@@ -9,18 +9,19 @@ shinyUI(
         "About",       
         HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:12px 12px; background-repeat: no-repeat; background-position: 0px 50%"><font size="5.5">Software references</font></li></ul></p>'),
         HTML(
-          '<p><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;1. R Development Core Team. <i><a href="http://www.r-project.org/" target="_blank">R</a>:  A Language and Environment for Statistical Computing.</i> R Foundation for Statistical Computing, Vienna (2018) <br>
+          '<p><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;1. R Development Core Team. <i><a href="http://www.r-project.org/" target="_blank">R</a>:  A Language and Environment for Statistical Computing.</i> R Foundation for Statistical Computing, Vienna. R version 3.5.0 (2018) <br>
          &nbsp;&nbsp;&nbsp;&nbsp;2. RStudio and Inc. <i><a href="http://www.rstudio.com/shiny/" target="_blank">shiny</a>: Web Application Framework for R.</i> R package version 1.0.5 (2017) <br>
-         &nbsp;&nbsp;&nbsp;&nbsp;3. H. Wickham. <i><a href="http://cran.r-project.org/web/packages/ggplot2/index.html" target="_blank">ggplot2</a>: Create Elegant Data Visualisations Using the Grammar of Graphics.</i> R package version 2.2.1.9000 (2016) <br>          
-		 &nbsp;&nbsp;&nbsp;&nbsp;4. Gregory R. Warnes, Ben Bolker, Lodewijk Bonebakker, Robert Gentleman, et al. <i><a href="http://cran.r-project.org/web/packages/gplots/index.html" target="_blank">gplots</a>: Various R Programming Tools for Plotting Data.</i> R package version 3.0.1 (2016) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;5. Erich Neuwirth. <i><a href="http://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank">RColorBrewer</a>: ColorBrewer palettes.</i> R package version 1.1-2 (2014) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;6. Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/plyr/index.html" target="_blank">plyr</a>: Tools for Splitting, Applying and Combining Data.</i> R package version 1.8.4 (2016) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;7. Jeffrey B. Arnold. <i><a href="http://cran.r-project.org/web/packages/ggthemes/index.html" target="_blank">ggthemes</a>: Extra Themes, Scales and Geoms for "ggplot2".</i> R package version 3.4.0 (2017) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;8. Christoph Burow, Urs Tilmann Wolpert and Sebastian Kreutzer. <i><a href="http://cran.r-project.org/web/packages/RLumShiny/index.html" target="_blank">RLumShiny</a>: "Shiny" Applications for the R Package "Luminescence".</i> R package version 0.2.0 (2017) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;9. Baptiste Auguie. <i><a href="http://cran.r-project.org/web/packages/gridExtra/index.html" target="_blank">gridExtra</a>: Miscellaneous Functions for "Grid" Graphics.</i> R package version 2.3 (2017) <br>
-		 &nbsp;10. Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/reshape2/index.html" target="_blank">reshape2</a>: Flexibly Reshape Data: A Reboot of the Reshape Package.</i> R package version 1.4.3 (2017) <br>
-		 &nbsp;11. Matt Dowle and Arun Srinivasan. <i><a href="http://cran.r-project.org/web/packages/data.table/index.html" target="_blank">data.table</a>: Extension of "data.frame".</i> R package version 1.10.4-3 (2017) <br>
-		 &nbsp;12. JJ Allaire, Jeffrey Horner, Vicent Marti and Natacha Porte. <i><a href="http://cran.r-project.org/web/packages/markdown/index.html" target="_blank">markdown</a>: "Markdown" Rendering for R</i> R package version 0.8 (2017) <br></font></p>'
+		 &nbsp;&nbsp;&nbsp;&nbsp;3. Lionel Henry and Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/rlang/index.html" target="_blank">rlang</a>: Functions for Base Types and Core R and "Tidyverse" Features.</i> R package version 0.2.1 (2018) <br>         
+		 &nbsp;&nbsp;&nbsp;&nbsp;4. H. Wickham. <i><a href="http://cran.r-project.org/web/packages/ggplot2/index.html" target="_blank">ggplot2</a>: Create Elegant Data Visualisations Using the Grammar of Graphics.</i> R package version 3.0.0 (2018) <br>          
+		 &nbsp;&nbsp;&nbsp;&nbsp;5. Gregory R. Warnes, Ben Bolker, Lodewijk Bonebakker, Robert Gentleman, et al. <i><a href="http://cran.r-project.org/web/packages/gplots/index.html" target="_blank">gplots</a>: Various R Programming Tools for Plotting Data.</i> R package version 3.0.1 (2016) <br>
+		 &nbsp;&nbsp;&nbsp;&nbsp;6. Erich Neuwirth. <i><a href="http://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank">RColorBrewer</a>: ColorBrewer palettes.</i> R package version 1.1-2 (2014) <br>
+		 &nbsp;&nbsp;&nbsp;&nbsp;7. Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/plyr/index.html" target="_blank">plyr</a>: Tools for Splitting, Applying and Combining Data.</i> R package version 1.8.4 (2016) <br>
+		 &nbsp;&nbsp;&nbsp;&nbsp;8. Jeffrey B. Arnold. <i><a href="http://cran.r-project.org/web/packages/ggthemes/index.html" target="_blank">ggthemes</a>: Extra Themes, Scales and Geoms for "ggplot2".</i> R package version 3.4.0 (2017) <br>
+		 &nbsp;&nbsp;&nbsp;&nbsp;9. Christoph Burow, Urs Tilmann Wolpert and Sebastian Kreutzer. <i><a href="http://cran.r-project.org/web/packages/RLumShiny/index.html" target="_blank">RLumShiny</a>: "Shiny" Applications for the R Package "Luminescence".</i> R package version 0.2.0 (2017) <br>
+		 &nbsp;10. Baptiste Auguie. <i><a href="http://cran.r-project.org/web/packages/gridExtra/index.html" target="_blank">gridExtra</a>: Miscellaneous Functions for "Grid" Graphics.</i> R package version 2.3 (2017) <br>
+		 &nbsp;11. Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/reshape2/index.html" target="_blank">reshape2</a>: Flexibly Reshape Data: A Reboot of the Reshape Package.</i> R package version 1.4.3 (2017) <br>
+		 &nbsp;12. Matt Dowle and Arun Srinivasan. <i><a href="http://cran.r-project.org/web/packages/data.table/index.html" target="_blank">data.table</a>: Extension of "data.frame".</i> R package version 1.10.4-3 (2017) <br>
+		 &nbsp;13. JJ Allaire, Jeffrey Horner, Vicent Marti and Natacha Porte. <i><a href="http://cran.r-project.org/web/packages/markdown/index.html" target="_blank">markdown</a>: "Markdown" Rendering for R.</i> R package version 0.8 (2017) <br></font></p>'
         ),
         HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:12px 12px; background-repeat: no-repeat; background-position: 0px 50%"><font size="5.5">Further references</font></li></ul></p>'),
         HTML('<p><font size="4">This application was created by <a href="http://www.researchgate.net/profile/Wen_Yao" target="_blank">Wen Yao</a> and <a href="http://www.researchgate.net/profile/Yiming_Yu6" target="_blank">Yiming Yu</a>. Please send bugs and feature requests to Wen Yao (ywhzau at gmail.com) or Yiming Yu (yimingyyu at gmail.com). This application uses the shiny package from <a href="http://www.rstudio.com/shiny/" target="_blank">RStudio</a>.</font></p>')      
@@ -38,7 +39,7 @@ shinyUI(
 				#lowColor1, #midColor1, #highColor1 {width:100%}
 				#mainPanel_1 {left:28em; position:absolute; min-width:27em;}"),
 			 tags$style(HTML(".shiny-output-error-validation {color: red;}")),
-             tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')), includeScript("google-analytics.js")				
+             tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')), includeScript("www/google-analytics.js")				
 		),    
       sidebarPanel(id="sidebarPanel_1",	  
     	tipify(radioButtons("plotype", "Image type", c("Concatenated chromosome" = "1", "Separated chromosome" = "2"), "1"),
@@ -366,7 +367,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend2", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  
 			  conditionalPanel(condition="input.addlegend2=='1'",
-			    conditionalPanel(condition="input.plottype2=='point' | input.plottype2=='line' | input.plottype2=='bar' | input.plottype2=='rect_gradual' | input.plottype2=='rect_discrete' | input.plottype2=='heatmap_gradual' | input.plottype2=='heatmap_discrete' | input.plottype2=='vertical line' | input.plottype2=='horizontal line' | input.plottype2=='text'",
+			    conditionalPanel(condition="input.plottype2=='point' | input.plottype2=='line' | input.plottype2=='bar' | input.plottype2=='rect_gradual' | input.plottype2=='rect_discrete' | input.plottype2=='heatmap_gradual' | input.plottype2=='heatmap_discrete' | input.plottype2=='vertical line' | input.plottype2=='horizontal line' | input.plottype2=='text' | input.plottype2 == 'segment'",
 		          radioButtons("collgd2", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd2=='1'",
  				      tipify(textInput("collgdname2", "Name:", value="color"),
@@ -551,7 +552,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend3", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			
 			  conditionalPanel(condition="input.addlegend3=='1'",
-			    conditionalPanel(condition="input.plottype3=='point' | input.plottype3=='line' | input.plottype3=='bar' | input.plottype3=='rect_gradual' | input.plottype3=='rect_discrete' | input.plottype3=='heatmap_gradual' | input.plottype3=='heatmap_discrete' | input.plottype3=='vertical line' | input.plottype3=='horizontal line' | input.plottype3=='text'",
+			    conditionalPanel(condition="input.plottype3=='point' | input.plottype3=='line' | input.plottype3=='bar' | input.plottype3=='rect_gradual' | input.plottype3=='rect_discrete' | input.plottype3=='heatmap_gradual' | input.plottype3=='heatmap_discrete' | input.plottype3=='vertical line' | input.plottype3=='horizontal line' | input.plottype3=='text' | input.plottype3 == 'segment'",
 		          radioButtons("collgd3", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd3=='1'",
  				      tipify(textInput("collgdname3", "Name:", value="color"),
@@ -736,7 +737,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend4", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			
 			  conditionalPanel(condition="input.addlegend4=='1'",
-			    conditionalPanel(condition="input.plottype4=='point' | input.plottype4=='line' | input.plottype4=='bar' | input.plottype4=='rect_gradual' | input.plottype4=='rect_discrete' | input.plottype4=='heatmap_gradual' | input.plottype4=='heatmap_discrete' | input.plottype4=='vertical line' | input.plottype4=='horizontal line' | input.plottype4=='text'",
+			    conditionalPanel(condition="input.plottype4=='point' | input.plottype4=='line' | input.plottype4=='bar' | input.plottype4=='rect_gradual' | input.plottype4=='rect_discrete' | input.plottype4=='heatmap_gradual' | input.plottype4=='heatmap_discrete' | input.plottype4=='vertical line' | input.plottype4=='horizontal line' | input.plottype4=='text' | input.plottype4 == 'segment'",
 		          radioButtons("collgd4", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd4=='1'",
  				      tipify(textInput("collgdname4", "Name:", value="color"),
@@ -921,7 +922,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend5", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			
 			  conditionalPanel(condition="input.addlegend5=='1'",
-			    conditionalPanel(condition="input.plottype5=='point' | input.plottype5=='line' | input.plottype5=='bar' | input.plottype5=='rect_gradual' | input.plottype5=='rect_discrete' | input.plottype5=='heatmap_gradual' | input.plottype5=='heatmap_discrete' | input.plottype5=='vertical line' | input.plottype5=='horizontal line' | input.plottype5=='text'",
+			    conditionalPanel(condition="input.plottype5=='point' | input.plottype5=='line' | input.plottype5=='bar' | input.plottype5=='rect_gradual' | input.plottype5=='rect_discrete' | input.plottype5=='heatmap_gradual' | input.plottype5=='heatmap_discrete' | input.plottype5=='vertical line' | input.plottype5=='horizontal line' | input.plottype5=='text' | input.plottype5 == 'segment'",
 		          radioButtons("collgd5", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd5=='1'",
  				      tipify(textInput("collgdname5", "Name:", value="color"),
@@ -1106,7 +1107,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend6", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
 			  conditionalPanel(condition="input.addlegend6=='1'",
-			    conditionalPanel(condition="input.plottype6=='point' | input.plottype6=='line' | input.plottype6=='bar' | input.plottype6=='rect_gradual' | input.plottype6=='rect_discrete' | input.plottype6=='heatmap_gradual' | input.plottype6=='heatmap_discrete' | input.plottype6=='vertical line' | input.plottype6=='horizontal line' | input.plottype6=='text'",
+			    conditionalPanel(condition="input.plottype6=='point' | input.plottype6=='line' | input.plottype6=='bar' | input.plottype6=='rect_gradual' | input.plottype6=='rect_discrete' | input.plottype6=='heatmap_gradual' | input.plottype6=='heatmap_discrete' | input.plottype6=='vertical line' | input.plottype6=='horizontal line' | input.plottype6=='text' | input.plottype6 == 'segment'",
 		          radioButtons("collgd6", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd6=='1'",
  				      tipify(textInput("collgdname6", "Name:", value="color"),
@@ -1291,7 +1292,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend7", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
 			  conditionalPanel(condition="input.addlegend7=='1'",
-			    conditionalPanel(condition="input.plottype7=='point' | input.plottype7=='line' | input.plottype7=='bar' | input.plottype7=='rect_gradual' | input.plottype7=='rect_discrete' | input.plottype7=='heatmap_gradual' | input.plottype7=='heatmap_discrete' | input.plottype7=='vertical line' | input.plottype7=='horizontal line' | input.plottype7=='text'",
+			    conditionalPanel(condition="input.plottype7=='point' | input.plottype7=='line' | input.plottype7=='bar' | input.plottype7=='rect_gradual' | input.plottype7=='rect_discrete' | input.plottype7=='heatmap_gradual' | input.plottype7=='heatmap_discrete' | input.plottype7=='vertical line' | input.plottype7=='horizontal line' | input.plottype7=='text' | input.plottype7 == 'segment'",
 		          radioButtons("collgd7", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd7=='1'",
  				      tipify(textInput("collgdname7", "Name:", value="color"),
@@ -1476,7 +1477,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend8", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
 			  conditionalPanel(condition="input.addlegend8=='1'",
-			    conditionalPanel(condition="input.plottype8=='point' | input.plottype8=='line' | input.plottype8=='bar' | input.plottype8=='rect_gradual' | input.plottype8=='rect_discrete' | input.plottype8=='heatmap_gradual' | input.plottype8=='heatmap_discrete' | input.plottype8=='vertical line' | input.plottype8=='horizontal line' | input.plottype8=='text'",
+			    conditionalPanel(condition="input.plottype8=='point' | input.plottype8=='line' | input.plottype8=='bar' | input.plottype8=='rect_gradual' | input.plottype8=='rect_discrete' | input.plottype8=='heatmap_gradual' | input.plottype8=='heatmap_discrete' | input.plottype8=='vertical line' | input.plottype8=='horizontal line' | input.plottype8=='text' | input.plottype8 == 'segment'",
 		          radioButtons("collgd8", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd8=='1'",
  				      tipify(textInput("collgdname8", "Name:", value="color"),		
@@ -1661,7 +1662,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend9", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
 			  conditionalPanel(condition="input.addlegend9=='1'",
-			    conditionalPanel(condition="input.plottype9=='point' | input.plottype9=='line' | input.plottype9=='bar' | input.plottype9=='rect_gradual' | input.plottype9=='rect_discrete' | input.plottype9=='heatmap_gradual' | input.plottype9=='heatmap_discrete' | input.plottype9=='vertical line' | input.plottype9=='horizontal line' | input.plottype9=='text'",
+			    conditionalPanel(condition="input.plottype9=='point' | input.plottype9=='line' | input.plottype9=='bar' | input.plottype9=='rect_gradual' | input.plottype9=='rect_discrete' | input.plottype9=='heatmap_gradual' | input.plottype9=='heatmap_discrete' | input.plottype9=='vertical line' | input.plottype9=='horizontal line' | input.plottype9=='text' | input.plottype9 == 'segment'",
 		          radioButtons("collgd9", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd9=='1'",
  				      tipify(textInput("collgdname9", "Name:", value="color"),
@@ -1846,7 +1847,7 @@ shinyUI(
 		    tipify(radioButtons("addlegend10", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
 			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
 			  conditionalPanel(condition="input.addlegend10=='1'",
-			    conditionalPanel(condition="input.plottype10=='point' | input.plottype10=='line' | input.plottype10=='bar' | input.plottype10=='rect_gradual' | input.plottype10=='rect_discrete' | input.plottype10=='heatmap_gradual' | input.plottype10=='heatmap_discrete' | input.plottype10=='vertical line' | input.plottype10=='horizontal line' | input.plottype10=='text'",
+			    conditionalPanel(condition="input.plottype10=='point' | input.plottype10=='line' | input.plottype10=='bar' | input.plottype10=='rect_gradual' | input.plottype10=='rect_discrete' | input.plottype10=='heatmap_gradual' | input.plottype10=='heatmap_discrete' | input.plottype10=='vertical line' | input.plottype10=='horizontal line' | input.plottype10=='text' | input.plottype10 == 'segment'",
 		          radioButtons("collgd10", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
 			        conditionalPanel(condition="input.collgd10=='1'",
  				      tipify(textInput("collgdname10", "Name:", value="color"),	
@@ -2053,7 +2054,7 @@ shinyUI(
 				#tc_lowColor, #tc_midColor, #tc_highColor {width:100%}
 				#mainPanel_2 {left:28em; position:absolute; min-width:27em;}"),
 			 tags$style(HTML(".shiny-output-error-validation {color: red;}")),
-             tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')), includeScript("google-analytics.js")				
+             tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')), includeScript("www/google-analytics.js")				
 		),
         sidebarPanel(id="sidebarPanel_2",
 	        tipify(fileInput("tc_uploadchrdata_1", "Upload genome1 data:", multiple = FALSE),

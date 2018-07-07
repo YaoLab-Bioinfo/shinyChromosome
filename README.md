@@ -21,7 +21,7 @@ User can choose to run shinyChromosome installed locally for a more preferable e
 
 **Step 1: Install R and RStudio**
 
-Before running the app you will need to have R and RStudio installed (tested with R 3.5.0 and RStudio 1.1.419).  
+Before running the app you will need to have R and RStudio installed (tested with <font color="red">R 3.5.0</font> and RStudio 1.1.419).  
 Please check CRAN (https://cran.r-project.org/) for the installation of R.  
 Please check https://www.rstudio.com/ for the installation of RStudio.  
 
@@ -29,8 +29,9 @@ Please check https://www.rstudio.com/ for the installation of RStudio.
 
 Start an R session using RStudio and run these lines:  
 ```
-# try an http CRAN mirror if https CRAN mirror doesn't work  
+# try an http CRAN mirror if https CRAN mirror doesn't work
 install.packages("shiny")
+install.packages("rlang")
 install.packages("gplots")
 install.packages("ggplot2")
 install.packages("plyr")
@@ -68,6 +69,7 @@ Start an R session and run these lines in R:
 ```
 # try an http CRAN mirror if https CRAN mirror doesn't work  
 install.packages("shiny")
+install.packages("rlang")
 install.packages("gplots")
 install.packages("ggplot2")
 install.packages("plyr")

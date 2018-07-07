@@ -1,5 +1,6 @@
 cat('## setwd("absolute path of a directory containing the input data files")',file="code.R",append=TRUE,sep="\n")
-cat("library(gplots)
+cat("options(scipen=5)
+library(gplots)
 library(ggplot2)
 library(plotly)
 library(plyr)
@@ -147,8 +148,8 @@ cat('names(data.C) <- c("chr","size")
 	  }
 	  val_range_chr <- melt(data=val_range_chr,id.vars=c("chr","pos"))
 	  val_range_chr$variable <- NULL
-	  p1 <- ggplot() + geom_point(data=val_range_chr, aes(pos,value),color=NA)
-      yaxis_breaks <- list()
+	  p1 <- ggplot() + geom_point(data=val_range_chr, aes(pos,value),color=NA)      
+	  yaxis_breaks <- list()
 	  yaxis_labels <- list()
       ## *** change priority level ***
 	  indx <- lapply(c("heatmap_gradual", "heatmap_discrete", "rect_gradual","rect_discrete", "bar", "line", "segment", "point", "vertical line", "horizontal line", "text"), function(x){
@@ -305,8 +306,8 @@ cat('names(data.C) <- c("chr","size")
 		      if(selrectcol==1){
                   cols <- c(brewer.pal(11,"Set3"),brewer.pal(9,"Set1")[c(-1,-3,-6)],brewer.pal(8,"Dark2"),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
 				  if(length(unique(data.TT[,4]))<= length(cols)){
-                      selcol <- sample(cols,length(unique(data.TT[,4])))
-		              rect_discol.export <<- c(rect_discol.export,paste(selcol,collapse="."))
+			          selcol <- rect_discol.export[which(indx==i)]
+			          selcol <- unlist(strsplit(selcol,"\\\\."))				      
 					  names(selcol) <- unique(data.TT[,4])
 			          data.TT$color <- selcol[data.TT[,4]]
 				  }else{
@@ -364,9 +365,9 @@ cat('names(data.C) <- c("chr","size")
                  cols <- c(brewer.pal(11,"Set3"),brewer.pal(9,"Set1")[c(-1,-3,-6)],brewer.pal(8,"Dark2"),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
 				  data.TT$raw_color <- data.TT$color
 				  if(length(unique(data.TT$color))<= length(cols)){
-                      selcol <- sample(cols,length(unique(data.TT$color)))
-		              heatmap_discol.export <<- c(heatmap_discol.export,paste(selcol,collapse="."))
-				      names(selcol) <- unique(data.TT$color)
+			          selcol <- heatmap_discol.export[which(indx==i)]
+			          selcol <- unlist(strsplit(selcol,"\\\\."))				      
+					  names(selcol) <- unique(data.TT$color)
 			          data.TT$color <- selcol[data.TT$color]
 				  }else{
 				      data.TT$color <- NA
@@ -849,7 +850,7 @@ cat('names(data.C) <- c("chr","size")
                  if(legendpos==1){				 
 			         lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=value), color=bordercolsp)+ scale_fill_gradient2(name=collgdname[i],low = rectcols[1],midpoint=midpoint,mid=rectcols[2],high=rectcols[3],na.value="#FFFFFF00") + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 				 }else{
-			         lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=value), color=bordercolsp)+ scale_fill_gradient2(name=collgdname[i],low = rectcols[1],midpoint=midpoint,mid=rectcols[2],high=rectcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.75, title.hjust = 1.2))
+			         lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=value), color=bordercolsp)+ scale_fill_gradient2(name=collgdname[i],low = rectcols[1],midpoint=midpoint,mid=rectcols[2],high=rectcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))
 				 }
                  g1 <- ggplot_build(lg1)
                  data.TT$fillcol <- g1$data[[1]][,"fill"]
@@ -884,7 +885,7 @@ cat('names(data.C) <- c("chr","size")
             if(legendpos==1){			
 			    lg1 <- ggplot() + geom_tile(data=data.TTP, aes(x=xpos, y=yvalue, fill=color), width=data.TTP$width, height=as.numeric(heightlayer[names(heightlayer) == layerindex[i]]), color=bordercolsp) + scale_fill_gradient2(name=collgdname[i],low = hmapcols[1],midpoint=midpoint,mid=hmapcols[2],high=hmapcols[3],na.value="#FFFFFF00") + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			}else{
-			    lg1 <- ggplot() + geom_tile(data=data.TTP, aes(x=xpos, y=yvalue, fill=color), width=data.TTP$width, height=as.numeric(heightlayer[names(heightlayer) == layerindex[i]]), color=bordercolsp) + scale_fill_gradient2(name=collgdname[i],low = hmapcols[1],midpoint=midpoint,mid=hmapcols[2],high=hmapcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.75, title.hjust = 1.2))
+			    lg1 <- ggplot() + geom_tile(data=data.TTP, aes(x=xpos, y=yvalue, fill=color), width=data.TTP$width, height=as.numeric(heightlayer[names(heightlayer) == layerindex[i]]), color=bordercolsp) + scale_fill_gradient2(name=collgdname[i],low = hmapcols[1],midpoint=midpoint,mid=hmapcols[2],high=hmapcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))
 			}
             g1 <- ggplot_build(lg1)
             data.TT$fillcol <- g1$data[[1]][,"fill"]

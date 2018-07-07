@@ -263,7 +263,7 @@ cat('names(data.C1) <- c("chr","size")
 			     tc_p1 <- tc_p1 + geom_point(data=data.TT, aes(x=pos1, y=pos2, color=color, shape=as.character(shape), size=size)) + scale_color_gradient2(name=collgdname,guide=addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + scale_size_identity(name=sizelgdname,guide = addsizelgd,breaks=sort(breakscex),labels=labelscex) + scale_shape_manual(name=shapelgdname,guide = addshapelgd,values=sort(breakspch),labels=sort(labelspch)) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			 }
 			 if(addcollgd %in% "colourbar"){
-			     tc_p1 <- tc_p1 + guides(color = guide_colorbar(order = 1), size = guide_legend(order = 2))
+			     tc_p1 <- tc_p1 + guides(color = guide_colorbar(order = 1, title.vjust = 0.8, title.hjust = 0.4), size = guide_legend(order = 2))
 			 }else{
 			     tc_p1 <- tc_p1 + guides(size = guide_legend(order = 1))			 
 			 }		 
@@ -293,7 +293,7 @@ cat('names(data.C1) <- c("chr","size")
              if(legendpos==1){				 
 		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			 }else{
-		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.75, title.hjust = 1.2))			 
+		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))			 
 			 }
 		 } 
 		 if(plottype %in% "rect_discrete"){		 

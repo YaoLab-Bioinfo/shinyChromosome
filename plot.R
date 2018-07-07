@@ -160,6 +160,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			      laycolor <- NA
 			  }
               data.TT$color <- laycolor
+		      laycolor.export <<- c(laycolor.export,NA)			  
             }else if(coltypep==3 & ("color" %in% colnames(data.TT))){
 			  laycolor <- colormulgp[i]
               laycolor <- unlist(strsplit(laycolor,";"))
@@ -184,6 +185,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               data.TT$raw_color <- data.TT$color
 			  data.TT$color <- data.TT$cols
 			  data.TT$cols <- NULL
+		      laycolor.export <<- c(laycolor.export,NA)			  
             }else if(coltypep==1 & ("color" %in% colnames(data.TT))){
               selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
               laycolor <- sample(selcols,length(unique(data.TT$color)))
@@ -263,6 +265,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			          data.TT$color <- selcol[data.TT[,4]]
 				  }else{
 				      data.TT$color <- NA
+					  rect_discol.export <<- c(rect_discol.export,NA)
 				  }
 			  }else if(selrectcol==2){
                   rectcols <- rectcoldis[i] 
@@ -274,6 +277,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			      }
                   data.TT$color <- rectcols
 				  data.TT$value <- rectcols
+				  rect_discol.export <<- c(rect_discol.export,NA)
 			  }else if(selrectcol==3){
                   rectcols <- rectcoldiscus[i]
                   rectcols <- unlist(strsplit(rectcols,";"))
@@ -286,6 +290,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
                   data.TT <- merge(data.TT,rectcols,by.x=colnames(data.TT)[4],by.y="group",all.x=T)
                   data.TT <- data.TT[c(colname,"cols")]
 			      names(data.TT)[ncol(data.TT)] <- "color"
+				  rect_discol.export <<- c(rect_discol.export,NA)				  
 			  }
 			  jd_col <- data.TT$color
 			  output$errorinfo3 <- renderPrint({
@@ -311,7 +316,9 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               data.TT$color <- factor(data.TT$color,levels=rectcol_1,ordered = T)
 			  rectval_1 <- rectval_1[which(!rectcol_1 %in% "#FFFFFF00")]
 			  rectcol_1 <- rectcol_1[!rectcol_1 %in% "#FFFFFF00"]
-		  }	  
+		  }else{
+			  rect_discol.export <<- c(rect_discol.export,NA)
+		  }
          ## *** The fill color for track ***
          if(plottype[i] %in% "heatmap_gradual"){
 		     if(heatmapcol[i]==1){
@@ -333,6 +340,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			          data.TT$color <- selcol[data.TT$color]
 				  }else{
 				      data.TT$color <- NA
+					  heatmap_discol.export <<- c(heatmap_discol.export,NA)
 				  }
 			  }else if(selcolhmapdis==2){
                   hmapcols <- colhmapdiscus[i]				  
@@ -347,6 +355,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
                   data.TT <- data.TT[c(colname,"cols")]
                   colnames(data.TT)[which(colnames(data.TT) %in% "color")] <- "raw_color"				  
 			      names(data.TT)[ncol(data.TT)] <- "color"
+			      heatmap_discol.export <<- c(heatmap_discol.export,NA)				  
 			  }
 			  jd_col <- data.TT$color
 			  output$errorinfo4 <- renderPrint({
@@ -372,6 +381,8 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               data.TT$color <- factor(data.TT$color,levels=hmapcol_1,ordered = T)
 			  hmapval_1 <- hmapval_1[which(!hmapcol_1 %in% "#FFFFFF00")]
 			  hmapcol_1 <- hmapcol_1[!hmapcol_1 %in% "#FFFFFF00"]
+		 }else{
+			  heatmap_discol.export <<- c(heatmap_discol.export,NA)		 
 		 }
          if(plottype[i] %in% c("vertical line","horizontal line")){
 		     linecolorp <- linecolor[i]
@@ -834,7 +845,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
                  if(legendpos==1){				 
 			         lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=value), color=bordercolsp)+ scale_fill_gradient2(name=collgdname[i],low = rectcols[1],midpoint=midpoint,mid=rectcols[2],high=rectcols[3],na.value="#FFFFFF00") + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 				 }else{
-			         lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=value), color=bordercolsp)+ scale_fill_gradient2(name=collgdname[i],low = rectcols[1],midpoint=midpoint,mid=rectcols[2],high=rectcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.75, title.hjust = 1.2))
+			         lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=value), color=bordercolsp)+ scale_fill_gradient2(name=collgdname[i],low = rectcols[1],midpoint=midpoint,mid=rectcols[2],high=rectcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))
 				 }
                  g1 <- ggplot_build(lg1)
                  data.TT$fillcol <- g1$data[[1]][,"fill"]
@@ -869,7 +880,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
             if(legendpos==1){			
 			    lg1 <- ggplot() + geom_tile(data=data.TTP, aes(x=xpos, y=yvalue, fill=color), width=data.TTP$width, height=as.numeric(heightlayer[names(heightlayer) == layerindex[i]]), color=bordercolsp) + scale_fill_gradient2(name=collgdname[i],low = hmapcols[1],midpoint=midpoint,mid=hmapcols[2],high=hmapcols[3],na.value="#FFFFFF00") + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			}else{
-			    lg1 <- ggplot() + geom_tile(data=data.TTP, aes(x=xpos, y=yvalue, fill=color), width=data.TTP$width, height=as.numeric(heightlayer[names(heightlayer) == layerindex[i]]), color=bordercolsp) + scale_fill_gradient2(name=collgdname[i],low = hmapcols[1],midpoint=midpoint,mid=hmapcols[2],high=hmapcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.75, title.hjust = 1.2))
+			    lg1 <- ggplot() + geom_tile(data=data.TTP, aes(x=xpos, y=yvalue, fill=color), width=data.TTP$width, height=as.numeric(heightlayer[names(heightlayer) == layerindex[i]]), color=bordercolsp) + scale_fill_gradient2(name=collgdname[i],low = hmapcols[1],midpoint=midpoint,mid=hmapcols[2],high=hmapcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))
 			}
             g1 <- ggplot_build(lg1)
             data.TT$fillcol <- g1$data[[1]][,"fill"]
@@ -1362,7 +1373,7 @@ plotfig_tc <- function(input, output, data.C1, data.C2, data.TC, Height, Width, 
 			     tc_p1 <- tc_p1 + geom_point(data=data.TT, aes(x=pos1, y=pos2, color=color, shape=as.character(shape), size=size)) + scale_color_gradient2(name=collgdname,guide=addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + scale_size_identity(name=sizelgdname,guide = addsizelgd,breaks=sort(breakscex),labels=labelscex) + scale_shape_manual(name=shapelgdname,guide = addshapelgd,values=sort(breakspch),labels=sort(labelspch)) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			 }
 			 if(addcollgd %in% "colourbar"){
-			     tc_p1 <- tc_p1 + guides(color = guide_colorbar(order = 1), size = guide_legend(order = 2))
+			     tc_p1 <- tc_p1 + guides(color = guide_colorbar(order = 1, title.vjust = 0.8, title.hjust = 0.4), size = guide_legend(order = 2))
 			 }else{
 			     tc_p1 <- tc_p1 + guides(size = guide_legend(order = 1))			 
 			 }
@@ -1392,7 +1403,7 @@ plotfig_tc <- function(input, output, data.C1, data.C2, data.TC, Height, Width, 
              if(legendpos==1){				 
 		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			 }else{
-		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.75, title.hjust = 1.2))			 
+		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))			 
 			 }
 		 } 
 		 if(plottype %in% "rect_discrete"){		 

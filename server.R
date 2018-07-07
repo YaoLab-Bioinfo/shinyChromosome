@@ -171,7 +171,7 @@ shinyServer(function(input, output, session) {
 			if(!is.null(data.T)){
 			    for(m in 1:length(data.T)){
 				    dt.TT <- data.T[[m]]
-					if(plottype[m] %in% c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text")){
+					if(plottype[m] %in% c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment")){
                         validate(
                             need(ncol(dt.TT)>=3, paste("Error: Data formatting error for Data",trackindx[m],"!"," Please upload applicable data.",sep=""))
                         )
@@ -191,6 +191,11 @@ shinyServer(function(input, output, session) {
                              need(length(unique(dt.TT[,4]))<=50, paste("Error: Data formatting error for Data",trackindx[m],"!"," For discrete data, the fourth column should be a categorical character vector with no more than 50 groups."," Please upload applicable data.",sep=""))
                          )
 			        }
+                    if(plottype[m] %in% "segment"){			          
+			             validate(
+                             need(ncol(dt.TT)==5 | (ncol(dt.TT)==6 && names(dt.TT)[6]=="color"), paste("Error: Data formatting error for Data",trackindx[m],"!"," Please upload applicable data.",sep=""))	 
+                         )
+			        }					
 					if(plottype[m] %in% "vertical line"){
                         validate(
                             need(ncol(dt.TT)==2, paste("Error: Data formatting error for Data",trackindx[m],"!"," Please upload applicable data.",sep=""))
@@ -302,24 +307,34 @@ shinyServer(function(input, output, session) {
             )		
             if(input$tc_plottype %in% c("point_gradual","point_discrete")){			          
 			    validate(
-                    need(ncol(data.TC)==4 | (ncol(data.TC)>4 && all(names(data.TC)[5:ncol(data.TC)] %in% c("color","shape","size"))), "Error: Data formatting error! Please upload applicable data.")	 
+                    need(ncol(data.TC)==4 | (ncol(data.TC)>4 && all(names(data.TC)[5:ncol(data.TC)] %in% c("color","shape","size"))), "Error: Data formatting error! Please upload applicable plot data.")	 
                 )
 			}
             if(input$tc_plottype %in% "segment"){			          
 			    validate(
-                    need(ncol(data.TC)==6 | (ncol(data.TC)==7 && names(data.TC)[7]=="color"), "Error: Data formatting error! Please upload applicable data.")	 
+                    need(ncol(data.TC)==6 | (ncol(data.TC)==7 && names(data.TC)[7]=="color"), "Error: Data formatting error! Please upload applicable plot data.")	 
                 )
 			}
 		    if(input$tc_plottype %in% "point_gradual"){
 			    validate(
-                    need(is.numeric(data.TC[,"color"]), 'Error: Data formatting error! For gradual data, the "color" column should be a numeric vector. Please upload applicable data.')
+                    need(is.numeric(data.TC[,"color"]), 'Error: Data formatting error! For gradual data, the "color" column should be a numeric vector. Please upload applicable plot data.')
                 )
 			}
 		    if(input$tc_plottype %in% "point_discrete"){
 				validate(
-                    need(("color" %in% names(data.TC) && length(unique(data.TC[,"color"]))<=50) | !"color" %in% names(data.TC), 'Error: Data formatting error! For discrete data, the "color" column should be a categorical character vector with no more than 50 groups. Please upload applicable data.')
+                    need(("color" %in% names(data.TC) && length(unique(data.TC[,"color"]))<=50) | !"color" %in% names(data.TC), 'Error: Data formatting error! For discrete data, the "color" column should be a categorical character vector with no more than 50 groups. Please upload applicable plot data.')
                 )
 			}	
+		    if(input$tc_plottype %in% "rect_gradual"){
+			    validate(
+                    need(ncol(data.TC)==7 && is.numeric(data.TC[,"color"]), 'Error: Data formatting error! Data should contain 7 columns. For gradual data, the "color" column should be a numeric vector. Please upload applicable plot data.')
+                )
+			}
+		    if(input$tc_plottype %in% "rect_discrete"){
+			    validate(
+                    need(ncol(data.TC)==6 | (ncol(data.TC)==7 && names(data.TC)[7]=="color" && length(unique(data.TC[,"color"]))<=50), 'Error: Data formatting error! Data should contain 6 columns or 7 columns. For discrete data with 7 columns, the "color" column should be a categorical character vector with no more than 50 groups. Please upload applicable plot data.')
+                )
+			}			
         })
         outputOptions(output, "errorinfo6", suspendWhenHidden = FALSE)
 		plotfig_tc(input=input, output=output, data.C1=data.C1, data.C2=data.C2, data.TC=data.TC, Height=tc_Height, Width=tc_Width, selgralcol=tc_selgralcol, gralcol_tp=tc_gralcol_tp, gralcol_ct=tc_gralcol_ct, coltype=tc_coltype, colorcus=tc_colorcus, colormulgp=tc_colormulgp, coltransparency=tc_coltransparency, themestyle=tc_themestyle, fontSize=tc_fontSize, xtitle=tc_xtitle, ytitle=tc_ytitle, titlefontface=tc_titlefontface, xlabel=tc_xlabel, ylabel=tc_ylabel, legendpos=tc_legendpos, lgdtitlesize=tc_lgdtitlesize, lgdtitlefontface=tc_lgdtitlefontface, lgdtextfontface=tc_lgdtextfontface, lgdtextsize=tc_lgdtextsize, symbolpoint=tc_symbolpoint, pointsize=tc_pointsize, linesize=tc_linesize, xrugs=tc_xrugs, yrugs=tc_yrugs, xrugscol=tc_xrugscol, yrugscol=tc_yrugscol, vertical=tc_vertical, verticalcol=tc_verticalcol, verticalsize=tc_verticalsize, verticaltype=tc_verticaltype, horizontal=tc_horizontal, horizontalcol=tc_horizontalcol, horizontalsize=tc_horizontalsize, horizontaltype=tc_horizontaltype, bordercols=tc_bordercols, addborder=tc_addborder, linetype=tc_linetype, addlegend=tc_addlegend, collgd=tc_collgd, collgdname=tc_collgdname, sizelgd=tc_sizelgd, sizelgdname=tc_sizelgdname, shapelgd=tc_shapelgd, shapelgdname=tc_shapelgdname, collgdmdylabel=tc_collgdmdylabel, collgdlabel=tc_collgdlabel, sizelgdmdylabel=tc_sizelgdmdylabel, sizelgdlabel=tc_sizelgdlabel, shapelgdmdylabel=tc_shapelgdmdylabel, shapelgdlabel=tc_shapelgdlabel, plottype=tc_plottype)
