@@ -104,8 +104,8 @@ shinyUI(
 			
     	ADVANCED_OPTIONS_PANEL_1(
 		    list(
-		    	checkboxInput("color_opt1", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt1",  #####
+		    	checkboxInput("color_opt1", HTML("<font color='red'>Color</font>"), FALSE),  
+			    conditionalPanel(condition="input.color_opt1",  
 			    conditionalPanel(condition="input.plottype1 == 'point' | input.plottype1 == 'line' | input.plottype1 == 'bar' | input.plottype1 == 'segment'",
 				                 selectInput("coltype1", h5("Data color",
 			                                    bsButton("bsb6", label="", icon=icon("question"), style="info", size="small")
@@ -298,8 +298,8 @@ shinyUI(
 			)
 			),			
 			conditionalPanel(condition="input.plottype1=='point'",
-				checkboxInput("symbol_opt1", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt1",  #####
+				checkboxInput("symbol_opt1", HTML("<font color='red'>Symbol</font>"), FALSE),  
+			    conditionalPanel(condition="input.symbol_opt1",  
 			                selectInput("sel_symbolpoint1", h5("Symbol type",
                                                     bsButton("bsb25", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -330,14 +330,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt1", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt1",  #####				
+				checkboxInput("size_opt1", HTML("<font color='red'>Size</font>"), FALSE),
+			    conditionalPanel(condition="input.size_opt1", 				
 				selectInput("sel_pointsize1", h5("Point size",
                                                   bsButton("bsb29", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb29", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize1=='1'",
-                    sliderInput("pointsize1", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize1", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				
 				selectInput("sizelgd1", h5("Size legend",
@@ -414,8 +414,8 @@ shinyUI(
 			
     	ADVANCED_OPTIONS_PANEL_2(
 				list(
-		    	checkboxInput("color_opt2", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt2",  #####					
+		    	checkboxInput("color_opt2", HTML("<font color='red'>Color</font>"), FALSE),  
+			    conditionalPanel(condition="input.color_opt2",  					
 				conditionalPanel(condition="input.plottype2 == 'point' | input.plottype2 == 'line' | input.plottype2 == 'bar' | input.plottype2 == 'segment'",
 				                 selectInput("coltype2", h5("Data color",
 			                                    bsButton("bsb38", label="", icon=icon("question"), style="info", size="small")
@@ -600,8 +600,8 @@ shinyUI(
 			)
 			),
 			conditionalPanel(condition="input.plottype2=='point'",
-				checkboxInput("symbol_opt2", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt2",  #####				
+				checkboxInput("symbol_opt2", HTML("<font color='red'>Symbol</font>"), FALSE),  
+			    conditionalPanel(condition="input.symbol_opt2",  				
 			                 selectInput("sel_symbolpoint2", h5("Symbol type",
                                                     bsButton("bsb57", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -628,14 +628,14 @@ shinyUI(
 	                )
 	            )
 				),
-				checkboxInput("size_opt2", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt2",  #####				
+				checkboxInput("size_opt2", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt2",  				
 				selectInput("sel_pointsize2", h5("Point size",
                                                   bsButton("bsb61", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb61", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize2=='1'",
-                    sliderInput("pointsize2", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize2", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd2", h5("Size legend",
 		                                    bsButton("bsb62", label="", icon=icon("question"), style="info", size="small")
@@ -706,8 +706,8 @@ shinyUI(
 			selectInput("plottype3", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_3(
 				list(
-		    	checkboxInput("color_opt3", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt3",  #####					
+		    	checkboxInput("color_opt3", HTML("<font color='red'>Color</font>"), FALSE),  
+			    conditionalPanel(condition="input.color_opt3",  					
 				conditionalPanel(condition="input.plottype3 == 'point' | input.plottype3 == 'line' | input.plottype3 == 'bar' | input.plottype3 == 'segment'",
 				                 selectInput("coltype3", h5("Data color",
 			                                    bsButton("bsb70", label="", icon=icon("question"), style="info", size="small")
@@ -890,8 +890,8 @@ shinyUI(
 			)            
 			),
 			conditionalPanel(condition="input.plottype3=='point'",
-				checkboxInput("symbol_opt3", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt3",  #####				
+				checkboxInput("symbol_opt3", HTML("<font color='red'>Symbol</font>"), FALSE),  
+			    conditionalPanel(condition="input.symbol_opt3",  				
 			                 selectInput("sel_symbolpoint3", h5("Symbol type",
                                                     bsButton("bsb89", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -921,14 +921,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt3", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt3",  #####				
+				checkboxInput("size_opt3", HTML("<font color='red'>Size</font>"), FALSE),
+			    conditionalPanel(condition="input.size_opt3", 				
 				selectInput("sel_pointsize3", h5("Point size",
                                                   bsButton("bsb93", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb93", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize3=='1'",
-                    sliderInput("pointsize3", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize3", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd3", h5("Size legend",
 		                                    bsButton("bsb94", label="", icon=icon("question"), style="info", size="small")
@@ -999,8 +999,8 @@ shinyUI(
 			selectInput("plottype4", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_4(
 				list(
-		    	checkboxInput("color_opt4", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt4",  #####					
+		    	checkboxInput("color_opt4", HTML("<font color='red'>Color</font>"), FALSE),  
+			    conditionalPanel(condition="input.color_opt4",  					
 				conditionalPanel(condition="input.plottype4 == 'point' | input.plottype4 == 'line' | input.plottype4 == 'bar' | input.plottype4 == 'segment'",
 				                 selectInput("coltype4", h5("Data color",
 			                                    bsButton("bsb102", label="", icon=icon("question"), style="info", size="small")
@@ -1178,8 +1178,8 @@ shinyUI(
 			)            
 			),
 			conditionalPanel(condition="input.plottype4=='point'",
-				checkboxInput("symbol_opt4", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt4",  #####				
+				checkboxInput("symbol_opt4", HTML("<font color='red'>Symbol</font>"), FALSE),  
+			    conditionalPanel(condition="input.symbol_opt4",  				
 			                 selectInput("sel_symbolpoint4", h5("Symbol type",
                                                     bsButton("bsb121", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -1205,14 +1205,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt4", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt4",  #####				
+				checkboxInput("size_opt4", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt4",  				
 				selectInput("sel_pointsize4", h5("Point size",
                                                   bsButton("bsb125", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb125", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize4=='1'",
-                    sliderInput("pointsize4", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize4", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd4", h5("Size legend",
 		                                    bsButton("bsb126", label="", icon=icon("question"), style="info", size="small")
@@ -1282,8 +1282,8 @@ shinyUI(
 			selectInput("plottype5", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_5(
 				list(
-		    	checkboxInput("color_opt5", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt5",  #####					
+		    	checkboxInput("color_opt5", HTML("<font color='red'>Color</font>"), FALSE),  
+			    conditionalPanel(condition="input.color_opt5",  					
 				conditionalPanel(condition="input.plottype5 == 'point' | input.plottype5 == 'line' | input.plottype5 == 'bar' | input.plottype5 == 'segment'",
 				                 selectInput("coltype5", h5("Data color",
 			                                    bsButton("bsb134", label="", icon=icon("question"), style="info", size="small")
@@ -1462,8 +1462,8 @@ shinyUI(
 			)
 			),
 			conditionalPanel(condition="input.plottype5=='point'",
-				checkboxInput("symbol_opt5", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt5",  #####				
+				checkboxInput("symbol_opt5", HTML("<font color='red'>Symbol</font>"), FALSE),  
+			    conditionalPanel(condition="input.symbol_opt5",  				
 			                 selectInput("sel_symbolpoint5", h5("Symbol type",
                                                     bsButton("bsb152", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -1491,14 +1491,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt5", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt5",  #####				
+				checkboxInput("size_opt5", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt5",  				
 				selectInput("sel_pointsize5", h5("Point size",
                                                   bsButton("bsb156", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb156", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize5=='1'",
-                    sliderInput("pointsize5", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize5", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd5", h5("Size legend",
 		                                    bsButton("bsb157", label="", icon=icon("question"), style="info", size="small")
@@ -1568,8 +1568,8 @@ shinyUI(
 			selectInput("plottype6", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_6(
 				list(
-		    	checkboxInput("color_opt6", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt6",  #####					
+		    	checkboxInput("color_opt6", HTML("<font color='red'>Color</font>"), FALSE), 
+			    conditionalPanel(condition="input.color_opt6", 					
 				conditionalPanel(condition="input.plottype6 == 'point' | input.plottype6 == 'line' | input.plottype6 == 'bar' | input.plottype6 == 'segment'",
 				                 selectInput("coltype6", h5("Data color",
 			                                    bsButton("bsb164", label="", icon=icon("question"), style="info", size="small")
@@ -1744,8 +1744,8 @@ shinyUI(
 			)            
 			),
 			conditionalPanel(condition="input.plottype6=='point'",
-				checkboxInput("symbol_opt6", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt6",  #####				
+				checkboxInput("symbol_opt6", HTML("<font color='red'>Symbol</font>"), FALSE), 
+			    conditionalPanel(condition="input.symbol_opt6", 				
 			                 selectInput("sel_symbolpoint6", h5("Symbol type",
                                                     bsButton("bsb183", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -1771,14 +1771,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt6", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt6",  #####
+				checkboxInput("size_opt6", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt6",  
 				selectInput("sel_pointsize6", h5("Point size",
                                                   bsButton("bsb187", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb187", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize6=='1'",
-                    sliderInput("pointsize6", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize6", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd6", h5("Size legend",
 		                                    bsButton("bsb188", label="", icon=icon("question"), style="info", size="small")
@@ -1848,8 +1848,8 @@ shinyUI(
 			selectInput("plottype7", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_7(
 				list(
-		    	checkboxInput("color_opt7", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt7",  #####					
+		    	checkboxInput("color_opt7", HTML("<font color='red'>Color</font>"), FALSE), 
+			    conditionalPanel(condition="input.color_opt7", 					
 				conditionalPanel(condition="input.plottype7 == 'point' | input.plottype7 == 'line' | input.plottype7 == 'bar' | input.plottype7 == 'segment'",
 				                 selectInput("coltype7", h5("Data color",
 			                                    bsButton("bsb196", label="", icon=icon("question"), style="info", size="small")
@@ -2024,8 +2024,8 @@ shinyUI(
 			)            
 			),
 			conditionalPanel(condition="input.plottype7=='point'",
-				checkboxInput("symbol_opt7", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt7",  #####				
+				checkboxInput("symbol_opt7", HTML("<font color='red'>Symbol</font>"), FALSE), 
+			    conditionalPanel(condition="input.symbol_opt7", 				
 			                 selectInput("sel_symbolpoint7", h5("Symbol type",
                                                     bsButton("bsb215", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -2051,14 +2051,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt7", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt7",  #####
+				checkboxInput("size_opt7", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt7",  
 				selectInput("sel_pointsize7", h5("Point size",
                                                   bsButton("bsb219", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb219", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize7=='1'",
-                    sliderInput("pointsize7", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize7", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd7", h5("Size legend",
 		                                    bsButton("bsb220", label="", icon=icon("question"), style="info", size="small")
@@ -2128,8 +2128,8 @@ shinyUI(
 			selectInput("plottype8", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_8(
 				list(
-		    	checkboxInput("color_opt8", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt8",  #####					
+		    	checkboxInput("color_opt8", HTML("<font color='red'>Color</font>"), FALSE), 
+			    conditionalPanel(condition="input.color_opt8", 					
 				conditionalPanel(condition="input.plottype8 == 'point' | input.plottype8 == 'line' | input.plottype8 == 'bar' | input.plottype8 == 'segment'",
 				                 selectInput("coltype8", h5("Data color",
 			                                    bsButton("bsb228", label="", icon=icon("question"), style="info", size="small")
@@ -2304,8 +2304,8 @@ shinyUI(
 			)            
 			),
 			conditionalPanel(condition="input.plottype8=='point'",
-				checkboxInput("symbol_opt8", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt8",  #####				
+				checkboxInput("symbol_opt8", HTML("<font color='red'>Symbol</font>"), FALSE), 
+			    conditionalPanel(condition="input.symbol_opt8", 				
 			                 selectInput("sel_symbolpoint8", h5("Symbol type",
                                                     bsButton("bsb247", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -2331,14 +2331,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt8", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt8",  #####				
+				checkboxInput("size_opt8", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt8",  				
 				selectInput("sel_pointsize8", h5("Point size",
                                                   bsButton("bsb251", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb251", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize8=='1'",
-                    sliderInput("pointsize8", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize8", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd8", h5("Size legend",
 		                                    bsButton("bsb252", label="", icon=icon("question"), style="info", size="small")
@@ -2408,8 +2408,8 @@ shinyUI(
 			selectInput("plottype9", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_9(
 				list(
-		    	checkboxInput("color_opt9", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt9",  #####					
+		    	checkboxInput("color_opt9", HTML("<font color='red'>Color</font>"), FALSE), 
+			    conditionalPanel(condition="input.color_opt9", 					
 				conditionalPanel(condition="input.plottype9 == 'point' | input.plottype9 == 'line' | input.plottype9 == 'bar' | input.plottype9 == 'segment'",
 				                 selectInput("coltype9", h5("Data color",
 			                                    bsButton("bsb260", label="", icon=icon("question"), style="info", size="small")
@@ -2584,8 +2584,8 @@ shinyUI(
 			)            
 			),
 			conditionalPanel(condition="input.plottype9=='point'",
-				checkboxInput("symbol_opt9", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt9",  #####				
+				checkboxInput("symbol_opt9", HTML("<font color='red'>Symbol</font>"), FALSE), 
+			    conditionalPanel(condition="input.symbol_opt9", 				
 			                 selectInput("sel_symbolpoint9", h5("Symbol type",
                                                     bsButton("bsb279", label="", icon=icon("question"), style="info", size="small")
                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -2611,14 +2611,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt9", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt9",  #####				
+				checkboxInput("size_opt9", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt9",  				
 				selectInput("sel_pointsize9", h5("Point size",
                                                   bsButton("bsb283", label="", icon=icon("question"), style="info", size="small")
                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb283", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize9=='1'",
-                    sliderInput("pointsize9", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize9", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd9", h5("Size legend",
 		                                    bsButton("bsb284", label="", icon=icon("question"), style="info", size="small")
@@ -2688,8 +2688,8 @@ shinyUI(
 			selectInput("plottype10", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_10(
 				list(
-		    	checkboxInput("color_opt10", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt10",  #####					
+		    	checkboxInput("color_opt10", HTML("<font color='red'>Color</font>"), FALSE), 
+			    conditionalPanel(condition="input.color_opt10", 					
 				conditionalPanel(condition="input.plottype10 == 'point' | input.plottype10 == 'line' | input.plottype10 == 'bar' | input.plottype10 == 'segment'",
 				                 selectInput("coltype10", h5("Data color",
 			                                     bsButton("bsb292", label="", icon=icon("question"), style="info", size="small")
@@ -2864,8 +2864,8 @@ shinyUI(
 			)
 			),
 			conditionalPanel(condition="input.plottype10=='point'",
-				checkboxInput("symbol_opt10", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.symbol_opt10",  #####				
+				checkboxInput("symbol_opt10", HTML("<font color='red'>Symbol</font>"), FALSE), 
+			    conditionalPanel(condition="input.symbol_opt10", 				
 			                 selectInput("sel_symbolpoint10", h5("Symbol type",
                                                      bsButton("bsb311", label="", icon=icon("question"), style="info", size="small")
                                                      ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -2891,14 +2891,14 @@ shinyUI(
 	                )
 				)
 				),
-				checkboxInput("size_opt10", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.size_opt10",  #####				
+				checkboxInput("size_opt10", HTML("<font color='red'>Size</font>"), FALSE),  
+			    conditionalPanel(condition="input.size_opt10",  				
 				selectInput("sel_pointsize10", h5("Point size",
                                                    bsButton("bsb315", label="", icon=icon("question"), style="info", size="small")
                                                    ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 				bsPopover("bsb315", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                 conditionalPanel(condition="input.sel_pointsize10=='1'",
-                    sliderInput("pointsize10", NULL, min=0, max=5, value=0.8, step=0.05)
+                    sliderInput("pointsize10", NULL, min=0, max=5, value=0.8, step=0.1)
                 ),
 				selectInput("sizelgd10", h5("Size legend",
 		                                     bsButton("bsb316", label="", icon=icon("question"), style="info", size="small")
@@ -2998,7 +2998,7 @@ shinyUI(
 						bsPopover("bsb328", "Intra-spacing between different legends.", trigger = "focus"),
 			            sliderInput("lgdtitlesize", h5("Title font size",
 			                                           bsButton("bsb329", label="", icon=icon("question"), style="info", size="small")
-			                                           ), min=0, max=40, value=15, step=0.1),
+			                                           ), min=0, max=40, value=12, step=0.1),
 						bsPopover("bsb329", "The font size of legend title.", trigger = "focus"),
 			            selectInput("lgdtitlefontface", h5("Title font face:",
 			                                               bsButton("bsb330", label="", icon=icon("question"), style="info", size="small")
@@ -3225,8 +3225,8 @@ shinyUI(
 			selectInput("tc_plottype", "Plot type:", choices = c("point_gradual", "point_discrete", "segment" , "rect_gradual", "rect_discrete"), selected="point_gradual"),
          	ADVANCED_OPTIONS_PANEL_tc(
 	  	        list(
-		    	checkboxInput("color_opt_tc", HTML("<font color='red'>Color</font>"), FALSE),  ####
-			    conditionalPanel(condition="input.color_opt_tc",  #####	  	        	
+		    	checkboxInput("color_opt_tc", HTML("<font color='red'>Color</font>"), FALSE), 
+			    conditionalPanel(condition="input.color_opt_tc", 	  	        	
 			        conditionalPanel(condition="input.tc_plottype=='point_gradual' | input.tc_plottype=='rect_gradual'",
 			                         selectInput("tc_selgralcol", h5("Colors",
 			                                             bsButton("bsb356", label="", icon=icon("question"), style="info", size="small")
@@ -3284,10 +3284,10 @@ shinyUI(
 			                                                 ), min=0, max=1, value=1, step=0.1),
 			            bsPopover("bsb361", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")
                     )          
-                    ),  ####################                    
+                    ),                     
                     conditionalPanel(condition="input.tc_plottype == 'point_gradual' | input.tc_plottype == 'point_discrete'",
-                    	checkboxInput("symbol_opt_tc", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
-			            conditionalPanel(condition="input.symbol_opt_tc",  #####
+                    	checkboxInput("symbol_opt_tc", HTML("<font color='red'>Symbol</font>"), FALSE),  
+			            conditionalPanel(condition="input.symbol_opt_tc",  
                                      selectInput("sel_tc_symbolpointype", h5("Symbol type",
                                                                  bsButton("bsb362", label="", icon=icon("question"), style="info", size="small")
                                                                  ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
@@ -3313,14 +3313,14 @@ shinyUI(
 	                        )
 					    )
 					    ),
-				        checkboxInput("size_opt_tc", HTML("<font color='red'>Size</font>"), FALSE),  ####
-			            conditionalPanel(condition="input.size_opt_tc",  #####					    
+				        checkboxInput("size_opt_tc", HTML("<font color='red'>Size</font>"), FALSE),  
+			            conditionalPanel(condition="input.size_opt_tc",  					    
 					    selectInput("sel_tc_pointsizetype", h5("Point size",
                                                                 bsButton("bsb366", label="", icon=icon("question"), style="info", size="small")
                                                                 ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
 					    bsPopover("bsb366", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                         conditionalPanel(condition="input.sel_tc_pointsizetype=='1'",
-                            sliderInput("tc_pointsize", NULL, min=0, max=5, value=0.8, step=0.05)
+                            sliderInput("tc_pointsize", NULL, min=0, max=5, value=0.8, step=0.1)
                         ),
 					    selectInput("tc_sizelgd", h5("Size legend",
 		                                              bsButton("bsb367", label="", icon=icon("question"), style="info", size="small")
@@ -3342,8 +3342,8 @@ shinyUI(
 					    )						
 					),
 			        conditionalPanel(condition="input.tc_plottype=='segment'",
-				        checkboxInput("linetype_opt_tc", HTML("<font color='red'>Linetype</font>"), FALSE),  ####
-			            conditionalPanel(condition="input.linetype_opt_tc",  #####				        	
+				        checkboxInput("linetype_opt_tc", HTML("<font color='red'>Linetype</font>"), FALSE),  
+			            conditionalPanel(condition="input.linetype_opt_tc",  				        	
                         sliderInput("tc_linesize", "Line width:", min=0, max=20, value=0.2, step=0.05),
 			            selectInput("tc_linetype", h5("Line type",
 			                                          bsButton("bsb369", label="", icon=icon("question"), style="info", size="small")
@@ -3448,7 +3448,7 @@ shinyUI(
 			    bsPopover("bsb386", "The position to place the legend.", trigger = "focus"),
 				sliderInput("tc_lgdtitlesize", h5("Title font size",
 				                                  bsButton("bsb387", label="", icon=icon("question"), style="info", size="small")
-				                                  ), min=0, max=40, value=15, step=0.1),
+				                                  ), min=0, max=40, value=12, step=0.1),
 				bsPopover("bsb387", "The font size of legend title.", trigger = "focus"),
 				selectInput("tc_lgdtitlefontface", h5("Title font face:",
 				                                      bsButton("bsb388", label="", icon=icon("question"), style="info", size="small")
@@ -3456,7 +3456,7 @@ shinyUI(
 				bsPopover("bsb388", "The font face of legend title.", trigger = "focus"),
 				sliderInput("tc_lgdtextsize", h5("Label font size",
 				                                 bsButton("bsb389", label="", icon=icon("question"), style="info", size="small")
-				                                 ), min=0, max=20, value=2, step=0.1),
+				                                 ), min=0, max=40, value=10, step=0.1),
 				bsPopover("bsb389", "The font size of legend tick label.", trigger = "focus"),
 			    selectInput("tc_lgdtextfontface", h5("Label font face:",
 			                                         bsButton("bsb390", label="", icon=icon("question"), style="info", size="small")

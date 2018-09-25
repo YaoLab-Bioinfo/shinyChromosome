@@ -460,16 +460,16 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			 breakspch <- unique(data.TT$shape[!is.na(data.TT$value)])
 			 labelspch <- breakspch
 			 breakscex <- unique(data.TT$size[!is.na(data.TT$value)])
-			 labelscex <- breakscex	 
+			 labelscex <- breakscex	
+		     output$errorinfo7 <- renderPrint({
+                 if(input[[paste("plottype",i,sep="")]] %in% "point"){			          
+			         validate(
+                         need(breakspch>=0 & breakspch<=25, paste("Error: Symbol type error for Data",i,"!"," Please input one applicable integer in [0-25].",sep=""))	 
+                     )
+			     }
+             })
+             outputOptions(output, "errorinfo7", suspendWhenHidden = FALSE)			 
 		 }
-		 output$errorinfo7 <- renderPrint({
-             if(input[[paste("plottype",i,sep="")]] %in% "point"){			          
-			     validate(
-                     need(breakspch>=0 & breakspch<=25, paste("Error: Symbol type error for Data",i,"!"," Please input one applicable integer in [0-25].",sep=""))	 
-                 )
-			 }
-         })
-         outputOptions(output, "errorinfo7", suspendWhenHidden = FALSE)
 		 ## *** Line type ***
 		 if(plottype[i] %in% c("line","segment","vertical line","horizontal line")){
 			 linetypep <- linetype[i]

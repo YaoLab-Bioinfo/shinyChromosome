@@ -33,10 +33,10 @@ shinyServer(function(input, output, session) {
         data.T <<- lapply(1:10,function(x){
           assign(paste("seluploaddata",x,sep=""),input[[paste("seluploaddata",x,sep="")]])	
           seluploaddata.export <<- c(seluploaddata.export,get(paste("seluploaddata",x,sep="")))
-          trackfil <- input[[paste("uploaddata",x,sep="")]]
-          uploadfile.export <<- c(uploadfile.export,trackfil$name)		   
+          trackfil <- input[[paste("uploaddata",x,sep="")]]	  
           if(get(paste("seluploaddata",x,sep="")) == 2 & !is.null(trackfil)){
-            data.frame(fread(trackfil$datapath),stringsAsFactors = F)
+            uploadfile.export <<- c(uploadfile.export,trackfil$name)		               
+			data.frame(fread(trackfil$datapath),stringsAsFactors = F)
           }
         })
 		uploadfile.export_1 <<- seluploaddata.export
@@ -1068,7 +1068,6 @@ shinyServer(function(input, output, session) {
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength=10))
-  
   
 })
 
