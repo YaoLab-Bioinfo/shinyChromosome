@@ -1,22 +1,36 @@
+g_legend <- function(a.gplot){
+    tmp <- ggplot_gtable(ggplot_build(a.gplot))
+    leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+    legend <- tmp$grobs[[leg]]
+    return(legend)
+}
 
-plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdirection, plottype, layerindex, Height, Width, coltype, colorcus, colormulgp, coltransparency, heightlayer, marginlayer, themestyle, fontSize, xtitle, ytitle, titlefontface, xlabel, ylabel, legendpos, lgdspacesize, lgdintrasize, lgdtitlesize, lgdtitlefontface, lgdtextsize, lgdtextfontface, addborder, bordercols, rectcol, rectcoldis, rectcoldiscus, colrect, heatmapcol, colhmap, heatmapcols, colhmapdis, colhmapdiscus, symbolpoint, pointsize, linecolor, linesize, fillarea, selareatype, borderarea, xrugs, yrugs, xrugscol, yrugscol, linetype, addarrow, arrowpos, arrowsize, textcol, textsize, fontface, textangle, addlegend, collgd, collgdname, sizelgd, sizelgdname, shapelgd, shapelgdname, linetypelgd, linetypelgdname, collgdmdylabel, collgdlabel, sizelgdmdylabel, sizelgdlabel, shapelgdmdylabel, shapelgdlabel, linetypelgdmdylabel, linetypelgdlabel){
-	  output$figure_1 <- renderPlot({
-	      withProgress(message='Making plots',value = 0,{      
-	      names(data.C) <- c("chr","size")
-	      chr_order <- unique(data.C$chr)	  
-	      data.C$size <- as.numeric(data.C$size) 
-	      layernum <- length(unique(layerindex))
-	      layerindex <- as.numeric(gsub("track", "", layerindex))
-	      val_range <- list()
-	      data.C$chrstart <- 0
-	      names(data.C) <- c("chr","chrsize","chrstart")
-	      data.C <- data.C[,c(1,3,2)]
-	      val_range_chr <- melt(data=data.C,id.vars="chr")
-	      val_range_chr$variable <- NULL	  
-	      chr.len <- data.C$chrsize
-          names(chr.len) <- data.C$chr
-          chr.cum.len <- c(0, cumsum(chr.len)[-length(chr.len)])
-          names(chr.cum.len) <- names(chr.len)
+areColors <- function(x){
+     sapply(x, function(y){
+         tryCatch(is.matrix(col2rgb(y)), 
+                  error = function(e) FALSE)
+     })
+}
+
+single_genome_plot <- function(data.C,data.T,plottype,layerindex,coltype,colorcus,colormulgp,coltransparency,addborder,bordercols,rectcol,rectcoldis,rectcoldiscus,colrect,rectgrad_col,rectgrad_cuscols,heatmapcol,colhmap,heatmapcols,
+	colhmapdis,colhmapdiscus,symbolpoint,sel_symbolpoint,pointsize,sel_pointsize,linecolor,linesize,fillarea,selareatype,borderarea,linetype,addarrow,arrowpos,arrowsize,textcol,textsize,fontface,textangle,collgd,collgdname,
+	sizelgd,sizelgdname,shapelgd,shapelgdname,linetypelgd,linetypelgdname,collgdmdylabel,collgdlabel,sizelgdmdylabel,sizelgdlabel,shapelgdmdylabel,shapelgdlabel,linetypelgdmdylabel,linetypelgdlabel,ylabel,heightlayer,
+	marginlayer,laycolor.export,rect_discol.export,heatmap_discol.export){      
+      names(data.C) <- c("chr","size")
+      chr_order <- unique(data.C$chr)	  
+      data.C$size <- as.numeric(data.C$size) 
+      layernum <- length(unique(layerindex))
+      layerindex <- as.numeric(gsub("track", "", layerindex))
+      val_range <- list()
+      data.C$chrstart <- 0
+      names(data.C) <- c("chr","chrsize","chrstart")
+      data.C <- data.C[,c(1,3,2)]
+      val_range_chr <- melt(data=data.C,id.vars="chr")
+      val_range_chr$variable <- NULL	  
+      chr.len <- data.C$chrsize
+      names(chr.len) <- data.C$chr
+      chr.cum.len <- c(0, cumsum(chr.len)[-length(chr.len)])
+      names(chr.cum.len) <- names(chr.len)  
 	  for(m in 1:length(data.T)){
 	     data.TT <- data.T[[m]]
          if(!plottype[m] %in% c("rect_gradual","rect_discrete","heatmap_gradual","heatmap_discrete","vertical line")){
@@ -82,8 +96,8 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 	  }
 	  val_range_chr <- melt(data=val_range_chr,id.vars=c("chr","pos"))
 	  val_range_chr$variable <- NULL
-	  p1 <- ggplot() + geom_point(data=val_range_chr, aes(pos,value),color=NA)
-      yaxis_breaks <- list()
+	  p1 <- ggplot() + geom_point(data=val_range_chr, aes(pos,value),color=NA)      
+	  yaxis_breaks <- list()
 	  yaxis_labels <- list()
       ## *** change priority level ***
 	  indx <- lapply(c("heatmap_gradual", "heatmap_discrete", "rect_gradual","rect_discrete", "bar", "line", "segment", "point", "vertical line", "horizontal line", "text"), function(x){
@@ -91,9 +105,6 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
           return(indx)
       })
       indx <- unlist(indx)
-	  laycolor.export <<- list()
-	  rect_discol.export <<- list()
-	  heatmap_discol.export <<- list()
 	  for(i in indx){	  
 	     data.TT <- data.T[[i]]
          data.CC <- data.C
@@ -155,12 +166,11 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               laycolor <- colorcus[i]
               laycolor <- gsub("\\s","",strsplit(laycolor,",")[[1]])
               laycolor <- gsub('\\"',"",laycolor)
-              laycolor <- gsub("0x","#", laycolor)
+			  laycolor <- gsub("0x","#", laycolor)
 			  if(length(laycolor)==0){
 			      laycolor <- NA
 			  }
               data.TT$color <- laycolor
-		      laycolor.export <<- c(laycolor.export,NA)			  
             }else if(coltypep==3 & ("color" %in% colnames(data.TT))){
 			  laycolor <- colormulgp[i]
               laycolor <- unlist(strsplit(laycolor,";"))
@@ -169,15 +179,6 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               laycolor$cols <- gsub(".*\\:","",laycolor$id)
               laycolor$group <- gsub(" ","",laycolor$group)
               laycolor$cols <- gsub(" ","",laycolor$cols)
-			  jd_col <- laycolor$cols
-			  output$errorinfo2 <- renderPrint({
-                  if(input[[paste("plottype",i,sep="")]] %in% c("point","line","bar","segment") && input[[paste("coltype",i,sep="")]]==3){			          
-					  validate(
-                          need(all(areColors(jd_col)), paste("Error: Data color error for Data",i,"!"," Please input applicable color name.",sep=""))	 
-                      )
-				  }
-              })
-              outputOptions(output, "errorinfo2", suspendWhenHidden = FALSE)
 			  colname <- colnames(data.TT)
               data.TTC <- merge(data.TT,laycolor,by.x="color",by.y="group",all.x=T)
 			  data.TT <- data.TTC[c(colname,"cols")]
@@ -185,12 +186,10 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               data.TT$raw_color <- data.TT$color
 			  data.TT$color <- data.TT$cols
 			  data.TT$cols <- NULL
-		      laycolor.export <<- c(laycolor.export,NA)			  
             }else if(coltypep==1 & ("color" %in% colnames(data.TT))){
-              selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
-              laycolor <- sample(selcols,length(unique(data.TT$color)))
-			  laycolor.export <<- c(laycolor.export,paste(laycolor,collapse="."))
-			  laycolor <- data.frame(group=unique(data.TT$color),cols=laycolor,stringsAsFactors=F)
+			  laycolor <- laycolor.export[which(indx==i)]
+			  laycolor <- unlist(strsplit(laycolor,"\\."))
+              laycolor <- data.frame(group=unique(data.TT$color),cols=laycolor,stringsAsFactors=F)
               colname <- colnames(data.TT)
               data.TTC <- merge(data.TT,laycolor,by.x="color",by.y="group",all.x=T)
               data.TT <- data.TTC[c(colname,"cols")]
@@ -199,85 +198,85 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			  data.TT$color <- data.TT$cols
 			  data.TT$cols <- NULL		
             }else{
-              selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
-              laycolor <- sample(selcols,1)
-		      laycolor.export <<- c(laycolor.export,paste(laycolor,collapse="."))			  
+			  laycolor <- laycolor.export[which(indx==i)]
+			  laycolor <- unlist(strsplit(laycolor,"\\."))
 			  data.TT$color <- laycolor
             }			
-          }else{
-		      laycolor.export <<- c(laycolor.export,NA)
-		  }
+          }	
           ## *** The data color ***
           ## *** Select color ***
 		  if(plottype[i] %in% "rect_gradual"){
-              selrectcol <- rectcol[i]		  
-              rectcolor <- colrect[i]
-              if(rectcolor=="blue"){
-                  rectcols <<- c("#EDEDFD","#6969F5","#00008B")
-              }else if(rectcolor=="red"){
-                  rectcols <<- c("#FDEDED","#F56969","#8B0000")
-              }else if(rectcolor=="green"){
-                  rectcols <<- c("#EDFBED","#69E169","#008B00")
-              }else if(rectcolor=="cyan"){
-                  rectcols <<- c("#EDFBFB","#69E1E1","#008B8B")
-              }else if(rectcolor=="purple"){
-                  rectcols <<- c("#F6F0FB","#B27FE1","#551A8B")
-              }else if(rectcolor=="pink"){
-                  rectcols <<- c("#FBEEF5","#E172AE","#8B1076")
-              }else if(rectcolor=="orange"){
-                  rectcols <<- c("#FDF5ED","#F5AE69","#8B4500")
-              }else if(rectcolor=="yellow"){
-                  rectcols <<- c("#FDFDED","#EFEF1A","#8B8B00")
-              }else if(rectcolor=="navy"){
-                  rectcols <<- c("#EDEDF6","#7272B8","#000080")
-              }else if(rectcolor=="seagreen"){
-                  rectcols <<- c("#F2FBF6","#4EEE94","#2E8B57")
-              }else if(rectcolor=="maroon"){
-                  rectcols <<- c("#FFF4FB","#FF69C7","#8B1C62")
-              }else if(rectcolor=="olivedrab"){
-                  rectcols <<- c("#FBFFF4","#C6FF52","#698B22")
-              }else if(rectcolor=="gold"){
-                  rectcols <<- c("#FFFCF1","#FFDD28","#8B7500")
-              }else if(rectcolor=="lightblue"){
-                  rectcols <<- c("#EFF5F7","#AFCDD7","#68838B")
-              }else if(rectcolor=="navy.yellow"){
-                  rectcols <<- c("#000080","#7B7B41","#FFFF00")
-              }else if(rectcolor=="purple.seagreen"){
-                  rectcols <<- c("#551A8B","#548994","#54FF9F")
-              }else if(rectcolor=="navy.orange"){
-                  rectcols <<- c("#000080","#7B5041","#FFA500")
-              }else if(rectcolor=="navy.cyan"){
-                  rectcols <<- c("#000080","#007BBD","#00FFFF")
-              }else if(rectcolor=="blue.red"){
-                  rectcols <<- c("#0000FF","#730083","#EE0000")
-              }else if(rectcolor=="green.red"){
-                  rectcols <<- c("#00EE00","#757800","#EE0000")
-              }
-          }
+              rectgradcol <- rectgrad_col[i]
+              if(rectgradcol==1){			  
+                  rectcolor <- colrect[i]
+                  if(rectcolor=="blue"){
+                      rectcols <- c("#EDEDFD","#6969F5","#00008B")
+                  }else if(rectcolor=="red"){
+                      rectcols <- c("#FDEDED","#F56969","#8B0000")
+                  }else if(rectcolor=="green"){
+                      rectcols <- c("#EDFBED","#69E169","#008B00")
+                  }else if(rectcolor=="cyan"){
+                      rectcols <- c("#EDFBFB","#69E1E1","#008B8B")
+                  }else if(rectcolor=="purple"){
+                      rectcols <- c("#F6F0FB","#B27FE1","#551A8B")
+                  }else if(rectcolor=="pink"){
+                      rectcols <- c("#FBEEF5","#E172AE","#8B1076")
+                  }else if(rectcolor=="orange"){
+                      rectcols <- c("#FDF5ED","#F5AE69","#8B4500")
+                  }else if(rectcolor=="yellow"){
+                      rectcols <- c("#FDFDED","#EFEF1A","#8B8B00")
+                  }else if(rectcolor=="navy"){
+                      rectcols <- c("#EDEDF6","#7272B8","#000080")
+                  }else if(rectcolor=="seagreen"){
+                      rectcols <- c("#F2FBF6","#4EEE94","#2E8B57")
+                  }else if(rectcolor=="maroon"){
+                      rectcols <- c("#FFF4FB","#FF69C7","#8B1C62")
+                  }else if(rectcolor=="olivedrab"){
+                      rectcols <- c("#FBFFF4","#C6FF52","#698B22")
+                  }else if(rectcolor=="gold"){
+                      rectcols <- c("#FFFCF1","#FFDD28","#8B7500")
+                  }else if(rectcolor=="lightblue"){
+                      rectcols <- c("#EFF5F7","#AFCDD7","#68838B")
+                  }else if(rectcolor=="navy.yellow"){
+                      rectcols <- c("#000080","#7B7B41","#FFFF00")
+                  }else if(rectcolor=="purple.seagreen"){
+                      rectcols <- c("#551A8B","#548994","#54FF9F")
+                  }else if(rectcolor=="navy.orange"){
+                      rectcols <- c("#000080","#7B5041","#FFA500")
+                  }else if(rectcolor=="navy.cyan"){
+                      rectcols <- c("#000080","#007BBD","#00FFFF")
+                  }else if(rectcolor=="blue.red"){
+                      rectcols <- c("#0000FF","#730083","#EE0000")
+                  }else if(rectcolor=="green.red"){
+                      rectcols <- c("#00EE00","#757800","#EE0000")
+                  }
+			  }else{
+			      rectgrad_cuscol <- rectgrad_cuscols[i]
+			      rectcols <- unlist(strsplit(rectgrad_cuscol,"\\."))
+			  }
+          }	
 		  if(plottype[i] %in% "rect_discrete"){
               selrectcol <- rectcol[i]		  
 		      if(selrectcol==1){
-                  cols <- c(brewer.pal(11,'Set3'),brewer.pal(9,'Set1')[c(-1,-3,-6)],brewer.pal(8,'Dark2'),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
+                  cols <- c(brewer.pal(11,"Set3"),brewer.pal(9,"Set1")[c(-1,-3,-6)],brewer.pal(8,"Dark2"),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
 				  if(length(unique(data.TT[,4]))<= length(cols)){
-                      selcol <- sample(cols,length(unique(data.TT[,4])))
-		              rect_discol.export <<- c(rect_discol.export,paste(selcol,collapse="."))
+			          selcol <- rect_discol.export[which(indx==i)]
+			          selcol <- unlist(strsplit(selcol,"\\."))				      
 					  names(selcol) <- unique(data.TT[,4])
 			          data.TT$color <- selcol[data.TT[,4]]
 				  }else{
 				      data.TT$color <- NA
-					  rect_discol.export <<- c(rect_discol.export,NA)
 				  }
 			  }else if(selrectcol==2){
                   rectcols <- rectcoldis[i] 
                   rectcols <- gsub("\\s","",strsplit(rectcols,",")[[1]])
                   rectcols <- gsub('\\"',"",rectcols)
-                  rectcols <- gsub("0x","#", rectcols)
+			      rectcols <- gsub("0x","#", rectcols)
 			      if(length(rectcols)==0){
 			          rectcols <- NA
 			      }
                   data.TT$color <- rectcols
 				  data.TT$value <- rectcols
-				  rect_discol.export <<- c(rect_discol.export,NA)
 			  }else if(selrectcol==3){
                   rectcols <- rectcoldiscus[i]
                   rectcols <- unlist(strsplit(rectcols,";"))
@@ -290,17 +289,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
                   data.TT <- merge(data.TT,rectcols,by.x=colnames(data.TT)[4],by.y="group",all.x=T)
                   data.TT <- data.TT[c(colname,"cols")]
 			      names(data.TT)[ncol(data.TT)] <- "color"
-				  rect_discol.export <<- c(rect_discol.export,NA)				  
 			  }
-			  jd_col <- data.TT$color
-			  output$errorinfo3 <- renderPrint({
-			      if(input[[paste("plottype",i,sep="")]] %in% "rect_discrete" && input[[paste("rectcol",i,sep="")]]!=1){
-			          validate(
-                          need(all(areColors(jd_col)), paste("Error: Data color error for Data",i,"!"," Please input applicable color name.",sep=""))	 
-                      )
-				  }
-              })
-              outputOptions(output, "errorinfo3", suspendWhenHidden = FALSE)
 			  data.TT$color[!areColors(data.TT$color)] <- NA			  
 		      data.TT$color <- adjustcolor(data.TT$color,alpha.f = coltransparency[i])
               if(!all(is.na(data.TT$color))){
@@ -315,32 +304,29 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               data.TT$value <- factor(data.TT$value,levels=rectval_1,ordered = T)
               data.TT$color <- factor(data.TT$color,levels=rectcol_1,ordered = T)
 			  rectval_1 <- rectval_1[which(!rectcol_1 %in% "#FFFFFF00")]
-			  rectcol_1 <- rectcol_1[!rectcol_1 %in% "#FFFFFF00"]
-		  }else{
-			  rect_discol.export <<- c(rect_discol.export,NA)
-		  }
+			  rectcol_1 <- rectcol_1[!rectcol_1 %in% "#FFFFFF00"]		  
+		  }	  
          ## *** The fill color for track ***
          if(plottype[i] %in% "heatmap_gradual"){
 		     if(heatmapcol[i]==1){
-                 hmapcols <- gsub('\\"',"",colhmap[i])    
-		     }else{
-		         hmapcols <- heatmapcols[i]                                         
+                hmapcols <- gsub('\\"',"",colhmap[i])    
+			 }else{
+		        hmapcols <- heatmapcols[i]                                         
 		     }
              hmapcols <- unlist(strsplit(hmapcols,"\\."))
          }
 		 if(plottype[i] %in% "heatmap_discrete"){
     		 selcolhmapdis <- colhmapdis[i]			 
 		     if(selcolhmapdis==1){
-                 cols <- c(brewer.pal(11,'Set3'),brewer.pal(9,'Set1')[c(-1,-3,-6)],brewer.pal(8,'Dark2'),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
+                 cols <- c(brewer.pal(11,"Set3"),brewer.pal(9,"Set1")[c(-1,-3,-6)],brewer.pal(8,"Dark2"),"chartreuse","aquamarine","cornflowerblue","blue","cyan","bisque1","darkorchid2","firebrick1","gold1","magenta1","olivedrab1","navy","maroon1","tan","yellow3","black","bisque4","seagreen3","plum2","yellow1","springgreen","slateblue1","lightsteelblue1","lightseagreen","limegreen")
 				  data.TT$raw_color <- data.TT$color
 				  if(length(unique(data.TT$color))<= length(cols)){
-                      selcol <- sample(cols,length(unique(data.TT$color)))
-		              heatmap_discol.export <<- c(heatmap_discol.export,paste(selcol,collapse="."))
-				      names(selcol) <- unique(data.TT$color)
+			          selcol <- heatmap_discol.export[which(indx==i)]
+			          selcol <- unlist(strsplit(selcol,"\\."))				      
+					  names(selcol) <- unique(data.TT$color)
 			          data.TT$color <- selcol[data.TT$color]
 				  }else{
 				      data.TT$color <- NA
-					  heatmap_discol.export <<- c(heatmap_discol.export,NA)
 				  }
 			  }else if(selcolhmapdis==2){
                   hmapcols <- colhmapdiscus[i]				  
@@ -355,17 +341,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
                   data.TT <- data.TT[c(colname,"cols")]
                   colnames(data.TT)[which(colnames(data.TT) %in% "color")] <- "raw_color"				  
 			      names(data.TT)[ncol(data.TT)] <- "color"
-			      heatmap_discol.export <<- c(heatmap_discol.export,NA)				  
 			  }
-			  jd_col <- data.TT$color
-			  output$errorinfo4 <- renderPrint({
-			      if(input[[paste("plottype",i,sep="")]] %in% "heatmap_discrete" && input[[paste("colhmapdis",i,sep="")]]!=1){
-			          validate(
-                          need(all(areColors(jd_col)), paste("Error: Data color error for Data",i,"!"," Please input applicable color name.",sep=""))	 
-                      )
-				  }
-              })
-              outputOptions(output, "errorinfo4", suspendWhenHidden = FALSE)
 			  data.TT$color[!areColors(data.TT$color)] <- NA			  
 		      data.TT$color <- adjustcolor(data.TT$color,alpha.f = coltransparency[i])
               if(!all(is.na(data.TT$color))){
@@ -380,15 +356,13 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               data.TT$raw_color <- factor(data.TT$raw_color,levels=hmapval_1,ordered = T)
               data.TT$color <- factor(data.TT$color,levels=hmapcol_1,ordered = T)
 			  hmapval_1 <- hmapval_1[which(!hmapcol_1 %in% "#FFFFFF00")]
-			  hmapcol_1 <- hmapcol_1[!hmapcol_1 %in% "#FFFFFF00"]
-		 }else{
-			  heatmap_discol.export <<- c(heatmap_discol.export,NA)		 
+			  hmapcol_1 <- hmapcol_1[!hmapcol_1 %in% "#FFFFFF00"]			  
 		 }
          if(plottype[i] %in% c("vertical line","horizontal line")){
 		     linecolorp <- linecolor[i]
              linecolorp <- gsub("\\s","",strsplit(linecolorp,",")[[1]])[1]
              linecolorp <- gsub('\\"',"",linecolorp)
-             linecolorp <- gsub("0x","#", linecolorp)			 
+			 linecolorp <- gsub("0x","#", linecolorp)			 
 			 if(length(linecolorp)==0){
 		         linecolorp <- NA
 	         }			 
@@ -420,7 +394,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 		 }
 		 if(plottype[i] %in% "text"){
 			 labelscol <- textcol[i]
-		 }
+		 }	 
          ## *** Fill area color ***
 		 if(plottype[i] %in% "line"){
 		     if(fillarea[i]==1){
@@ -442,25 +416,21 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 		 }	 
 		 ## *** Point type and size ***
 		 if(plottype[i] %in% "point"){
-		     if(!"shape" %in% names(data.TT)){
-				 data.TT$shape <- as.numeric(symbolpoint[i])
+		     if(sel_symbolpoint[i]==1){
+			     data.TT$shape <- as.numeric(symbolpoint[i])
+			 }else if(sel_symbolpoint[i]==2 & (!"shape" %in% names(data.TT))){
+			     data.TT$shape <- 16
 			 }
-			 if(!"size" %in% names(data.TT)){
-			     data.TT$size <- as.numeric(pointsize[i])		 
-		     }
+			 if(sel_pointsize[i]==1){
+			     data.TT$size <- as.numeric(pointsize[i])		 			 
+			 }else if(sel_pointsize[i]==2 & (!"size" %in% names(data.TT))){
+			     data.TT$size <- 0.8
+			 }
 			 breakspch <- unique(data.TT$shape[!is.na(data.TT$value)])
 			 labelspch <- breakspch
 			 breakscex <- unique(data.TT$size[!is.na(data.TT$value)])
 			 labelscex <- breakscex	 
 		 }
-		 output$errorinfo7 <- renderPrint({
-             if(input[[paste("plottype",i,sep="")]] %in% "point"){			          
-			     validate(
-                     need(breakspch>=0 & breakspch<=25, paste("Error: Symbol type error for Data",i,"!"," Please input one applicable integer in [0-25].",sep=""))	 
-                 )
-			 }
-         })
-         outputOptions(output, "errorinfo7", suspendWhenHidden = FALSE)
 		 ## *** Line type ***
 		 if(plottype[i] %in% c("line","segment","vertical line","horizontal line")){
 			 linetypep <- linetype[i]
@@ -486,13 +456,12 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 		 addsizelgd <- "none"
 		 addshapelgd <- "none"
 		 addlinetypelgd <- "none"		 
-		 if(addlegend[i]==1){
 		   if(collgd[i]==1){
 		      addcollgd <- "legend"
 			  if(collgdmdylabel[i]==1){
                   collgdlabelp <- gsub("\\s","",strsplit(collgdlabel[i],",")[[1]])
                   collgdlabelp <- gsub('\\"',"",collgdlabelp)
-			  if(length(collgdlabelp)==0){
+				  if(length(collgdlabelp)==0){
 			      collgdlabelp <- "NA"
 			  }
 			  if(!plottype[i] %in% c("heatmap_gradual","heatmap_discrete","text","rect_gradual","rect_discrete")){
@@ -518,18 +487,18 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			  }		  
 			  }
 		   }
-		   if(sizelgd[i]==1){
+		   if(plottype[i] %in% "point" && sizelgd[i]==1){
 		     addsizelgd <- "legend"
 			 if(sizelgdmdylabel[i]==1){
                  sizelgdlabelp <- gsub("\\s","",strsplit(sizelgdlabel[i],",")[[1]])
                  sizelgdlabelp <- gsub('\\"',"",sizelgdlabelp)
-				 if(length(sizelgdlabelp)==0){
+			     if(length(sizelgdlabelp)==0){
 			         sizelgdlabelp <- "NA"
 			     }
              labelscex <- rep(sizelgdlabelp,length(breakscex))[1:length(breakscex)]	 
 			 }	  
 		   }
-		   if(shapelgd[i]==1){
+		   if(plottype[i] %in% "point" && shapelgd[i]==1){
 		     addshapelgd <- "legend"
 			 if(shapelgdmdylabel[i]==1){
                  shapelgdlabelp <- gsub("\\s","",strsplit(shapelgdlabel[i],",")[[1]])
@@ -540,7 +509,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
              labelspch <- rep(shapelgdlabelp,length(breakspch))[1:length(breakspch)]
 			 }
 		   }
-		   if(linetypelgd[i]==1){
+		   if(plottype[i] %in% c("vertical line","horizontal line") && linetypelgd[i]==1){
 		     addlinetypelgd <- "legend"
 			 if(linetypelgdmdylabel[i]==1){
                  linetypelgdlabelp <- gsub("\\s","",strsplit(linetypelgdlabel[i],",")[[1]])
@@ -551,9 +520,8 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
              labelslinetype <- rep(linetypelgdlabelp,length(linetypep))[1:length(linetypep)]
 			 }
 		   }
-		 }
          ## *** Legend of fill area ***
-		if(plottype[i] %in% "line" & fillarea[i]==1 & addlegend[i]==1 & addcollgd %in% "legend"){
+		if(plottype[i] %in% "line" & fillarea[i]==1 & addcollgd %in% "legend"){
             data.TT$raw_areacol <- as.character(data.TT$raw_color)                      
 			raw_areacol_1 <- unique(data.TT$raw_areacol[!is.na(data.TT$value)])
             areacol_1 <- data.TT$areacol[match(raw_areacol_1,data.TT$raw_areacol)]
@@ -687,7 +655,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 	     }
 	     data.TT$chr.f <- factor(data.TT$chr,levels=chr_order,ordered=T)
 		 if(plottype[i] %in% "point"){
-		     if(addlegend[i]==1 & any(c(addcollgd,addsizelgd,addshapelgd) %in% "legend")){
+		     if(any(c(addcollgd,addsizelgd,addshapelgd) %in% "legend")){
 			     if(is.numeric(labelscex)){
 			         labelscex <- sprintf("%.1f",sort(labelscex))
 			     }
@@ -710,7 +678,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			     linetypep <- "solid"
 			 }
 		     if(fillarea[i]==2){
-                 if(addlegend[i]==1 & addcollgd %in% "legend"){
+                 if(addcollgd %in% "legend"){
                      if(legendpos==1){				 
 		                 lg1 <- ggplot() + geom_line(data=data.TTP, aes(pos, yvalue, color=color), size=linesize[i], linetype=linetypep) + scale_color_identity(name=collgdname[i],guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 					 }else{
@@ -727,7 +695,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 					 }
 				 }				 
 			 }else{
-			 	 if(addlegend[i]==1 & addcollgd %in% "legend"){
+			 	 if(addcollgd %in% "legend"){
                      if(legendpos==1){		                 
 						 lg1 <- ggplot() + geom_line(data=data.TTP, aes(pos,yvalue), color=as.character(data.TTP$color), size=linesize[i], linetype=linetypep) + geom_area(data=data.TTP,aes(x=pos,y=yvalue,fill=areacol)) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=areacol_1,labels=raw_areacol_1) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 					 }else{					 
@@ -749,7 +717,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			if(max(data.T[[i]][,4], na.rm = T)<=0 | min(data.T[[i]][,4], na.rm = T)>=0){
 			    if(directbarp==1){
 				    if(length(which(layerindex==layerindex[i]))>1){
-						if(addlegend[i]==1 & addcollgd %in% "legend"){
+						if(addcollgd %in% "legend"){
                             if(legendpos==1){						
                                 lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymax=yvalue, fill=color), ymin=data.TTP$ystart+minnum_1, color=bordercolsp) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 							}else{
@@ -762,11 +730,11 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			 	        for(f in unique(data.TT$chr)){
 				            for(j in unique(data.TT$color[data.TT$chr %in% f])){
                                 dat <- data.TT[data.TT$chr %in% f & data.TT$color %in% j,]						
-                                p1 <- p1 + geom_rect(data=dat, aes(xmin=xmin, xmax=xmax, ymax=yvalue), ymin=dat$ystart[1]+minnum_p, fill=as.character(dat$color), color=bordercolsp)
+                                p1 <- p1 + geom_rect(data=dat, aes(xmin=xmin, xmax=xmax, ymax=yvalue), ymin=dat$ystart[1], fill=as.character(dat$color), color=bordercolsp)
 						    }
 					    }
 					}else{
-		                if(addlegend[i]==1 & addcollgd %in% "legend"){
+		                if(addcollgd %in% "legend"){
                             if(legendpos==1){						
                                 lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yvalue, fill=color), color=bordercolsp) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 							}else{
@@ -784,7 +752,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 						}
 					}
 			    }else if(directbarp==2){
-				    if(addlegend[i]==1 & addcollgd %in% "legend"){
+				    if(addcollgd %in% "legend"){
                         if(legendpos==1){					
                             lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymax=yvalue, fill=color), ymin=minnum_1, color=bordercolsp) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 						}else{
@@ -803,7 +771,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 				}
 			}else{
 			    if(min_val < 0){
-					if(addlegend[i]==1 & addcollgd %in% "legend"){
+					if(addcollgd %in% "legend"){
                         if(legendpos==1){					
                             lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymax=yvalue, fill=color), ymin=minnum_1, color=bordercolsp) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 						}else{
@@ -820,7 +788,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 					    }
 					}
 			    }else{
-					if(addlegend[i]==1 & addcollgd %in% "legend"){
+					if(addcollgd %in% "legend"){
                         if(legendpos==1){					
                             lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yvalue, fill=color), color=bordercolsp) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 						}else{
@@ -849,7 +817,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 				 }
                  g1 <- ggplot_build(lg1)
                  data.TT$fillcol <- g1$data[[1]][,"fill"]
-				 if(addlegend[i]==1 & addcollgd %in% "legend"){				 
+				 if(addcollgd %in% "legend"){				 
 				     assign(paste("legend",i,sep=""),g_legend(lg1))
 				 }else{
 			         assign(paste("legend",i,sep=""),NA)				 
@@ -865,7 +833,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			 }else{
 			     lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=color), color=bordercolsp) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=rectcol_1,labels=rectval_1) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			 }
-			 if(addlegend[i]==1 & addcollgd %in% "legend"){				 
+			 if(addcollgd %in% "legend"){				 
 			     assign(paste("legend",i,sep=""),g_legend(lg1))
 			 }else{
 			     assign(paste("legend",i,sep=""),NA)				 
@@ -884,7 +852,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			}
             g1 <- ggplot_build(lg1)
             data.TT$fillcol <- g1$data[[1]][,"fill"]
-			if(addlegend[i]==1 & addcollgd %in% "legend"){				 
+			if(addcollgd %in% "legend"){				 
 			    assign(paste("legend",i,sep=""),g_legend(lg1))
 			}else{
 			    assign(paste("legend",i,sep=""),NA)				 
@@ -900,7 +868,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 			 }else{
 			     lg1 <- ggplot() + geom_rect(data=data.TTP, aes(xmin=xmin, xmax=xmax, ymin=ystart, ymax=yend, fill=color), color=bordercolsp) + scale_fill_identity(name=collgdname[i],guide = addcollgd,breaks=hmapcol_1,labels=hmapval_1) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			 }
-			 if(addlegend[i]==1 & addcollgd %in% "legend"){				 
+			 if(addcollgd %in% "legend"){				 
 			     assign(paste("legend",i,sep=""),g_legend(lg1))
 			 }else{
 			     assign(paste("legend",i,sep=""),NA)				 
@@ -911,7 +879,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
              }
 		 }
 		 if(plottype[i] %in% "vertical line"){
-		    if(addlegend[i]==1 & any(c(addcollgd,addlinetypelgd) %in% "legend")){
+		    if(any(c(addcollgd,addlinetypelgd) %in% "legend")){
                 if(legendpos==1){			
 		            lg1 <- ggplot() + geom_segment(data=data.TTP, aes(x = pos, y = ystart, xend = pos, yend = yend, color=color, linetype=linetypep), size=linesize[i]) + scale_color_identity(name=collgdname[i], guide=addcollgd,breaks=breakscol,labels=labelscol) + scale_linetype_identity(name=linetypelgdname[i], guide=addlinetypelgd,breaks=as.character(linetypep),labels=labelslinetype) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(color = guide_legend(order = 1), linetype = guide_legend(order = 2))
 				}else{
@@ -924,7 +892,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 		    p1 <- p1 + geom_segment(data=data.TT, aes(x = pos, y = ystart, xend = pos, yend = yend), color=as.character(data.TT$color), size=linesize[i], linetype=linetypep)			
 		 }
 		 if(plottype[i] %in% "horizontal line"){
-		 	if(addlegend[i]==1 & any(c(addcollgd,addlinetypelgd) %in% "legend")){
+		 	if(any(c(addcollgd,addlinetypelgd) %in% "legend")){
                 if(legendpos==1){			
 		            lg1 <- ggplot() + geom_segment(data=data.TTP, aes(x = xmin, y = yvalue, xend = xmax, yend = yvalue, color=color, linetype=linetypep), size=linesize[i]) + scale_color_identity(name=collgdname[i], guide=addcollgd,breaks=breakscol,labels=labelscol) + scale_linetype_identity(name=linetypelgdname[i], guide=addlinetypelgd,breaks=as.character(linetypep),labels=labelslinetype) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(color = guide_legend(order = 1), linetype = guide_legend(order = 2))
 				}else{
@@ -937,7 +905,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 		    p1 <- p1 + geom_segment(data=data.TT, aes(x = xmin, y = yvalue, xend = xmax, yend = yvalue), color=as.character(data.TT$color), size=linesize[i], linetype=linetypep)			
 		 }
 		 if(plottype[i] %in% "text"){
-		 	if(addlegend[i]==1 & addcollgd %in% "legend"){
+		 	if(addcollgd %in% "legend"){
 			    data.TTP$color <- textcol[i]
                 if(legendpos==1){                
 				    lg1 <- ggplot() + geom_text(data=data.TTP, aes(x=pos, y=yvalue, label=symbol, color=color), size=textsize[i], hjust=0, angle=textangle[i], fontface=fontface[i]) + scale_color_identity(name=collgdname[i], guide=addcollgd, breaks=textcol[i],labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
@@ -954,7 +922,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 		     if(length(unique(data.TTP$color))>1){
 			     linetypep <- "solid"
 			 }
-         if(addlegend[i]==1 & addcollgd %in% "legend"){
+         if(addcollgd %in% "legend"){
              if(legendpos==1){
 		         lg1 <- ggplot() + geom_segment(data=data.TTP, aes(x=xpos1, y=ypos1, xend=xpos2, yend=ypos2, color=color), size=linesize[i], linetype=linetypep) + scale_color_identity(name=collgdname[i],guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
 			 }else{       
@@ -984,29 +952,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
               yaxis_breaks <- c(yaxis_breaks,list(c(layerindex[i],range(data.TT$yvalue))))
 		      yaxis_labels <- c(yaxis_labels,list(c(layerindex[i],round(range(data.TT$raw_value),2))))
 		  }
-		  if(xrugs[i]==1){
-		      if(plottype[i] %in% "bar"){
-			      data.TT$pos <- (data.TT$xmin + data.TT$xmax)/2
-			  }
-			  p1 <- p1 + geom_rug(data=data.TT, x=data.TT$pos, color=xrugscol[i])
-		  }
-		  if(yrugs[i]==1){
-		      p1 <- p1 + geom_rug(data=data.TT, y=data.TT$yvalue, color=yrugscol[i])				  
-		  }
-	  }
-	  output$errorinfo9 <- renderPrint({
-          if(input[[paste("plottype",i,sep="")]] %in% c("point","line","bar") && input[[paste("xrugs",i,sep="")]]==1){	  		          
-		      validate(
-                  need(all(areColors(xrugscol[i])), paste("Error: Incorrect color for y-axis rugs of ",i,"!"," Please input applicable color name.",sep=""))
-              )
-		  }
-          if(input[[paste("plottype",i,sep="")]] %in% c("point","line","bar") && input[[paste("yrugs",i,sep="")]]==1){	  		          
-		      validate(
-                  need(all(areColors(yrugscol[i])), paste("Error: Incorrect color for y-axis rugs of ",i,"!"," Please input applicable color name.",sep=""))
-              )
-	      }			 
-      })
-      outputOptions(output, "errorinfo9", suspendWhenHidden = FALSE)		  
+	  }		  
 	  }
 	  ## *** Plot theme ***
       if(themestyle %in% "theme1"){
@@ -1077,8 +1023,8 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
       ## *** x and y axis title***
 	  p1 <- p1 + xlab(xtitle) + ylab(ytitle)
       ## *** Font face ***
-	  p1 <- p1 + theme(axis.title = element_text(face=titlefontface))
-	  ## *** Font size ***
+	  p1 <- p1 + theme(axis.title = element_text(face=titlefontface))	  
+      ## *** Font size ***
       p1 <- p1 + theme(text = element_text(size=fontSize))
       ## *** Orientation ***
 	  if(plotdirection==2){
@@ -1111,347 +1057,12 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 		      }
 		  }
 	  }
-	  if(any(addlegend==1) && all(!is.na(legends)) && !all(is.na(legends$grobs))){
+	  if(all(!is.na(legends)) && !all(is.na(legends$grobs))){
 		  if(legendpos==1){
 	          p1 <- arrangeGrob(p1, legends, widths=c(1.05-lgdspacesize, lgdspacesize+0.05), ncol = 2)
 		  }else{
 	          p1 <- arrangeGrob(p1, legends, heights=c(1.05-lgdspacesize, lgdspacesize+0.05), nrow = 2)		
 		  }
 	  }
-	  grid.draw(p1)
-	  figure_1 <<- recordPlot()
-      incProgress(1/1, detail="Finished")
-      })		 
-   }, height = Height, width = Width)  
-}
-
-plotfig_tc <- function(input, output, data.C1, data.C2, data.TC, Height, Width, selgralcol, gralcol_tp, gralcol_ct, coltype, colorcus, colormulgp, coltransparency, themestyle, fontSize, xtitle, ytitle, titlefontface, xlabel, ylabel, legendpos, lgdtitlesize, lgdtitlefontface, lgdtextsize, lgdtextfontface, symbolpoint, pointsize, linesize, xrugs, yrugs, xrugscol, yrugscol, vertical, verticalcol, verticalsize, verticaltype, horizontal, horizontalcol, horizontalsize, horizontaltype, addborder, bordercols, linetype, curvature, addlegend, collgd, collgdname, sizelgd, sizelgdname, shapelgd, shapelgdname, collgdmdylabel, collgdlabel, sizelgdmdylabel, sizelgdlabel, shapelgdmdylabel, shapelgdlabel, plottype){
-	  output$figure_2 <- renderPlot({
-	      withProgress(message='Making plots',value = 0,{	  
-	          names(data.C1) <- c("chr","size")
-	          data.C1$size <- as.numeric(data.C1$size)
-	          names(data.C2) <- c("chr","size")
-	          data.C2$size <- as.numeric(data.C2$size) 
-	          tc_p1 <- ggplot()
-	          ## *** Plot theme ***
-              if(themestyle %in% "theme1"){
-	              tc_p1 <- tc_p1 + theme_bw()
-	          }else if(themestyle %in% "theme2"){
-		          tc_p1 <- tc_p1 + theme_classic()
-	          }else if(themestyle %in% "theme3"){
-		          tc_p1 <- tc_p1 + theme_minimal()
-              }else if(themestyle %in% "theme4"){
-		          tc_p1 <- tc_p1 + theme_few()
-	          }else if(themestyle %in% "theme5"){
-		          tc_p1 <- tc_p1+ theme_grey()
-	          }else if(themestyle %in% "theme6"){
-		          tc_p1 <- tc_p1 + theme_tufte()
-	          }else if(themestyle %in% "theme7"){
-		          tc_p1 <- tc_p1 + theme_calc()
-              }else if(themestyle %in% "theme8"){
-		          tc_p1 <- tc_p1 + theme_void()
-	          }else if(themestyle %in% "theme9"){
-		          tc_p1 <- tc_p1 + theme_base()
-	          }else if(themestyle %in% "theme10"){
-		          tc_p1 <- tc_p1 + theme_linedraw()
-              }
-	     data.TT <- data.TC
-		 if(plottype %in% c("point_gradual","point_discrete")){
-		    names(data.TT)[1:4] <- c("chr1","pos1","chr2","pos2")
-			data.TT$pos1 <- as.numeric(data.TT$pos1)
-			data.TT$pos2 <- as.numeric(data.TT$pos2)
-		 }
-         if(plottype %in% c("segment","rect_gradual","rect_discrete")){
-		    names(data.TT)[1:6] <- c("chr1","xpos1","xpos2","chr2","ypos1","ypos2")
-			data.TT$xpos1 <- as.numeric(data.TT$xpos1)
-			data.TT$xpos2 <- as.numeric(data.TT$xpos2)	
-			data.TT$ypos1 <- as.numeric(data.TT$ypos1)
-			data.TT$ypos2 <- as.numeric(data.TT$ypos2)
-		 }
-		 #### color		  
-          if(plottype %in% c("point_gradual","rect_gradual")){
-		      if(selgralcol==1){
-                  gralcols <- gsub('\\"',"",gralcol_tp)    
-		      }else{
-		          gralcols <- gralcol_ct                                         
-		      }
-              gralcols <- unlist(strsplit(gralcols,"\\."))
-          }	
-          laycolor.export <<- c()		  
-          if(plottype %in% c("point_discrete","segment","rect_discrete")){
-            data.TTC <- NULL
-            if(coltype==2){
-              laycolor <- colorcus
-              laycolor <- gsub("\\s","",strsplit(laycolor,",")[[1]])
-              laycolor <- gsub('\\"',"",laycolor)
-              laycolor <- gsub("0x","#", laycolor)
-			  if(length(laycolor)==0){
-			      laycolor <- NA
-			  }
-              data.TT$color <- laycolor
-            }else if(coltype==3 & ("color" %in% colnames(data.TT))){
-			  laycolor <- colormulgp
-              laycolor <- unlist(strsplit(laycolor,";"))
-              laycolor <- data.frame(id=laycolor,stringsAsFactors=F)
-              laycolor$group <- gsub("\\:.*","",laycolor$id)
-              laycolor$cols <- gsub(".*\\:","",laycolor$id)
-              laycolor$group <- gsub(" ","",laycolor$group)
-              laycolor$cols <- gsub(" ","",laycolor$cols)
-			  colname <- colnames(data.TT)
-              data.TTC <- merge(data.TT,laycolor,by.x="color",by.y="group",all.x=T)
-			  data.TT <- data.TTC[c(colname,"cols")]
-              laycolor <- unique(data.TT$cols)
-              data.TT$raw_color <- data.TT$color
-			  data.TT$color <- data.TT$cols
-			  data.TT$cols <- NULL
-            }else if(coltype==1 & ("color" %in% colnames(data.TT))){
-              selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
-              laycolor <- sample(selcols,length(unique(data.TT$color)))
-			  laycolor.export <<- paste(laycolor,collapse=".")
-			  laycolor <- data.frame(group=unique(data.TT$color),cols=laycolor,stringsAsFactors=F)
-              colname <- colnames(data.TT)
-              data.TTC <- merge(data.TT,laycolor,by.x="color",by.y="group",all.x=T)
-              data.TT <- data.TTC[c(colname,"cols")]
-              laycolor <- unique(data.TT$cols)
-              data.TT$raw_color <- data.TT$color			  
-			  data.TT$color <- data.TT$cols
-			  data.TT$cols <- NULL		
-            }else{
-              selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
-              laycolor <- sample(selcols,1)
-			  laycolor.export <<- paste(laycolor,collapse=".")
-			  data.TT$color <- laycolor
-            }
-			jd_col <- data.TT$color
-			output$errorinfo5 <- renderPrint({
-                if(input$tc_plottype %in% c("point_discrete","segment","rect_discrete")){			          
-			        validate(
-                        need(all(areColors(jd_col)), "Error: Data color error! Please input applicable color name.")	 
-                    )
-				}
-            })
-            outputOptions(output, "errorinfo5", suspendWhenHidden = FALSE)
-          }
-          ## *** The data color ***
-		 if(!plottype %in% c("point_gradual","rect_gradual")){
-		     if(!"raw_color" %in% names(data.TT)){
-		         data.TT$raw_color <- data.TT$color
-		     }		 
-		     data.TT$color[!areColors(data.TT$color)] <- NA
-             data.TT$color <- adjustcolor(data.TT$color, alpha.f = coltransparency)		 
-		     labelscol <- unique(data.TT$raw_color)
-             breakscol <- data.TT$color[match(labelscol,data.TT$raw_color)]		 
-		     labelscol <- labelscol[!duplicated(breakscol)]
-		     breakscol <- breakscol[!duplicated(breakscol)]
-             data.TT$raw_color <- factor(data.TT$raw_color,levels=labelscol,ordered = T)
-             data.TT$color <- factor(data.TT$color,levels=breakscol,ordered = T)			 
-			 labelscol <- labelscol[which(!breakscol %in% "#FFFFFF00")]
-			 breakscol <- breakscol[!breakscol %in% "#FFFFFF00"]		 
-		 }
-		 ## *** Point type and size ***
-		 if(plottype %in% c("point_gradual","point_discrete")){
-		     if(!"shape" %in% names(data.TT)){
-				 data.TT$shape <- as.numeric(symbolpoint)
-			 }
-			 if(!"size" %in% names(data.TT)){
-			     data.TT$size <- as.numeric(pointsize)		 
-		     }
-			 breakspch <- unique(data.TT$shape)
-			 labelspch <- breakspch
-			 breakscex <- unique(data.TT$size)
-			 labelscex <- breakscex 
-		 }
-		 output$errorinfo8 <- renderPrint({
-             if(input$tc_plottype %in% c("point_gradual","point_discrete")){			          
-			     validate(
-                     need(breakspch>=0 & breakspch<=25, "Error: Symbol type error for Data! Please input one applicable integer in [0-25].")
-                 )
-			 }
-         })
-         outputOptions(output, "errorinfo8", suspendWhenHidden = FALSE)		 
-         ## *** Borders ***
-		 if(addborder==2){
-		     bordercols <- NA
-		 }
-		 ## *** Legends ***
-		 addcollgd <- "none"
-		 addsizelgd <- "none"
-		 addshapelgd <- "none"
-		 if(addlegend==1){
-		   if(collgd==1){
-		      if(plottype %in% c("point_gradual","rect_gradual")){
-		          addcollgd <- "colourbar"
-			  }else{
-		          addcollgd <- "legend"			  
-			  }
-			  if(plottype %in% c("point_discrete","segment","rect_discrete")){
-			      if(collgdmdylabel==1){
-                      collgdlabelp <- gsub("\\s","",strsplit(collgdlabel,",")[[1]])
-                      collgdlabelp <- gsub('\\"',"",collgdlabelp)
-			      if(length(collgdlabelp)==0){
-			          collgdlabelp <- "NA"
-			      }
-			      collgdlabelp <- rep(collgdlabelp,length(breakscol))[1:length(breakscol)]
-			      names(collgdlabelp) <- labelscol
-	              data.TT$raw_color <- as.character(data.TT$raw_color)
-			      data.TT$raw_color <- collgdlabelp[data.TT$raw_color]				  
-			      labelscol <- unname(collgdlabelp)
-			      data.TT$raw_color <- factor(data.TT$raw_color,levels=unique(labelscol),ordered = T)
-			      }
-			  }
-		   }
-		   if(plottype %in% c("point_gradual","point_discrete")){
-		   if(sizelgd==1){
-		     addsizelgd <- "legend"
-			 if(sizelgdmdylabel==1){
-                 sizelgdlabelp <- gsub("\\s","",strsplit(sizelgdlabel,",")[[1]])
-                 sizelgdlabelp <- gsub('\\"',"",sizelgdlabelp)
-				 if(length(sizelgdlabelp)==0){
-			         sizelgdlabelp <- "NA"
-			     }
-             labelscex <- rep(sizelgdlabelp,length(breakscex))[1:length(breakscex)]	 
-			 }	  
-		   }
-		   if(shapelgd==1){
-		     addshapelgd <- "legend"
-			 if(shapelgdmdylabel==1){
-                 shapelgdlabelp <- gsub("\\s","",strsplit(shapelgdlabel,",")[[1]])
-                 shapelgdlabelp <- gsub('\\"',"",shapelgdlabelp)
-				 if(length(shapelgdlabelp)==0){
-			         shapelgdlabelp <- "NA"
-			     }
-             labelspch <- rep(shapelgdlabelp,length(breakspch))[1:length(breakspch)]
-			 }
-		   }
-		   }
-		 }
-		 chr.len <- data.C1$size
-         names(chr.len) <- data.C1$chr
-         chr.cum.len_1 <- c(0, cumsum(chr.len))
-		 chr.cum.len <- c(0, cumsum(chr.len)[-length(chr.len)])
-         names(chr.cum.len) <- names(chr.len)
-		 data.C1$chrstart <- 0
-		 data.C1$pos <- (data.C1$chrstart+data.C1$size)/2
-		 data.C1$chr <- factor(data.C1$chr,levels = names(chr.cum.len),ordered=T)
-		 data.C1$pos <- data.C1$pos + chr.cum.len[data.C1$chr]
-		 data.C1$chr <- as.character(data.C1$chr)
-		 data.TT$chr1 <- factor(data.TT$chr1,levels = names(chr.cum.len),ordered=T)
-		 
-		 if(plottype %in% c("segment","rect_gradual","rect_discrete")){
-		     data.TT$xpos1 <- data.TT$xpos1 + chr.cum.len[data.TT$chr1]
-			 data.TT$xpos2 <- data.TT$xpos2 + chr.cum.len[data.TT$chr1]
-		 }else{
-             data.TT$pos1 <- data.TT$pos1 + chr.cum.len[data.TT$chr1]
-		 }
-		 data.TT$chr1 <- as.character(data.TT$chr1)
-		 chr.len <- data.C2$size
-         names(chr.len) <- data.C2$chr
-		 chr.cum.len_2 <- c(0, cumsum(chr.len))
-         chr.cum.len <- c(0, cumsum(chr.len)[-length(chr.len)])
-         names(chr.cum.len) <- names(chr.len)
-		 data.C2$chrstart <- 0
-		 data.C2$pos <- (data.C2$chrstart+data.C2$size)/2
-		 data.C2$chr <- factor(data.C2$chr,levels = names(chr.cum.len),ordered=T)		 
-		 data.C2$pos <- data.C2$pos + chr.cum.len[data.C2$chr]
-		 data.C2$chr <- as.character(data.C2$chr)
-		 data.TT$chr2 <- factor(data.TT$chr2,levels = names(chr.cum.len),ordered=T)		 
-		 if(plottype %in% c("segment","rect_gradual","rect_discrete")){
-		     data.TT$ypos1 <- data.TT$ypos1 + chr.cum.len[data.TT$chr2]
-			 data.TT$ypos2 <- data.TT$ypos2 + chr.cum.len[data.TT$chr2]
-		 }else{
-             data.TT$pos2 <- data.TT$pos2 + chr.cum.len[data.TT$chr2]	 
-		 }
-		 data.TT$chr2 <- as.character(data.TT$chr2)
-		 if(plottype %in% "point_gradual"){
-		     midpoint <- mean(data.TT$color,na.rm = T)
-			 if(is.numeric(labelscex)){
-			     labelscex <- sprintf("%.1f",sort(labelscex))
-			 }
-             if(legendpos==1){
-			     tc_p1 <- tc_p1 + geom_point(data=data.TT, aes(x=pos1, y=pos2, color=color, shape=as.character(shape), size=size)) + scale_color_gradient2(name=collgdname,guide=addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + scale_size_identity(name=sizelgdname,guide = addsizelgd,breaks=sort(breakscex),labels=labelscex) + scale_shape_manual(name=shapelgdname,guide = addshapelgd,values=sort(breakspch),labels=sort(labelspch)) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
-			 }else{
-			     tc_p1 <- tc_p1 + geom_point(data=data.TT, aes(x=pos1, y=pos2, color=color, shape=as.character(shape), size=size)) + scale_color_gradient2(name=collgdname,guide=addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + scale_size_identity(name=sizelgdname,guide = addsizelgd,breaks=sort(breakscex),labels=labelscex) + scale_shape_manual(name=shapelgdname,guide = addshapelgd,values=sort(breakspch),labels=sort(labelspch)) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
-			 }
-			 if(addcollgd %in% "colourbar"){
-			     tc_p1 <- tc_p1 + guides(color = guide_colorbar(order = 1, title.vjust = 0.8, title.hjust = 0.4), size = guide_legend(order = 2))
-			 }else{
-			     tc_p1 <- tc_p1 + guides(size = guide_legend(order = 1))			 
-			 }
-         }
-		 if(plottype %in% "point_discrete"){
-			 if(is.numeric(labelscex)){
-			     labelscex <- sprintf("%.1f",sort(labelscex))
-			 }		 
-			 if(legendpos==1){
-		         tc_p1 <- tc_p1 + geom_point(data=data.TT, aes(pos1, pos2, color=color, shape=as.character(shape), size=size)) + scale_color_identity(name=collgdname,guide = addcollgd,breaks=breakscol,labels=labelscol) + scale_size_identity(name=sizelgdname,guide = addsizelgd,breaks=sort(breakscex),labels=labelscex) + scale_shape_manual(name=shapelgdname,guide = addshapelgd,values=sort(breakspch),labels=sort(labelspch)) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(color = guide_legend(order = 1), size = guide_legend(order = 2))
-			 }else{
-		         tc_p1 <- tc_p1 + geom_point(data=data.TT, aes(pos1, pos2, color=color, shape=as.character(shape), size=size)) + scale_color_identity(name=collgdname,guide = addcollgd,breaks=breakscol,labels=labelscol) + scale_size_identity(name=sizelgdname,guide = addsizelgd,breaks=sort(breakscex),labels=labelscex) + scale_shape_manual(name=shapelgdname,guide = addshapelgd,values=sort(breakspch),labels=sort(labelspch)) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(color = guide_legend(order = 1), size = guide_legend(order = 2))			 
-			 }
-	     }
-		 if(plottype %in% "segment"){
-		     if(length(unique(data.TT$color))>1){
-			     linetype <- "solid"
-			 }
-             if(legendpos==1){				 
-		         tc_p1 <- tc_p1 + geom_segment(data=data.TT, aes(x=xpos1, y=ypos1, xend=xpos2, yend=ypos2, color=color), size=linesize, linetype=linetype) + scale_color_identity(name=collgdname,guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
-			 }else{
-		         tc_p1 <- tc_p1 + geom_segment(data=data.TT, aes(x=xpos1, y=ypos1, xend=xpos2, yend=ypos2, color=color), size=linesize, linetype=linetype) + scale_color_identity(name=collgdname,guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))					 
-			 }
-		 }
-		 if(plottype %in% "rect_gradual"){
-		     midpoint <- mean(data.TT$color,na.rm = T)
-             if(legendpos==1){				 
-		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
-			 }else{
-		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_gradient2(name=collgdname,guide = addcollgd,low = gralcols[1],midpoint=midpoint,mid=gralcols[2],high=gralcols[3],na.value="#FFFFFF00") + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA)) + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))			 
-			 }
-		 } 
-		 if(plottype %in% "rect_discrete"){		 
-             if(legendpos==1){
-		         tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_identity(name=collgdname,guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))				 
-			 }else{
-			     tc_p1 <- tc_p1 + geom_rect(data=data.TT, aes(xmin=xpos1, xmax=xpos2, ymin=ypos1, ymax=ypos2, fill=color), color=bordercols) + scale_fill_identity(name=collgdname,guide = addcollgd,breaks=breakscol,labels=labelscol) + theme(legend.position = "bottom", legend.title = element_text(size=lgdtitlesize,face=lgdtitlefontface),legend.text = element_text(size=lgdtextsize,face=lgdtextfontface), legend.key = element_rect(fill = NA))
-			 }		 
-		 }
-	     if(plottype %in% c("point_gradual","point_discrete","segment")){
-		     if(xrugs==1){
-			     tc_p1 <- tc_p1 + geom_rug(data=data.TT, x=data.TT$pos1, color=xrugscol)
-		     }
-		     if(yrugs==1){
-		         tc_p1 <- tc_p1 + geom_rug(data=data.TT, y=data.TT$pos2, color=yrugscol)				  
-		     }
-	     }
-		 ## *** vertical line ***
-		 if(vertical==1){
-		    tc_p1 <- tc_p1 + geom_vline(xintercept=chr.cum.len_1, linetype=verticaltype, color=verticalcol, size=verticalsize)
-		 }
-		 ## *** horizontal line ***		 
-		 if(horizontal==1){
-		    tc_p1 <- tc_p1 + geom_hline(yintercept=chr.cum.len_2, linetype=horizontaltype, color=horizontalcol, size=horizontalsize)
-		 }
-	     ## *** axis label***
-         if(xlabel==1){
-	         tc_p1 <- tc_p1 + scale_x_continuous(breaks=data.C1$pos,labels=data.C1$chr)
-	     }else{
-	         tc_p1 <- tc_p1 + theme(axis.text.x=element_blank(),axis.ticks.x=element_blank())
-	     }	
-         if(ylabel==1){
-	         tc_p1 <- tc_p1 + scale_y_continuous(breaks=data.C2$pos,labels=data.C2$chr)		 
-		 }else{
-	         tc_p1 <- tc_p1 + theme(axis.text.y=element_blank(),axis.ticks.y=element_blank())
-	     }	  
-         ## *** x and y axis title***
-	     tc_p1 <- tc_p1 + xlab(xtitle) + ylab(ytitle)
-         ## *** Font face ***
-	     tc_p1 <- tc_p1 + theme(axis.title = element_text(face=titlefontface))		 
-         ## *** Font size ***
-         tc_p1 <- tc_p1 + theme(text = element_text(size=fontSize))	  
-		 grid.draw(tc_p1)
-	     figure_2 <<- recordPlot()
-         incProgress(1/1, detail="Finished")
-         })		 
-    }, height = Height, width = Width)
-}
-
-
-
+	  return(p1)
+	}

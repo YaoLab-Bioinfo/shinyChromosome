@@ -3,31 +3,15 @@ source("global_ui.R")
 
 shinyUI(
   navbarPage(
-    title = "shinyChromosome", theme = shinytheme("flatly"), 
-    windowTitle = "interactive creation of non-circular plots",
-    tabPanel(
-        "About",       
-        HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:12px 12px; background-repeat: no-repeat; background-position: 0px 50%"><font size="5.5">Software references</font></li></ul></p>'),
-        HTML(
-          '<p><font size="4">&nbsp;&nbsp;&nbsp;&nbsp;1. R Development Core Team. <i><a href="http://www.r-project.org/" target="_blank">R</a>:  A Language and Environment for Statistical Computing.</i> R Foundation for Statistical Computing, Vienna. R version 3.5.0 (2018) <br>
-         &nbsp;&nbsp;&nbsp;&nbsp;2. RStudio and Inc. <i><a href="http://www.rstudio.com/shiny/" target="_blank">shiny</a>: Web Application Framework for R.</i> R package version 1.0.5 (2017) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;3. Lionel Henry and Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/rlang/index.html" target="_blank">rlang</a>: Functions for Base Types and Core R and "Tidyverse" Features.</i> R package version 0.2.1 (2018) <br>         
-		 &nbsp;&nbsp;&nbsp;&nbsp;4. H. Wickham. <i><a href="http://cran.r-project.org/web/packages/ggplot2/index.html" target="_blank">ggplot2</a>: Create Elegant Data Visualisations Using the Grammar of Graphics.</i> R package version 3.0.0 (2018) <br>          
-		 &nbsp;&nbsp;&nbsp;&nbsp;5. Gregory R. Warnes, Ben Bolker, Lodewijk Bonebakker, Robert Gentleman, et al. <i><a href="http://cran.r-project.org/web/packages/gplots/index.html" target="_blank">gplots</a>: Various R Programming Tools for Plotting Data.</i> R package version 3.0.1 (2016) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;6. Erich Neuwirth. <i><a href="http://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank">RColorBrewer</a>: ColorBrewer palettes.</i> R package version 1.1-2 (2014) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;7. Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/plyr/index.html" target="_blank">plyr</a>: Tools for Splitting, Applying and Combining Data.</i> R package version 1.8.4 (2016) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;8. Jeffrey B. Arnold. <i><a href="http://cran.r-project.org/web/packages/ggthemes/index.html" target="_blank">ggthemes</a>: Extra Themes, Scales and Geoms for "ggplot2".</i> R package version 3.4.0 (2017) <br>
-		 &nbsp;&nbsp;&nbsp;&nbsp;9. Christoph Burow, Urs Tilmann Wolpert and Sebastian Kreutzer. <i><a href="http://cran.r-project.org/web/packages/RLumShiny/index.html" target="_blank">RLumShiny</a>: "Shiny" Applications for the R Package "Luminescence".</i> R package version 0.2.0 (2017) <br>
-		 &nbsp;10. Baptiste Auguie. <i><a href="http://cran.r-project.org/web/packages/gridExtra/index.html" target="_blank">gridExtra</a>: Miscellaneous Functions for "Grid" Graphics.</i> R package version 2.3 (2017) <br>
-		 &nbsp;11. Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/reshape2/index.html" target="_blank">reshape2</a>: Flexibly Reshape Data: A Reboot of the Reshape Package.</i> R package version 1.4.3 (2017) <br>
-		 &nbsp;12. Matt Dowle and Arun Srinivasan. <i><a href="http://cran.r-project.org/web/packages/data.table/index.html" target="_blank">data.table</a>: Extension of "data.frame".</i> R package version 1.10.4-3 (2017) <br>
-		 &nbsp;13. JJ Allaire, Jeffrey Horner, Vicent Marti and Natacha Porte. <i><a href="http://cran.r-project.org/web/packages/markdown/index.html" target="_blank">markdown</a>: "Markdown" Rendering for R.</i> R package version 0.8 (2017) <br></font></p>'
-        ),
-        HTML('<p <ul><li style="list-style-type: none; background-image: url(bullet.jpg); padding-left: 18px; background-size:12px 12px; background-repeat: no-repeat; background-position: 0px 50%"><font size="5.5">Further references</font></li></ul></p>'),
-        HTML('<p><font size="4">This application was created by <a href="http://www.researchgate.net/profile/Wen_Yao" target="_blank">Wen Yao</a> and <a href="http://www.researchgate.net/profile/Yiming_Yu6" target="_blank">Yiming Yu</a>. Please send bugs and feature requests to Wen Yao (ywhzau at gmail.com) or Yiming Yu (yimingyyu at gmail.com). This application uses the shiny package from <a href="http://www.rstudio.com/shiny/" target="_blank">RStudio</a>.</font></p>')      
-    ),    
-	tabPanel(
-      "One genome",tags$head(
+    title = "shinyChromosome", theme = shinytheme("flatly"),
+    windowTitle = "interactive creation of non-circular whole genome diagram",
+    
+    tabPanel("About", includeMarkdown("About.md")),
+    
+    tabPanel("Input data format", includeMarkdown("In_Data_Format.md")),
+    
+	  tabPanel(
+      "Single genome plot", tags$head(
 			tags$style("
                 input[type='file'] {width:5em;}
 				.toggleButton {width:100%;} 
@@ -35,202 +19,374 @@ shinyUI(
 				.fa-angle-down:before, .fa-angle-up:before {float:right;}
 				.popover{text-align:left;width:500px;background-color:#000000;}
 				.popover-title{color:#FFFFFF;font-size:16px;background-color:#000000;border-color:#000000;}
+
 				#sidebarPanel_1 {width:25em;}
 				#lowColor1, #midColor1, #highColor1 {width:100%}
+				#lowColor2, #midColor2, #highColor2 {width:100%}
+				#lowColor3, #midColor3, #highColor3 {width:100%}
+				#lowColor4, #midColor4, #highColor4 {width:100%}
+				#lowColor5, #midColor5, #highColor5 {width:100%}
+				#lowColor6, #midColor6, #highColor6 {width:100%}
+				#lowColor7, #midColor7, #highColor7 {width:100%}
+				#lowColor8, #midColor8, #highColor8 {width:100%}
+				#lowColor9, #midColor9, #highColor9 {width:100%}
+				#lowColor10, #midColor10, #highColor10 {width:100%}
+				#colorcus1, #colorcus2, #colorcus3, #colorcus4, #colorcus5, #colorcus6, #colorcus7, #colorcus8, #colorcus9, #colorcus10 {width:100%} 
+				#textcol1, #textcol2, #textcol3, #textcol4, #textcol5, #textcol6, #textcol7, #textcol8, #textcol9, #textcol10 {width:100%}
+                #linecolor1, #linecolor2, #linecolor3, #linecolor4, #linecolor5, #linecolor6, #linecolor7, #linecolor8, #linecolor9, #linecolor10 {width:100%}				
+				#rectcoldis1, #rectcoldis2, #rectcoldis3, #rectcoldis4, #rectcoldis5, #rectcoldis6, #rectcoldis7, #rectcoldis8, #rectcoldis9, #rectcoldis10 {width:100%}
+				#bordercols1, #bordercols2, #bordercols3, #bordercols4, #bordercols5, #bordercols6, #bordercols7, #bordercols8, #bordercols9, #bordercols10 {width:100%}
+				#borderarea1, #borderarea2, #borderarea3, #borderarea4, #borderarea5, #borderarea6, #borderarea7, #borderarea8, #borderarea9, #borderarea10 {width:100%}
+				#rect_lowColor1, #rect_midColor1, #rect_highColor1 {width:100%}
+				#rect_lowColor2, #rect_midColor2, #rect_highColor2 {width:100%}
+				#rect_lowColor3, #rect_midColor3, #rect_highColor3 {width:100%}
+				#rect_lowColor4, #rect_midColor4, #rect_highColor4 {width:100%}
+				#rect_lowColor5, #rect_midColor5, #rect_highColor5 {width:100%}
+				#rect_lowColor6, #rect_midColor6, #rect_highColor6 {width:100%}
+				#rect_lowColor7, #rect_midColor7, #rect_highColor7 {width:100%}
+				#rect_lowColor8, #rect_midColor8, #rect_highColor8 {width:100%}
+				#rect_lowColor9, #rect_midColor9, #rect_highColor9 {width:100%}
+				#rect_lowColor10, #rect_midColor10, #rect_highColor10 {width:100%}
 				#mainPanel_1 {left:28em; position:absolute; min-width:27em;}"),
 			 tags$style(HTML(".shiny-output-error-validation {color: red;}")),
-             tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')), includeScript("www/google-analytics.js")				
-		),    
-      sidebarPanel(id="sidebarPanel_1",	  
-    	tipify(radioButtons("plotype", "Image type", c("Concatenated chromosome" = "1", "Separated chromosome" = "2"), "1"),
-		    "All chromosomes can either be concatenated or separated.", placement="right", options=list(container="body")),
-    	tipify(radioButtons("plotdirection", "Orientation", c("Horizontal" = "1", "Vertical" = "2"), "1"),
-		    'The coordinate frame could be flipped in one click.', placement="right", options=list(container="body")),		
-	    tipify(fileInput("uploadchrdata", "Upload genome data:", multiple = FALSE),
-			'Click "Browse" to upload the genome data, which is compulsory and defines the frame of the non-circular plot.', placement="right", options=list(container="body")),						
-		tags$script('$( "#uploadchrdata" ).on( "click", function() { this.value = null; });'),		
-					
+       tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')),
+			 includeScript("www/google-analytics.js")				
+		),
+		
+      sidebarPanel(id="sidebarPanel_1",
+    	radioButtons("plotype", h4("*Image type",
+    	                           bsButton("bsb1", label="", icon=icon("question"), style="info", size="small")
+    	                           ), c("Concatenated chromosomes" = "1", "Separated chromosomes" = "2"), "1"),
+    	bsPopover("bsb1", "All chromosomes can either be concatenated or separated.",
+    	          trigger = "focus"),
+    	
+    	radioButtons("plotdirection", h4("*Chromosome orientation",
+    	                                 bsButton("bsb2", label="", icon=icon("question"), style="info", size="small")
+    	                                 ), c("Horizontally aligned" = "1", "Vertically aligned" = "2"), "1"),
+    	bsPopover("bsb2", "Chromosomes could be aligned to the horizontal axis or the vertical axis.",
+    	          trigger = "focus"),
+    	
+	    fileInput("uploadchrdata", h4("*Upload genome data",
+	                                  bsButton("bsb3", label="", icon=icon("question"), style="info", size="small")
+	                                  ), multiple = FALSE, width = "100%"),
+    	bsPopover("bsb3", 'Click "Browse" to upload the genome data, which is compulsory and defines the frame of the non-circular plot.',
+    	          trigger = "focus"),
+    	
+			actionButton("tabBut1", "View example data"),
+		  tags$script('$( "#uploadchrdata" ).on( "click", function() { this.value = null; });'),
+      downloadButton("genome_data.txt", "Example data"),
+	
+		br(),
+		
 		checkboxInput("data1", HTML("<font color='red'>Data1</font>"), FALSE),
 		conditionalPanel(condition="input.data1",
 		  radioButtons("seluploaddata1", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata1 == '2'",
-		    tipify(fileInput("uploaddata1", "Upload data1:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																							
-			tags$script('$( "#uploaddata1" ).on( "click", function() { this.value = null; });'),
+		    fileInput("uploaddata1", h5("Upload data1:",
+		                                bsButton("bsb4", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb4", 'Click "Browse" to upload the track data.',
+		              trigger = "focus"),
+		    
+		    actionButton("tabBut2", "View example data"),
+			  tags$script('$( "#uploaddata1" ).on( "click", function() { this.value = null; });'),
+            downloadButton("example_data1.txt", "Example data"),
+	
+			br(),
+			
+			selectInput("layerindex1", h5("Track index:",
+			                              bsButton("bsb5", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb5", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.',
+			          trigger = "focus"),
+			
 			selectInput("plottype1", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
-			tipify(selectInput("layerindex1", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																										
+			
     	ADVANCED_OPTIONS_PANEL_1(
 		    list(
-				conditionalPanel(condition="input.plottype1 == 'point' | input.plottype1 == 'line' | input.plottype1 == 'bar' | input.plottype1 == 'segment'",
-			        tipify(radioButtons("coltype1", "Data color", c("Random" = "1", "One custom color" = "2",
+		    	checkboxInput("color_opt1", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt1",  #####
+			    conditionalPanel(condition="input.plottype1 == 'point' | input.plottype1 == 'line' | input.plottype1 == 'bar' | input.plottype1 == 'segment'",
+				                 selectInput("coltype1", h5("Data color",
+			                                    bsButton("bsb6", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups in the uploaded data should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																								
-					conditionalPanel(condition="input.coltype1=='2'",	
-			            textInput("colorcus1", NULL, value="red")
+			        bsPopover("bsb6", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups in the uploaded data should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.',
+                    trigger = "focus"),
+			        
+					conditionalPanel(condition="input.coltype1=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus1", label = NULL, value = "#FF0000"))),
+                        br()			            
 			         ),
-                    conditionalPanel(condition="input.coltype1=='3'",	
+                    conditionalPanel(condition="input.coltype1=='3'",
 			            textInput("colormulgp1", NULL, value="a:red;b:blue;c:cyan")
 	                )
 				),
 			conditionalPanel(condition="input.plottype1=='rect_discrete'",
-			    tipify(radioButtons("rectcol1", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("rectcol1", h5("Data color",
+			                                bsButton("bsb7", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb7", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.',
+			              trigger = "focus"),
 			conditionalPanel(condition="input.rectcol1=='2'",
-			    textInput("rectcoldis1", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis1", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol1=='3'",
 			    textInput("rectcoldiscus1", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype1=='rect_gradual'",
-			    selectInput("colrect1", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col1", h5("Colors",
+			                                     bsButton("bsb8", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb8", "Colors to be used for the data, which can be assigned by the application or be specified by the users.",
+			              trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col1=='1'",
+			        selectInput("colrect1", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col1=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor1", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor1", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor1", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype1=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol1", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol1=='1'",			
-			    selectInput("colhmap1", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype1=='heatmap_gradual'",
+			                 selectInput("heatmapcol1", h5("Colors",
+			                                   bsButton("bsb9", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb9", "Colors to be used for the data, which can be assigned by the application or be specified by the users.",
+			              trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol1=='1'",
+			    selectInput("colhmap1", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol1=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor1", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor1", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor1", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor1", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor1", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
-			),			
+			),
 			conditionalPanel(condition="input.plottype1=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis1", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis1", h5("Data color",
+			                                   bsButton("bsb10", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb10", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.',
+			              trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis1=='2'",
 			    textInput("colhmapdiscus1", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype1=='vertical line' | input.plottype1=='horizontal line'",	
-			    tipify(textInput("linecolor1", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype1=='vertical line' | input.plottype1=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor1", label = h5("Line color:",
+			                                                              bsButton("bsb11", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb11", 'The color to be used to plot the data.',
+			              trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype1=='line'",	
-			    tipify(radioButtons("fillarea1", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea1=='1'",			
-			    tipify(radioButtons("selareatype1", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Color to be used to fill the area, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype1=='line'",
+			                 selectInput("fillarea1", h5("Fill area",
+			                                 bsButton("bsb12", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb12", "Fill the area below the lines.", trigger = "focus"),
+			
+                conditionalPanel(condition="input.fillarea1=='1'",
+			    radioButtons("selareatype1", h5("Area color",
+			                                    bsButton("bsb13", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb13", 'Color to be used to fill the area, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
+			
 				conditionalPanel(condition="input.selareatype1=='2'",
-			        textInput("borderarea1", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea1", label = NULL, value = "#0000FF"))),
+                    br()			        
+			)
+			)
+			),
+			conditionalPanel(condition="input.plottype1=='point' | input.plottype1=='line' | input.plottype1=='bar' | input.plottype1=='rect_gradual' | input.plottype1=='rect_discrete' | input.plottype1=='heatmap_gradual' | input.plottype1=='heatmap_discrete' | input.plottype1=='vertical line' | input.plottype1=='horizontal line' | input.plottype1=='text' | input.plottype1 == 'segment'",
+			                conditionalPanel(condition="input.plottype1=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol1", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),			                 
+			                selectInput("collgd1", h5("Color legend",
+		                                   bsButton("bsb14", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb14", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.collgd1=='1'",
+ 				    textInput("collgdname1", h5("Legend title:",
+ 				                                bsButton("bsb15", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb15", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+				    conditionalPanel(condition="input.plottype1!='rect_gradual' & input.plottype1!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel1", h5("Modify legend labels",
+					                                       bsButton("bsb16", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb16", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    
+					    conditionalPanel(condition="input.collgdmdylabel1=='1'",
+					        textInput("collgdlabel1", NULL, value="a,b,c")
+					    )
+				    )
+                )				
+			),
+			conditionalPanel(condition="input.plottype1!='rect_gradual' & input.plottype1!='heatmap_gradual' & input.plottype1!='text'",
+			    sliderInput("coltransparency1", h5("Color transparency:",
+			                                       bsButton("bsb17", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb17", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")
+            )          
+            ),
+			conditionalPanel(condition="input.plottype1=='line' | input.plottype1=='vertical line' | input.plottype1=='horizontal line' | input.plottype1 == 'segment'",
+		    checkboxInput("linetype_opt1", HTML("<font color='red'>Linetype</font>"), FALSE),
+			conditionalPanel(condition="input.linetype_opt1",
+			sliderInput("linesize1", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype1", h5("Line type",
+			                            bsButton("bsb18", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb18", 'The line type is automatically set as "solid" for line with more than one color.', trigger = "focus"),
+			
+			conditionalPanel(condition="input.plottype1=='vertical line' | input.plottype1=='horizontal line'",
+			                 selectInput("linetypelgd1", h5("Line type legend",
+		                                        bsButton("bsb19", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb19", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.linetypelgd1=='1'",
+ 				    textInput("linetypelgdname1", h5("Legend title:",
+ 				                                     bsButton("bsb20", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb20", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("linetypelgdmdylabel1", h5("Modify legend labels",
+					                                        bsButton("bsb21", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb21", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					
+					conditionalPanel(condition="input.linetypelgdmdylabel1=='1'",
+						textInput("linetypelgdlabel1", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype1 == 'segment'",
+			                 selectInput("addarrow1", h5("Add arrow head",
+			                                 bsButton("bsb22", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb22", "Add arrow head for the segment.", trigger = "focus"),
+				
+			conditionalPanel(condition="input.addarrow1 == '1'",
+			                 selectInput("arrowpos1", h5("Arrow position",
+			                                 bsButton("bsb23", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb23", 'The position of arrow head.', trigger = "focus"),
+				
+				sliderInput("arrowsize1", h5("Arrow size:",
+				                             bsButton("bsb24", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb24", 'The size of arrow head.', trigger = "focus")								
+            )
 			)
 			)
 			),			
-			conditionalPanel(condition="input.plottype1!='rect_gradual' & input.plottype1!='heatmap_gradual' & input.plottype1!='text'",				
-			    tipify(numericInput("coltransparency1", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),		
-			conditionalPanel(condition="input.plottype1=='line' | input.plottype1=='vertical line' | input.plottype1=='horizontal line' | input.plottype1 == 'segment'",	
-			    numericInput("linesize1", "Line width:", value=0.2, min=0, max=20, step=0.05)
-			),
-			conditionalPanel(condition="input.plottype1=='line' | input.plottype1=='vertical line' | input.plottype1=='horizontal line' | input.plottype1 == 'segment'",	
-			    tipify(selectInput("linetype1", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
-			),
-			conditionalPanel(condition="input.plottype1 == 'segment'",	
-			    tipify(radioButtons("addarrow1", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
-			conditionalPanel(condition="input.addarrow1 == '1'",
-			    tipify(radioButtons("arrowpos1", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),
-				tipify(numericInput("arrowsize1", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
-            )
-			),
-			conditionalPanel(condition="input.plottype1=='point'",			
-                tipify(textInput("symbolpoint1", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize1", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype1=='point'",
+				checkboxInput("symbol_opt1", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt1",  #####
+			                selectInput("sel_symbolpoint1", h5("Symbol type",
+                                                    bsButton("bsb25", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb25", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                
+                conditionalPanel(condition="input.sel_symbolpoint1=='1'",
+                    sliderInput("symbolpoint1", NULL, min=0, max=25, value=16, step=1)
+                ),
+                
+                selectInput("shapelgd1", h5("Symbol legend",
+		                                     bsButton("bsb26", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb26", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.shapelgd1=='1'",
+ 				    textInput("shapelgdname1", h5("Legend title:",
+ 				                                  bsButton("bsb27", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb27", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("shapelgdmdylabel1", h5("Modify legend labels",
+					                                     bsButton("bsb28", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb28", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					
+					conditionalPanel(condition="input.shapelgdmdylabel1=='1'",
+						textInput("shapelgdlabel1", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt1", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt1",  #####				
+				selectInput("sel_pointsize1", h5("Point size",
+                                                  bsButton("bsb29", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb29", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize1=='1'",
+                    sliderInput("pointsize1", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				
+				selectInput("sizelgd1", h5("Size legend",
+		                                    bsButton("bsb30", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb30", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.sizelgd1=='1'",
+ 				    textInput("sizelgdname1", h5("Legend title:",
+ 				                                 bsButton("bsb31", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb31", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("sizelgdmdylabel1", h5("Modify legend labels",
+				                                        bsButton("bsb32", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb32", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+				    
+					conditionalPanel(condition="input.sizelgdmdylabel1=='1'",
+						    textInput("sizelgdlabel1", NULL, value="a,b,c")
+	                )
+				)
+				)	
             ),
 			conditionalPanel(condition="input.plottype1=='heatmap_gradual' | input.plottype1=='heatmap_discrete' | input.plottype1=='rect_gradual' | input.plottype1=='rect_discrete' | input.plottype1=='bar'",
-			    tipify(radioButtons("addborder1", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder1", h5("Add cell borders",
+			                                  bsButton("bsb33", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb33", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
+				
 			    conditionalPanel(condition="input.addborder1=='1'",
-                    tipify(textInput("bordercols1", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
+                    fluidRow(column(12, jscolorInput("bordercols1", label = h5('Borders color:'), value = "#000000"))),
+					br()
 			    )
             ),
-			conditionalPanel(condition="input.plottype1=='line' | input.plottype1=='point' | input.plottype1=='bar'",				
-				tipify(radioButtons("xrugs1", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs1=='1'",
-				    textInput("xrugscol1", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs1", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs1=='1'",
-				    textInput("yrugscol1", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel1", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype1=='line' | input.plottype1=='point' | input.plottype1=='bar'",
+			                 selectInput("ylabel1", h5("Y axis label",
+	                                       bsButton("bsb35", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb35", "Add tick labels on the Y-axis.", trigger = "focus")				
 			),
 			conditionalPanel(condition="input.plottype1=='text'",
-				textInput("textcol1", "Font color:", value="black"),
-			    numericInput("textsize1", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface1", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle1", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend1", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  
-			  conditionalPanel(condition="input.addlegend1=='1'",
-			    conditionalPanel(condition="input.plottype1=='point' | input.plottype1=='line' | input.plottype1=='bar' | input.plottype1=='rect_gradual' | input.plottype1=='rect_discrete' | input.plottype1=='heatmap_gradual' | input.plottype1=='heatmap_discrete' | input.plottype1=='vertical line' | input.plottype1=='horizontal line' | input.plottype1=='text' | input.plottype1 == 'segment'",
-		          radioButtons("collgd1", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd1=='1'",
- 				      tipify(textInput("collgdname1", "Name:", value="color"),
-			          "Title of the color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  
-					    conditionalPanel(condition="input.plottype1!='rect_gradual' & input.plottype1!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel1", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),
-						  conditionalPanel(condition="input.collgdmdylabel1=='1'",
-						    textInput("collgdlabel1", NULL, value="a,b,c")
-					      )
-						)	
-					)
-				),
-			    conditionalPanel(condition="input.plottype1=='point'",
-		          radioButtons("sizelgd1", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd1=='1'",
- 				      tipify(textInput("sizelgdname1", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-				      tipify(radioButtons("sizelgdmdylabel1", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),
-						  conditionalPanel(condition="input.sizelgdmdylabel1=='1'",
-						    textInput("sizelgdlabel1", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd1", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd1=='1'",
- 				      tipify(textInput("shapelgdname1", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      
-					  tipify(radioButtons("shapelgdmdylabel1", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),
-						  conditionalPanel(condition="input.shapelgdmdylabel1=='1'",
-						    textInput("shapelgdlabel1", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype1=='vertical line' | input.plottype1=='horizontal line'",
-		          radioButtons("linetypelgd1", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd1=='1'",
- 				      tipify(textInput("linetypelgdname1", "Name:", value="linetype"),
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("linetypelgdmdylabel1", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),
-						  conditionalPanel(condition="input.linetypelgdmdylabel1=='1'",
-						    textInput("linetypelgdlabel1", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt1", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt1",					
+				    sliderInput("textsize1", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface1", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle1", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )
+			)
 			)
 			)
 		   )
@@ -239,738 +395,1154 @@ shinyUI(
 		conditionalPanel(condition="input.data2",
 		  radioButtons("seluploaddata2", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata2 == '2'",
-		    tipify(fileInput("uploaddata2", "Upload data2:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata2", h5("Upload data2:",
+		                                bsButton("bsb36", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb36", 'Click "Browse" to upload the track data.', trigger = "focus"),
+			
+		    actionButton("tabBut3", "View example data"),
 			tags$script('$( "#uploaddata2" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype2", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),		
-			tipify(selectInput("layerindex2", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+			downloadButton("example_data2.txt", "Example data"),
+            br(),
+			br(),
+						
+			selectInput("layerindex2", h5("Track index:",
+			                              bsButton("bsb37", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb37", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype2", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
+			
     	ADVANCED_OPTIONS_PANEL_2(
 				list(
+		    	checkboxInput("color_opt2", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt2",  #####					
 				conditionalPanel(condition="input.plottype2 == 'point' | input.plottype2 == 'line' | input.plottype2 == 'bar' | input.plottype2 == 'segment'",
-			        tipify(radioButtons("coltype2", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype2", h5("Data color",
+			                                    bsButton("bsb38", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																								
-					conditionalPanel(condition="input.coltype2=='2'",	
-			            textInput("colorcus2", NULL, value="red")
+			        bsPopover("bsb38", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype2=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus2", label = NULL, value = "#FF0000"))),
+                        br()			            						
 			         ),
-                    conditionalPanel(condition="input.coltype2=='3'",	
+                    conditionalPanel(condition="input.coltype2=='3'",
 			            textInput("colormulgp2", NULL, value="a:red;b:blue;c:cyan")
 	                )
 				),
 			conditionalPanel(condition="input.plottype2=='rect_discrete'",
-			    tipify(radioButtons("rectcol2", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),											  
+			                 selectInput("rectcol2", h5("Data color",
+			                                bsButton("bsb39", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb39", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol2=='2'",
-			    textInput("rectcoldis2", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis2", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol2=='3'",
 			    textInput("rectcoldiscus2", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype2=='rect_gradual'",
-			    selectInput("colrect2", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col2", h5("Colors",
+			                                     bsButton("bsb40", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb40", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col2=='1'",
+			        selectInput("colrect2", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col2=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor2", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor2", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor2", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype2=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol2", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol2=='1'",			
-			    selectInput("colhmap2", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype2=='heatmap_gradual'",
+			                 selectInput("heatmapcol2", h5("Colors",
+			                                   bsButton("bsb41", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb41", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			
+			conditionalPanel(condition="input.heatmapcol2=='1'",
+			    selectInput("colhmap2", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol2=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor2", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor2", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor2", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor2", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor2", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype2=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis2", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis2", h5("Data color",
+			                                   bsButton("bsb42", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb42", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis2=='2'",
 			    textInput("colhmapdiscus2", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype2=='vertical line' | input.plottype2=='horizontal line'",	
-			    tipify(textInput("linecolor2", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype2=='vertical line' | input.plottype2=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor2", label = h5('Line color:',
+			                                                              bsButton("bsb43", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb43", 'The color to be used to plot the data. ', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype2=='line'",	
-			    tipify(radioButtons("fillarea2", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea2=='1'",			
-			    tipify(radioButtons("selareatype2", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.selareatype2=='2'",
-			        textInput("borderarea2", NULL, value="blue")
+			conditionalPanel(condition="input.plottype2=='line'",
+			                 selectInput("fillarea2", h5("Fill area",
+			                                 bsButton("bsb44", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb44", "Fill the area below the lines.", trigger = "focus"),
+			    
+                conditionalPanel(condition="input.fillarea2=='1'",
+			    radioButtons("selareatype2", h5("Area color",
+			                                    bsButton("bsb45", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb45", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
+				
+			conditionalPanel(condition="input.selareatype2=='2'",
+			        fluidRow(column(12, jscolorInput("borderarea2", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 			)
-			),			
-			conditionalPanel(condition="input.plottype2!='rect_gradual' & input.plottype2!='heatmap_gradual' & input.plottype2!='text'",				
-			    tipify(numericInput("coltransparency2", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype2=='line' | input.plottype2=='vertical line' | input.plottype2=='horizontal line' | input.plottype2 == 'segment'",	
-			    numericInput("linesize2", "Line width:", value=0.2, min=0, max=20, step=0.05)
 			),
-			conditionalPanel(condition="input.plottype2=='line' | input.plottype2=='vertical line' | input.plottype2=='horizontal line' | input.plottype2 == 'segment'",	
-			    tipify(selectInput("linetype2", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype2=='point' | input.plottype2=='line' | input.plottype2=='bar' | input.plottype2=='rect_gradual' | input.plottype2=='rect_discrete' | input.plottype2=='heatmap_gradual' | input.plottype2=='heatmap_discrete' | input.plottype2=='vertical line' | input.plottype2=='horizontal line' | input.plottype2=='text' | input.plottype2 == 'segment'",
+			                conditionalPanel(condition="input.plottype2=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol2", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ), 
+			                selectInput("collgd2", h5("Color legend",
+		                                   bsButton("bsb46", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb46", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.collgd2=='1'",
+ 				    textInput("collgdname2", h5("Legend title:",
+ 				                                bsButton("bsb47", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb47", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+				    conditionalPanel(condition="input.plottype2!='rect_gradual' & input.plottype2!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel2", h5("Modify legend labels",
+					                                       bsButton("bsb48", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb48", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    
+					    conditionalPanel(condition="input.collgdmdylabel2=='1'",
+					        textInput("collgdlabel2", NULL, value="a,b,c")
+					    )
+				    )
+                )				
 			),
-			conditionalPanel(condition="input.plottype2 == 'segment'",	
-			    tipify(radioButtons("addarrow2", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			
+			conditionalPanel(condition="input.plottype2!='rect_gradual' & input.plottype2!='heatmap_gradual' & input.plottype2!='text'",
+			    sliderInput("coltransparency2", h5("Color transparency:",
+			                                       bsButton("bsb49", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb49", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")
+            )           
+            ),  
+            conditionalPanel(condition="input.plottype2=='line' | input.plottype2=='vertical line' | input.plottype2=='horizontal line' | input.plottype2 == 'segment'",
+		    checkboxInput("linetype_opt2", HTML("<font color='red'>Linetype</font>"), FALSE), 
+			conditionalPanel(condition="input.linetype_opt2", 
+            sliderInput("linesize2", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype2", h5("Line type",
+			                            bsButton("bsb50", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb50", 'The line type is automatically set as "solid" for line with more than one color.', trigger = "focus"),
+			
+			conditionalPanel(condition="input.plottype2=='vertical line' | input.plottype2=='horizontal line'",
+			                 selectInput("linetypelgd2", h5("Line type legend",
+		                                        bsButton("bsb51", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb51", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.linetypelgd2=='1'",
+ 				    textInput("linetypelgdname2", h5("Legend title:",
+ 				                                     bsButton("bsb52", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb52", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("linetypelgdmdylabel2", h5("Modify legend labels",
+					                                        bsButton("bsb53", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb53", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel2=='1'",
+						textInput("linetypelgdlabel2", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype2 == 'segment'",
+			                 selectInput("addarrow2", h5("Add arrow head",
+			                                 bsButton("bsb54", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb54", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow2 == '1'",
-			    tipify(radioButtons("arrowpos2", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize2", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos2", h5("Arrow position",
+			                                 bsButton("bsb55", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb55", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize2", h5("Arrow size:",
+				                             bsButton("bsb56", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb56", 'The size of arrow head.',trigger = "focus")								
             )
-			),			
-			conditionalPanel(condition="input.plottype2=='point'",			
-                tipify(textInput("symbolpoint2", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize2", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+            )
+			)
+			),
+			conditionalPanel(condition="input.plottype2=='point'",
+				checkboxInput("symbol_opt2", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt2",  #####				
+			                 selectInput("sel_symbolpoint2", h5("Symbol type",
+                                                    bsButton("bsb57", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb57", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint2=='1'",
+                    sliderInput("symbolpoint2", NULL, min=0, max=25, value=16, step=1)
+                ),
+		        
+                selectInput("shapelgd2", h5("Symbol legend",
+                                             bsButton("bsb58", label="", icon=icon("question"), style="info", size="small")
+                                             ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+                bsPopover("bsb58", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.shapelgd2=='1'",
+ 				    textInput("shapelgdname2", h5("Legend title:",
+ 				                                  bsButton("bsb59", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb59", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("shapelgdmdylabel2", h5("Modify legend labels",
+					                                     bsButton("bsb60", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb60", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel2=='1'",
+						textInput("shapelgdlabel2", NULL, value="a,b,c")
+	                )
+	            )
+				),
+				checkboxInput("size_opt2", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt2",  #####				
+				selectInput("sel_pointsize2", h5("Point size",
+                                                  bsButton("bsb61", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb61", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize2=='1'",
+                    sliderInput("pointsize2", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd2", h5("Size legend",
+		                                    bsButton("bsb62", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb62", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd2=='1'",
+ 				    textInput("sizelgdname2", h5("Legend title:",
+ 				                                 bsButton("bsb63", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb63", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("sizelgdmdylabel2", h5("Modify legend labels",
+				                                        bsButton("bsb64", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb64", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel2=='1'",
+						    textInput("sizelgdlabel2", NULL, value="a,b,c")
+	                )
+				)
+				)				
             ),
 			conditionalPanel(condition="input.plottype2=='heatmap_gradual' | input.plottype2=='heatmap_discrete' | input.plottype2=='rect_gradual' | input.plottype2=='rect_discrete' | input.plottype2=='bar'",
-			    tipify(radioButtons("addborder2", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder2", h5("Add cell borders",
+			                                  bsButton("bsb65", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"), selected="2"),
+			    bsPopover("bsb65", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder2=='1'",
-                    tipify(textInput("bordercols2", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols2", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype2=='line' | input.plottype2=='point' | input.plottype2=='bar'",				
-				tipify(radioButtons("xrugs2", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs2=='1'",
-				    textInput("xrugscol2", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs2", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs2=='1'",
-				    textInput("yrugscol2", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel2", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
-			),			
-			conditionalPanel(condition="input.plottype2=='text'",
-				textInput("textcol2", "Font color:", value="black"),			
-			    numericInput("textsize2", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface2", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle2", "Font angle:", value=60, min=-360, max=360, step=1)
+			conditionalPanel(condition="input.plottype2=='line' | input.plottype2=='point' | input.plottype2=='bar'",
+			                 selectInput("ylabel2", h5("Y axis label",
+	                                       bsButton("bsb67", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb67", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
-		    tipify(radioButtons("addlegend2", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  
-			  conditionalPanel(condition="input.addlegend2=='1'",
-			    conditionalPanel(condition="input.plottype2=='point' | input.plottype2=='line' | input.plottype2=='bar' | input.plottype2=='rect_gradual' | input.plottype2=='rect_discrete' | input.plottype2=='heatmap_gradual' | input.plottype2=='heatmap_discrete' | input.plottype2=='vertical line' | input.plottype2=='horizontal line' | input.plottype2=='text' | input.plottype2 == 'segment'",
-		          radioButtons("collgd2", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd2=='1'",
- 				      tipify(textInput("collgdname2", "Name:", value="color"),
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype2!='rect_gradual' & input.plottype2!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel2", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.collgdmdylabel2=='1'",
-						    textInput("collgdlabel2", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype2=='point'",
-		          radioButtons("sizelgd2", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd2=='1'",
- 				      tipify(textInput("sizelgdname2", "Name:", value="size"),	
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  
-				      tipify(radioButtons("sizelgdmdylabel2", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel2=='1'",
-						    textInput("sizelgdlabel2", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd2", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd2=='1'",
- 				      tipify(textInput("shapelgdname2", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel2", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.shapelgdmdylabel2=='1'",
-						    textInput("shapelgdlabel2", NULL, value="a,b,c")
-	                      )	  
-					)
-				),
-			    conditionalPanel(condition="input.plottype2=='vertical line' | input.plottype2=='horizontal line'",
-		          radioButtons("linetypelgd2", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd2=='1'",
- 				      tipify(textInput("linetypelgdname2", "Name:", value="linetype"),					  
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel2", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.linetypelgdmdylabel2=='1'",
-						    textInput("linetypelgdlabel2", NULL, value="a")
-	                      )
-					)
+			conditionalPanel(condition="input.plottype2=='text'",
+		    	checkboxInput("font_opt2", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt2",					
+				    sliderInput("textsize2", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface2", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle2", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )
 			)
-			)			
+			)
+			)
 		   )
 		),
 		checkboxInput("data3", HTML("<font color='red'>Data3</font>"), FALSE),
 		conditionalPanel(condition="input.data3",
 		  radioButtons("seluploaddata3", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata3 == '2'",
-		    tipify(fileInput("uploaddata3", "Upload data3:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata3", h5("Upload data3:",
+		                                bsButton("bsb68", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb68", 'Click "Browse" to upload the track data.', trigger = "focus"),
+			
+		    actionButton("tabBut4", "View example data"),
 			tags$script('$( "#uploaddata3" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype3", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),		
-			tipify(selectInput("layerindex3", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+            downloadButton("example_data3.txt", "Example data"),
+            br(),
+			br(),
+			selectInput("layerindex3", h5("Track index:",
+			                              bsButton("bsb69", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb69", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype3", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_3(
 				list(
+		    	checkboxInput("color_opt3", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt3",  #####					
 				conditionalPanel(condition="input.plottype3 == 'point' | input.plottype3 == 'line' | input.plottype3 == 'bar' | input.plottype3 == 'segment'",
-			        tipify(radioButtons("coltype3", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype3", h5("Data color",
+			                                    bsButton("bsb70", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																								
-					conditionalPanel(condition="input.coltype3=='2'",	
-			            textInput("colorcus3", NULL, value="red")
+			        bsPopover("bsb70", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype3=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus3", label = NULL, value = "#FF0000"))),
+                        br()			            			            
 			         ),
-                    conditionalPanel(condition="input.coltype3=='3'",	
+                    conditionalPanel(condition="input.coltype3=='3'",
 			            textInput("colormulgp3", NULL, value="a:red;b:blue;c:cyan")
 	                )
 				),
 			conditionalPanel(condition="input.plottype3=='rect_discrete'",
-			    tipify(radioButtons("rectcol3", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),											  
+			                 selectInput("rectcol3", h5("Data color",
+			                                bsButton("bsb71", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb71", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol3=='2'",
-			    textInput("rectcoldis3", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis3", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol3=='3'",
 			    textInput("rectcoldiscus3", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype3=='rect_gradual'",
-			    selectInput("colrect3", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col3", h5("Colors",
+			                                     bsButton("bsb72", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb72", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col3=='1'",
+			        selectInput("colrect3", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col3=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor3", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor3", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor3", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype3=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol3", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol3=='1'",			
-			    selectInput("colhmap3", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype3=='heatmap_gradual'",
+			                 selectInput("heatmapcol3", h5("Colors",
+			                                   bsButton("bsb73", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb73", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol3=='1'",
+			    selectInput("colhmap3", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol3=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor3", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor3", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor3", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor3", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor3", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype3=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis3", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis3", h5("Data color",
+			                                   bsButton("bsb74", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb74", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis3=='2'",
 			    textInput("colhmapdiscus3", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype3=='vertical line' | input.plottype3=='horizontal line'",	
-			    tipify(textInput("linecolor3", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype3=='vertical line' | input.plottype3=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor3", label = h5('Line color:',
+			                                                              bsButton("bsb75", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb75", 'The color to be used to plot the data. ', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype3=='line'",	
-			    tipify(radioButtons("fillarea3", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea3=='1'",			
-			    tipify(radioButtons("selareatype3", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype3=='line'",
+			                 selectInput("fillarea3", h5("Fill area",
+			                                 bsButton("bsb76", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb76", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea3=='1'",
+			    radioButtons("selareatype3", h5("Area color",
+			                                    bsButton("bsb77", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb77", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype3=='2'",
-			        textInput("borderarea3", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea3", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype3!='rect_gradual' & input.plottype3!='heatmap_gradual' & input.plottype3!='text'",				
-			    tipify(numericInput("coltransparency3", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype3=='line' | input.plottype3=='vertical line' | input.plottype3=='horizontal line' | input.plottype3 == 'segment'",	
-			    numericInput("linesize3", "Line width:", value=0.2, min=0, max=20, step=0.05)
-			),	
-			conditionalPanel(condition="input.plottype3=='line' | input.plottype3=='vertical line' | input.plottype3=='horizontal line' | input.plottype3 == 'segment'",	
-			    tipify(selectInput("linetype3", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
 			),
-			conditionalPanel(condition="input.plottype3 == 'segment'",	
-			    tipify(radioButtons("addarrow3", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype3=='point' | input.plottype3=='line' | input.plottype3=='bar' | input.plottype3=='rect_gradual' | input.plottype3=='rect_discrete' | input.plottype3=='heatmap_gradual' | input.plottype3=='heatmap_discrete' | input.plottype3=='vertical line' | input.plottype3=='horizontal line' | input.plottype3=='text' | input.plottype3 == 'segment'",
+			                conditionalPanel(condition="input.plottype3=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol3", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),
+			                selectInput("collgd3", h5("Color legend",
+		                                   bsButton("bsb78", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb78", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.collgd3=='1'",
+ 				    textInput("collgdname3", h5("Legend title:",
+ 				                                bsButton("bsb79", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb79", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+				    conditionalPanel(condition="input.plottype3!='rect_gradual' & input.plottype3!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel3", h5("Modify legend labels",
+					                                       bsButton("bsb80", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb80", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    conditionalPanel(condition="input.collgdmdylabel3=='1'",
+					        textInput("collgdlabel3", NULL, value="a,b,c")
+					    )
+				    )
+                )				
+			),
+			conditionalPanel(condition="input.plottype3!='rect_gradual' & input.plottype3!='heatmap_gradual' & input.plottype3!='text'",
+			    sliderInput("coltransparency3", h5("Color transparency:",
+			                                       bsButton("bsb81", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb81", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )          
+            ), 
+			conditionalPanel(condition="input.plottype3=='line' | input.plottype3=='vertical line' | input.plottype3=='horizontal line' | input.plottype3 == 'segment'",
+		    checkboxInput("linetype_opt3", HTML("<font color='red'>Linetype</font>"), FALSE), 
+			conditionalPanel(condition="input.linetype_opt3",                        
+            sliderInput("linesize3", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype3", h5("Line type",
+			                            bsButton("bsb82", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb82", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			
+			conditionalPanel(condition="input.plottype3=='vertical line' | input.plottype3=='horizontal line'",
+			                 selectInput("linetypelgd3", h5("Line type legend",
+		                                        bsButton("bsb83", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb83", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.linetypelgd3=='1'",
+ 				    textInput("linetypelgdname3", h5("Legend title:",
+ 				                                     bsButton("bsb84", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb84", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("linetypelgdmdylabel3", h5("Modify legend labels",
+					                                        bsButton("bsb85", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb85", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					
+					conditionalPanel(condition="input.linetypelgdmdylabel3=='1'",
+						textInput("linetypelgdlabel3", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype3 == 'segment'",
+			                 selectInput("addarrow3", h5("Add arrow head",
+			                                 bsButton("bsb86", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb86", "Add arrow head for the segment.", trigger = "focus"),
+				
 			conditionalPanel(condition="input.addarrow3 == '1'",
-			    tipify(radioButtons("arrowpos3", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize3", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos3", h5("Arrow position",
+			                                 bsButton("bsb87", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb87", 'The position of arrow head.',trigger = "focus"),
+				
+				sliderInput("arrowsize3", h5("Arrow size:",
+				                             bsButton("bsb88", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb88", 'The size of arrow head.',trigger = "focus")								
             )
+			)
+			)            
 			),
-			conditionalPanel(condition="input.plottype3=='point'",			
-                tipify(textInput("symbolpoint3", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize3", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype3=='point'",
+				checkboxInput("symbol_opt3", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt3",  #####				
+			                 selectInput("sel_symbolpoint3", h5("Symbol type",
+                                                    bsButton("bsb89", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb89", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint3=='1'",
+                    sliderInput("symbolpoint3", NULL, min=0, max=25, value=16, step=1)
+                ),
+
+                selectInput("shapelgd3", h5("Symbol legend",
+		                                     bsButton("bsb90", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb90", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+
+			    conditionalPanel(condition="input.shapelgd3=='1'",
+ 				    textInput("shapelgdname3", h5("Legend title:",
+ 				                                  bsButton("bsb91", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb91", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("shapelgdmdylabel3", h5("Modify legend labels",
+					                                     bsButton("bsb92", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb92", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					
+					conditionalPanel(condition="input.shapelgdmdylabel3=='1'",
+						textInput("shapelgdlabel3", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt3", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt3",  #####				
+				selectInput("sel_pointsize3", h5("Point size",
+                                                  bsButton("bsb93", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb93", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize3=='1'",
+                    sliderInput("pointsize3", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd3", h5("Size legend",
+		                                    bsButton("bsb94", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb94", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd3=='1'",
+ 				    textInput("sizelgdname3", h5("Legend title:",
+ 				                                 bsButton("bsb95", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb95", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+
+ 				    selectInput("sizelgdmdylabel3", h5("Modify legend labels",
+				                                        bsButton("bsb96", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb96", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel3=='1'",
+						    textInput("sizelgdlabel3", NULL, value="a,b,c")
+	                )
+				)
+				)				
             ),
 			conditionalPanel(condition="input.plottype3=='heatmap_gradual' | input.plottype3=='heatmap_discrete' | input.plottype3=='rect_gradual' | input.plottype3=='rect_discrete' | input.plottype3=='bar'",
-			    tipify(radioButtons("addborder3", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder3", h5("Add cell borders",
+			                                  bsButton("bsb97", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb97", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder3=='1'",
-                    tipify(textInput("bordercols3", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols3", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype3=='line' | input.plottype3=='point' | input.plottype3=='bar'",				
-				tipify(radioButtons("xrugs3", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs3=='1'",
-				    textInput("xrugscol3", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs3", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs3=='1'",
-				    textInput("yrugscol3", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel3", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype3=='line' | input.plottype3=='point' | input.plottype3=='bar'",
+			                 selectInput("ylabel3", h5("Y axis label",
+	                                       bsButton("bsb99", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb99", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype3=='text'",
-				textInput("textcol3", "Font color:", value="black"),			
-			    numericInput("textsize3", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface3", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle3", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend3", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			
-			  conditionalPanel(condition="input.addlegend3=='1'",
-			    conditionalPanel(condition="input.plottype3=='point' | input.plottype3=='line' | input.plottype3=='bar' | input.plottype3=='rect_gradual' | input.plottype3=='rect_discrete' | input.plottype3=='heatmap_gradual' | input.plottype3=='heatmap_discrete' | input.plottype3=='vertical line' | input.plottype3=='horizontal line' | input.plottype3=='text' | input.plottype3 == 'segment'",
-		          radioButtons("collgd3", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd3=='1'",
- 				      tipify(textInput("collgdname3", "Name:", value="color"),
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype3!='rect_gradual' & input.plottype3!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel3", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.collgdmdylabel3=='1'",
-						    textInput("collgdlabel3", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype3=='point'",
-		          radioButtons("sizelgd3", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd3=='1'",
- 				      tipify(textInput("sizelgdname3", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  
-				      tipify(radioButtons("sizelgdmdylabel3", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel3=='1'",
-						    textInput("sizelgdlabel3", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd3", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd3=='1'",
- 				      tipify(textInput("shapelgdname3", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel3", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.shapelgdmdylabel3=='1'",
-						    textInput("shapelgdlabel3", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype3=='vertical line' | input.plottype3=='horizontal line'",
-		          radioButtons("linetypelgd3", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd3=='1'",
- 				      tipify(textInput("linetypelgdname3", "Name:", value="linetype"),		
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel3", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.linetypelgdmdylabel3=='1'",
-						    textInput("linetypelgdlabel3", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt3", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt3",					
+				    sliderInput("textsize3", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface3", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle3", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )			
 			)
-			)			
+			)
+			)
 		   )
 		),
 		checkboxInput("data4", HTML("<font color='red'>Data4</font>"), FALSE),
 		conditionalPanel(condition="input.data4",
 		  radioButtons("seluploaddata4", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata4 == '2'",
-		    tipify(fileInput("uploaddata4", "Upload data4:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata4", h5("Upload data4:",
+		                                bsButton("bsb100", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb100", 'Click "Browse" to upload the track data.', trigger = "focus"),
+			
+		    actionButton("tabBut5", "View example data"),
 			tags$script('$( "#uploaddata4" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype4", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),	
-			tipify(selectInput("layerindex4", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+            downloadButton("example_data4.txt", "Example data"),
+            br(),
+			br(),
+			selectInput("layerindex4", h5("Track index:",
+			                              bsButton("bsb101", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb101", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype4", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_4(
 				list(
-				conditionalPanel(condition="input.plottype4 == 'point' | input.plottype4 == 'line' | input.plottype4 == 'bar' | input.plottype4 == 'segment'",				
-			        tipify(radioButtons("coltype4", "Data color", c("Random" = "1", "One custom color" = "2",
+		    	checkboxInput("color_opt4", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt4",  #####					
+				conditionalPanel(condition="input.plottype4 == 'point' | input.plottype4 == 'line' | input.plottype4 == 'bar' | input.plottype4 == 'segment'",
+				                 selectInput("coltype4", h5("Data color",
+			                                    bsButton("bsb102", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																									
-					conditionalPanel(condition="input.coltype4=='2'",	
-			            textInput("colorcus4", NULL, value="red")
+			        bsPopover("bsb102", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype4=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus4", label = NULL, value = "#FF0000"))),
+                        br()			            			            
 			         ),
-                    conditionalPanel(condition="input.coltype4=='3'",	
+                    conditionalPanel(condition="input.coltype4=='3'",
 			            textInput("colormulgp4", NULL, value="a:red;b:blue;c:cyan")
 	                )
 				),
 			conditionalPanel(condition="input.plottype4=='rect_discrete'",
-			    tipify(radioButtons("rectcol4", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),										  
+			                 selectInput("rectcol4", h5("Data color",
+			                                bsButton("bsb103", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb103", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol4=='2'",
-			    textInput("rectcoldis4", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis4", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol4=='3'",
 			    textInput("rectcoldiscus4", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype4=='rect_gradual'",
-			    selectInput("colrect4", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col4", h5("Colors",
+			                                     bsButton("bsb104", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb104", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col4=='1'",
+			        selectInput("colrect4", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col4=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor4", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype4=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol4", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol4=='1'",			
-			    selectInput("colhmap4", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype4=='heatmap_gradual'",
+			                 selectInput("heatmapcol4", h5("Colors",
+			                                   bsButton("bsb105", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb105", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol4=='1'",
+			    selectInput("colhmap4", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol4=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor4", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype4=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis4", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis4", h5("Data color",
+			                                   bsButton("bsb106", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb106", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis4=='2'",
 			    textInput("colhmapdiscus4", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype4=='vertical line' | input.plottype4=='horizontal line'",	
-			    tipify(textInput("linecolor4", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype4=='vertical line' | input.plottype4=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor4", label = h5('Line color:',
+			                                                              bsButton("bsb107", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb107", 'The color to be used to plot the data.', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype4=='line'",	
-			    tipify(radioButtons("fillarea4", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea4=='1'",			
-			    tipify(radioButtons("selareatype4", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype4=='line'",
+			                 selectInput("fillarea4", h5("Fill area",
+			                                 bsButton("bsb108", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb108", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea4=='1'",
+			    radioButtons("selareatype4", h5("Area color",
+			                                    bsButton("bsb109", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb109", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype4=='2'",
-			        textInput("borderarea4", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea4", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype4!='rect_gradual' & input.plottype4!='heatmap_gradual' & input.plottype4!='text'",				
-			    tipify(numericInput("coltransparency4", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype4=='line' | input.plottype4=='vertical line' | input.plottype4=='horizontal line' | input.plottype4 == 'segment'",	
-			    numericInput("linesize4", "Line width:", value=0.2, min=0, max=20, step=0.05)
-			),	
-			conditionalPanel(condition="input.plottype4=='line' | input.plottype4=='vertical line' | input.plottype4=='horizontal line' | input.plottype4 == 'segment'",	
-			    tipify(selectInput("linetype4", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
 			),
-			conditionalPanel(condition="input.plottype4 == 'segment'",	
-			    tipify(radioButtons("addarrow4", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype4=='point' | input.plottype4=='line' | input.plottype4=='bar' | input.plottype4=='rect_gradual' | input.plottype4=='rect_discrete' | input.plottype4=='heatmap_gradual' | input.plottype4=='heatmap_discrete' | input.plottype4=='vertical line' | input.plottype4=='horizontal line' | input.plottype4=='text' | input.plottype4 == 'segment'",
+			                conditionalPanel(condition="input.plottype4=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol4", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),  			                
+			                selectInput("collgd4", h5("Color legend",
+		                                   bsButton("bsb110", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb110", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.collgd4=='1'",
+ 				    textInput("collgdname4", h5("Legend title:",
+ 				                                bsButton("bsb111", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb111", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+				    conditionalPanel(condition="input.plottype4!='rect_gradual' & input.plottype4!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel4", h5("Modify legend labels",
+					                                       bsButton("bsb112", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb112", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    
+					    conditionalPanel(condition="input.collgdmdylabel4=='1'",
+					        textInput("collgdlabel4", NULL, value="a,b,c")
+					    )
+				    )
+                )				
+			),
+			conditionalPanel(condition="input.plottype4!='rect_gradual' & input.plottype4!='heatmap_gradual' & input.plottype4!='text'",
+			    sliderInput("coltransparency4", h5("Color transparency:",
+			                                       bsButton("bsb113", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb113", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )          
+            ),       
+			conditionalPanel(condition="input.plottype4=='line' | input.plottype4=='vertical line' | input.plottype4=='horizontal line' | input.plottype4 == 'segment'",
+		    checkboxInput("linetype_opt4", HTML("<font color='red'>Linetype</font>"), FALSE), 
+			conditionalPanel(condition="input.linetype_opt4",                   
+            sliderInput("linesize4", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype4", h5("Line type",
+			                            bsButton("bsb114", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb114", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			conditionalPanel(condition="input.plottype4=='vertical line' | input.plottype4=='horizontal line'",
+			                 selectInput("linetypelgd4", h5("Line type legend",
+		                                        bsButton("bsb115", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb115", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.linetypelgd4=='1'",
+ 				    textInput("linetypelgdname4", h5("Legend title:",
+ 				                                     bsButton("bsb116", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb116", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("linetypelgdmdylabel4", h5("Modify legend labels",
+					                                        bsButton("bsb117", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb117", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel4=='1'",
+						textInput("linetypelgdlabel4", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype4 == 'segment'",
+			                 selectInput("addarrow4", h5("Add arrow head",
+			                                 bsButton("bsb118", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb118", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow4 == '1'",
-			    tipify(radioButtons("arrowpos4", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize4", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))				
+			                 selectInput("arrowpos4", h5("Arrow position",
+			                                 bsButton("bsb119", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb119", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize4", h5("Arrow size:",
+				                             bsButton("bsb120", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb120", 'The size of arrow head.',trigger = "focus")				
             )
-			),			
-			conditionalPanel(condition="input.plottype4=='point'",			
-                tipify(textInput("symbolpoint4", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize4", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			)
+			)            
+			),
+			conditionalPanel(condition="input.plottype4=='point'",
+				checkboxInput("symbol_opt4", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt4",  #####				
+			                 selectInput("sel_symbolpoint4", h5("Symbol type",
+                                                    bsButton("bsb121", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb121", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint4=='1'",
+                    sliderInput("symbolpoint4", NULL, min=0, max=25, value=16, step=1)
+                ),
+                selectInput("shapelgd4", h5("Symbol legend",
+		                                     bsButton("bsb122", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb122", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.shapelgd4=='1'",
+ 				    textInput("shapelgdname4", h5("Legend title:",
+ 				                                  bsButton("bsb123", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb123", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("shapelgdmdylabel4", h5("Modify legend labels",
+					                                     bsButton("bsb124", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb124", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel4=='1'",
+						textInput("shapelgdlabel4", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt4", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt4",  #####				
+				selectInput("sel_pointsize4", h5("Point size",
+                                                  bsButton("bsb125", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb125", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize4=='1'",
+                    sliderInput("pointsize4", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd4", h5("Size legend",
+		                                    bsButton("bsb126", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb126", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd4=='1'",
+ 				    textInput("sizelgdname4", h5("Legend title:",
+ 				                                 bsButton("bsb127", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb127", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("sizelgdmdylabel4", h5("Modify legend labels",
+				                                        bsButton("bsb128", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb128", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel4=='1'",
+						    textInput("sizelgdlabel4", NULL, value="a,b,c")
+	                )
+				)
+				)				
             ),
 			conditionalPanel(condition="input.plottype4=='heatmap_gradual' | input.plottype4=='heatmap_discrete' | input.plottype4=='rect_gradual' | input.plottype4=='rect_discrete' | input.plottype4=='bar'",
-			    tipify(radioButtons("addborder4", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder4", h5("Add cell borders",
+			                                  bsButton("bsb129", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb129", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder4=='1'",
-                    tipify(textInput("bordercols4", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols4", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype4=='line' | input.plottype4=='point' | input.plottype4=='bar'",				
-				tipify(radioButtons("xrugs4", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs4=='1'",
-				    textInput("xrugscol4", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs4", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs4=='1'",
-				    textInput("yrugscol4", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel4", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype4=='line' | input.plottype4=='point' | input.plottype4=='bar'",
+			                 selectInput("ylabel4", h5("Y axis label",
+	                                       bsButton("bsb131", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb131", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype4=='text'",
-				textInput("textcol4", "Font color:", value="black"),			
-			    numericInput("textsize4", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface4", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle4", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend4", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			
-			  conditionalPanel(condition="input.addlegend4=='1'",
-			    conditionalPanel(condition="input.plottype4=='point' | input.plottype4=='line' | input.plottype4=='bar' | input.plottype4=='rect_gradual' | input.plottype4=='rect_discrete' | input.plottype4=='heatmap_gradual' | input.plottype4=='heatmap_discrete' | input.plottype4=='vertical line' | input.plottype4=='horizontal line' | input.plottype4=='text' | input.plottype4 == 'segment'",
-		          radioButtons("collgd4", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd4=='1'",
- 				      tipify(textInput("collgdname4", "Name:", value="color"),
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype4!='rect_gradual' & input.plottype4!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel4", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.collgdmdylabel4=='1'",
-						    textInput("collgdlabel4", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype4=='point'",
-		          radioButtons("sizelgd4", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd4=='1'",
- 				      tipify(textInput("sizelgdname4", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  					  
-				      tipify(radioButtons("sizelgdmdylabel4", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel4=='1'",
-						    textInput("sizelgdlabel4", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd4", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd4=='1'",
- 				      tipify(textInput("shapelgdname4", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel4", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.shapelgdmdylabel4=='1'",
-						    textInput("shapelgdlabel4", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype4=='vertical line' | input.plottype4=='horizontal line'",
-		          radioButtons("linetypelgd4", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd4=='1'",
- 				      tipify(textInput("linetypelgdname4", "Name:", value="linetype"),	
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel4", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.linetypelgdmdylabel4=='1'",
-						    textInput("linetypelgdlabel4", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt4", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt4",					
+				    sliderInput("textsize4", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface4", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle4", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )	
 			)
-			)			
+			)
+			)
 		   )
 		),
 		checkboxInput("data5", HTML("<font color='red'>Data5</font>"), FALSE),
 		conditionalPanel(condition="input.data5",
 		  radioButtons("seluploaddata5", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata5 == '2'",
-		    tipify(fileInput("uploaddata5", "Upload data5:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata5", h5("Upload data5:",
+		                                bsButton("bsb132", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb132", 'Click "Browse" to upload the track data.', trigger = "focus"),
+			
+		    actionButton("tabBut6", "View example data"),
 			tags$script('$( "#uploaddata5" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype5", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),	
-			tipify(selectInput("layerindex5", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+            downloadButton("example_data5.txt", "Example data"),
+            br(),
+			br(),
+			selectInput("layerindex5", h5("Track index:",
+			                              bsButton("bsb133", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb133", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype5", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_5(
 				list(
+		    	checkboxInput("color_opt5", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt5",  #####					
 				conditionalPanel(condition="input.plottype5 == 'point' | input.plottype5 == 'line' | input.plottype5 == 'bar' | input.plottype5 == 'segment'",
-			        tipify(radioButtons("coltype5", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype5", h5("Data color",
+			                                    bsButton("bsb134", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																								
-					conditionalPanel(condition="input.coltype5=='2'",	
-			            textInput("colorcus5", NULL, value="red")
+			        bsPopover("bsb134", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype5=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus5", label = NULL, value = "#FF0000"))),
+                        br()			            			            
 			         ),
-                    conditionalPanel(condition="input.coltype5=='3'",	
+                    conditionalPanel(condition="input.coltype5=='3'",
 			            textInput("colormulgp5", NULL, value="a:red;b:blue;c:cyan")
 	                )
 				),
 			conditionalPanel(condition="input.plottype5=='rect_discrete'",
-			    tipify(radioButtons("rectcol5", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),											  
+			                 selectInput("rectcol5", h5("Data color",
+			                                bsButton("bsb135", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb135", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol5=='2'",
-			    textInput("rectcoldis5", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis5", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol5=='3'",
 			    textInput("rectcoldiscus5", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype5=='rect_gradual'",
-			    selectInput("colrect5", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col5", h5("Colors",
+			                                     bsButton("bsb136", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb136", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col5=='1'",
+			        selectInput("colrect5", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col5=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor5", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor5", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor5", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype5=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol5", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol5=='1'",			
-			    selectInput("colhmap5", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype5=='heatmap_gradual'",
+			                 selectInput("heatmapcol5", h5("Colors",
+			                                   bsButton("bsb137", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb137", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol5=='1'",
+			    selectInput("colhmap5", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol5=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor5", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor5", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor5", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor5", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor5", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype5=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis5", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis5", h5("Data color",
+			                                   bsButton("bsb138", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb138", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis5=='2'",
 			    textInput("colhmapdiscus5", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype5=='vertical line' | input.plottype5=='horizontal line'",	
-			    tipify(textInput("linecolor5", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype5=='vertical line' | input.plottype5=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor5", label = h5('Line color:',
+			                                                              bsButton("bsb139", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb139", 'The color to be used to plot the data.', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype5=='line'",	
-			    tipify(radioButtons("fillarea5", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea5=='1'",			
-			    tipify(radioButtons("selareatype5", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype5=='line'",
+			                 selectInput("fillarea5", h5("Fill area",
+			                                 bsButton("bsb140", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb140", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea5=='1'",
+			    radioButtons("selareatype5", h5("Area color",
+			                                    bsButton("bsb1400", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb1400", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype5=='2'",
-			        textInput("borderarea5", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea5", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype5!='rect_gradual' & input.plottype5!='heatmap_gradual' & input.plottype5!='text'",				
-			    tipify(numericInput("coltransparency5", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype5=='line' | input.plottype5=='vertical line' | input.plottype5=='horizontal line' | input.plottype5 == 'segment'",	
-			    numericInput("linesize5", "Line width:", value=0.2, min=0, max=20, step=0.05)
 			),
-			conditionalPanel(condition="input.plottype5=='line' | input.plottype5=='vertical line' | input.plottype5=='horizontal line' | input.plottype5 == 'segment'",	
-			    tipify(selectInput("linetype5", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype5=='point' | input.plottype5=='line' | input.plottype5=='bar' | input.plottype5=='rect_gradual' | input.plottype5=='rect_discrete' | input.plottype5=='heatmap_gradual' | input.plottype5=='heatmap_discrete' | input.plottype5=='vertical line' | input.plottype5=='horizontal line' | input.plottype5=='text' | input.plottype5 == 'segment'",
+			                conditionalPanel(condition="input.plottype5=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol5", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),  			                
+			                selectInput("collgd5", h5("Color legend",
+		                                   bsButton("bsb141", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb141", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.collgd5=='1'",
+ 				    textInput("collgdname5", h5("Legend title:",
+ 				                                bsButton("bsb142", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb142", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+				    conditionalPanel(condition="input.plottype5!='rect_gradual' & input.plottype5!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel5", h5("Modify legend labels",
+					                                       bsButton("bsb143", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb143", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    conditionalPanel(condition="input.collgdmdylabel5=='1'",
+					        textInput("collgdlabel5", NULL, value="a,b,c")
+					    )
+				    )
+                )				
 			),
-			conditionalPanel(condition="input.plottype5 == 'segment'",	
-			    tipify(radioButtons("addarrow5", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype5!='rect_gradual' & input.plottype5!='heatmap_gradual' & input.plottype5!='text'",
+			    sliderInput("coltransparency5", h5("Color transparency:",
+			                                       bsButton("bsb144", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb144", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )          
+            ),   
+			conditionalPanel(condition="input.plottype5=='line' | input.plottype5=='vertical line' | input.plottype5=='horizontal line' | input.plottype5 == 'segment'",
+		    checkboxInput("linetype_opt5", HTML("<font color='red'>Linetype</font>"), FALSE), 
+			conditionalPanel(condition="input.linetype_opt5",                       
+            sliderInput("linesize5", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype5", h5("Line type",
+			                            bsButton("bsb145", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb145", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			
+			conditionalPanel(condition="input.plottype5=='vertical line' | input.plottype5=='horizontal line'",
+			                 selectInput("linetypelgd5", h5("Line type legend",
+		                                        bsButton("bsb146", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb146", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+				
+			    conditionalPanel(condition="input.linetypelgd5=='1'",
+ 				    textInput("linetypelgdname5", h5("Legend title:",
+ 				                                     bsButton("bsb147", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb147", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("linetypelgdmdylabel5", h5("Modify legend labels",
+					                                        bsButton("bsb148", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb148", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel5=='1'",
+						textInput("linetypelgdlabel5", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype5 == 'segment'",
+			                 selectInput("addarrow5", h5("Add arrow head",
+			                                 bsButton("bsb149", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb149", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow5 == '1'",
-			    tipify(radioButtons("arrowpos5", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize5", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos5", h5("Arrow position",
+			                                 bsButton("bsb150", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb150", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize5", h5("Arrow size:",
+				                             bsButton("bsb151", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb151", 'The size of arrow head.',trigger = "focus")								
             )
-			),			
-			conditionalPanel(condition="input.plottype5=='point'",			
-                tipify(textInput("symbolpoint5", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize5", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			)
+			)
+			),
+			conditionalPanel(condition="input.plottype5=='point'",
+				checkboxInput("symbol_opt5", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt5",  #####				
+			                 selectInput("sel_symbolpoint5", h5("Symbol type",
+                                                    bsButton("bsb152", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb152", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint5=='1'",
+                    sliderInput("symbolpoint5", NULL, min=0, max=25, value=16, step=1)
+                ),
+                selectInput("shapelgd5", h5("Symbol legend",
+		                                     bsButton("bsb153", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb153", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+
+			    conditionalPanel(condition="input.shapelgd5=='1'",
+ 				    textInput("shapelgdname5", h5("Legend title:",
+ 				                                  bsButton("bsb154", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb154", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    
+ 				    selectInput("shapelgdmdylabel5", h5("Modify legend labels",
+					                                     bsButton("bsb155", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb155", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel5=='1'",
+						textInput("shapelgdlabel5", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt5", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt5",  #####				
+				selectInput("sel_pointsize5", h5("Point size",
+                                                  bsButton("bsb156", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb156", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize5=='1'",
+                    sliderInput("pointsize5", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd5", h5("Size legend",
+		                                    bsButton("bsb157", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb157", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd5=='1'",
+ 				    textInput("sizelgdname5", h5("Legend title:",
+ 				                                 bsButton("bsb1570", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb1570", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("sizelgdmdylabel5", h5("Modify legend labels",
+				                                        bsButton("bsb158", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb158", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel5=='1'",
+						    textInput("sizelgdlabel5", NULL, value="a,b,c")
+	                )
+				)
+				)				
             ),
 			conditionalPanel(condition="input.plottype5=='heatmap_gradual' | input.plottype5=='heatmap_discrete' | input.plottype5=='rect_gradual' | input.plottype5=='rect_discrete' | input.plottype5=='bar'",
-			    tipify(radioButtons("addborder5", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder5", h5("Add cell borders",
+			                                  bsButton("bsb159", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb159", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder5=='1'",
-                    tipify(textInput("bordercols5", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols5", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype5=='line' | input.plottype5=='point' | input.plottype5=='bar'",				
-				tipify(radioButtons("xrugs5", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs5=='1'",
-				    textInput("xrugscol5", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs5", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs5=='1'",
-				    textInput("yrugscol5", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel5", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype5=='line' | input.plottype5=='point' | input.plottype5=='bar'",
+			                 selectInput("ylabel5", h5("Y axis label",
+	                                       bsButton("bsb161", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb161", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype5=='text'",
-				textInput("textcol5", "Font color:", value="black"),			
-			    numericInput("textsize5", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface5", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle5", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend5", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			
-			  conditionalPanel(condition="input.addlegend5=='1'",
-			    conditionalPanel(condition="input.plottype5=='point' | input.plottype5=='line' | input.plottype5=='bar' | input.plottype5=='rect_gradual' | input.plottype5=='rect_discrete' | input.plottype5=='heatmap_gradual' | input.plottype5=='heatmap_discrete' | input.plottype5=='vertical line' | input.plottype5=='horizontal line' | input.plottype5=='text' | input.plottype5 == 'segment'",
-		          radioButtons("collgd5", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd5=='1'",
- 				      tipify(textInput("collgdname5", "Name:", value="color"),
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype5!='rect_gradual' & input.plottype5!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel5", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.collgdmdylabel5=='1'",
-						    textInput("collgdlabel5", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype5=='point'",
-		          radioButtons("sizelgd5", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd5=='1'",
- 				      tipify(textInput("sizelgdname5", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  					  
-				      tipify(radioButtons("sizelgdmdylabel5", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel5=='1'",
-						    textInput("sizelgdlabel5", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd5", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd5=='1'",
- 				      tipify(textInput("shapelgdname5", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel5", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.shapelgdmdylabel5=='1'",
-						    textInput("shapelgdlabel5", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype5=='vertical line' | input.plottype5=='horizontal line'",
-		          radioButtons("linetypelgd5", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd5=='1'",
- 				      tipify(textInput("linetypelgdname5", "Name:", value="linetype"),	
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel5", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),				
-						  conditionalPanel(condition="input.linetypelgdmdylabel5=='1'",
-						    textInput("linetypelgdlabel5", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt5", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt5",					
+				    sliderInput("textsize5", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface5", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle5", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )		
+			)
 			)
 			)
 		   )
@@ -979,1070 +1551,1633 @@ shinyUI(
 		conditionalPanel(condition="input.data6",
 		  radioButtons("seluploaddata6", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata6 == '2'",
-		    tipify(fileInput("uploaddata6", "Upload data6:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata6", h5("Upload data6:",
+		                                bsButton("bsb162", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb162", 'Click "Browse" to upload the track data.', trigger = "focus"),
+		    
+		    actionButton("tabBut7", "View example data"),
 			tags$script('$( "#uploaddata6" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype6", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),		
-			tipify(selectInput("layerindex6", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+            downloadButton("example_data6.txt", "Example data"),
+            br(),
+			br(),
+			selectInput("layerindex6", h5("Track index:",
+			                              bsButton("bsb163", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb163", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype6", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_6(
 				list(
+		    	checkboxInput("color_opt6", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt6",  #####					
 				conditionalPanel(condition="input.plottype6 == 'point' | input.plottype6 == 'line' | input.plottype6 == 'bar' | input.plottype6 == 'segment'",
-			        tipify(radioButtons("coltype6", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype6", h5("Data color",
+			                                    bsButton("bsb164", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																									
-					conditionalPanel(condition="input.coltype6=='2'",	
-			            textInput("colorcus6", NULL, value="red")
+			        bsPopover("bsb164", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype6=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus6", label = NULL, value = "#FF0000"))),
+                        br()			            			            
 			         ),
-                    conditionalPanel(condition="input.coltype6=='3'",	
+                    conditionalPanel(condition="input.coltype6=='3'",
 			            textInput("colormulgp6", NULL, value="a:red;b:blue;c:cyan")
 	                )
-				),		
+				),
 			conditionalPanel(condition="input.plottype6=='rect_discrete'",
-			    tipify(radioButtons("rectcol6", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),										  
+			                 selectInput("rectcol6", h5("Data color",
+			                                bsButton("bsb165", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb165", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol6=='2'",
-			    textInput("rectcoldis6", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis6", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol6=='3'",
 			    textInput("rectcoldiscus6", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype6=='rect_gradual'",
-			    selectInput("colrect6", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col6", h5("Colors",
+			                                     bsButton("bsb166", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb166", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col6=='1'",
+			        selectInput("colrect6", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
-			),			
-			conditionalPanel(condition="input.plottype6=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol6", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol6=='1'",			
-			    selectInput("colhmap6", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col6=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor6", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor6", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor6", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
+			),
+			conditionalPanel(condition="input.plottype6=='heatmap_gradual'",
+			                 selectInput("heatmapcol6", h5("Colors",
+			                                   bsButton("bsb167", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb167", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol6=='1'",
+			    selectInput("colhmap6", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol6=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor6", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor6", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor6", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor6", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor6", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype6=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis6", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis6", h5("Data color",
+			                                   bsButton("bsb168", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb168", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis6=='2'",
 			    textInput("colhmapdiscus6", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype6=='vertical line' | input.plottype6=='horizontal line'",	
-			    tipify(textInput("linecolor6", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype6=='vertical line' | input.plottype6=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor6", label = h5('Line color:',
+			                                                              bsButton("bsb169", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb169", 'The color to be used to plot the data.', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype6=='line'",	
-			    tipify(radioButtons("fillarea6", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea6=='1'",			
-			    tipify(radioButtons("selareatype6", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype6=='line'",
+			                 selectInput("fillarea6", h5("Fill area",
+			                                 bsButton("bsb170", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb170", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea6=='1'",
+			    radioButtons("selareatype6", h5("Area color",
+			                                    bsButton("bsb171", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb171", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype6=='2'",
-			        textInput("borderarea6", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea6", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype6!='rect_gradual' & input.plottype6!='heatmap_gradual' & input.plottype6!='text'",				
-			    tipify(numericInput("coltransparency6", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype6=='line' | input.plottype6=='vertical line' | input.plottype6=='horizontal line' | input.plottype6 == 'segment'",	
-			    numericInput("linesize6", "Line width:", value=0.2, min=0, max=20, step=0.05)
 			),
-			conditionalPanel(condition="input.plottype6=='line' | input.plottype6=='vertical line' | input.plottype6=='horizontal line' | input.plottype6 == 'segment'",	
-			    tipify(selectInput("linetype6", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype6=='point' | input.plottype6=='line' | input.plottype6=='bar' | input.plottype6=='rect_gradual' | input.plottype6=='rect_discrete' | input.plottype6=='heatmap_gradual' | input.plottype6=='heatmap_discrete' | input.plottype6=='vertical line' | input.plottype6=='horizontal line' | input.plottype6=='text' | input.plottype6 == 'segment'",
+			                conditionalPanel(condition="input.plottype6=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol6", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),
+			                selectInput("collgd6", h5("Color legend",
+		                                   bsButton("bsb172", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb172", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.collgd6=='1'",
+ 				    textInput("collgdname6", h5("Legend title:",
+ 				                                bsButton("bsb173", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb173", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+				    conditionalPanel(condition="input.plottype6!='rect_gradual' & input.plottype6!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel6", h5("Modify legend labels",
+					                                       bsButton("bsb174", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb174", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    conditionalPanel(condition="input.collgdmdylabel6=='1'",
+					        textInput("collgdlabel6", NULL, value="a,b,c")
+					    )
+				    )
+                )				
 			),
-			conditionalPanel(condition="input.plottype6 == 'segment'",	
-			    tipify(radioButtons("addarrow6", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype6!='rect_gradual' & input.plottype6!='heatmap_gradual' & input.plottype6!='text'",
+			    sliderInput("coltransparency6", h5("Color transparency:",
+			                                       bsButton("bsb175", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb175", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )          
+            ),    
+			conditionalPanel(condition="input.plottype6=='line' | input.plottype6=='vertical line' | input.plottype6=='horizontal line' | input.plottype6 == 'segment'",
+		    checkboxInput("linetype_opt6", HTML("<font color='red'>Linetype</font>"), FALSE), 
+			conditionalPanel(condition="input.linetype_opt6",                      
+            sliderInput("linesize6", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype6", h5("Line type",
+			                            bsButton("bsb176", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb176", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			conditionalPanel(condition="input.plottype6=='vertical line' | input.plottype6=='horizontal line'",
+			                 selectInput("linetypelgd6", h5("Line type legend",
+		                                        bsButton("bsb177", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb177", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.linetypelgd6=='1'",
+ 				    textInput("linetypelgdname6", h5("Legend title:",
+ 				                                     bsButton("bsb178", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb178", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("linetypelgdmdylabel6", h5("Modify legend labels",
+					                                        bsButton("bsb179", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb179", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel6=='1'",
+						textInput("linetypelgdlabel6", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype6 == 'segment'",
+			                 selectInput("addarrow6", h5("Add arrow head",
+			                                 bsButton("bsb180", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb180", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow6 == '1'",
-			    tipify(radioButtons("arrowpos6", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize6", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos6", h5("Arrow position",
+			                                 bsButton("bsb181", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb181", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize6", h5("Arrow size:",
+				                             bsButton("bsb182", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb182", 'The size of arrow head.',trigger = "focus")								
             )
-			),			
-			conditionalPanel(condition="input.plottype6=='point'",			
-                tipify(textInput("symbolpoint6", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize6", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			)
+			)            
+			),
+			conditionalPanel(condition="input.plottype6=='point'",
+				checkboxInput("symbol_opt6", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt6",  #####				
+			                 selectInput("sel_symbolpoint6", h5("Symbol type",
+                                                    bsButton("bsb183", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb183", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint6=='1'",
+                    sliderInput("symbolpoint6", NULL, min=0, max=25, value=16, step=1)
+                ),
+                selectInput("shapelgd6", h5("Symbol legend",
+		                                     bsButton("bsb184", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb184", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.shapelgd6=='1'",
+ 				    textInput("shapelgdname6", h5("Legend title:",
+ 				                                  bsButton("bsb185", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb185", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("shapelgdmdylabel6", h5("Modify legend labels",
+					                                     bsButton("bsb186", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb186", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel6=='1'",
+						textInput("shapelgdlabel6", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt6", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt6",  #####
+				selectInput("sel_pointsize6", h5("Point size",
+                                                  bsButton("bsb187", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb187", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize6=='1'",
+                    sliderInput("pointsize6", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd6", h5("Size legend",
+		                                    bsButton("bsb188", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb188", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd6=='1'",
+ 				    textInput("sizelgdname6", h5("Legend title:",
+ 				                                 bsButton("bsb189", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb189", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("sizelgdmdylabel6", h5("Modify legend labels",
+				                                        bsButton("bsb190", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb190", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel6=='1'",
+						    textInput("sizelgdlabel6", NULL, value="a,b,c")
+	                )
+				)
+				)				
             ),
 			conditionalPanel(condition="input.plottype6=='heatmap_gradual' | input.plottype6=='heatmap_discrete' | input.plottype6=='rect_gradual' | input.plottype6=='rect_discrete' | input.plottype6=='bar'",
-			    tipify(radioButtons("addborder6", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder6", h5("Add cell borders",
+			                                  bsButton("bsb191", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb191", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder6=='1'",
-                    tipify(textInput("bordercols6", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols6", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype6=='line' | input.plottype6=='point' | input.plottype6=='bar'",				
-				tipify(radioButtons("xrugs6", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs6=='1'",
-				    textInput("xrugscol6", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs6", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs6=='1'",
-				    textInput("yrugscol6", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel6", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype6=='line' | input.plottype6=='point' | input.plottype6=='bar'",
+			                 selectInput("ylabel6", h5("Y axis label",
+	                                       bsButton("bsb193", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb193", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype6=='text'",
-				textInput("textcol6", "Font color:", value="black"),			
-			    numericInput("textsize6", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface6", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle6", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend6", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
-			  conditionalPanel(condition="input.addlegend6=='1'",
-			    conditionalPanel(condition="input.plottype6=='point' | input.plottype6=='line' | input.plottype6=='bar' | input.plottype6=='rect_gradual' | input.plottype6=='rect_discrete' | input.plottype6=='heatmap_gradual' | input.plottype6=='heatmap_discrete' | input.plottype6=='vertical line' | input.plottype6=='horizontal line' | input.plottype6=='text' | input.plottype6 == 'segment'",
-		          radioButtons("collgd6", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd6=='1'",
- 				      tipify(textInput("collgdname6", "Name:", value="color"),
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype6!='rect_gradual' & input.plottype6!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel6", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.collgdmdylabel6=='1'",
-						    textInput("collgdlabel6", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype6=='point'",
-		          radioButtons("sizelgd6", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd6=='1'",
- 				      tipify(textInput("sizelgdname6", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  					  
-				      tipify(radioButtons("sizelgdmdylabel6", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel6=='1'",
-						    textInput("sizelgdlabel6", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd6", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd6=='1'",
- 				      tipify(textInput("shapelgdname6", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel6", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.shapelgdmdylabel6=='1'",
-						    textInput("shapelgdlabel6", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype6=='vertical line' | input.plottype6=='horizontal line'",
-		          radioButtons("linetypelgd6", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd6=='1'",
- 				      tipify(textInput("linetypelgdname6", "Name:", value="linetype"),	
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel6", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),				
-						  conditionalPanel(condition="input.linetypelgdmdylabel6=='1'",
-						    textInput("linetypelgdlabel6", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt6", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt6",					
+				    sliderInput("textsize6", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface6", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle6", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )			
 			)
-			)			
+			)
+			)
 		   )
 		),
 		checkboxInput("data7", HTML("<font color='red'>Data7</font>"), FALSE),
 		conditionalPanel(condition="input.data7",
 		  radioButtons("seluploaddata7", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata7 == '2'",
-		    tipify(fileInput("uploaddata7", "Upload data7:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata7", h5("Upload data7:",
+		                                bsButton("bsb194", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb194", 'Click "Browse" to upload the track data.', trigger = "focus"),
+		    
+		    actionButton("tabBut8", "View example data"),
 			tags$script('$( "#uploaddata7" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype7", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),		
-	     	tipify(selectInput("layerindex7", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+            downloadButton("example_data7.txt", "Example data"),
+            br(),
+			br(),
+	     	selectInput("layerindex7", h5("Track index:",
+	     	                              bsButton("bsb195", label="", icon=icon("question"), style="info", size="small")
+	     	                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb195", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype7", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_7(
 				list(
+		    	checkboxInput("color_opt7", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt7",  #####					
 				conditionalPanel(condition="input.plottype7 == 'point' | input.plottype7 == 'line' | input.plottype7 == 'bar' | input.plottype7 == 'segment'",
-			        tipify(radioButtons("coltype7", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype7", h5("Data color",
+			                                    bsButton("bsb196", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																									
-					conditionalPanel(condition="input.coltype7=='2'",	
-			            textInput("colorcus7", NULL, value="red")
+			        bsPopover("bsb196", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype7=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus7", label = NULL, value = "#FF0000"))),
+                        br()			            						
 			         ),
-                    conditionalPanel(condition="input.coltype7=='3'",	
+                    conditionalPanel(condition="input.coltype7=='3'",
 			            textInput("colormulgp7", NULL, value="a:red;b:blue;c:cyan")
 	                )
 				),
 			conditionalPanel(condition="input.plottype7=='rect_discrete'",
-			    tipify(radioButtons("rectcol7", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),											  
+			                 selectInput("rectcol7", h5("Data color",
+			                                bsButton("bsb197", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb197", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol7=='2'",
-			    textInput("rectcoldis7", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis7", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol7=='3'",
 			    textInput("rectcoldiscus7", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype7=='rect_gradual'",
-			    selectInput("colrect7", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col7", h5("Colors",
+			                                     bsButton("bsb198", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb198", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col7=='1'",
+			        selectInput("colrect7", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col7=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor7", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor7", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor7", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype7=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol7", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol7=='1'",			
-			    selectInput("colhmap7", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype7=='heatmap_gradual'",
+			                 selectInput("heatmapcol7", h5("Colors",
+			                                   bsButton("bsb199", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb199", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol7=='1'",
+			    selectInput("colhmap7", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol7=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor7", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor7", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor7", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor7", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor7", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype7=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis7", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis7", h5("Data color",
+			                                   bsButton("bsb200", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb200", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis7=='2'",
 			    textInput("colhmapdiscus7", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype7=='vertical line' | input.plottype7=='horizontal line'",	
-			    tipify(textInput("linecolor7", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype7=='vertical line' | input.plottype7=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor7", label = h5('Line color:',
+			                                                              bsButton("bsb201", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb201", 'The color to be used to plot the data.', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype7=='line'",	
-			    tipify(radioButtons("fillarea7", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea7=='1'",			
-			    tipify(radioButtons("selareatype7", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype7=='line'",
+			                 selectInput("fillarea7", h5("Fill area",
+			                                 bsButton("bsb202", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb202", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea7=='1'",
+			    radioButtons("selareatype7", h5("Area color",
+			                                    bsButton("bsb203", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb203", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype7=='2'",
-			        textInput("borderarea7", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea7", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype7!='rect_gradual' & input.plottype7!='heatmap_gradual' & input.plottype7!='text'",				
-			    tipify(numericInput("coltransparency7", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype7=='line' | input.plottype7=='vertical line' | input.plottype7=='horizontal line' | input.plottype7 == 'segment'",	
-			    numericInput("linesize7", "Line width:", value=0.2, min=0, max=20, step=0.05)
-			),	
-			conditionalPanel(condition="input.plottype7=='line' | input.plottype7=='vertical line' | input.plottype7=='horizontal line' | input.plottype7 == 'segment'",	
-			    tipify(selectInput("linetype7", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
 			),
-			conditionalPanel(condition="input.plottype7 == 'segment'",	
-			    tipify(radioButtons("addarrow7", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype7=='point' | input.plottype7=='line' | input.plottype7=='bar' | input.plottype7=='rect_gradual' | input.plottype7=='rect_discrete' | input.plottype7=='heatmap_gradual' | input.plottype7=='heatmap_discrete' | input.plottype7=='vertical line' | input.plottype7=='horizontal line' | input.plottype7=='text' | input.plottype7 == 'segment'",
+			                conditionalPanel(condition="input.plottype7=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol7", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),			                
+			                selectInput("collgd7", h5("Color legend",
+		                                   bsButton("bsb204", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb204", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.collgd7=='1'",
+ 				    textInput("collgdname7", h5("Legend title:",
+ 				                                bsButton("bsb205", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb205", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+				    conditionalPanel(condition="input.plottype7!='rect_gradual' & input.plottype7!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel7", h5("Modify legend labels",
+					                                       bsButton("bsb206", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb206", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    conditionalPanel(condition="input.collgdmdylabel7=='1'",
+					        textInput("collgdlabel7", NULL, value="a,b,c")
+					    )
+				    )
+                )				
+			),
+			conditionalPanel(condition="input.plottype7!='rect_gradual' & input.plottype7!='heatmap_gradual' & input.plottype7!='text'",
+			    sliderInput("coltransparency7", h5("Color transparency:",
+			                                       bsButton("bsb207", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb207", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )          
+            ),      
+			conditionalPanel(condition="input.plottype7=='line' | input.plottype7=='vertical line' | input.plottype7=='horizontal line' | input.plottype7 == 'segment'",
+		    checkboxInput("linetype_opt7", HTML("<font color='red'>Linetype</font>"), FALSE),  
+			conditionalPanel(condition="input.linetype_opt7",                     
+            sliderInput("linesize7", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype7", h5("Line type",
+			                            bsButton("bsb208", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb208", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			conditionalPanel(condition="input.plottype7=='vertical line' | input.plottype7=='horizontal line'",
+			                 selectInput("linetypelgd7", h5("Line type legend",
+		                                        bsButton("bsb209", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb209", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.linetypelgd7=='1'",
+ 				    textInput("linetypelgdname7", h5("Legend title:",
+ 				                                     bsButton("bsb210", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb210", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("linetypelgdmdylabel7", h5("Modify legend labels",
+					                                        bsButton("bsb211", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb211", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel7=='1'",
+						textInput("linetypelgdlabel7", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype7 == 'segment'",
+			                 selectInput("addarrow7", h5("Add arrow head",
+			                                 bsButton("bsb212", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb212", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow7 == '1'",
-			    tipify(radioButtons("arrowpos7", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize7", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos7", h5("Arrow position",
+			                                 bsButton("bsb213", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb213", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize7", h5("Arrow size:",
+				                             bsButton("bsb214", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb214", 'The size of arrow head.',trigger = "focus")								
             )
-			),			
-			conditionalPanel(condition="input.plottype7=='point'",			
-                tipify(textInput("symbolpoint7", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize7", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			)
+			)            
+			),
+			conditionalPanel(condition="input.plottype7=='point'",
+				checkboxInput("symbol_opt7", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt7",  #####				
+			                 selectInput("sel_symbolpoint7", h5("Symbol type",
+                                                    bsButton("bsb215", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb215", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint7=='1'",
+                    sliderInput("symbolpoint7", NULL, min=0, max=25, value=16, step=1)
+                ),
+                selectInput("shapelgd7", h5("Symbol legend",
+		                                     bsButton("bsb216", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb216", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.shapelgd7=='1'",
+ 				    textInput("shapelgdname7", h5("Legend title:",
+ 				                                  bsButton("bsb217", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb217", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("shapelgdmdylabel7", h5("Modify legend labels",
+					                                     bsButton("bsb218", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb218", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel7=='1'",
+						textInput("shapelgdlabel7", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt7", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt7",  #####
+				selectInput("sel_pointsize7", h5("Point size",
+                                                  bsButton("bsb219", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb219", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize7=='1'",
+                    sliderInput("pointsize7", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd7", h5("Size legend",
+		                                    bsButton("bsb220", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb220", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd7=='1'",
+ 				    textInput("sizelgdname7", h5("Legend title:",
+ 				                                 bsButton("bsb221", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb221", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("sizelgdmdylabel7", h5("Modify legend labels",
+				                                        bsButton("bsb222", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb222", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel7=='1'",
+						    textInput("sizelgdlabel7", NULL, value="a,b,c")
+	                )
+				)	
+				)			
             ),
 			conditionalPanel(condition="input.plottype7=='heatmap_gradual' | input.plottype7=='heatmap_discrete' | input.plottype7=='rect_gradual' | input.plottype7=='rect_discrete' | input.plottype7=='bar'",
-			    tipify(radioButtons("addborder7", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder7", h5("Add cell borders",
+			                                  bsButton("bsb223", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb223", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder7=='1'",
-                    tipify(textInput("bordercols7", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols7", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype7=='line' | input.plottype7=='point' | input.plottype7=='bar'",				
-				tipify(radioButtons("xrugs7", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs7=='1'",
-				    textInput("xrugscol7", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs7", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs7=='1'",
-				    textInput("yrugscol7", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel7", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype7=='line' | input.plottype7=='point' | input.plottype7=='bar'",
+			                 selectInput("ylabel7", h5("Y axis label",
+	                                       bsButton("bsb225", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb225", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype7=='text'",
-				textInput("textcol7", "Font color:", value="black"),			
-			    numericInput("textsize7", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface7", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle7", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend7", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
-			  conditionalPanel(condition="input.addlegend7=='1'",
-			    conditionalPanel(condition="input.plottype7=='point' | input.plottype7=='line' | input.plottype7=='bar' | input.plottype7=='rect_gradual' | input.plottype7=='rect_discrete' | input.plottype7=='heatmap_gradual' | input.plottype7=='heatmap_discrete' | input.plottype7=='vertical line' | input.plottype7=='horizontal line' | input.plottype7=='text' | input.plottype7 == 'segment'",
-		          radioButtons("collgd7", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd7=='1'",
- 				      tipify(textInput("collgdname7", "Name:", value="color"),
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype7!='rect_gradual' & input.plottype7!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel7", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.collgdmdylabel7=='1'",
-						    textInput("collgdlabel7", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype7=='point'",
-		          radioButtons("sizelgd7", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd7=='1'",
- 				      tipify(textInput("sizelgdname7", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  					  
-				      tipify(radioButtons("sizelgdmdylabel7", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel7=='1'",
-						    textInput("sizelgdlabel7", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd7", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd7=='1'",
- 				      tipify(textInput("shapelgdname7", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel7", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.shapelgdmdylabel7=='1'",
-						    textInput("shapelgdlabel7", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype7=='vertical line' | input.plottype7=='horizontal line'",
-		          radioButtons("linetypelgd7", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd7=='1'",
- 				      tipify(textInput("linetypelgdname7", "Name:", value="linetype"),		
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel7", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.linetypelgdmdylabel7=='1'",
-						    textInput("linetypelgdlabel7", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt7", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt7",					
+				    sliderInput("textsize7", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface7", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle7", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )		
 			)
-			)			
+			)
+			)
 		   )
 		),
 		checkboxInput("data8", HTML("<font color='red'>Data8</font>"), FALSE),
 		conditionalPanel(condition="input.data8",
 		  radioButtons("seluploaddata8", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata8 == '2'",
-		    tipify(fileInput("uploaddata8", "Upload data8:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata8", h5("Upload data8:",
+		                                bsButton("bsb226", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb226", 'Click "Browse" to upload the track data.', trigger = "focus"),
+		    
+		    actionButton("tabBut9", "View example data"),
 			tags$script('$( "#uploaddata8" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype8", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),		
-			tipify(selectInput("layerindex8", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+            downloadButton("example_data8.txt", "Example data"),
+            br(),
+			br(),
+			selectInput("layerindex8", h5("Track index:",
+			                              bsButton("bsb227", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb227", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype8", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_8(
 				list(
+		    	checkboxInput("color_opt8", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt8",  #####					
 				conditionalPanel(condition="input.plottype8 == 'point' | input.plottype8 == 'line' | input.plottype8 == 'bar' | input.plottype8 == 'segment'",
-			        tipify(radioButtons("coltype8", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype8", h5("Data color",
+			                                    bsButton("bsb228", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																								
-					conditionalPanel(condition="input.coltype8=='2'",	
-			            textInput("colorcus8", NULL, value="red")
+			        bsPopover("bsb228", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype8=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus8", label = NULL, value = "#FF0000"))),
+                        br()			            						
 			         ),
-                    conditionalPanel(condition="input.coltype8=='3'",	
+                    conditionalPanel(condition="input.coltype8=='3'",
 			            textInput("colormulgp8", NULL, value="a:red;b:blue;c:cyan")
 	                )
 				),
 			conditionalPanel(condition="input.plottype8=='rect_discrete'",
-			    tipify(radioButtons("rectcol8", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),										  
+			                 selectInput("rectcol8", h5("Data color",
+			                                bsButton("bsb229", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb229", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol8=='2'",
-			    textInput("rectcoldis8", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis8", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol8=='3'",
 			    textInput("rectcoldiscus8", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype8=='rect_gradual'",
-			    selectInput("colrect8", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col8", h5("Colors",
+			                                     bsButton("bsb230", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb230", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col8=='1'",
+			        selectInput("colrect8", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col8=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor8", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor8", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor8", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype8=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol8", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol8=='1'",			
-			    selectInput("colhmap8", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype8=='heatmap_gradual'",
+			                 selectInput("heatmapcol8", h5("Colors",
+			                                   bsButton("bsb231", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb231", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol8=='1'",
+			    selectInput("colhmap8", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol8=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor8", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor8", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor8", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor8", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor8", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype8=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis8", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis8", h5("Data color",
+			                                   bsButton("bsb232", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb232", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis8=='2'",
 			    textInput("colhmapdiscus8", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype8=='vertical line' | input.plottype8=='horizontal line'",	
-			    tipify(textInput("linecolor8", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype8=='vertical line' | input.plottype8=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor8", label = h5('Line color:',
+			                                                              bsButton("bsb233", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb233", 'The color to be used to plot the data.', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype8=='line'",	
-			    tipify(radioButtons("fillarea8", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea8=='1'",			
-			    tipify(radioButtons("selareatype8", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype8=='line'",
+			                 selectInput("fillarea8", h5("Fill area",
+			                                 bsButton("bsb234", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb234", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea8=='1'",
+			    radioButtons("selareatype8", h5("Area color",
+			                                    bsButton("bsb235", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb235", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype8=='2'",
-			        textInput("borderarea8", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea8", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype8!='rect_gradual' & input.plottype8!='heatmap_gradual' & input.plottype8!='text'",				
-			    tipify(numericInput("coltransparency8", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype8=='line' | input.plottype8=='vertical line' | input.plottype8=='horizontal line' | input.plottype8 == 'segment'",	
-			    numericInput("linesize8", "Line width:", value=0.2, min=0, max=20, step=0.05)
 			),
-			conditionalPanel(condition="input.plottype8=='line' | input.plottype8=='vertical line' | input.plottype8=='horizontal line' | input.plottype8 == 'segment'",	
-			    tipify(selectInput("linetype8", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype8=='point' | input.plottype8=='line' | input.plottype8=='bar' | input.plottype8=='rect_gradual' | input.plottype8=='rect_discrete' | input.plottype8=='heatmap_gradual' | input.plottype8=='heatmap_discrete' | input.plottype8=='vertical line' | input.plottype8=='horizontal line' | input.plottype8=='text' | input.plottype8 == 'segment'",
+			                conditionalPanel(condition="input.plottype8=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol8", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),			                
+			                selectInput("collgd8", h5("Color legend",
+		                                   bsButton("bsb236", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb236", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.collgd8=='1'",
+ 				    textInput("collgdname8", h5("Legend title:",
+ 				                                bsButton("bsb237", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb237", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+				    conditionalPanel(condition="input.plottype8!='rect_gradual' & input.plottype8!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel8", h5("Modify legend labels",
+					                                       bsButton("bsb238", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb238", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    conditionalPanel(condition="input.collgdmdylabel8=='1'",
+					        textInput("collgdlabel8", NULL, value="a,b,c")
+					    )
+				    )
+                )				
 			),
-			conditionalPanel(condition="input.plottype8 == 'segment'",	
-			    tipify(radioButtons("addarrow8", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype8!='rect_gradual' & input.plottype8!='heatmap_gradual' & input.plottype8!='text'",
+			    sliderInput("coltransparency8", h5("Color transparency:",
+			                                       bsButton("bsb239", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb239", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )            
+            ),  
+			conditionalPanel(condition="input.plottype8=='line' | input.plottype8=='vertical line' | input.plottype8=='horizontal line' | input.plottype8 == 'segment'",
+		    checkboxInput("linetype_opt8", HTML("<font color='red'>Linetype</font>"), FALSE),  
+			conditionalPanel(condition="input.linetype_opt8",                         
+            sliderInput("linesize8", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype8", h5("Line type",
+			                            bsButton("bsb240", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			    bsPopover("bsb240", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			conditionalPanel(condition="input.plottype8=='vertical line' | input.plottype8=='horizontal line'",
+			                 selectInput("linetypelgd8", h5("Line type legend",
+		                                        bsButton("bsb241", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb241", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.linetypelgd8=='1'",
+ 				    textInput("linetypelgdname8", h5("Legend title:",
+ 				                                     bsButton("bsb242", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb242", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("linetypelgdmdylabel8", h5("Modify legend labels",
+					                                        bsButton("bsb243", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb243", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel8=='1'",
+						textInput("linetypelgdlabel8", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype8 == 'segment'",
+			                 selectInput("addarrow8", h5("Add arrow head",
+			                                 bsButton("bsb244", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb244", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow8 == '1'",
-			    tipify(radioButtons("arrowpos8", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize8", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos8", h5("Arrow position",
+			                                 bsButton("bsb245", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb245", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize8", h5("Arrow size:",
+				                             bsButton("bsb246", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb246", 'The size of arrow head.',trigger = "focus")								
             )
-			),			
-			conditionalPanel(condition="input.plottype8=='point'",			
-                tipify(textInput("symbolpoint8", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize8", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			)
+			)            
+			),
+			conditionalPanel(condition="input.plottype8=='point'",
+				checkboxInput("symbol_opt8", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt8",  #####				
+			                 selectInput("sel_symbolpoint8", h5("Symbol type",
+                                                    bsButton("bsb247", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb247", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint8=='1'",
+                    sliderInput("symbolpoint8", NULL, min=0, max=25, value=16, step=1)
+                ),
+                selectInput("shapelgd8", h5("Symbol legend",
+		                                     bsButton("bsb248", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb248", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.shapelgd8=='1'",
+ 				    textInput("shapelgdname8", h5("Legend title:",
+ 				                                  bsButton("bsb249", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb249", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("shapelgdmdylabel8", h5("Modify legend labels",
+					                                     bsButton("bsb250", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb250", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel8=='1'",
+						textInput("shapelgdlabel8", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt8", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt8",  #####				
+				selectInput("sel_pointsize8", h5("Point size",
+                                                  bsButton("bsb251", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb251", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize8=='1'",
+                    sliderInput("pointsize8", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd8", h5("Size legend",
+		                                    bsButton("bsb252", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb252", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd8=='1'",
+ 				    textInput("sizelgdname8", h5("Legend title:",
+ 				                                 bsButton("bsb253", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb253", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("sizelgdmdylabel8", h5("Modify legend labels",
+				                                        bsButton("bsb254", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb254", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel8=='1'",
+						    textInput("sizelgdlabel8", NULL, value="a,b,c")
+	                )
+				)
+				)				
             ),
 			conditionalPanel(condition="input.plottype8=='heatmap_gradual' | input.plottype8=='heatmap_discrete' | input.plottype8=='rect_gradual' | input.plottype8=='rect_discrete' | input.plottype8=='bar'",
-			    tipify(radioButtons("addborder8", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder8", h5("Add cell borders",
+			                                  bsButton("bsb255", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb255", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder8=='1'",
-                    tipify(textInput("bordercols8", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols8", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype8=='line' | input.plottype8=='point' | input.plottype8=='bar'",				
-				tipify(radioButtons("xrugs8", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs8=='1'",
-				    textInput("xrugscol8", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs8", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs8=='1'",
-				    textInput("yrugscol8", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel8", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype8=='line' | input.plottype8=='point' | input.plottype8=='bar'",
+			                 selectInput("ylabel8", h5("Y axis label",
+	                                       bsButton("bsb257", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb257", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype8=='text'",
-				textInput("textcol8", "Font color:", value="black"),			
-			    numericInput("textsize8", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface8", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle8", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend8", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
-			  conditionalPanel(condition="input.addlegend8=='1'",
-			    conditionalPanel(condition="input.plottype8=='point' | input.plottype8=='line' | input.plottype8=='bar' | input.plottype8=='rect_gradual' | input.plottype8=='rect_discrete' | input.plottype8=='heatmap_gradual' | input.plottype8=='heatmap_discrete' | input.plottype8=='vertical line' | input.plottype8=='horizontal line' | input.plottype8=='text' | input.plottype8 == 'segment'",
-		          radioButtons("collgd8", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd8=='1'",
- 				      tipify(textInput("collgdname8", "Name:", value="color"),		
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype8!='rect_gradual' & input.plottype8!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel8", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.collgdmdylabel8=='1'",
-						    textInput("collgdlabel8", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype8=='point'",
-		          radioButtons("sizelgd8", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd8=='1'",
- 				      tipify(textInput("sizelgdname8", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  					  
-				      tipify(radioButtons("sizelgdmdylabel8", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel8=='1'",
-						    textInput("sizelgdlabel8", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd8", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd8=='1'",
- 				      tipify(textInput("shapelgdname8", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel8", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.shapelgdmdylabel8=='1'",
-						    textInput("shapelgdlabel8", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype8=='vertical line' | input.plottype8=='horizontal line'",
-		          radioButtons("linetypelgd8", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd8=='1'",
- 				      tipify(textInput("linetypelgdname8", "Name:", value="linetype"),	
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel8", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.linetypelgdmdylabel8=='1'",
-						    textInput("linetypelgdlabel8", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt8", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt8",					
+				    sliderInput("textsize8", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface8", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle8", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )			
 			)
-			)			
+			)
+			)
 		   )
-		),
+		),		
 		checkboxInput("data9", HTML("<font color='red'>Data9</font>"), FALSE),
 		conditionalPanel(condition="input.data9",
 		  radioButtons("seluploaddata9", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata9 == '2'",
-		    tipify(fileInput("uploaddata9", "Upload data9:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata9", h5("Upload data9:",
+		                                bsButton("bsb258", label="", icon=icon("question"), style="info", size="small")
+		                                ), multiple = FALSE),
+		    bsPopover("bsb258", 'Click "Browse" to upload the track data.', trigger = "focus"),
+		    
+		    actionButton("tabBut10", "View example data"),
 			tags$script('$( "#uploaddata9" ).on( "click", function() { this.value = null; });'),
+            downloadButton("example_data9.txt", "Example data"),
+            br(),
+			br(),
+			selectInput("layerindex9", h5("Track index:",
+			                              bsButton("bsb259", label="", icon=icon("question"), style="info", size="small")
+			                              ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb259", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
 			selectInput("plottype9", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
-			tipify(selectInput("layerindex9", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
     	ADVANCED_OPTIONS_PANEL_9(
 				list(
+		    	checkboxInput("color_opt9", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt9",  #####					
 				conditionalPanel(condition="input.plottype9 == 'point' | input.plottype9 == 'line' | input.plottype9 == 'bar' | input.plottype9 == 'segment'",
-			        tipify(radioButtons("coltype9", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype9", h5("Data color",
+			                                    bsButton("bsb260", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																								
-					conditionalPanel(condition="input.coltype9=='2'",	
-			            textInput("colorcus9", NULL, value="red")
+			        bsPopover("bsb260", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype9=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus9", label = NULL, value = "#FF0000"))),
+                        br()			            			            
 			         ),
-                    conditionalPanel(condition="input.coltype9=='3'",	
+                    conditionalPanel(condition="input.coltype9=='3'",
 			            textInput("colormulgp9", NULL, value="a:red;b:blue;c:cyan")
 	                )
-				),		
+				),
 			conditionalPanel(condition="input.plottype9=='rect_discrete'",
-			    tipify(radioButtons("rectcol9", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),										  
+			                 selectInput("rectcol9", h5("Data color",
+			                                bsButton("bsb261", label="", icon=icon("question"), style="info", size="small")
+			                                ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb261", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol9=='2'",
-			    textInput("rectcoldis9", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis9", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol9=='3'",
 			    textInput("rectcoldiscus9", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype9=='rect_gradual'",
-			    selectInput("colrect9", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col9", h5("Colors",
+			                                     bsButton("bsb262", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb262", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col9=='1'",
+			        selectInput("colrect9", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col9=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor9", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor9", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor9", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype9=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol9", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol9=='1'",			
-			    selectInput("colhmap9", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype9=='heatmap_gradual'",
+			                 selectInput("heatmapcol9", h5("Colors",
+			                                   bsButton("bsb263", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb263", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol9=='1'",
+			    selectInput("colhmap9", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol9=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor9", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor9", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor9", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor9", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor9", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype9=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis9", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis9", h5("Data color",
+			                                   bsButton("bsb264", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb264", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis9=='2'",
 			    textInput("colhmapdiscus9", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype9=='vertical line' | input.plottype9=='horizontal line'",	
-			    tipify(textInput("linecolor9", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype9=='vertical line' | input.plottype9=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor9", label = h5('Line color:',
+			                                                              bsButton("bsb265", label="", icon=icon("question"), style="info", size="small")
+			                                                              ), value = "#FF0000"))),
+			    bsPopover("bsb265", 'The color to be used to plot the data.', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype9=='line'",	
-			    tipify(radioButtons("fillarea9", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea9=='1'",			
-			    tipify(radioButtons("selareatype9", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype9=='line'",
+			                 selectInput("fillarea9", h5("Fill area",
+			                                 bsButton("bsb266", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb266", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea9=='1'",
+			    radioButtons("selareatype9", h5("Area color",
+			                                    bsButton("bsb267", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb267", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype9=='2'",
-			        textInput("borderarea9", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea9", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype9!='rect_gradual' & input.plottype9!='heatmap_gradual' & input.plottype9!='text'",				
-			    tipify(numericInput("coltransparency9", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype9=='line' | input.plottype9=='vertical line' | input.plottype9=='horizontal line' | input.plottype9 == 'segment'",	
-			    numericInput("linesize9", "Line width:", value=0.2, min=0, max=20, step=0.05)
 			),
-			conditionalPanel(condition="input.plottype9=='line' | input.plottype9=='vertical line' | input.plottype9=='horizontal line' | input.plottype9 == 'segment'",	
-			    tipify(selectInput("linetype9", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype9=='point' | input.plottype9=='line' | input.plottype9=='bar' | input.plottype9=='rect_gradual' | input.plottype9=='rect_discrete' | input.plottype9=='heatmap_gradual' | input.plottype9=='heatmap_discrete' | input.plottype9=='vertical line' | input.plottype9=='horizontal line' | input.plottype9=='text' | input.plottype9 == 'segment'",
+			                conditionalPanel(condition="input.plottype9=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol9", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),			                
+			                selectInput("collgd9", h5("Color legend",
+		                                   bsButton("bsb268", label="", icon=icon("question"), style="info", size="small")
+		                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb268", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.collgd9=='1'",
+ 				    textInput("collgdname9", h5("Legend title:",
+ 				                                bsButton("bsb269", label="", icon=icon("question"), style="info", size="small")
+ 				                                ), value="color"),
+ 				    bsPopover("bsb269", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+				    conditionalPanel(condition="input.plottype9!='rect_gradual' & input.plottype9!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel9", h5("Modify legend labels",
+					                                       bsButton("bsb270", label="", icon=icon("question"), style="info", size="small")
+					                                       ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb270", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    conditionalPanel(condition="input.collgdmdylabel9=='1'",
+					        textInput("collgdlabel9", NULL, value="a,b,c")
+					    )
+				    )
+                )				
 			),
-			conditionalPanel(condition="input.plottype9 == 'segment'",	
-			    tipify(radioButtons("addarrow9", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype9!='rect_gradual' & input.plottype9!='heatmap_gradual' & input.plottype9!='text'",
+			    sliderInput("coltransparency9", h5("Color transparency:",
+			                                       bsButton("bsb271", label="", icon=icon("question"), style="info", size="small")
+			                                       ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb271", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )         
+            ),     
+			conditionalPanel(condition="input.plottype9=='line' | input.plottype9=='vertical line' | input.plottype9=='horizontal line' | input.plottype9 == 'segment'",
+		    checkboxInput("linetype_opt9", HTML("<font color='red'>Linetype</font>"), FALSE),  
+			conditionalPanel(condition="input.linetype_opt9",                      
+            sliderInput("linesize9", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype9", h5("Line type",
+			                            bsButton("bsb272", label="", icon=icon("question"), style="info", size="small")
+			                            ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb272", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			conditionalPanel(condition="input.plottype9=='vertical line' | input.plottype9=='horizontal line'",
+			                 selectInput("linetypelgd9", h5("Line type legend",
+		                                        bsButton("bsb273", label="", icon=icon("question"), style="info", size="small")
+		                                        ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb273", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.linetypelgd9=='1'",
+ 				    textInput("linetypelgdname9", h5("Legend title:",
+ 				                                     bsButton("bsb274", label="", icon=icon("question"), style="info", size="small")
+ 				                                     ), value="linetype"),
+ 				    bsPopover("bsb274", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("linetypelgdmdylabel9", h5("Modify legend labels",
+					                                        bsButton("bsb275", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb275", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel9=='1'",
+						textInput("linetypelgdlabel9", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype9 == 'segment'",
+			                 selectInput("addarrow9", h5("Add arrow head",
+			                                 bsButton("bsb276", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb276", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow9 == '1'",
-			    tipify(radioButtons("arrowpos9", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize9", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos9", h5("Arrow position",
+			                                 bsButton("bsb277", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb277", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize9", h5("Arrow size:",
+				                             bsButton("bsb278", label="", icon=icon("question"), style="info", size="small")
+				                             ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb278", 'The size of arrow head.',trigger = "focus")								
             )
-			),			
-			conditionalPanel(condition="input.plottype9=='point'",			
-                tipify(textInput("symbolpoint9", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize9", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			)
+			)            
+			),
+			conditionalPanel(condition="input.plottype9=='point'",
+				checkboxInput("symbol_opt9", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt9",  #####				
+			                 selectInput("sel_symbolpoint9", h5("Symbol type",
+                                                    bsButton("bsb279", label="", icon=icon("question"), style="info", size="small")
+                                                    ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb279", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint9=='1'",
+                    sliderInput("symbolpoint9", NULL, min=0, max=25, value=16, step=1)
+                ),
+                selectInput("shapelgd9", h5("Symbol legend",
+		                                     bsButton("bsb280", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb280", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.shapelgd9=='1'",
+ 				    textInput("shapelgdname9", h5("Legend title:",
+ 				                                  bsButton("bsb281", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="symbol"),
+ 				    bsPopover("bsb281", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("shapelgdmdylabel9", h5("Modify legend labels",
+					                                     bsButton("bsb282", label="", icon=icon("question"), style="info", size="small")
+					                                     ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb282", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel9=='1'",
+						textInput("shapelgdlabel9", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt9", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt9",  #####				
+				selectInput("sel_pointsize9", h5("Point size",
+                                                  bsButton("bsb283", label="", icon=icon("question"), style="info", size="small")
+                                                  ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb283", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize9=='1'",
+                    sliderInput("pointsize9", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd9", h5("Size legend",
+		                                    bsButton("bsb284", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb284", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd9=='1'",
+ 				    textInput("sizelgdname9", h5("Legend title:",
+ 				                                 bsButton("bsb285", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="size"),
+ 				    bsPopover("bsb285", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("sizelgdmdylabel9", h5("Modify legend labels",
+				                                        bsButton("bsb286", label="", icon=icon("question"), style="info", size="small")
+				                                        ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb286", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel9=='1'",
+						    textInput("sizelgdlabel9", NULL, value="a,b,c")
+	                )
+				)
+				)				
             ),
 			conditionalPanel(condition="input.plottype9=='heatmap_gradual' | input.plottype9=='heatmap_discrete' | input.plottype9=='rect_gradual' | input.plottype9=='rect_discrete' | input.plottype9=='bar'",
-			    tipify(radioButtons("addborder9", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder9", h5("Add cell borders",
+			                                  bsButton("bsb287", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb287", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder9=='1'",
-                    tipify(textInput("bordercols9", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols9", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype9=='line' | input.plottype9=='point' | input.plottype9=='bar'",				
-				tipify(radioButtons("xrugs9", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs9=='1'",
-				    textInput("xrugscol9", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs9", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs9=='1'",
-				    textInput("yrugscol9", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel9", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype9=='line' | input.plottype9=='point' | input.plottype9=='bar'",
+			                 selectInput("ylabel9", h5("Y axis label",
+	                                       bsButton("bsb289", label="", icon=icon("question"), style="info", size="small")
+	                                       ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb289", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype9=='text'",
-				textInput("textcol9", "Font color:", value="black"),			
-			    numericInput("textsize9", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface9", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle9", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend9", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
-			  conditionalPanel(condition="input.addlegend9=='1'",
-			    conditionalPanel(condition="input.plottype9=='point' | input.plottype9=='line' | input.plottype9=='bar' | input.plottype9=='rect_gradual' | input.plottype9=='rect_discrete' | input.plottype9=='heatmap_gradual' | input.plottype9=='heatmap_discrete' | input.plottype9=='vertical line' | input.plottype9=='horizontal line' | input.plottype9=='text' | input.plottype9 == 'segment'",
-		          radioButtons("collgd9", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd9=='1'",
- 				      tipify(textInput("collgdname9", "Name:", value="color"),
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype9!='rect_gradual' & input.plottype9!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel9", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.collgdmdylabel9=='1'",
-						    textInput("collgdlabel9", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype9=='point'",
-		          radioButtons("sizelgd9", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd9=='1'",
- 				      tipify(textInput("sizelgdname9", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  					  
-				      tipify(radioButtons("sizelgdmdylabel9", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.sizelgdmdylabel9=='1'",
-						    textInput("sizelgdlabel9", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd9", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd9=='1'",
- 				      tipify(textInput("shapelgdname9", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  
-					  tipify(radioButtons("shapelgdmdylabel9", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.shapelgdmdylabel9=='1'",
-						    textInput("shapelgdlabel9", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype9=='vertical line' | input.plottype9=='horizontal line'",
-		          radioButtons("linetypelgd9", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd9=='1'",
- 				      tipify(textInput("linetypelgdname9", "Name:", value="linetype"),		
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel9", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.linetypelgdmdylabel9=='1'",
-						    textInput("linetypelgdlabel9", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt9", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt9",					
+				    sliderInput("textsize9", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface9", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle9", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )		
 			)
-			)			
+			)
+			)
 		   )
 		),
 		checkboxInput("data10", HTML("<font color='red'>Data10</font>"), FALSE),
 		conditionalPanel(condition="input.data10",
 		  radioButtons("seluploaddata10", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
 		  conditionalPanel(condition="input.seluploaddata10 == '2'",
-		    tipify(fileInput("uploaddata10", "Upload data10:", multiple = FALSE),
-			'Click "Browse" to upload the track data.', placement="right", options=list(container="body")),																										
+		    fileInput("uploaddata10", h5("Upload data10:",
+		                                 bsButton("bsb290", label="", icon=icon("question"), style="info", size="small")
+		                                 ), multiple = FALSE),
+		    bsPopover("bsb290", 'Click "Browse" to upload the track data.', trigger = "focus"),
+		    
+		    actionButton("tabBut11", "View example data"),
 			tags$script('$( "#uploaddata10" ).on( "click", function() { this.value = null; });'),
-			selectInput("plottype10", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),		
-			tipify(selectInput("layerindex10", "Track index:", choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
-			'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks. The track index can be set at the choice of the users, if only one data file is uploaded.', placement="right", options=list(container="body")),																													
+            downloadButton("example_data10.txt", "Example data"),
+            br(),
+			br(),
+			selectInput("layerindex10", h5("Track index:",
+			                               bsButton("bsb291", label="", icon=icon("question"), style="info", size="small")
+			                               ), choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
+			bsPopover("bsb291", 'Data with the same track index will be plotted in the same track, while data with different track indices will be displayed in differing tracks.', trigger = "focus"),
+			selectInput("plottype10", "Plot type:", choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "text", "segment", "vertical line", "horizontal line"), selected="point"),
     	ADVANCED_OPTIONS_PANEL_10(
 				list(
+		    	checkboxInput("color_opt10", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt10",  #####					
 				conditionalPanel(condition="input.plottype10 == 'point' | input.plottype10 == 'line' | input.plottype10 == 'bar' | input.plottype10 == 'segment'",
-			        tipify(radioButtons("coltype10", "Data color", c("Random" = "1", "One custom color" = "2",
+				                 selectInput("coltype10", h5("Data color",
+			                                     bsButton("bsb292", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Random" = "1", "One custom color" = "2",
 	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),																									
-					conditionalPanel(condition="input.coltype10=='2'",	
-			            textInput("colorcus10", NULL, value="red")
+			        bsPopover("bsb292", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					conditionalPanel(condition="input.coltype10=='2'",
+			            fluidRow(column(12, jscolorInput("colorcus10", label = NULL, value = "#FF0000"))),
+                        br()			            			            
 			         ),
-                    conditionalPanel(condition="input.coltype10=='3'",	
+                    conditionalPanel(condition="input.coltype10=='3'",
 			            textInput("colormulgp10", NULL, value="a:red;b:blue;c:cyan")
 	                )
-				),		
+				),
 			conditionalPanel(condition="input.plottype10=='rect_discrete'",
-			    tipify(radioButtons("rectcol10", "Data color", c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),										  
+			                 selectInput("rectcol10", h5("Data color",
+			                                 bsButton("bsb293", label="", icon=icon("question"), style="info", size="small")
+			                                 ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected="1"),
+			    bsPopover("bsb293", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.rectcol10=='2'",
-			    textInput("rectcoldis10", NULL, value="red")
+			    fluidRow(column(12, jscolorInput("rectcoldis10", label = NULL, value = "#FF0000"))),
+                br()
 			),
 			conditionalPanel(condition="input.rectcol10=='3'",
 			    textInput("rectcoldiscus10", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
 			conditionalPanel(condition="input.plottype10=='rect_gradual'",
-			    selectInput("colrect10", "Data color", choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
-			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold", 
-			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange", 
+			                 selectInput("rectgrad_col10", h5("Colors",
+			                                      bsButton("bsb294", label="", icon=icon("question"), style="info", size="small")
+			                                      ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb294", "Colors to be used for the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			    conditionalPanel(condition="input.rectgrad_col10=='1'",
+			        selectInput("colrect10", NULL, choices = c("blue", "red", "green", "cyan", "purple", "pink", "orange",
+			                                               "yellow", "navy", "seagreen", "maroon", "olivedrab", "gold",
+			                                               "lightblue", "navy.yellow", "purple.seagreen", "navy.orange",
 			                                               "navy.cyan", "blue.red", "green.red"))
+			    ),
+			    conditionalPanel(condition="input.rectgrad_col10=='2'",
+			        fluidRow(
+			            column(4, jscolorInput("rect_lowColor10", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
+			            column(4, jscolorInput("rect_midColor10", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
+			            column(4, jscolorInput("rect_highColor10", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
+			    )
 			),
-			conditionalPanel(condition="input.plottype10=='heatmap_gradual'",			
-			    tipify(radioButtons("heatmapcol10", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			conditionalPanel(condition="input.heatmapcol10=='1'",			
-			    selectInput("colhmap10", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+			conditionalPanel(condition="input.plottype10=='heatmap_gradual'",
+			                 selectInput("heatmapcol10", h5("Colors",
+			                                    bsButton("bsb295", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb295", "Colors to be used for the heatmap, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			conditionalPanel(condition="input.heatmapcol10=='1'",
+			    selectInput("colhmap10", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			),
 			conditionalPanel(condition="input.heatmapcol10=='2'",
 			    fluidRow(
-			        column(4, jscolorInput("lowColor10", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			        column(4, jscolorInput("lowColor10", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			        column(4, jscolorInput("midColor10", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			        column(4, jscolorInput("highColor10", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			        HTML('<br>')
+			        column(4, jscolorInput("highColor10", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			        br()
 			)			
 			),
 			conditionalPanel(condition="input.plottype10=='heatmap_discrete'",
-			    tipify(radioButtons("colhmapdis10", "Data color", c("Random" = "1", "Custom" = "2"), selected="1"),
-			    'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set to NULL. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body")),
+			                 selectInput("colhmapdis10", h5("Data color",
+			                                    bsButton("bsb296", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Random" = "1", "Custom" = "2"), selected="1"),
+			    bsPopover("bsb296", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.', trigger = "focus"),
 			conditionalPanel(condition="input.colhmapdis10=='2'",
 			    textInput("colhmapdiscus10", NULL, value="a:red;b:blue;c:cyan")
 			)
 			),
-			conditionalPanel(condition="input.plottype10=='vertical line' | input.plottype10=='horizontal line'",	
-			    tipify(textInput("linecolor10", "Line color:", value="black"),
-			'The color to be used to plot the data. Hex color codes as "#FF0000" are also supported.', placement="right", options=list(container="body"))				
+			conditionalPanel(condition="input.plottype10=='vertical line' | input.plottype10=='horizontal line'",
+			    fluidRow(column(12, jscolorInput("linecolor10", label = h5('Line color:',
+			                                                               bsButton("bsb297", label="", icon=icon("question"), style="info", size="small")
+			                                                               ), value = "#FF0000"))),
+			    bsPopover("bsb297", 'The color to be used to plot the data.', trigger = "focus"),
+                br()
 			),
-			conditionalPanel(condition="input.plottype10=='line'",	
-			    tipify(radioButtons("fillarea10", "Fill area", c("Yes" = "1", "No" = "2"),selected="2"),
-			"Fill the area below the lines.", placement="right", options=list(container="body")),
-                conditionalPanel(condition="input.fillarea10=='1'",			
-			    tipify(radioButtons("selareatype10", "Area color", c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
-			'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype10=='line'",
+			                 selectInput("fillarea10", h5("Fill area",
+			                                  bsButton("bsb298", label="", icon=icon("question"), style="info", size="small")
+			                                  ), choices = c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb298", "Fill the area below the lines.", trigger = "focus"),
+                conditionalPanel(condition="input.fillarea10=='1'",
+			    radioButtons("selareatype10", h5("Area color",
+			                                     bsButton("bsb299", label="", icon=icon("question"), style="info", size="small")
+			                                     ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
+			    bsPopover("bsb299", 'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".', trigger = "focus"),
 				conditionalPanel(condition="input.selareatype10=='2'",
-			        textInput("borderarea10", NULL, value="blue")
+			        fluidRow(column(12, jscolorInput("borderarea10", label = NULL, value = "#0000FF"))),
+                    br()
 			)
 		    )			
-			),			
-			conditionalPanel(condition="input.plottype10!='rect_gradual' & input.plottype10!='heatmap_gradual' & input.plottype10!='text'",				
-			    tipify(numericInput("coltransparency10", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			"A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))										  
-            ),
-			conditionalPanel(condition="input.plottype10=='line' | input.plottype10=='vertical line' | input.plottype10=='horizontal line' | input.plottype10 == 'segment'",	
-			    numericInput("linesize10", "Line width:", value=0.2, min=0, max=20, step=0.05)
 			),
-			conditionalPanel(condition="input.plottype10=='line' | input.plottype10=='vertical line' | input.plottype10=='horizontal line' | input.plottype10 == 'segment'",	
-			    tipify(selectInput("linetype10", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
+			conditionalPanel(condition="input.plottype10=='point' | input.plottype10=='line' | input.plottype10=='bar' | input.plottype10=='rect_gradual' | input.plottype10=='rect_discrete' | input.plottype10=='heatmap_gradual' | input.plottype10=='heatmap_discrete' | input.plottype10=='vertical line' | input.plottype10=='horizontal line' | input.plottype10=='text' | input.plottype10 == 'segment'",
+			                conditionalPanel(condition="input.plottype10=='text'",
+			                    fluidRow(column(12, jscolorInput("textcol10", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+			                    br()
+			                ),			                
+			                selectInput("collgd10", h5("Color legend",
+		                                    bsButton("bsb300", label="", icon=icon("question"), style="info", size="small")
+		                                    ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb300", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.collgd10=='1'",
+ 				    textInput("collgdname10", h5("Legend title:",
+ 				                                 bsButton("bsb301", label="", icon=icon("question"), style="info", size="small")
+ 				                                 ), value="color"),
+ 				    bsPopover("bsb301", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
+				    conditionalPanel(condition="input.plottype10!='rect_gradual' & input.plottype10!='heatmap_gradual'",
+				                     selectInput("collgdmdylabel10", h5("Modify legend labels",
+					                                        bsButton("bsb302", label="", icon=icon("question"), style="info", size="small")
+					                                        ), c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb302", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					    conditionalPanel(condition="input.collgdmdylabel10=='1'",
+					        textInput("collgdlabel10", NULL, value="a,b,c")
+					    )
+				    )
+                )				
 			),
-			conditionalPanel(condition="input.plottype10 == 'segment'",	
-			    tipify(radioButtons("addarrow10", "Add arrow head", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add arrow head for the segment.", placement="right", options=list(container="body")),
+			conditionalPanel(condition="input.plottype10!='rect_gradual' & input.plottype10!='heatmap_gradual' & input.plottype10!='text'",
+			    sliderInput("coltransparency10", h5("Color transparency:",
+			                                        bsButton("bsb303", label="", icon=icon("question"), style="info", size="small")
+			                                        ), min=0, max=1, value=1, step=0.1),
+			    bsPopover("bsb303", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")										  
+            )          
+            ),    
+			conditionalPanel(condition="input.plottype10=='line' | input.plottype10=='vertical line' | input.plottype10=='horizontal line' | input.plottype10 == 'segment'",
+		    checkboxInput("linetype_opt10", HTML("<font color='red'>Linetype</font>"), FALSE),  
+			conditionalPanel(condition="input.linetype_opt10",                        
+            sliderInput("linesize10", "Line width:", min=0, max=3, value=0.2, step=0.05),
+			selectInput("linetype10", h5("Line type",
+			                             bsButton("bsb304", label="", icon=icon("question"), style="info", size="small")
+			                             ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			bsPopover("bsb304", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus"),
+			conditionalPanel(condition="input.plottype10=='vertical line' | input.plottype10=='horizontal line'",
+			                 selectInput("linetypelgd10", h5("Line type legend",
+		                                         bsButton("bsb305", label="", icon=icon("question"), style="info", size="small")
+		                                         ), c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb305", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.linetypelgd10=='1'",
+ 				    textInput("linetypelgdname10", h5("Legend title:",
+ 				                                      bsButton("bsb306", label="", icon=icon("question"), style="info", size="small")
+ 				                                      ), value="linetype"),
+ 				    bsPopover("bsb306", "Title of line type legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("linetypelgdmdylabel10", h5("Modify legend labels",
+					                                         bsButton("bsb307", label="", icon=icon("question"), style="info", size="small")
+					                                         ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb307", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', trigger = "focus"),
+					conditionalPanel(condition="input.linetypelgdmdylabel10=='1'",
+						textInput("linetypelgdlabel10", NULL, value="a")
+	                )
+				)
+			),
+			conditionalPanel(condition="input.plottype10 == 'segment'",
+			                 selectInput("addarrow10", h5("Add arrow head",
+			                                  bsButton("bsb308", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb308", "Add arrow head for the segment.", trigger = "focus"),
 			conditionalPanel(condition="input.addarrow10 == '1'",
-			    tipify(radioButtons("arrowpos10", "Arrow position", c("Line end" = "1", "Line beginning" = "2"),selected="1"),
-				'The position of arrow head.',placement="right", options=list(container="body")),				
-				tipify(numericInput("arrowsize10", "Arrow size:", value=0.1, min=0, max=20, step=0.05),
-			    'The size of arrow head.',placement="right", options=list(container="body"))								
+			                 selectInput("arrowpos10", h5("Arrow position",
+			                                  bsButton("bsb309", label="", icon=icon("question"), style="info", size="small")
+			                                  ), c("Line end" = "1", "Line beginning" = "2"),selected="1"),
+			    bsPopover("bsb309", 'The position of arrow head.',trigger = "focus"),
+				sliderInput("arrowsize10", h5("Arrow size:",
+				                              bsButton("bsb310", label="", icon=icon("question"), style="info", size="small")
+				                              ), min=0, max=2, value=0.1, step=0.01),
+				bsPopover("bsb310", 'The size of arrow head.',trigger = "focus")								
             )
-			),			
-			conditionalPanel(condition="input.plottype10=='point'",			
-                tipify(textInput("symbolpoint10", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			    tipify(numericInput("pointsize10", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body"))
+			)
+			)
+			),
+			conditionalPanel(condition="input.plottype10=='point'",
+				checkboxInput("symbol_opt10", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.symbol_opt10",  #####				
+			                 selectInput("sel_symbolpoint10", h5("Symbol type",
+                                                     bsButton("bsb311", label="", icon=icon("question"), style="info", size="small")
+                                                     ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                bsPopover("bsb311", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_symbolpoint10=='1'",
+                    sliderInput("symbolpoint10", NULL, min=0, max=25, value=16, step=1)
+                ),
+                selectInput("shapelgd10", h5("Symbol legend",
+		                                      bsButton("bsb312", label="", icon=icon("question"), style="info", size="small")
+		                                      ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+		        bsPopover("bsb312", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.shapelgd10=='1'",
+ 				    textInput("shapelgdname10", h5("Legend title:",
+ 				                                   bsButton("bsb313", label="", icon=icon("question"), style="info", size="small")
+ 				                                   ), value="symbol"),
+ 				    bsPopover("bsb313", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("shapelgdmdylabel10", h5("Modify legend labels",
+					                                      bsButton("bsb314", label="", icon=icon("question"), style="info", size="small")
+					                                      ), c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb314", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.shapelgdmdylabel10=='1'",
+						textInput("shapelgdlabel10", NULL, value="a,b,c")
+	                )
+				)
+				),
+				checkboxInput("size_opt10", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.size_opt10",  #####				
+				selectInput("sel_pointsize10", h5("Point size",
+                                                   bsButton("bsb315", label="", icon=icon("question"), style="info", size="small")
+                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+				bsPopover("bsb315", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                conditionalPanel(condition="input.sel_pointsize10=='1'",
+                    sliderInput("pointsize10", NULL, min=0, max=5, value=0.8, step=0.05)
+                ),
+				selectInput("sizelgd10", h5("Size legend",
+		                                     bsButton("bsb316", label="", icon=icon("question"), style="info", size="small")
+		                                     ), choices = c("Show" = "1", "Hide" = "2"), "2"),
+				bsPopover("bsb316", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			    conditionalPanel(condition="input.sizelgd10=='1'",
+ 				    textInput("sizelgdname10", h5("Legend title:",
+ 				                                  bsButton("bsb317", label="", icon=icon("question"), style="info", size="small")
+ 				                                  ), value="size"),
+ 				    bsPopover("bsb317", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				    selectInput("sizelgdmdylabel10", h5("Modify legend labels",
+				                                         bsButton("bsb318", label="", icon=icon("question"), style="info", size="small")
+				                                         ), c("Yes" = "1", "No" = "2"), "2"),
+				    bsPopover("bsb318", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+					conditionalPanel(condition="input.sizelgdmdylabel10=='1'",
+						    textInput("sizelgdlabel10", NULL, value="a,b,c")
+	                )
+				)
+				)
             ),
 			conditionalPanel(condition="input.plottype10=='heatmap_gradual' | input.plottype10=='heatmap_discrete' | input.plottype10=='rect_gradual' | input.plottype10=='rect_discrete' | input.plottype10=='bar'",
-			    tipify(radioButtons("addborder10", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				"Add borders to the grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                 selectInput("addborder10", h5("Add cell borders",
+			                                   bsButton("bsb319", label="", icon=icon("question"), style="info", size="small")
+			                                   ), c("Yes" = "1", "No" = "2"),selected="2"),
+			    bsPopover("bsb319", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
 			    conditionalPanel(condition="input.addborder10=='1'",
-                    tipify(textInput("bordercols10", "Borders color:", value="black"),
-					"The color to be used for the borders of grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			    )
+                    fluidRow(column(12, jscolorInput("bordercols10", label = h5('Borders color:'), value = "#000000"))),
+                    br()
+					)
             ),
-			conditionalPanel(condition="input.plottype10=='line' | input.plottype10=='point' | input.plottype10=='bar'",				
-				tipify(radioButtons("xrugs10", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.xrugs10=='1'",
-				    textInput("xrugscol10", "Color:", value="black")				
-				),				
-				tipify(radioButtons("yrugs10", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			"Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				conditionalPanel(condition="input.yrugs10=='1'",
-				    textInput("yrugscol10", "Color:", value="black")				
-				),
-	            tipify(radioButtons("ylabel10", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+			conditionalPanel(condition="input.plottype10=='line' | input.plottype10=='point' | input.plottype10=='bar'",
+			                 selectInput("ylabel10", h5("Y axis label",
+	                                        bsButton("bsb321", label="", icon=icon("question"), style="info", size="small")
+	                                        ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+	            bsPopover("bsb321", "Add tick labels on the Y-axis.", trigger = "focus")								
 			),
 			conditionalPanel(condition="input.plottype10=='text'",
-				textInput("textcol10", "Font color:", value="black"),			
-			    numericInput("textsize10", "Font size:", value=2, min=0, max=100, step=0.5),
-			    selectInput("fontface10", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),			    
-				numericInput("textangle10", "Font angle:", value=60, min=-360, max=360, step=1)
-			),
-		    tipify(radioButtons("addlegend10", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			"Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),			  			
-			  conditionalPanel(condition="input.addlegend10=='1'",
-			    conditionalPanel(condition="input.plottype10=='point' | input.plottype10=='line' | input.plottype10=='bar' | input.plottype10=='rect_gradual' | input.plottype10=='rect_discrete' | input.plottype10=='heatmap_gradual' | input.plottype10=='heatmap_discrete' | input.plottype10=='vertical line' | input.plottype10=='horizontal line' | input.plottype10=='text' | input.plottype10 == 'segment'",
-		          radioButtons("collgd10", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.collgd10=='1'",
- 				      tipify(textInput("collgdname10", "Name:", value="color"),	
-			          "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  
-					    conditionalPanel(condition="input.plottype10!='rect_gradual' & input.plottype10!='heatmap_gradual'",
-					      tipify(radioButtons("collgdmdylabel10", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),						
-						  conditionalPanel(condition="input.collgdmdylabel10=='1'",
-						    textInput("collgdlabel10", NULL, value="a,b,c")
-					      )
-						)
-					)
-				),
-			    conditionalPanel(condition="input.plottype10=='point'",
-		          radioButtons("sizelgd10", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.sizelgd10=='1'",
- 				      tipify(textInput("sizelgdname10", "Name:", value="size"),
-			          "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  					  
-				      tipify(radioButtons("sizelgdmdylabel10", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.sizelgdmdylabel10=='1'",
-						    textInput("sizelgdlabel10", NULL, value="a,b,c")
-	                      )
-					),
-		          radioButtons("shapelgd10", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.shapelgd10=='1'",
- 				      tipify(textInput("shapelgdname10", "Name:", value="shape"),
-			          "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      				      
-					  tipify(radioButtons("shapelgdmdylabel10", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.shapelgdmdylabel10=='1'",
-						    textInput("shapelgdlabel10", NULL, value="a,b,c")
-	                      )
-					)
-				),
-			    conditionalPanel(condition="input.plottype10=='vertical line' | input.plottype10=='horizontal line'",
-		          radioButtons("linetypelgd10", "Line type legend", c("Yes" = "1", "No" = "2"), "2"),
-			        conditionalPanel(condition="input.linetypelgd10=='1'",
- 				      tipify(textInput("linetypelgdname10", "Name:", value="linetype"),
-			          "Title of line type legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      					  					  
-					  tipify(radioButtons("linetypelgdmdylabel10", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                          'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".', placement="right", options=list(container="body")),					
-						  conditionalPanel(condition="input.linetypelgdmdylabel10=='1'",
-						    textInput("linetypelgdlabel10", NULL, value="a")
-	                      )
-					)
+		    	checkboxInput("font_opt10", HTML("<font color='red'>Font</font>"), FALSE),
+			    conditionalPanel(condition="input.font_opt10",					
+				    sliderInput("textsize10", "Font size:", min=0, max=10, value=2, step=0.1),
+			        selectInput("fontface10", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				    sliderInput("textangle10", "Font angle:", min=0, max=360, value=60, step=1)				
 				)
-			  )		
 			)
-			)			
+			)
+			)
 		   )
-		),		
-		HTML('<br>'),
-        tipify(actionButton("submit1", strong("Go!")),
-		'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', placement="right", options=list(container="body")),							  					  				      					  					  		
+		),
+		br(),
+		
+        actionButton("submit1", strong("Go!",
+                                       bsButton("bsb322", label="", icon=icon("question"), style="info", size="small")
+                                       )),
+		bsPopover("bsb322", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus"),
         br(),
         h4("Plot options"),
     	ADVANCED_OPTIONS_PANEL(
 				list(
-                    tipify(checkboxInput("plotSize", "Adjust plot size", FALSE),
-			          "Adjust the height and width of the non-circular plot. The figure size in both the browser and the download files would be affected.", placement="right", options=list(container="body")),							  					  				      				      					
+                    checkboxInput("plotSize", "Adjust plot size", FALSE),
                     conditionalPanel(condition = "input.plotSize",
                         numericInput("Height", "Plot height:", value = 550),
                         numericInput("Width", "Plot width:", value = 750)
                     ),
-                    tipify(checkboxInput("plotheme", "Figure theme", FALSE),
-                    "Figure themes which control all non-data display.", placement="right", options=list(container="body")),					
-                    conditionalPanel(condition = "input.plotheme",					
-			            selectInput("themestyle", NULL, choices = c("theme1", "theme2", "theme3", 
-	                                                      "theme4", "theme5", "theme6", 
+                    checkboxInput("plotheme", "Figure theme", FALSE),
+                    conditionalPanel(condition = "input.plotheme",
+			            selectInput("themestyle", NULL, choices = c("theme1", "theme2", "theme3",
+	                                                      "theme4", "theme5", "theme6",
 	                                                      "theme7","theme8","theme9","theme10"), selected="theme1")
 														  ),
                     checkboxInput("selfontsize", "Font size", FALSE),
-                    conditionalPanel(condition = "input.selfontsize",					
-			            numericInput("fontSize", NULL, value=16, min=0, max=100, step=0.5)														  
-														  ),														  
-                    tipify(checkboxInput("addtitle", "Axis title", FALSE),
-                    "Modify axis title of non-circular plot.", placement="right", options=list(container="body")),									
+                    conditionalPanel(condition = "input.selfontsize",
+			  		    sliderInput("fontSize", NULL, min=0, max=50, value=16, step=0.5)        
+									),
+                    checkboxInput("addtitle", "Axis title", FALSE),
                     conditionalPanel(condition = "input.addtitle",
-                        textInput("xtitle", "X title:", value="Genomic position"),
-			            textInput("ytitle", "Y title:", value="Value"),
+                        textInput("xtitle", "X axis title:", value="Genomic position"),
+			            textInput("ytitle", "Y axis title:", value="Value"),
 			            selectInput("titlefontface", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain")
 														  ),
                     checkboxInput("addlabels", "X axis label", FALSE),
-                    conditionalPanel(condition = "input.addlabels",					
-			            tipify(radioButtons("xlabel", NULL, c("Show" = "1", "Hide" = "2"), selected="1"),
-			        "Add tick labels on the Y-axis.", placement="right", options=list(container="body"))										
-					),					
+                    conditionalPanel(condition = "input.addlabels",
+                                     selectInput("xlabel", NULL, choices = c("Show" = "1", "Hide" = "2"), selected="1")
+					),
                     checkboxInput("legends", "Legend", FALSE),
                     conditionalPanel(condition = "input.legends",
-			            tipify(radioButtons("legendpos", "Position", c("Right" = "1", "Bottom" = "2"), selected="1"),
-			            "The position to place the legend.", placement="right", options=list(container="body")),						
-						tipify(numericInput("lgdspacesize", "Space size", value=0.04, min=0, max=1, step=0.05),
-						"Percent of legend size relative to the main plotting region. Applicable values are numbers in [0-1].", placement="right", options=list(container="body")),
-						tipify(numericInput("lgdintrasize", "Intra-spacing", value=15, min=0, max=100, step=1),
-						"Intra-spacing between different legends.", placement="right", options=list(container="body")),						
-			            tipify(numericInput("lgdtitlesize", "Title size", value=10, min=0, max=100, step=0.5),
-						    "The font size of legend title.", placement="right", options=list(container="body")),						
-			            tipify(selectInput("lgdtitlefontface", "Title font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
-						    "The font face of legend title.", placement="right", options=list(container="body")),						
-						tipify(numericInput("lgdtextsize", "Label size", value=10, min=0, max=100, step=0.5),
-						    "The font size of legend tick label.", placement="right", options=list(container="body")),			            
-						tipify(selectInput("lgdtextfontface", "Label font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),	
-						    "The font face of legend tick label.", placement="right", options=list(container="body"))
-					),					
+                                     selectInput("legendpos", h5("Legend position",
+			                                                bsButton("bsb326", label="", icon=icon("question"), style="info", size="small")
+			                                                ), c("Right" = "1", "Bottom" = "2"), selected="1"),
+			            bsPopover("bsb326", "The position to place the legend.", trigger = "focus"),
+						sliderInput("lgdspacesize", h5("Legend region size",
+						                               bsButton("bsb327", label="", icon=icon("question"), style="info", size="small")
+						                               ), min=0, max=1, value=0.04, step=0.01),
+						bsPopover("bsb327", "Percent of legend size relative to the main plotting region. Applicable values are numbers in [0-1].", trigger = "focus"),
+						sliderInput("lgdintrasize", h5("Intra-spacing",
+						                               bsButton("bsb328", label="", icon=icon("question"), style="info", size="small")
+						                               ), min=0, max=150, value=15, step=0.5),
+						bsPopover("bsb328", "Intra-spacing between different legends.", trigger = "focus"),
+			            sliderInput("lgdtitlesize", h5("Title font size",
+			                                           bsButton("bsb329", label="", icon=icon("question"), style="info", size="small")
+			                                           ), min=0, max=40, value=15, step=0.1),
+						bsPopover("bsb329", "The font size of legend title.", trigger = "focus"),
+			            selectInput("lgdtitlefontface", h5("Title font face:",
+			                                               bsButton("bsb330", label="", icon=icon("question"), style="info", size="small")
+			                                               ), choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+						bsPopover("bsb330", "The font face of legend title.", trigger = "focus"),
+						sliderInput("lgdtextsize", h5("Label font size",
+						                              bsButton("bsb331", label="", icon=icon("question"), style="info", size="small")
+						                              ), min=0, max=40, value=10, step=0.1),
+						bsPopover("bsb331", "The font size of legend tick label.", trigger = "focus"),
+						selectInput("lgdtextfontface", h5("Label font face:",
+						                                  bsButton("bsb332", label="", icon=icon("question"), style="info", size="small")
+						                                  ), choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+						bsPopover("bsb332", "The font face of legend tick label.", trigger = "focus")
+					),
 					checkboxInput("layer1", HTML("<font color='red'>Track1</font>"), FALSE),
 			            conditionalPanel(condition="input.layer1",
-						        tipify(numericInput("heightlayer1", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer1", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))	
+						        sliderInput("heightlayer1", h5("Track height:",
+						                                       bsButton("bsb333", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb333", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer1", h5("Track margin:",
+			                                                   bsButton("bsb334", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb334", "Margin size of the track.", trigger = "focus")	
 						),
 					checkboxInput("layer2", HTML("<font color='red'>Track2</font>"), FALSE),
 			            conditionalPanel(condition="input.layer2",
-						        tipify(numericInput("heightlayer2", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer2", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer2", h5("Track height:",
+						                                       bsButton("bsb335", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb335", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer2", h5("Track margin:",
+			                                                   bsButton("bsb336", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb336", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer3", HTML("<font color='red'>Track3</font>"), FALSE),
 			            conditionalPanel(condition="input.layer3",
-						        tipify(numericInput("heightlayer3", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer3", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer3", h5("Track height:",
+						                                       bsButton("bsb337", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb337", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer3", h5("Track margin:",
+			                                                   bsButton("bsb338", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb338", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer4", HTML("<font color='red'>Track4</font>"), FALSE),
 			            conditionalPanel(condition="input.layer4",
-						        tipify(numericInput("heightlayer4", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer4", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer4", h5("Track height:",
+						                                       bsButton("bsb339", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb339", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer4", h5("Track margin:",
+			                                                   bsButton("bsb340", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb340", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer5", HTML("<font color='red'>Track5</font>"), FALSE),
 			            conditionalPanel(condition="input.layer5",
-						        tipify(numericInput("heightlayer5", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer5", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer5", h5("Track height:",
+						                                       bsButton("bsb341", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb341", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer5", h5("Track margin:",
+			                                                   bsButton("bsb342", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb342", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer6", HTML("<font color='red'>Track6</font>"), FALSE),
 			            conditionalPanel(condition="input.layer6",
-						        tipify(numericInput("heightlayer6", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer6", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer6", h5("Track height:",
+						                                       bsButton("bsb343", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb343", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer6", h5("Track margin:",
+			                                                   bsButton("bsb344", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb344", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer7", HTML("<font color='red'>Track7</font>"), FALSE),
 			            conditionalPanel(condition="input.layer7",
-						        tipify(numericInput("heightlayer7", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer7", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer7", h5("Track height:",
+						                                       bsButton("bsb345", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb345", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer7", h5("Track margin:",
+			                                                   bsButton("bsb346", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb346", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer8", HTML("<font color='red'>Track8</font>"), FALSE),
 			            conditionalPanel(condition="input.layer8",
-						        tipify(numericInput("heightlayer8", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer8", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer8", h5("Track height:",
+						                                       bsButton("bsb347", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb347", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer8", h5("Track margin:",
+			                                                   bsButton("bsb348", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb348", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer9", HTML("<font color='red'>Track9</font>"), FALSE),
 			            conditionalPanel(condition="input.layer9",
-						        tipify(numericInput("heightlayer9", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer9", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
-						),					
+						        sliderInput("heightlayer9", h5("Track height:",
+						                                       bsButton("bsb349", label="", icon=icon("question"), style="info", size="small")
+						                                       ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb349", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer9", h5("Track margin:",
+			                                                   bsButton("bsb350", label="", icon=icon("question"), style="info", size="small")
+			                                                   ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb350", "Margin size of the track.", trigger = "focus")
+						),
 					checkboxInput("layer10", HTML("<font color='red'>Track10</font>"), FALSE),
 			            conditionalPanel(condition="input.layer10",
-						        tipify(numericInput("heightlayer10", "Track height:", value=0.06, min=0, max=0.8, step=0.01),
-								"Height of the track.", placement="right", options=list(container="body")),
-			                    tipify(numericInput("marginlayer10", "Track margin:", value=0.01, min=0, max=0.8, step=0.005), 
-								"Margin size of the track.", placement="right", options=list(container="body"))
+						        sliderInput("heightlayer10", h5("Track height:",
+						                                        bsButton("bsb351", label="", icon=icon("question"), style="info", size="small")
+						                                        ), min=0, max=5, value=0.06, step=0.01),
+						        bsPopover("bsb351", "Height of the track.", trigger = "focus"),
+			                    sliderInput("marginlayer10", h5("Track margin:",
+			                                                    bsButton("bsb352", label="", icon=icon("question"), style="info", size="small")
+			                                                    ), min=0, max=5, value=0.01, step=0.005),
+						        bsPopover("bsb352", "Margin size of the track.", trigger = "focus")
 						)
 		        )
 		)
-      ),     
+      ),
+		
       mainPanel(id = "mainPanel_1",
           downloadButton("Visualization_1.pdf", "Download pdf-file"),
           downloadButton("Visualization_1.svg", "Download svg-file"),
-		  downloadButton("Script_1.R", "Download the R scripts to reproduce the plot"),
-		  HTML('<br>'),
-		  HTML('<br>'),
-		  textOutput("errorinfo1"),
-		  textOutput("errorinfo2"),
-		  textOutput("errorinfo3"),
-          textOutput("errorinfo4"),	
-          textOutput("errorinfo7"),	
-          textOutput("errorinfo9"),		  		  
-		  plotOutput("figure_1", height = '100%', width = '100%')
+		      downloadButton("Script_1.R", "Download the R scripts to reproduce the plot"),
+		      br(),
+		      br(),
+		      textOutput("errorinfo1"),
+		      textOutput("errorinfo2"),
+		      textOutput("errorinfo3"),
+          textOutput("errorinfo4"),
+          textOutput("errorinfo7"),
+		      plotOutput("figure_1", height = '100%', width = '100%'),
+		      
+		      bsModal("Example1", "Data Table", "tabBut1", size = "large",
+		              dataTableOutput("Table1")),
+		      
+		      bsModal("Example2", "Data Table", "tabBut2", size = "large",
+		              dataTableOutput("Table2")),
+		      
+		      bsModal("Example3", "Data Table", "tabBut3", size = "large",
+		              dataTableOutput("Table3")),
+		      
+		      bsModal("Example4", "Data Table", "tabBut4", size = "large",
+		              dataTableOutput("Table4")),
+		      
+		      bsModal("Example5", "Data Table", "tabBut5", size = "large",
+		              dataTableOutput("Table5")),
+		      
+		      bsModal("Example6", "Data Table", "tabBut6", size = "large",
+		              dataTableOutput("Table6")),
+		      
+		      bsModal("Example7", "Data Table", "tabBut7", size = "large",
+		              dataTableOutput("Table7")),
+		      
+		      bsModal("Example8", "Data Table", "tabBut8", size = "large",
+		              dataTableOutput("Table8")),
+		      
+		      bsModal("Example9", "Data Table", "tabBut9", size = "large",
+		              dataTableOutput("Table9")),
+		      
+		      bsModal("Example10", "Data Table", "tabBut10", size = "large",
+		              dataTableOutput("Table10")),
+		      
+		      bsModal("Example11", "Data Table", "tabBut11", size = "large",
+		              dataTableOutput("Table11"))
 	  )
+		
     ),
+		
     tabPanel(
-       "Two genomes",tags$head(
+       "Two genomes plot",tags$head(
 			tags$style("
                 input[type='file'] {width:5em;}
 				.toggleButton {width:100%;} 
@@ -2051,212 +3186,312 @@ shinyUI(
 				.popover{text-align:left;width:500px;background-color:#000000;}
 				.popover-title{color:#FFFFFF;font-size:16px;background-color:#000000;border-color:#000000;}
 				#sidebarPanel_2 {width:25em;}
-				#tc_lowColor, #tc_midColor, #tc_highColor {width:100%}
+				#tc_lowColor, #tc_midColor, #tc_highColor, #tc_colorcus, #tc_bordercols, #tc_verticalcol, #tc_horizontalcol {width:100%}
 				#mainPanel_2 {left:28em; position:absolute; min-width:27em;}"),
 			 tags$style(HTML(".shiny-output-error-validation {color: red;}")),
              tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')), includeScript("www/google-analytics.js")				
 		),
         sidebarPanel(id="sidebarPanel_2",
-	        tipify(fileInput("tc_uploadchrdata_1", "Upload genome1 data:", multiple = FALSE),
-			'Click "Browse" to upload the genome1 data along the X-axis.', placement="right", options=list(container="body")),														
+	        fileInput("tc_uploadchrdata_1", h5("*Upload genome1 data:",
+	                                           bsButton("bsb353", label="", icon=icon("question"), style="info", size="small")
+	                                           ), multiple = FALSE),
+	        bsPopover("bsb353", 'Click "Browse" to upload the genome data aligned along the X-axis.', trigger = "focus"),
+	        
+	        actionButton("tabBut12", "View example data"),
 		    tags$script('$( "#tc_uploadchrdata_1" ).on( "click", function() { this.value = null; });'),
-	        tipify(fileInput("tc_uploadchrdata_2", "Upload genome2 data:", multiple = FALSE),
-			'Click "Browse" to upload the genome2 data along the Y-axis.', placement="right", options=list(container="body")),																	
-		    tags$script('$( "#tc_uploadchrdata_2" ).on( "click", function() { this.value = null; });'),			
-	        tipify(fileInput("tc_uploaddata", "Upload plot data:", multiple = FALSE),
-			'Click "Browse" to upload the plot data.', placement="right", options=list(container="body")),																				
+            downloadButton("genome1_data.txt", "Example data"),
+            br(),
+		    br(),
+	        fileInput("tc_uploadchrdata_2", h5("*Upload genome2 data:",
+	                                           bsButton("bsb354", label="", icon=icon("question"), style="info", size="small")
+	                                           ), multiple = FALSE),
+		    bsPopover("bsb354", 'Click "Browse" to upload the genome data aligned along the Y-axis.', trigger = "focus"),
+		    
+		    actionButton("tabBut13", "View example data"),
+		    tags$script('$( "#tc_uploadchrdata_2" ).on( "click", function() { this.value = null; });'),
+            downloadButton("genome2_data.txt", "Example data"),
+            br(),
+		    br(),
+	        fileInput("tc_uploaddata", h5("*Upload main plot data:",
+	                                      bsButton("bsb355", label="", icon=icon("question"), style="info", size="small")
+	                                      ), multiple = FALSE),
+		    bsPopover("bsb355", 'Click "Browse" to upload data for the main plot.', trigger = "focus"),
+		    
+		    actionButton("tabBut14", "View example data"),
 		    tags$script('$( "#tc_uploaddata" ).on( "click", function() { this.value = null; });'),
+			downloadButton("example_plot_data.txt", "Example data"),
+            br(),
+		    br(),
 			selectInput("tc_plottype", "Plot type:", choices = c("point_gradual", "point_discrete", "segment" , "rect_gradual", "rect_discrete"), selected="point_gradual"),
          	ADVANCED_OPTIONS_PANEL_tc(
 	  	        list(
-			        conditionalPanel(condition="input.tc_plottype=='point_gradual' | input.tc_plottype=='rect_gradual'",			
-			            tipify(radioButtons("tc_selgralcol", "Colors", c("Typical" = "1", "Custom" = "2"), selected="1"), "Colors to be used to plot the data, which can be assigned by the application or be specified by the users.", placement="right", options=list(container="body")),			
-			            conditionalPanel(condition="input.tc_selgralcol=='1'",			
-			                selectInput("tc_gralcol", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red", 
-	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green", 
+		    	checkboxInput("color_opt_tc", HTML("<font color='red'>Color</font>"), FALSE),  ####
+			    conditionalPanel(condition="input.color_opt_tc",  #####	  	        	
+			        conditionalPanel(condition="input.tc_plottype=='point_gradual' | input.tc_plottype=='rect_gradual'",
+			                         selectInput("tc_selgralcol", h5("Colors",
+			                                             bsButton("bsb356", label="", icon=icon("question"), style="info", size="small")
+			                                             ), c("Typical" = "1", "Custom" = "2"), selected="1"),
+			            bsPopover("bsb356", "Colors to be used to plot the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+			            conditionalPanel(condition="input.tc_selgralcol=='1'",
+			                selectInput("tc_gralcol", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
+	                                                      "purple.yellow.red", "blue.green.red", "blue.yellow.green",
 	                                                      "cyan.white.deeppink1"), selected="blue.white.red")
 			            ),
 			        conditionalPanel(condition="input.tc_selgralcol=='2'",
 			            fluidRow(
-			            column(4, jscolorInput("tc_lowColor", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+			            column(4, jscolorInput("tc_lowColor", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
 			            column(4, jscolorInput("tc_midColor", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-			            column(4, jscolorInput("tc_highColor", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),					
-			            HTML('<br>')
+			            column(4, jscolorInput("tc_highColor", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+			            br()
 			        )			
-			        ),	
-			        conditionalPanel(condition="input.tc_plottype=='point_discrete' | input.tc_plottype=='segment' | input.tc_plottype=='rect_discrete'",			
-			            tipify(radioButtons("tc_coltype", "Data color", c("Random" = "1", "One custom color" = "2",
-	                                            "Custom for data with multi-group" = "3"), selected="1"),
-                        'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should provide a character string representing one color as "red". To customize color for data with multiple groups, the column indicating different groups should be named as "color". Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', placement="right", options=list(container="body")),
-					    conditionalPanel(condition="input.tc_coltype=='2'",	
-			                textInput("tc_colorcus", NULL, value="red")
-			            ),
-                        conditionalPanel(condition="input.tc_coltype=='3'",	
-			                textInput("tc_colormulgp", NULL, value="a:red;b:blue;c:cyan")
-	                    ),
-			            tipify(numericInput("tc_coltransparency", "Color transparency:", value=1, min=0, max=1, step=0.1),
-			                "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", placement="right", options=list(container="body"))
-					),
-                    conditionalPanel(condition="input.tc_plottype == 'point_gradual' | input.tc_plottype == 'point_discrete'",						
-                        tipify(textInput("tc_symbolpoint", "Symbol type:", value="16"), 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. The option is suitable for data without a "shape" column.', placement="right", options=list(container="body")),				
-			            tipify(numericInput("tc_pointsize", "Point size:", value=0.8, min=0, max=2, step=0.05), 'Value used for different size of points. The option is suitable for data without a "size" column.', placement="right", options=list(container="body")) 						
-					),
-			        conditionalPanel(condition="input.tc_plottype=='segment'",	
-			            numericInput("tc_linesize", "Line width:", value=2, min=0, max=20, step=0.05),
-			            tipify(selectInput("tc_linetype", "Line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-			                'The line type is automatically set to "solid" for line with more than one color.',placement="right", options=list(container="body"))
 			        ),
-                    conditionalPanel(condition="input.tc_plottype == 'point_gradual' | input.tc_plottype == 'point_discrete'",
-				        tipify(radioButtons("tc_xrugs", "X-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			                "Create a set of tick marks along the X-axis.", placement="right", options=list(container="body")),
-				        conditionalPanel(condition="input.tc_xrugs=='1'",
-				            textInput("tc_xrugscol", "Color:", value="black")				
-				        ),				
-				        tipify(radioButtons("tc_yrugs", "Y-axis rugs", c("Show" = "1", "Hide" = "2"),selected="2"),
-			                "Create a set of tick marks along the Y-axis.", placement="right", options=list(container="body")),
-				        conditionalPanel(condition="input.tc_yrugs=='1'",
-				            textInput("tc_yrugscol", "Color:", value="black")				
-				        )
-					),
-				    tipify(radioButtons("tc_vertical", "Vertical line", c("Show" = "1", "Hide" = "2"),selected="1"),
-			            "Create a set of vertical lines across the X-axis to separate different chromosomes.", placement="right", options=list(container="body")),
-				    conditionalPanel(condition="input.tc_vertical=='1'",
-						tipify(textInput("tc_verticalcol", "Vertical line color:", value="black"),"Color for the vertical line.",placement="right", options=list(container="body")),
-			            tipify(numericInput("tc_verticalsize", "Vertical line width:", value=0.2, min=0, max=20, step=0.05),"Line width for the vertical line.",placement="right", options=list(container="body")),
-						tipify(selectInput("tc_verticaltype", "Vertical line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-						"Line type for the vertical line.",placement="right", options=list(container="body"))
+			        conditionalPanel(condition="input.tc_plottype=='point_discrete' | input.tc_plottype=='segment' | input.tc_plottype=='rect_discrete'",
+			                         selectInput("tc_coltype", h5("Data color",
+			                                          bsButton("bsb357", label="", icon=icon("question"), style="info", size="small")
+			                                          ), c("Random" = "1", "One custom color" = "2",
+	                                            "Custom for data with multi-group" = "3"), selected="1"),
+			            bsPopover("bsb357", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.', trigger = "focus"),
+					    conditionalPanel(condition="input.tc_coltype=='2'",
+			                fluidRow(column(12, jscolorInput("tc_colorcus", label = NULL, value = "#FF0000"))),
+                            br()			                
+			            ),
+                        conditionalPanel(condition="input.tc_coltype=='3'",
+			                textInput("tc_colormulgp", NULL, value="a:red;b:blue;c:cyan")
+	                    )
+						),
+						selectInput("tc_collgd", h5("Color legend",
+					                             bsButton("bsb358", label="", icon=icon("question"), style="info", size="small")
+					                             ), choices = c("Yes" = "1", "No" = "2"), "2"),
+					bsPopover("bsb358", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
+			        conditionalPanel(condition="input.tc_collgd=='1'",
+ 				        textInput("tc_collgdname", h5("Legend title:",
+ 				                                      bsButton("bsb359", label="", icon=icon("question"), style="info", size="small")
+ 				                                      ), value="color"),
+ 				        bsPopover("bsb359", "Title of color legend. Null value will result in an empty title.", trigger = "focus"),
+			            conditionalPanel(condition="input.tc_plottype=='point_discrete' | input.tc_plottype=='segment' | input.tc_plottype=='rect_discrete'",
+			                             selectInput("tc_collgdmdylabel", h5("Modify legend labels",
+							                                     bsButton("bsb360", label="", icon=icon("question"), style="info", size="small")
+							                                     ), c("Yes" = "1", "No" = "2"), "2"),
+							bsPopover("bsb360", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+						    conditionalPanel(condition="input.tc_collgdmdylabel=='1'",
+						        textInput("tc_collgdlabel", NULL, value="a,b,c")
+					        )
+						)
 				    ),
-				    tipify(radioButtons("tc_horizontal", "Horizontal line", c("Show" = "1", "Hide" = "2"),selected="1"),
-			            "Create a set of horizontal lines across the Y-axis to separate different chromosomes.", placement="right", options=list(container="body")),
+			        conditionalPanel(condition="input.tc_plottype=='point_discrete' | input.tc_plottype=='segment' | input.tc_plottype=='rect_discrete'",
+			            sliderInput("tc_coltransparency", h5("Color transparency:",
+			                                                 bsButton("bsb361", label="", icon=icon("question"), style="info", size="small")
+			                                                 ), min=0, max=1, value=1, step=0.1),
+			            bsPopover("bsb361", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")
+                    )          
+                    ),  ####################                    
+                    conditionalPanel(condition="input.tc_plottype == 'point_gradual' | input.tc_plottype == 'point_discrete'",
+                    	checkboxInput("symbol_opt_tc", HTML("<font color='red'>Symbol</font>"), FALSE),  ####
+			            conditionalPanel(condition="input.symbol_opt_tc",  #####
+                                     selectInput("sel_tc_symbolpointype", h5("Symbol type",
+                                                                 bsButton("bsb362", label="", icon=icon("question"), style="info", size="small")
+                                                                 ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected="1"),
+                        bsPopover("bsb362", 'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
+                        conditionalPanel(condition="input.sel_tc_symbolpointype=='1'",
+                            sliderInput("tc_symbolpoint", NULL, min=0, max=25, value=16, step=1)
+                        ),
+                        selectInput("tc_shapelgd", h5("Symbol legend",
+		                                               bsButton("bsb363", label="", icon=icon("question"), style="info", size="small")
+		                                               ), choices = c("Yes" = "1", "No" = "2"), "2"),
+		                bsPopover("bsb363", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
+			            conditionalPanel(condition="input.tc_shapelgd=='1'",
+ 				            textInput("tc_shapelgdname", h5("Legend title:",
+ 				                                            bsButton("bsb364", label="", icon=icon("question"), style="info", size="small")
+ 				                                            ), value="symbol"),
+ 				            bsPopover("bsb364", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
+ 				            selectInput("tc_shapelgdmdylabel", h5("Modify legend labels",
+					                                               bsButton("bsb365", label="", icon=icon("question"), style="info", size="small")
+					                                               ), c("Yes" = "1", "No" = "2"), "2"),
+					        bsPopover("bsb365", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+						    conditionalPanel(condition="input.tc_shapelgdmdylabel=='1'",
+						        textInput("tc_shapelgdlabel", NULL, value="a,b,c")
+	                        )
+					    )
+					    ),
+				        checkboxInput("size_opt_tc", HTML("<font color='red'>Size</font>"), FALSE),  ####
+			            conditionalPanel(condition="input.size_opt_tc",  #####					    
+					    selectInput("sel_tc_pointsizetype", h5("Point size",
+                                                                bsButton("bsb366", label="", icon=icon("question"), style="info", size="small")
+                                                                ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected="1"),
+					    bsPopover("bsb366", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
+                        conditionalPanel(condition="input.sel_tc_pointsizetype=='1'",
+                            sliderInput("tc_pointsize", NULL, min=0, max=5, value=0.8, step=0.05)
+                        ),
+					    selectInput("tc_sizelgd", h5("Size legend",
+		                                              bsButton("bsb367", label="", icon=icon("question"), style="info", size="small")
+		                                              ), choices = c("Yes" = "1", "No" = "2"), "2"),
+					    bsPopover("bsb367", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
+			            conditionalPanel(condition="input.tc_sizelgd=='1'",
+ 				            textInput("tc_sizelgdname", h5("Legend title:",
+ 				                                           bsButton("bsb368", label="", icon=icon("question"), style="info", size="small")
+ 				                                           ), value="size"),
+ 				            bsPopover("bsb368", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
+ 				            selectInput("tc_sizelgdmdylabel", h5("Modify legend labels",
+				                                                  bsButton("bsb3680", label="", icon=icon("question"), style="info", size="small")
+				                                                  ), c("Yes" = "1", "No" = "2"), "2"),
+				            bsPopover("bsb3680", 'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
+							conditionalPanel(condition="input.tc_sizelgdmdylabel=='1'",
+						            textInput("tc_sizelgdlabel", NULL, value="a,b,c")
+	                        )
+					    )
+					    )						
+					),
+			        conditionalPanel(condition="input.tc_plottype=='segment'",
+				        checkboxInput("linetype_opt_tc", HTML("<font color='red'>Linetype</font>"), FALSE),  ####
+			            conditionalPanel(condition="input.linetype_opt_tc",  #####				        	
+                        sliderInput("tc_linesize", "Line width:", min=0, max=20, value=0.2, step=0.05),
+			            selectInput("tc_linetype", h5("Line type",
+			                                          bsButton("bsb369", label="", icon=icon("question"), style="info", size="small")
+			                                          ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+			            bsPopover("bsb369", 'The line type is automatically set as "solid" for line with more than one color.',trigger = "focus")
+			        )
+			        ),
+					selectInput("tc_vertical", h5("Vertical line",
+				                                   bsButton("bsb370", label="", icon=icon("question"), style="info", size="small")
+				                                   ), c("Show" = "1", "Hide" = "2"),selected="2"),
+					bsPopover("bsb370", "Create a set of vertical lines across the X-axis to separate different chromosomes.", trigger = "focus"),
+				    conditionalPanel(condition="input.tc_vertical=='1'",
+						fluidRow(column(12, jscolorInput("tc_verticalcol", label = h5('Vertical line color:',
+						                                                              bsButton("bsb371", label="", icon=icon("question"), style="info", size="small")
+						                                                              ), value = "#000000"))),
+						bsPopover("bsb371", "Color of the vertical lines.",trigger = "focus"),
+						br(),
+			            sliderInput("tc_verticalsize", h5("Vertical line width:",
+			                                              bsButton("bsb372", label="", icon=icon("question"), style="info", size="small")
+			                                              ), min=0, max=3, value=0.2, step=0.05),
+						bsPopover("bsb372", "Line width of the vertical lines",trigger = "focus"),
+						selectInput("tc_verticaltype", h5("Vertical line type",
+						                                  bsButton("bsb373", label="", icon=icon("question"), style="info", size="small")
+						                                  ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+						bsPopover("bsb373", "Line type of the vertical lines",trigger = "focus")
+				    ),
+					selectInput("tc_horizontal", h5("Horizontal line",
+				                                     bsButton("bsb374", label="", icon=icon("question"), style="info", size="small")
+				                                     ), c("Show" = "1", "Hide" = "2"),selected="2"),
+					bsPopover("bsb374", "Create a set of horizontal lines across the Y-axis to separate different chromosomes.", trigger = "focus"),
 				    conditionalPanel(condition="input.tc_horizontal=='1'",
-						tipify(textInput("tc_horizontalcol", "Horizontal line color:", value="black"),"Color for the horizontal line.",placement="right", options=list(container="body")),
-			            tipify(numericInput("tc_horizontalsize", "Horizontal line width:", value=0.2, min=0, max=20, step=0.05),"Line width for the horizontal line.",placement="right", options=list(container="body")),			            
-						tipify(selectInput("tc_horizontaltype", "Horizontal line type", choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
-						"Line type for the horizontal line.",placement="right", options=list(container="body"))
+						fluidRow(column(12, jscolorInput("tc_horizontalcol", label = h5('Horizontal line color:',
+						                                                                bsButton("bsb375", label="", icon=icon("question"), style="info", size="small")
+						                                                                ), value = "#000000"))),
+						bsPopover("bsb375", "Color of the horizontal lines",trigger = "focus"),
+						br(),
+			            sliderInput("tc_horizontalsize", h5("Horizontal line width:",
+			                                                bsButton("bsb376", label="", icon=icon("question"), style="info", size="small")
+			                                                ), min=0, max=3, value=0.2, step=0.05),
+						bsPopover("bsb376", "Line width of the horizontal lines",trigger = "focus"),
+						selectInput("tc_horizontaltype", h5("Horizontal line type",
+						                                    bsButton("bsb377", label="", icon=icon("question"), style="info", size="small")
+						                                    ), choices = c("solid","dashed","dotted","dotdash","longdash","twodash"), selected="solid"),
+						bsPopover("bsb377", "Line type of the horizontal lines",trigger = "focus")
 				    ),
 			        conditionalPanel(condition="input.tc_plottype=='rect_gradual' | input.tc_plottype=='rect_discrete'",
-			            tipify(radioButtons("tc_addborder", "Add cell borders", c("Yes" = "1", "No" = "2"),selected="2"),
-				        "Add borders to the rect grids, which can be used to separate cells from each other.", placement="right", options=list(container="body")),
+			                         selectInput("tc_addborder", h5("Add cell borders",
+			                                            bsButton("bsb378", label="", icon=icon("question"), style="info", size="small")
+			                                            ), c("Yes" = "1", "No" = "2"),selected="2"),
+			            bsPopover("bsb378", "Add borders to the rect grids, which can be used to separate cells from each other.", trigger = "focus"),
 			            conditionalPanel(condition="input.tc_addborder=='1'",
-                            tipify(textInput("tc_bordercols", "Borders color:", value="black"),
-					        "The color to be used for the borders of rect grids. For example, 'white' or 'red'. Hex color codes as '#FF0000' are also supported.", placement="right", options=list(container="body"))
-			            )
-                    ),					
-		            tipify(radioButtons("tc_addlegend", "Add legend", c("Yes" = "1", "No" = "2"), "2"),
-			        "Control the appearance of the legend in the plotting region.", placement="right", options=list(container="body")),					
-			            conditionalPanel(condition="input.tc_addlegend=='1'",
-		                    radioButtons("tc_collgd", "Color legend", c("Yes" = "1", "No" = "2"), "2"),
-			                conditionalPanel(condition="input.tc_collgd=='1'",
- 				                tipify(textInput("tc_collgdname", "Name:", value="color"),
-							    "Title of color legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  
-			                    conditionalPanel(condition="input.tc_plottype=='point_discrete' | input.tc_plottype=='segment' | input.tc_plottype=='rect_discrete'",
-								    tipify(radioButtons("tc_collgdmdylabel", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                                    'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),
-						            conditionalPanel(condition="input.tc_collgdmdylabel=='1'",
-						                textInput("tc_collgdlabel", NULL, value="a,b,c")
-					                )
-								)
-				            ),
-			                 conditionalPanel(condition="input.tc_plottype == 'point_gradual' | input.tc_plottype == 'point_discrete'",
-		                         radioButtons("tc_sizelgd", "Size legend", c("Yes" = "1", "No" = "2"), "2"),
-			                     conditionalPanel(condition="input.tc_sizelgd=='1'",
- 				                     tipify(textInput("tc_sizelgdname", "Name:", value="size"),
-			                         "Title of size legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  					  									 
-				                     tipify(radioButtons("tc_sizelgdmdylabel", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                                     'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),						             
-									 conditionalPanel(condition="input.tc_sizelgdmdylabel=='1'",
-						                 textInput("tc_sizelgdlabel", NULL, value="a,b,c")
-	                                 )
-					             ),
-		                         radioButtons("tc_shapelgd", "Shape legend", c("Yes" = "1", "No" = "2"), "2"),
-			                     conditionalPanel(condition="input.tc_shapelgd=='1'",
- 				                     tipify(textInput("tc_shapelgdname", "Name:", value="shape"),	
-			                         "Title of shape legend. Null value will result in an empty title.", placement="right", options=list(container="body")),							  					  				      									 
-					                 tipify(radioButtons("tc_shapelgdmdylabel", "Modify labels", c("Yes" = "1", "No" = "2"), "2"),
-                                     'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', placement="right", options=list(container="body")),
-						             conditionalPanel(condition="input.tc_shapelgdmdylabel=='1'",
-						                 textInput("tc_shapelgdlabel", NULL, value="a,b,c")
-	                                 )
-					             )
-			             	)
-			           )
+                            fluidRow(column(12, jscolorInput("tc_bordercols", label = h5('Borders color:'), value = "#000000")))
+                            )
+                    )
                 )
             ),
-		    HTML('<br>'),
-		    HTML('<br>'),			
-            tipify(actionButton("submit2", strong("Go!")),
-		    'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', placement="right", options=list(container="body")),							  					  				      					  					  					
+
+			br(),br(),
+            actionButton("submit2", strong("Go!",
+                                           bsButton("bsb380", label="", icon=icon("question"), style="info", size="small")
+                                           )),
+			bsPopover("bsb380", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus"),
             br(),
             h4("Plot options"),
-            tipify(checkboxInput("tc_plotSize", "Adjust plot size", FALSE),
-			"Adjust the height and width of the non-circular plot. The figure size in both the browser and the download files would be affected.", placement="right", options=list(container="body")),							  					  				      				      								
+            checkboxInput("tc_plotSize", "Adjust plot size", FALSE),
             conditionalPanel(condition = "input.tc_plotSize",
-                numericInput("tc_Height", "Plot height:", value = 550),
+                numericInput("tc_Height", "Plot height:", value = 650),
                 numericInput("tc_Width", "Plot width:", value = 750)
             ),
-            tipify(checkboxInput("tc_plotheme", "Figure theme", FALSE),
-            "Figure themes which control all non-data display.", placement="right", options=list(container="body")),			
-            conditionalPanel(condition = "input.tc_plotheme",					
-			    selectInput("tc_themestyle", NULL, choices = c("theme1", "theme2", "theme3", 
-	                                                  "theme4", "theme5", "theme6", 
+            checkboxInput("tc_plotheme", "Figure theme", FALSE),
+            conditionalPanel(condition = "input.tc_plotheme",
+			    selectInput("tc_themestyle", NULL, choices = c("theme1", "theme2", "theme3",
+	                                                  "theme4", "theme5", "theme6",
 	                                                  "theme7","theme8","theme9","theme10"), selected="theme1")
 			),
             checkboxInput("tc_selfontsize", "Font size", FALSE),
-            conditionalPanel(condition = "input.tc_selfontsize",					
-			    numericInput("tc_fontSize", NULL, value=16, min=0, max=100, step=0.5)														  
-		    ),														  
-            tipify(checkboxInput("tc_addtitle", "Axis title", FALSE),
-            "Modify axis title of non-circular plot.", placement="right", options=list(container="body")),												
-            conditionalPanel(condition = "input.tc_addtitle",					
-                textInput("tc_xtitle", "X title:", value="Genomic position 1"),
-			    textInput("tc_ytitle", "Y title:", value="Genomic position 2"),
+            conditionalPanel(condition = "input.tc_selfontsize",
+		        sliderInput("tc_fontSize", NULL, min=0, max=50, value=16, step=0.5)
+		    ),
+            checkboxInput("tc_addtitle", "Axis title", FALSE),
+            conditionalPanel(condition = "input.tc_addtitle",
+                textInput("tc_xtitle", "X axis title:", value="Genomic position 1"),
+			    textInput("tc_ytitle", "Y axis title:", value="Genomic position 2"),
 			    selectInput("tc_titlefontface", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain")
 			),
             checkboxInput("tc_addlabels", "Axis label", FALSE),
-            conditionalPanel(condition = "input.tc_addlabels",					
-			    tipify(radioButtons("tc_xlabel", "X label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the X-axis.", placement="right", options=list(container="body")),								
-			    tipify(radioButtons("tc_ylabel", "Y label", c("Show" = "1", "Hide" = "2"), selected="1"),
-			"Add tick labels on the Y-axis.", placement="right", options=list(container="body"))								
+            conditionalPanel(condition = "input.tc_addlabels",
+                             selectInput("tc_xlabel", h5("X axis label",
+			                                 bsButton("bsb384", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+			    bsPopover("bsb384", "Add tick labels on the X-axis.", trigger = "focus"),
+			    selectInput("tc_ylabel", h5("Y axis label",
+			                                 bsButton("bsb385", label="", icon=icon("question"), style="info", size="small")
+			                                 ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
+			    bsPopover("bsb385", "Add tick labels on the Y-axis.", trigger = "focus")
 			),
             checkboxInput("tc_legends", "Legend", FALSE),
             conditionalPanel(condition = "input.tc_legends",
-			    tipify(radioButtons("tc_legendpos", "Position", c("Right" = "1", "Bottom" = "2"), selected="1"),
-			        "The position to place the legend.", placement="right", options=list(container="body")),			    
-				tipify(numericInput("tc_lgdtitlesize", "Title size", value=10, min=0, max=100, step=0.5),
-			        "The font size of legend title.", placement="right", options=list(container="body")),			    
-				tipify(selectInput("tc_lgdtitlefontface", "Title font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
-			        "The font face of legend title.", placement="right", options=list(container="body")),				
-				tipify(numericInput("tc_lgdtextsize", "Label size", value=10, min=0, max=100, step=0.5),
-			        "The font size of legend tick label.", placement="right", options=list(container="body")),								
-			    tipify(selectInput("tc_lgdtextfontface", "Label font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
-			        "The font face of legend tick label.", placement="right", options=list(container="body"))				
+                             selectInput("tc_legendpos", h5("Legend position",
+			                                    bsButton("bsb386", label="", icon=icon("question"), style="info", size="small")
+			                                    ), c("Right" = "1", "Bottom" = "2"), selected="1"),
+			    bsPopover("bsb386", "The position to place the legend.", trigger = "focus"),
+				sliderInput("tc_lgdtitlesize", h5("Title font size",
+				                                  bsButton("bsb387", label="", icon=icon("question"), style="info", size="small")
+				                                  ), min=0, max=40, value=15, step=0.1),
+				bsPopover("bsb387", "The font size of legend title.", trigger = "focus"),
+				selectInput("tc_lgdtitlefontface", h5("Title font face:",
+				                                      bsButton("bsb388", label="", icon=icon("question"), style="info", size="small")
+				                                      ), choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				bsPopover("bsb388", "The font face of legend title.", trigger = "focus"),
+				sliderInput("tc_lgdtextsize", h5("Label font size",
+				                                 bsButton("bsb389", label="", icon=icon("question"), style="info", size="small")
+				                                 ), min=0, max=20, value=2, step=0.1),
+				bsPopover("bsb389", "The font size of legend tick label.", trigger = "focus"),
+			    selectInput("tc_lgdtextfontface", h5("Label font face:",
+			                                         bsButton("bsb390", label="", icon=icon("question"), style="info", size="small")
+			                                         ), choices = c("plain", "italic", "bold", "bold.italic"), selected="plain"),
+				bsPopover("bsb390", "The font face of legend tick label.", trigger = "focus")				
 			)
-		),			
+		),
        mainPanel(id = "mainPanel_2",
            downloadButton("Visualization_2.pdf", "Download pdf-file"),
            downloadButton("Visualization_2.svg", "Download svg-file"),
-		   downloadButton("Script_2.R", "Download the R scripts to reproduce the plot"),
-		   HTML('<br>'),
-           HTML('<br>'),
-		   textOutput("errorinfo5"),
-		   textOutput("errorinfo6"),
-		   textOutput("errorinfo8"),		   
-		   plotOutput("figure_2", height = '100%', width = '100%')
+		       downloadButton("Script_2.R", "Download the R scripts to reproduce the plot"),
+		       br(),
+           br(),
+		       textOutput("errorinfo5"),
+		       textOutput("errorinfo6"),
+		       textOutput("errorinfo8"),
+		       plotOutput("figure_2", height = '100%', width = '100%'),
+		       
+		       bsModal("Example12", "Data Table", "tabBut12", size = "large",
+		               dataTableOutput("Table12")),
+		       
+		       bsModal("Example13", "Data Table", "tabBut13", size = "large",
+		               dataTableOutput("Table13")),
+		       
+		       bsModal("Example14", "Data Table", "tabBut14", size = "large",
+		               dataTableOutput("Table14"))
 	   )
 	   ),
-	tabPanel(
-        "Gallery",
-        includeHTML("www/gallery.html")
-    ), 
-	tabPanel(
-        "Help",
-        includeMarkdown("README.md")
-      ),
-	tabPanel(
-        "Manual",
-		uiOutput("pdfview")
-      )	  
-      )
-  )
+		
+	tabPanel("Gallery", includeHTML("www/gallery.html")),
+	
+	tabPanel("Help", includeMarkdown("README.md")),
+	
+	tabPanel("Manual", uiOutput("pdfview"))	  
+      
+	)
+)
 
