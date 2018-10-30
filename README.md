@@ -8,8 +8,8 @@ This is the repository for the Shiny application presented in "shinyChromosome: 
 
 #	Use shinyChromosome online
 
-shinyChromosome is deployed at https://yimingyu.shinyapps.io/shinychromosome/ and http://shinychromosome.ncpgr.cn/ for online use.  
-shinyChromosome is idle until you activate it by accessing the two URLs.  
+shinyChromosome is deployed at https://yimingyu.shinyapps.io/shinychromosome/, http://shinychromosome.ncpgr.cn/ and http://150.109.59.144:3838/shinyChromosome/ for online use.  
+shinyChromosome is idle until you activate it by accessing the URLs.  
 So it may take some time when you access this URL for the first time.   
 Once it was activated, shinyChromosome could be used smoothly and easily.
 
