@@ -44,6 +44,9 @@ install.packages("data.table")
 install.packages("shinythemes")
 install.packages("shinyBS")
 install.packages("markdown")
+# install shinysky  
+if (require(devtools)) install.packages("devtools")  
+devtools::install_github("venyao/ShinySky")  
 ```
 
 **Step 3: Start the app**  
@@ -82,6 +85,9 @@ install.packages("data.table")
 install.packages("shinythemes")
 install.packages("shinyBS")
 install.packages("markdown")
+# install shinysky  
+if (require(devtools)) install.packages("devtools")  
+devtools::install_github("venyao/ShinySky")  
 ```
 
 For more information, please check the following pages:  
@@ -131,6 +137,6 @@ $ chown -R shiny /srv/shiny-server/shinyChromosome
 $ start shiny-server  
 ```
 
-Now, the shinyChromosome app is available at http://IPAddressOfTheServer:3838/shinychromosome/.  
+Now, the shinyChromosome app is available at http://IPAddressOfTheServer:3838/shinyChromosome/.  
 
 

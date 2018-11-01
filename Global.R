@@ -12,6 +12,8 @@ library(reshape2)
 library(data.table)
 library(grid)
 
+library(shinysky)
+
 source("single_genome_plot.R")
 source("two_genomes_plot.R")
 

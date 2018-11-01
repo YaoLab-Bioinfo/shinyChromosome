@@ -1,6 +1,6 @@
 plotfig_tc <- function(input, output, data.C1, data.C2, data.TC, Height, Width, selgralcol, gralcol_tp, gralcol_ct, coltype, colorcus, colormulgp, coltransparency, themestyle, fontSize, xtitle, ytitle, titlefontface, xlabel, ylabel, legendpos, lgdtitlesize, lgdtitlefontface, lgdtextsize, lgdtextfontface, symbolpoint, symbolpointype, pointsizetype, pointsize, linesize, vertical, verticalcol, verticalsize, verticaltype, horizontal, horizontalcol, horizontalsize, horizontaltype, addborder, bordercols, linetype, curvature, collgd, collgdname, sizelgd, sizelgdname, shapelgd, shapelgdname, collgdmdylabel, collgdlabel, sizelgdmdylabel, sizelgdlabel, shapelgdmdylabel, shapelgdlabel, plottype){
 	  output$figure_2 <- renderPlot({
-	      withProgress(message='Making plots',value = 0,{	  
+#	      withProgress(message='Making plots',value = 0,{	  
 	          names(data.C1) <- c("chr","size")
 	          data.C1$size <- as.numeric(data.C1$size)
 	          names(data.C2) <- c("chr","size")
@@ -315,7 +315,7 @@ plotfig_tc <- function(input, output, data.C1, data.C2, data.TC, Height, Width, 
          tc_p1 <- tc_p1 + theme(text = element_text(size=fontSize))	  
 		 grid.draw(tc_p1)
 	     figure_2 <<- recordPlot()
-         incProgress(1/1, detail="Finished")
-         })		 
+#         incProgress(1/1, detail="Finished")
+#         })		 
     }, height = Height, width = Width)
 }

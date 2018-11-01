@@ -1,7 +1,7 @@
 
 plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdirection, plottype, layerindex, Height, Width, coltype, colorcus, colormulgp, coltransparency, heightlayer, marginlayer, themestyle, fontSize, xtitle, ytitle, titlefontface, xlabel, ylabel, legendpos, lgdspacesize, lgdintrasize, lgdtitlesize, lgdtitlefontface, lgdtextsize, lgdtextfontface, addborder, bordercols, rectcol, rectcoldis, rectcoldiscus, rectgrad_col, colrect, heatmapcol, colhmap, heatmapcols, rectgrad_cuscols, colhmapdis, colhmapdiscus, symbolpoint, sel_symbolpoint, pointsize, sel_pointsize, linecolor, linesize, fillarea, selareatype, borderarea, linetype, addarrow, arrowpos, arrowsize, textcol, textsize, fontface, textangle, collgd, collgdname, sizelgd, sizelgdname, shapelgd, shapelgdname, linetypelgd, linetypelgdname, collgdmdylabel, collgdlabel, sizelgdmdylabel, sizelgdlabel, shapelgdmdylabel, shapelgdlabel, linetypelgdmdylabel, linetypelgdlabel){
 	  output$figure_1 <- renderPlot({
-	      withProgress(message='Making plots',value = 0,{      
+#	      withProgress(message='Making plots',value = 0,{      
 	      names(data.C) <- c("chr","size")
 	      chr_order <- unique(data.C$chr)	  
 	      data.C$size <- as.numeric(data.C$size) 
@@ -1106,7 +1106,7 @@ plotfig <- function(input, output, data.C, data.T, trackindx, chrplotype, plotdi
 	  }
 	  grid.draw(p1)
 	  figure_1 <<- recordPlot()
-      incProgress(1/1, detail="Finished")
-      })		 
+#      incProgress(1/1, detail="Finished")
+#      })		 
    }, height = Height, width = Width)  
 }
