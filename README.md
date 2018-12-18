@@ -8,16 +8,16 @@ This is the repository for the Shiny application presented in "shinyChromosome: 
 
 #	Use shinyChromosome online
 
-shinyChromosome is deployed at https://yimingyu.shinyapps.io/shinychromosome/, http://shinychromosome.ncpgr.cn/ and http://150.109.59.144:3838/shinyChromosome/ for online use.  
+shinyChromosome is deployed at http://150.109.59.144:3838/shinyChromosome/, http://shinychromosome.ncpgr.cn/ and https://yimingyu.shinyapps.io/shinychromosome/ for online use.  
 shinyChromosome is idle until you activate it by accessing the URLs.  
-So it may take some time when you access this URL for the first time.   
+So, it may take some time when you access this URL for the first time.   
 Once it was activated, shinyChromosome could be used smoothly and easily.
 
 *****
 
 #	<font color="red">Launch shinyChromosome directly from R and GitHub (preferred approach)</font>
 
-User can choose to run shinyChromosome installed locally for a more preferable experience.
+User can choose to run shinyChromosome installed on local computers (Windows, Mac or Linux) for a more preferable experience.
 
 **Step 1: Install R and RStudio**
 
