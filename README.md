@@ -45,8 +45,8 @@ install.packages("shinythemes")
 install.packages("shinyBS")
 install.packages("markdown")
 # install shinysky  
-if (require(devtools)) install.packages("devtools")  
-devtools::install_github("venyao/ShinySky")  
+install.packages("devtools")  
+devtools::install_github("venyao/ShinySky", force=TRUE)  
 ```
 
 **Step 3: Start the app**  
@@ -86,8 +86,8 @@ install.packages("shinythemes")
 install.packages("shinyBS")
 install.packages("markdown")
 # install shinysky  
-if (require(devtools)) install.packages("devtools")  
-devtools::install_github("venyao/ShinySky")  
+install.packages("devtools")  
+devtools::install_github("venyao/ShinySky", force=TRUE)  
 ```
 
 For more information, please check the following pages:  
