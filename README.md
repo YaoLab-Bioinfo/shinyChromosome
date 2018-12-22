@@ -55,8 +55,19 @@ Start an R session using RStudio and run these lines:
 ```
 shiny::runGitHub("shinyChromosome", "venyao")  
 ```
+This command will download the code of shinyChromosome from GitHub to a temporary directory of your computer and then launch the shinyChromosome app in the web browser. Once the web browser was closed, the downloaded code of shinyChromosome would be deleted from your computer. Next time when you run this command in RStudio, it will download the source code of shinyChromosome from GitHub to a temporary directory again. This process is frustrating since it takes some time to download the code of shinyChromosome from GitHub.  
 
-Your web browser will open the app.
+Users are suggested to download the source code of shinyChromosome from GitHub to a fixed directory of your computer, such as “E:\apps” on Windows. Following the procedure illustrated in the following figure, a zip file named “shinyChromosome-master.zip” would be downloaded to the disk of your computer. Move this file to “E:\apps” and unzip this file. Then a directory named “shinyChromosome-master” would be generated in “E:\apps”. The scripts “server.R” and “ui.R” could be found in “E:\apps\shinyChromosome-master”.  
+
+<br>
+<img src="shinyChromosome.png" width="890"/>  
+<br>
+
+Then you can start the shinyChromosome app by running these lines in RStudio.  
+```
+library(shiny)
+runApp("E:/apps/shinyChromosome-master", launch.browser = TRUE)
+```
 
 *****
 
