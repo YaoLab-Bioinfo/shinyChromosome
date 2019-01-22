@@ -2,11 +2,13 @@
 options(scipen = 5)
 
 shinyServer(function(input, output, session) {
+  # single genome plot
   observe({
     if (input$submit1 > 0) {
       isolate({
+	# general input options
         Height <<- input$Height; Width <<- input$Width; chr_plotype <<- input$plotype
-        plot_direct <<- input$plot_direct; theme_sty <<- input$theme_sty;font_size <<- input$font_size
+        plot_direct <<- input$plot_direct; theme_sty <<- input$theme_sty; font_size <<- input$font_size
         xtitle <<- input$xtitle; ytitle <<- input$ytitle; title_font_face <<- input$title_font_face
         xlabel <<- input$xlabel; lgd_pos <<- input$lgd_pos; lgd_space_size <<- input$lgd_space_size
         lgd_intra_size <<- input$lgd_intra_size; lgd_title_size <<- input$lgd_title_size
@@ -19,9 +21,9 @@ shinyServer(function(input, output, session) {
           data.chr <<- NULL
         }
 
+	# user input data
         sel_upload_data.export <<- c()
         upload_file.export <<- c()
-
         data.track <<- lapply(1:10, function(x) {
           assign(paste("sel_upload_data", x, sep = ""), input[[paste("sel_upload_data", x, sep = "")]])
           sel_upload_data.export <<- c(sel_upload_data.export, get(paste("sel_upload_data", x, sep = "")))
@@ -43,6 +45,7 @@ shinyServer(function(input, output, session) {
         }
 
         if (!is.null(data.track)) {
+	  # input options for each dataset
           plot_type <<- c(); col_type <<- c(); color_cus <<- c(); color_mulgp <<- c(); col_transpt <<- c()
           height_layer <<- c(); margin_layer <<- c(); add_border <<- c(); border_col <<- c(); rect_col <<- c()
           rect_col_dis <<- c(); rect_col_dis_cus <<- c(); rect_grad_col <<- c(); col_rect <<- c(); ylabel <<- c()
@@ -121,6 +124,7 @@ shinyServer(function(input, output, session) {
             margin_layer <<- c(margin_layer, input[[paste("margin_layer", i, sep = "")]])
           }
 
+	  # error infomation
           output$errorinfo1 <- renderPrint({
             validate(need(!is.null(data.chr), "Please upload genome data!"))
             validate(need(!is.null(data.track), "Please upload track data!"))
@@ -241,9 +245,11 @@ shinyServer(function(input, output, session) {
     }
   })
 
+  # two genomes plot
   observe({
     if (input$submit2 > 0) {
       isolate({
+	# user input options
         tc_Height <<- input$tc_Height; tc_Width <<- input$tc_Width; tc_theme_sty <<- input$tc_theme_sty
         tc_font_size <<- input$tc_font_size; tc_xtitle <<- input$tc_xtitle; tc_ytitle <<- input$tc_ytitle
         tc_title_font_face <<- input$tc_title_font_face; tc_xlabel <<- input$tc_xlabel; tc_ylabel <<- input$tc_ylabel
@@ -429,7 +435,7 @@ shinyServer(function(input, output, session) {
       dev.off()
     }, contentType = 'image/svg')
 
-  ## *** Download Source code file ***
+  ## *** Download R Source code file ***
   output$downloadscript1 <- renderUI({
     req(input$submit1)
     downloadButton("Script_1.R", "Download the R scripts to reproduce the plot")
@@ -608,7 +614,7 @@ shinyServer(function(input, output, session) {
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
   
-  ## *** Manual ***
+  ## *** User Manual ***
   output$pdfview <- renderUI({
     tags$iframe(style = "height:1500px; width:100%; scrolling=yes", src = "shinyChromosome_Help_Manual.pdf")
   })

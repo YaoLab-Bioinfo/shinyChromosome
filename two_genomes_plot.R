@@ -46,7 +46,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
         names(data.2geno.plot)[1:6] <- c("chr1", "xpos1", "xpos2", "chr2", "ypos1", "ypos2")
         data.2geno.plot[c("xpos1", "xpos2", "ypos1","ypos2")] <- sapply(data.2geno.plot[c("xpos1", "xpos2", "ypos1","ypos2")],as.numeric)
       }
-	  
+      
       ## *** Color ***
       if (plot_type %in% c("point_gradual", "rect_gradual")) {
         if (sel_gral_col == 1) {
@@ -135,12 +135,12 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
         }
       })
       outputOptions(output, "errorinfo8", suspendWhenHidden = FALSE)
-	  
+  
       ## *** Borders ***
       if (add_border == 2) {
         border_col <- NA
       }
-	  
+ 
       ## *** Legends ***
       add_col_lgd <- "none"; add_size_lgd <- "none"; add_shape_lgd <- "none"
       if (col_lgd == 1) {
@@ -161,7 +161,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
           }
         }
       }
-	  
+
       if (plot_type %in% c("point_gradual", "point_discrete")) {
         if (size_lgd == 1) {
           add_size_lgd <- "legend"
@@ -321,19 +321,19 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
         }
       }
-	  
+
       ## *** Vertical line ***
       if (vertical == 1) {
         tc_p1 <- tc_p1 + geom_vline(xintercept = chr.cum.len_1, linetype = vertical_type, 
                                     color = vertical_col, size = vertical_size)
       }
-	  
+ 
       ## *** Horizontal line ***
       if (horizontal == 1) {
         tc_p1 <- tc_p1 + geom_hline(yintercept = chr.cum.len_2, linetype = horizontal_type, 
                                     color = horizontal_col, size = horizontal_size)
       }
-	  
+
       ## *** The axis label ***
       if (xlabel == 1) {
         tc_p1 <- tc_p1 + scale_x_continuous(breaks = data.chr1$pos, labels = data.chr1$chr)
@@ -345,16 +345,16 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       } else{
         tc_p1 <- tc_p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
       }
-	  
+
       ## *** The x and y axis title ***
       tc_p1 <- tc_p1 + xlab(xtitle) + ylab(ytitle)
-	  
+
       ## *** Font face ***
       tc_p1 <- tc_p1 + theme(axis.title = element_text(face = title_font_face))
-	  
+
       ## *** Font size ***
       tc_p1 <- tc_p1 + theme(text = element_text(size = font_size))
-	  
+ 
       grid.draw(tc_p1)
       figure_2 <<- recordPlot()
     }, height = Height, width = Width)

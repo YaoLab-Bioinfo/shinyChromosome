@@ -187,7 +187,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       val_range_chr$variable <- NULL
 
       selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow",
-	               "navy", "seagreen", "maroon", "burlywood3", "magenta2")
+                   "navy", "seagreen", "maroon", "burlywood3", "magenta2")
 
       col_dis_rand <- c(brewer.pal(11, 'Set3'), brewer.pal(9, 'Set1')[c(-1, -3, -6)], brewer.pal(8, 'Dark2'),
                       "chartreuse", "aquamarine", "cornflowerblue", "blue", "cyan", "bisque1", "darkorchid2",
@@ -503,7 +503,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             }
           }
         }
-	
+
         if (plot_type[i] %in% "point" && size_lgd[i] == 1) {
           add_size_lgd <- "legend"
           if (size_lgd_mdy_label[i] == 1) {
@@ -511,7 +511,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             labelscex <- rep(size_lgd_labelp, length(breakscex))[1:length(breakscex)]
           }
         }
-	
+
         if (plot_type[i] %in% "point" && shape_lgd[i] == 1) {
           add_shape_lgd <- "legend"
           if (shape_lgd_mdy_label[i] == 1) {
@@ -519,7 +519,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             labelspch <- rep(shape_lgd_labelp, length(breakspch))[1:length(breakspch)]
           }
         }
-	
+
         if (plot_type[i] %in% c("vertical_line", "horizontal_line") && line_type_lgd[i] == 1) {
           add_line_type_lgd <- "legend"
           if (line_type_lgd_mdy_label[i] == 1) {
@@ -527,7 +527,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             labels_line_type <- rep(line_type_lgd_labelp, length(linetypep))[1:length(linetypep)]
           }
         }
-	
+
         ## *** Legend of fill area ***
         if (plot_type[i] %in% "line" & fill_area[i] == 1 & add_col_lgd %in% "legend") {
           data.track.single$raw_areacol <- as.character(data.track.single$raw_color)
@@ -538,7 +538,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           data.track.single$areacol <- factor(data.track.single$areacol, levels = areacol_1, ordered = T)
           data.track.single$raw_areacol <- factor(data.track.single$raw_areacol, levels = raw_areacol_1, ordered = T)
         }
-	
+
         ## *** Number of chromosomes ***
         data.track.single$layer <- layer_index[i]
         data.track.single <- merge(data.track.single, track_layout, by.x = "layer", by.y = "num", all.x = T)
@@ -558,14 +558,14 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
               fold_1 <- abs(as.numeric(height_layer[names(height_layer) == layer_index[i]]) / (1.02 * max_val))
             }
           }
-	
+
           if (min_val < 0) {
             minnum_1 <- unique(abs(min_val) * fold_1 + data.track.single$ystart)
           } else{
             minnum_1 <- unique(data.track.single$ystart)
           }
           minnum_p <- minnum_1
-	
+
           if (plot_type[i] %in% "segment") {
             if (min_val < 0) {
               data.track.single$ypos1 <- data.track.single$ypos1 + abs(min_val)
@@ -581,18 +581,18 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           }
           minnum_p <- minnum_1
         }
-	
+
         if (plot_type[i] %in% "heatmap_gradual") {
           fold_2 <- as.numeric(height_layer[names(height_layer) == layer_index[i]]) / max(data.track.single$value, na.rm = T)
           data.track.single$yvalue <- fold_2 * data.track.single$value - fold_2 / 2 + data.track.single$ystart[1]
         }
-	
+
         if (plot_type[i] %in% "heatmap_discrete") {
           fold_2 <- as.numeric(height_layer[names(height_layer) == layer_index[i]]) / max(as.numeric(as.character(data.track.single$value)), na.rm = T)
           data.track.single$yvalue1 <- fold_2 * as.numeric(as.character(data.track.single$value)) - fold_2 + data.track.single$ystart[1]
           data.track.single$yvalue2 <- fold_2 * as.numeric(as.character(data.track.single$value)) + data.track.single$ystart[1]
         }
-	
+
         if (plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete")) {
           data.track.single$xpos <- (data.track.single$xmin + data.track.single$xmax) / 2
           data.track.single$width <- (data.track.single$xmax - data.track.single$xpos) * 2
@@ -604,7 +604,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         data.track.single$chr.f <- factor(data.track.single$chr, levels = chr_order, ordered = T)
 
         data.track.single.lgd$chr <- factor(data.track.single.lgd$chr, levels = names(chr.cum.len), ordered = T)
-	
+
         ## *** The position of concatenated chromosomes ***
         if (plot_type[i] %in% c("point", "line", "vertical_line", "text")) {
           data.track.single.lgd$pos <- data.track.single.lgd$pos + chr.cum.len[data.track.single.lgd$chr]
@@ -625,7 +625,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           data.track.single.lgd$xmin <- data.track.single.lgd$xmin + chr.cum.len[data.track.single.lgd$chr]
           data.track.single.lgd$xmax <- data.track.single.lgd$xmax + chr.cum.len[data.track.single.lgd$chr]
         }
-	
+
         if (plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete")) {
           data.track.single.lgd$xpos <- (data.track.single.lgd$xmin + data.track.single.lgd$xmax) / 2
           data.track.single.lgd$width <- (data.track.single.lgd$xmax - data.track.single.lgd$xpos) * 2
@@ -1253,7 +1253,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           p1 <- arrangeGrob(p1, legends, heights = c(1.05 - lgd_space_size, lgd_space_size + 0.05), nrow = 2)
         }
       }
-	  
+
       grid.draw(p1)
       figure_1 <<- recordPlot()
     }, height = Height, width = Width)
