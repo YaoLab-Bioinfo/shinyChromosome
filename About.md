@@ -6,7 +6,7 @@ To create single genome plot by aligning genome data along all chromosomes of a 
 
 To cretae two genomes plot for comparison of data across two genomes, go to the `Two genomes plot` menu.  
 
-For the detail format of input data, check the `Input data format` menu.  
+For the detail format of input data, check the `Input data format` submenu of the `Help` menu.  
 
 ## Software references  
 1. R Development Core Team. <i><a href="http://www.r-project.org/" target="_blank">R</a>:  A Language and Environment for Statistical Computing.</i> R Foundation for Statistical Computing, Vienna. R version 3.5.0 (2018)  

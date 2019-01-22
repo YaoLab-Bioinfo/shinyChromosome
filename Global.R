@@ -28,7 +28,7 @@ areColors <- function(x) {
     tryCatch(is.matrix(col2rgb(y)), error = function(e) FALSE)
   })
 }
-		  
+
 dat_dis_col <- function(i, dis_cols, dat) {
   dis_col <- dis_cols[i]
   dis_col <- gsub("\\s", "", strsplit(dis_col, ",")[[1]])
@@ -49,7 +49,7 @@ lgd_mdy_label <- function(i, lgd_labels) {
   }
   return(lgd_label)
 }
-			
+
 dat_cus_cols <- function(i, cus_cols, dat) {
   laycolor <- cus_cols[i]
   laycolor <- unlist(strsplit(laycolor, ";"))
@@ -63,7 +63,7 @@ dat_cus_cols <- function(i, cus_cols, dat) {
   dat <- dat[c(colname, "cols")]
   return(dat)
 }
-			
+
 chr_cumsum <- function(dat, i) {
   chr.len <- dat$size
   names(chr.len) <- dat$chr
@@ -74,7 +74,7 @@ chr_cumsum <- function(dat, i) {
   names(chr.cum.len) <- names(chr.len)
   return(chr.cum.len)
 }
-			
+
 cols_adjust <- function(i, dat, col_transpt, plot_type, type) {
   if ((type == 1 && (plot_type[i] %in% c("rect_discrete", "heatmap_discrete"))) |
       (type == 2 && (!plot_type[i] %in% c("point_gradual", "rect_gradual")))) {
@@ -87,7 +87,7 @@ cols_adjust <- function(i, dat, col_transpt, plot_type, type) {
       dat_val <- unique(dat$raw_color[!is.na(dat$raw_color)])[1]
       dat_col <- "#FFFFFF00"
     }
-  } else if (!plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete", "text", 
+  } else if (!plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete", "text",
                                   "rect_gradual", "rect_discrete", "ideogram")){
     if (!"raw_color" %in% names(dat)) {
       dat$raw_color <- dat$color
@@ -103,17 +103,17 @@ cols_adjust <- function(i, dat, col_transpt, plot_type, type) {
     dat$color[!areColors(dat$color)] <- NA
     dat$color <- adjustcolor(dat$color, alpha.f = col_transpt[i])
     dat_col <- dat$color[match(dat_val, dat$raw_color)]
-  }		  
+  }
   dat_val <- dat_val[!duplicated(dat_col)]
   dat_col <- dat_col[!duplicated(dat_col)]
-  
+
   dat$raw_color <- factor(dat$raw_color, levels = dat_val, ordered = T)
   dat$color <- factor(dat$color, levels = dat_col, ordered = T)
   dat_val <<- dat_val[which(!dat_col %in% "#FFFFFF00")]
   dat_col <<- dat_col[!dat_col %in% "#FFFFFF00"]
   return(dat)
-}			
-			
+}
+
 col_lgd_mdy_labels <- function(dat, col_lgd_labels, breakscol, labelscol) {
     col_lgd_labels <- rep(col_lgd_labels, length(breakscol))[1:length(breakscol)]
     names(col_lgd_labels) <- labelscol
@@ -122,8 +122,5 @@ col_lgd_mdy_labels <- function(dat, col_lgd_labels, breakscol, labelscol) {
     dat$raw_color <- col_lgd_labels[dat$raw_color]
     dat$raw_color <- factor(dat$raw_color, levels = unique(labels_1), ordered = T)
     return(dat)
-}			
-			
-			
-			
-			
+}
+

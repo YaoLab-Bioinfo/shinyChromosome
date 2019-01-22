@@ -1,4 +1,4 @@
-	
+
 dat_chr_cum <- function(dat, chr.cum.len) {
   dat$start <- 0
   dat$pos <- (dat$start + dat$size) / 2
@@ -7,7 +7,7 @@ dat_chr_cum <- function(dat, chr.cum.len) {
   dat$chr <- as.character(dat$chr)
   return(dat)
 }
-	
+
 two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plot, Height, Width, sel_gral_col, 
                        gral_col_tp, gral_col_ct, col_type, color_cus, color_mulgp, col_transpt, 
                        theme_sty, font_size, xtitle, ytitle, title_font_face, xlabel, ylabel, 
@@ -19,7 +19,6 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
                        col_lgd_mdy_label, col_lgd_label, size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label, 
                        shape_lgd_label, plot_type) {
     output$figure_2 <- renderPlot({
-      #	      withProgress(message='Making plots',value = 0,{
       ## *** Modify two genomes data ***
       names(data.chr1) <- c("chr", "size")
       data.chr1$size <- as.numeric(data.chr1$size)
@@ -27,7 +26,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       data.chr2$size <- as.numeric(data.chr2$size)
       selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", 
                    "yellow", "navy", "seagreen", "maroon", "burlywood3", "magenta2")
-					   
+
       tc_p1 <- ggplot()
       ## *** Plot theme ***
       tc_alltheme_sty <-
@@ -61,7 +60,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       if (plot_type %in% c("point_discrete", "segment", "rect_discrete")) {
         if (col_type == 2) {
           data.2geno.plot <- dat_dis_col(1, color_cus, data.2geno.plot)
-        } else if (col_type == 3 & ("color" %in% colnames(data.2geno.plot))) { 
+        } else if (col_type == 3 & ("color" %in% colnames(data.2geno.plot))) {
           data.2geno.plot <- dat_cus_cols(1, color_mulgp, data.2geno.plot)
           laycolor <- unique(data.2geno.plot$cols)
           data.2geno.plot$raw_color <- data.2geno.plot$color
@@ -94,7 +93,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
         })
         outputOptions(output, "errorinfo5", suspendWhenHidden = FALSE)
       }
-	  
+
       ## *** The color labels ***
       if (!plot_type %in% c("point_gradual", "rect_gradual")) {
         if (!"raw_color" %in% names(data.2geno.plot)) {
@@ -106,7 +105,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
         labelscol <- dat_val
         breakscol <- dat_col
       }
-	  
+
       ## *** Point type and size ***
       if (plot_type %in% c("point_gradual", "point_discrete")) {
         if (symbol_point_type == 1) {
@@ -124,7 +123,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
         breakscex <- unique(data.2geno.plot$size)
         labelscex <- breakscex
       }
-	  
+
       output$errorinfo8 <- renderPrint({
         if (input$tc_plot_type %in% c("point_gradual", "point_discrete")) {
           validate(
@@ -166,7 +165,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       if (plot_type %in% c("point_gradual", "point_discrete")) {
         if (size_lgd == 1) {
           add_size_lgd <- "legend"
-          if (size_lgd_mdy_label == 1) {		  
+          if (size_lgd_mdy_label == 1) {
             size_lgd_labelp <- lgd_mdy_label(i, size_lgd_label)
             labelscex <- rep(size_lgd_labelp, length(breakscex))[1:length(breakscex)]
           }
@@ -203,7 +202,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
 
       data.chr2 <- dat_chr_cum(data.chr2, chr.cum.len)
       data.2geno.plot$chr2 <- factor(data.2geno.plot$chr2, levels = names(chr.cum.len), ordered = T)
-	  
+
       if (plot_type %in% c("segment", "rect_gradual", "rect_discrete")) {
         data.2geno.plot$ypos1 <- data.2geno.plot$ypos1 + chr.cum.len[data.2geno.plot$chr2]
         data.2geno.plot$ypos2 <- data.2geno.plot$ypos2 + chr.cum.len[data.2geno.plot$chr2]
@@ -286,7 +285,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
         }
       }
       
-      ## *** Rect_gradual ***	  
+      ## *** Rect_gradual ***
       if (plot_type %in% "rect_gradual") {
         midpoint <- mean(data.2geno.plot$color, na.rm = T)
         if (lgd_pos == 1) {
@@ -358,7 +357,6 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
 	  
       grid.draw(tc_p1)
       figure_2 <<- recordPlot()
-      #         incProgress(1/1, detail="Finished")
-      #         })
     }, height = Height, width = Width)
   }
+

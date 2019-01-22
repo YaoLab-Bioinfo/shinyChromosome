@@ -12,16 +12,16 @@ shinyServer(function(input, output, session) {
         lgd_intra_size <<- input$lgd_intra_size; lgd_title_size <<- input$lgd_title_size
         lgd_title_font_face <<- input$lgd_title_font_face; lgd_text_font_face <<- input$lgd_text_font_face
         lgd_text_size <<- input$lgd_text_size; chr_data <<- input$upload_chr_data
-        
+
         if (!is.null(input$upload_chr_data)) {
           data.chr <<- data.frame(fread(chr_data$datapath), stringsAsFactors = F)
         } else{
           data.chr <<- NULL
         }
-		
+
         sel_upload_data.export <<- c()
         upload_file.export <<- c()
-		
+
         data.track <<- lapply(1:10, function(x) {
           assign(paste("sel_upload_data", x, sep = ""), input[[paste("sel_upload_data", x, sep = "")]])
           sel_upload_data.export <<- c(sel_upload_data.export, get(paste("sel_upload_data", x, sep = "")))
@@ -31,17 +31,17 @@ shinyServer(function(input, output, session) {
             data.frame(fread(trackfil$datapath), stringsAsFactors = F)
           }
         })
-		
+
         upload_file.export_1 <<- sel_upload_data.export
         upload_file.export_1[upload_file.export_1 == 2] <<- upload_file.export
         upload_file.export <<- upload_file.export_1
         track_indx <<- which(!unlist(lapply(data.track, is.null)))
         data.track <<- data.track[track_indx]
-		
+
         if (length(data.track) == 0) {
           data.track <<- NULL
         }
-		
+
         if (!is.null(data.track)) {
           plot_type <<- c(); col_type <<- c(); color_cus <<- c(); color_mulgp <<- c(); col_transpt <<- c()
           height_layer <<- c(); margin_layer <<- c(); add_border <<- c(); border_col <<- c(); rect_col <<- c()
@@ -72,11 +72,11 @@ shinyServer(function(input, output, session) {
             col_rect <<- c(col_rect, input[[paste("col_rect", track_indx[k], sep = "")]])
             sel_heatmap_col <<- c(sel_heatmap_col, input[[paste("sel_heatmap_col", track_indx[k], sep = "")]])
             hmap_col <<- c(hmap_col, input[[paste("hmap_col", track_indx[k], sep = "")]])
-            heatmap_col_cus <<- c(heatmap_col_cus, paste(input[[paste("lowColor", track_indx[k], sep = "")]], 
-                                                 input[[paste("midColor", track_indx[k], sep = "")]], 
+            heatmap_col_cus <<- c(heatmap_col_cus, paste(input[[paste("lowColor", track_indx[k], sep = "")]],
+                                                 input[[paste("midColor", track_indx[k], sep = "")]],
                                                  input[[paste("highColor", track_indx[k], sep = "")]], sep = "."))
-            rect_grad_cus_cols <<- c(rect_grad_cus_cols, paste(input[[paste("rect_lowColor", track_indx[k], sep = "")]], 
-                                                           input[[paste("rect_midColor", track_indx[k], sep = "")]], 
+            rect_grad_cus_cols <<- c(rect_grad_cus_cols, paste(input[[paste("rect_lowColor", track_indx[k], sep = "")]],
+                                                           input[[paste("rect_midColor", track_indx[k], sep = "")]],
                                                            input[[paste("rect_highColor", track_indx[k], sep = "")]], sep = "."))
             hmap_col_dis <<- c(hmap_col_dis, input[[paste("hmap_col_dis", track_indx[k], sep = "")]])
             hmap_col_dis_cus <<- c(hmap_col_dis_cus, input[[paste("hmap_col_dis_cus", track_indx[k], sep = "")]])
@@ -115,19 +115,19 @@ shinyServer(function(input, output, session) {
             line_type_lgd_label <<- c(line_type_lgd_label, input[[paste("line_type_lgd_label", track_indx[k], sep = "")]])
             ylabel <<- c(ylabel, input[[paste("ylabel", track_indx[k], sep = "")]])
           }
-		  
+
           for (i in sort(as.numeric(gsub("track", "", layer_index)))) {
             height_layer <<- c(height_layer, input[[paste("height_layer", i, sep = "")]])
             margin_layer <<- c(margin_layer, input[[paste("margin_layer", i, sep = "")]])
           }
-		  
+
           output$errorinfo1 <- renderPrint({
             validate(need(!is.null(data.chr), "Please upload genome data!"))
             validate(need(!is.null(data.track), "Please upload track data!"))
             if (!is.null(data.track)) {
               for (m in 1:length(data.track)) {
                 dt.TT <- data.track[[m]]
-                if (plot_type[m] %in% c("point", "line", "bar", "rect_gradual", "rect_discrete", 
+                if (plot_type[m] %in% c("point", "line", "bar", "rect_gradual", "rect_discrete",
                                         "heatmap_gradual", "heatmap_discrete", "text", "segment")) {
                   validate(need(
                     ncol(dt.TT) >= 3,
@@ -211,7 +211,7 @@ shinyServer(function(input, output, session) {
             }
           })
           outputOptions(output, "errorinfo1", suspendWhenHidden = FALSE)
-          
+
           single_genome_plot(
             input = input, output = output, data.chr = data.chr, data.track = data.track, track_indx = track_indx,
             chr_plotype = chr_plotype, plot_type = plot_type, plot_direct = plot_direct, layer_index = layer_index,
@@ -222,9 +222,9 @@ shinyServer(function(input, output, session) {
             lgd_title_size = lgd_title_size, lgd_title_font_face = lgd_title_font_face, lgd_text_font_face = lgd_text_font_face,
             lgd_text_size = lgd_text_size, add_border = add_border, border_col = border_col, rect_col = rect_col,
             rect_col_dis = rect_col_dis, rect_col_dis_cus = rect_col_dis_cus, rect_grad_col = rect_grad_col, col_rect = col_rect,
-            sel_heatmap_col = sel_heatmap_col, hmap_col = hmap_col, heatmap_col_cus = heatmap_col_cus, 
-            rect_grad_cus_cols = rect_grad_cus_cols, hmap_col_dis = hmap_col_dis, hmap_col_dis_cus = hmap_col_dis_cus, 
-            symbol_point = symbol_point, sel_symbol_point = sel_symbol_point, point_size = point_size, 
+            sel_heatmap_col = sel_heatmap_col, hmap_col = hmap_col, heatmap_col_cus = heatmap_col_cus,
+            rect_grad_cus_cols = rect_grad_cus_cols, hmap_col_dis = hmap_col_dis, hmap_col_dis_cus = hmap_col_dis_cus,
+            symbol_point = symbol_point, sel_symbol_point = sel_symbol_point, point_size = point_size,
             sel_point_size = sel_point_size, line_color = line_color, line_size = line_size, fill_area = fill_area,
             sel_area_type = sel_area_type, border_area = border_area, linetype = linetype, add_arrow = add_arrow,
             arrow_pos = arrow_pos, arrow_size = arrow_size, text_col = text_col, text_size = text_size, font_face = font_face,
@@ -240,7 +240,7 @@ shinyServer(function(input, output, session) {
       NULL
     }
   })
-  
+
   observe({
     if (input$submit2 > 0) {
       isolate({
@@ -251,26 +251,26 @@ shinyServer(function(input, output, session) {
         tc_lgd_title_font_face <<- input$tc_lgd_title_font_face; tc_lgd_text_font_face <<- input$tc_lgd_text_font_face
         tc_lgd_text_size <<- input$tc_lgd_text_size; tc_chr_data1 <<- input$tc_upload_chr_data_1
         tc_chr_data2 <<- input$tc_upload_chr_data_2
-		
+
         if (!is.null(tc_chr_data1)) {
           data.chr1 <<- data.frame(fread(tc_chr_data1$datapath), stringsAsFactors = F)
         } else{
           data.chr1 <<- NULL
         }
-		
+
         if (!is.null(tc_chr_data2)) {
           data.chr2 <<- data.frame(fread(tc_chr_data2$datapath), stringsAsFactors = F)
         } else{
           data.chr2 <<- NULL
         }
-		
+
         trackfil <<- input$tc_uploaddata
         if (!is.null(trackfil)) {
           data.2geno.plot <<- data.frame(fread(trackfil$datapath), stringsAsFactors = F)
         } else{
           data.2geno.plot <<- NULL
         }
-		
+
         if (!is.null(data.2geno.plot)) {
           tc_plot_type <<- input$tc_plot_type; tc_sel_gral_col <<- input$tc_sel_gral_col; tc_gral_col_tp <<- input$tc_gral_col
           tc_gral_col_ct <<- c(input$tc_lowColor, input$tc_midColor, input$tc_highColor); tc_col_type <<- input$tc_col_type
@@ -288,7 +288,7 @@ shinyServer(function(input, output, session) {
           tc_col_lgd_label <<- input$tc_col_lgd_label; tc_size_lgd_mdy_label <<- input$tc_size_lgd_mdy_label
           tc_size_lgd_label <<- input$tc_size_lgd_label; tc_shape_lgd_mdy_label <<- input$tc_shape_lgd_mdy_label
           tc_shape_lgd_label <<- input$tc_shape_lgd_label
-          
+
           output$errorinfo6 <- renderPrint({
             validate(need(!is.null(data.chr1), "Please upload genome1 data!"))
             validate(need(!is.null(data.chr2), "Please upload genome2 data!"))
@@ -342,7 +342,7 @@ shinyServer(function(input, output, session) {
             }
           })
           outputOptions(output, "errorinfo6", suspendWhenHidden = FALSE)
-		  
+
           two_genomes_plot(
             input = input, output = output, data.chr1 = data.chr1, data.chr2 = data.chr2, data.2geno.plot = data.2geno.plot,
             Height = tc_Height, Width = tc_Width, sel_gral_col = tc_sel_gral_col, gral_col_tp = tc_gral_col_tp,
@@ -359,7 +359,6 @@ shinyServer(function(input, output, session) {
             size_lgd = tc_size_lgd, size_lgd_name = tc_size_lgd_name, shape_lgd = tc_shape_lgd, shape_lgd_name = tc_shape_lgd_name,
             col_lgd_mdy_label = tc_col_lgd_mdy_label, col_lgd_label = tc_col_lgd_label, size_lgd_mdy_label = tc_size_lgd_mdy_label,
             size_lgd_label = tc_size_lgd_label, shape_lgd_mdy_label = tc_shape_lgd_mdy_label, shape_lgd_label = tc_shape_lgd_label
-            
           )
         }
       })
@@ -367,13 +366,13 @@ shinyServer(function(input, output, session) {
       NULL
     }
   })
-  
+
   ## *** Download PDF file ***
   output$downloadpdf1 <- renderUI({
     req(input$submit1)
     downloadButton("Visualization_1.pdf", "Download pdf-file")
   })
-  
+
   output$Visualization_1.pdf <- downloadHandler(
     filename <- function() {
       paste('Visualization_1.pdf')
@@ -383,12 +382,12 @@ shinyServer(function(input, output, session) {
       print(figure_1)
       dev.off()
     }, contentType = 'application/pdf')
-  
+
   output$downloadpdf2 <- renderUI({
     req(input$submit2)
     downloadButton("Visualization_2.pdf", "Download pdf-file")
   })
-  
+
   output$Visualization_2.pdf <- downloadHandler(
     filename <- function() {
       paste('Visualization_2.pdf')
@@ -398,13 +397,13 @@ shinyServer(function(input, output, session) {
       print(figure_2)
       dev.off()
     }, contentType = 'application/pdf')
-  
+
   ## *** Download SVG file ***
   output$downloadsvg1 <- renderUI({
     req(input$submit1)
     downloadButton("Visualization_1.svg", "Download svg-file")
   })
-  
+
   output$Visualization_1.svg <- downloadHandler(
     filename <- function() {
       paste('Visualization_1.svg')
@@ -414,12 +413,12 @@ shinyServer(function(input, output, session) {
       print(figure_1)
       dev.off()
     }, contentType = 'image/svg')
-  
+
   output$downloadsvg2 <- renderUI({
     req(input$submit2)
     downloadButton("Visualization_2.svg", "Download svg-file")
   })
-  
+
   output$Visualization_2.svg <- downloadHandler(
     filename <- function() {
       paste('Visualization_2.svg')
@@ -429,13 +428,13 @@ shinyServer(function(input, output, session) {
       print(figure_2)
       dev.off()
     }, contentType = 'image/svg')
-  
+
   ## *** Download Source code file ***
   output$downloadscript1 <- renderUI({
     req(input$submit1)
     downloadButton("Script_1.R", "Download the R scripts to reproduce the plot")
   })
-  
+
   output$Script_1.R <- downloadHandler(
     filename <- function() {
     paste('Script_1.R')
@@ -444,12 +443,12 @@ shinyServer(function(input, output, session) {
     source("writeCmd-1.R")
     writeLines(out, con = file)
   }, contentType = NULL)
-  
+
   output$downloadscript2 <- renderUI({
     req(input$submit2)
     downloadButton("Script_2.R", "Download the R scripts to reproduce the plot")
   })
-  
+
   output$Script_2.R <- downloadHandler(
     filename <- function() {
     paste('Script_2.R')
@@ -458,7 +457,7 @@ shinyServer(function(input, output, session) {
     source("writeCmd-2.R")
     writeLines(out, con = file)
   }, contentType = NULL)
-  
+
   ## *** Download data file ***
   output$data.zip <- downloadHandler(
     filename <- function() {
@@ -467,7 +466,7 @@ shinyServer(function(input, output, session) {
   content <- function(file) {
     file.copy("www/data.zip", file)
   }, contentType = "application/zip")
-  
+
   ## *** Download example data ***
   output$genome_data.txt <- downloadHandler(
     filename <- function() {
@@ -478,7 +477,7 @@ shinyServer(function(input, output, session) {
     example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
     write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
   }, contentType = 'text/csv')
-  
+
   output$genome1_data.txt <- downloadHandler(
     filename <- function() {
     paste('genome1_data.txt')
@@ -488,7 +487,7 @@ shinyServer(function(input, output, session) {
     example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
     write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
   }, contentType = 'text/csv')
-  
+
   output$genome2_data.txt <- downloadHandler(
     filename <- function() {
     paste('genome2_data.txt')
@@ -498,33 +497,33 @@ shinyServer(function(input, output, session) {
     example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
     write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
   }, contentType = 'text/csv')
-  
+
   output$example_data1.txt <- downloadHandler(
     filename <- function() {
       paste('example_data1.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type1, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type1, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
-  
+
   output$example_data2.txt <- downloadHandler(
     filename <- function() {
       paste('example_data2.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type2, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type2, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
-    }, contentType = 'text/csv')  
-  
+    }, contentType = 'text/csv')
+
   output$example_data3.txt <- downloadHandler(
     filename <- function() {
       paste('example_data3.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type3, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type3, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
@@ -532,80 +531,79 @@ shinyServer(function(input, output, session) {
   output$example_data4.txt <- downloadHandler(
     filename <- function() {
       paste('example_data4.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type4, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type4, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
-  
+
   output$example_data5.txt <- downloadHandler(
     filename <- function() {
       paste('example_data5.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type5, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type5, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
-  
+
   output$example_data6.txt <- downloadHandler(
     filename <- function() {
       paste('example_data6.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type6, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type6, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
-    }, contentType = 'text/csv')  
+    }, contentType = 'text/csv')
 
   output$example_data7.txt <- downloadHandler(
     filename <- function() {
       paste('example_data7.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type7, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type7, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
-  
+
   output$example_data8.txt <- downloadHandler(
     filename <- function() {
       paste('example_data8.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type8, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type8, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
-    }, contentType = 'text/csv')  
+    }, contentType = 'text/csv')
 
   output$example_data9.txt <- downloadHandler(
     filename <- function() {
       paste('example_data9.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type9, ".txt") 
-      example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
-      write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
-    }, contentType = 'text/csv')
-  
-  output$example_data10.txt <- downloadHandler(
-    filename <- function() {
-      paste('example_data10.txt')
-    }, 
-    content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type10, ".txt") 
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type9, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
 
-  
+  output$example_data10.txt <- downloadHandler(
+    filename <- function() {
+      paste('example_data10.txt')
+    },
+    content <- function(file) {
+      input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type10, ".txt")
+      example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
+      write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
+    }, contentType = 'text/csv')
+
   output$example_plot_data.txt <- downloadHandler(
     filename <- function() {
       paste('example_plot_data.txt')
-    }, 
+    },
     content <- function(file) {
-      input_file <- paste0("www/data/download_example_data/two_genome/", input$tc_plot_type, ".txt") 
+      input_file <- paste0("www/data/download_example_data/two_genome/", input$tc_plot_type, ".txt")
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
@@ -614,55 +612,55 @@ shinyServer(function(input, output, session) {
   output$pdfview <- renderUI({
     tags$iframe(style = "height:1500px; width:100%; scrolling=yes", src = "shinyChromosome_Help_Manual.pdf")
   })
-  
+
   ## *** View example data ***
   output$Table1 <- renderDataTable({
     x <- fread("www/data/download_example_data/single_genome/genome_data.txt")
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table2 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type1, ".txt")
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table3 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type2, ".txt")
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table4 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type3, ".txt")
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table5 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type4, ".txt")
     x <- fread(input_file)
     return(x)
-  }, options = list(pageLength = 10))  
-  
+  }, options = list(pageLength = 10))
+
   output$Table6 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type5, ".txt")
     x <- fread(input_file)
     return(x)
-  }, options = list(pageLength = 10))  
-  
+  }, options = list(pageLength = 10))
+
   output$Table7 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type6, ".txt")
     x <- fread(input_file)
     return(x)
-  }, options = list(pageLength = 10))  
+  }, options = list(pageLength = 10))
 
   output$Table8 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type7, ".txt")
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table9 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type8, ".txt")
     x <- fread(input_file)
@@ -674,31 +672,30 @@ shinyServer(function(input, output, session) {
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table11 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type10, ".txt")
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table12 <- renderDataTable({
     input_file <- "www/data/download_example_data/two_genome/genome1_data.txt"
-    
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table13 <- renderDataTable({
     input_file <- "www/data/download_example_data/two_genome/genome2_data.txt"
-    
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
   output$Table14 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/two_genome/", input$tc_plot_type, ".txt")
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
-  
+
 })
+

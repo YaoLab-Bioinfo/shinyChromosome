@@ -17,7 +17,7 @@ cytoband.col <- function(x) {
   names(col) <- NULL
   return(col)
 }
-	
+
 rect_grad_cols <- function(i, rect_grad_col, col_rect, rect_grad_cus_cols) {
   rect_grad_col <- rect_grad_col[i]
   if (rect_grad_col == 1) {
@@ -53,7 +53,7 @@ dis_type_cols <- function(i, dat, col_dis, plot_type, col_dis_rand, col_dis_cus,
     if (plot_type[i] %in% "heatmap_discrete") {
       dat$raw_color <- dat$color
     }
-			
+
     if (length(unique(dat$color)) <= length(col_dis_rand)) {
       selcol <- sample(col_dis_rand, length(unique(dat$color)))
       dis_col.export <<- paste(selcol, collapse = ".")
@@ -97,9 +97,9 @@ dat_val_range <- function(m, dat, plot_type, layer_index) {
   }
   return(val_range)
 }
-		
-single_genome_plot <- function(input, output, data.chr, data.track, track_indx, chr_plotype, plot_direct, plot_type, layer_index, 
-           Height, Width, col_type, color_cus, color_mulgp, col_transpt, height_layer, margin_layer, 
+
+single_genome_plot <- function(input, output, data.chr, data.track, track_indx, chr_plotype, plot_direct, plot_type, layer_index,
+           Height, Width, col_type, color_cus, color_mulgp, col_transpt, height_layer, margin_layer,
            theme_sty, font_size, xtitle, ytitle, title_font_face, xlabel, ylabel, lgd_pos, lgd_space_size,
            lgd_intra_size, lgd_title_size, lgd_title_font_face, lgd_text_size, lgd_text_font_face, add_border, border_col,
            rect_col, rect_col_dis, rect_col_dis_cus, rect_grad_col, col_rect, sel_heatmap_col, hmap_col, heatmap_col_cus,
@@ -109,7 +109,6 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
            shape_lgd_name, line_type_lgd, line_type_lgd_name, col_lgd_mdy_label, col_lgd_label, size_lgd_mdy_label,
            size_lgd_label, shape_lgd_mdy_label, shape_lgd_label, line_type_lgd_mdy_label, line_type_lgd_label) {
     output$figure_1 <- renderPlot({
-      #	      withProgress(message='Making plots',value = 0,{
       names(data.chr) <- c("chr", "size")
       chr_order <- unique(data.chr$chr)
       data.chr$size <- as.numeric(data.chr$size)
@@ -122,7 +121,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       val_range_chr <- melt(data = data.chr, id.vars = "chr")
       val_range_chr$variable <- NULL
       chr.cum.len <- chr_cumsum(data.chr, 1)
-      
+
       ## *** Set colnames for track data ***
       for (m in 1:length(data.track)) {
         data.track.single <- data.track[[m]]
@@ -140,7 +139,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         } else if (plot_type[m] %in% "text") {
           names(data.track.single) <- c("chr", "pos", "value", "symbol")
         }
-          
+
         ## *** Extract ymin and ymax of each track ***
         if (plot_type[m] %in% "segment") {
           val_range <- dat_val_range(m, data.track.single, plot_type, layer_index)
@@ -148,7 +147,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           val_range <- dat_val_range(m, data.track.single, plot_type, layer_index)
         }
       }
-      
+
       if (length(val_range) > 0) {
         val_range <- as.data.frame(do.call(rbind, val_range), stringsAsFactors = F)
         names(val_range) <- c("layer", "chr", "min_val", "max_val")
@@ -161,7 +160,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         })
         val_range <- unique(val_range)
       }
-      
+
       ## *** Overal layout as height of each track and interval between adjacent tracks ***
       track_layout <- data.frame(num = sort(layer_index), height = height_layer, gap = margin_layer, stringsAsFactors = F)
       track_layout <- unique(track_layout)
@@ -176,43 +175,43 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       track_layout_tmp$chr <- track_layout_chrs
       names(val_range_chr) <- c("chr", "pos")
       val_range_chr <- merge(val_range_chr, track_layout_tmp, by = "chr", all.x = T)
-	  
+
       if (chr_plotype == 1) {
         val_range_chr$chr <- factor(val_range_chr$chr, levels = names(chr.cum.len), ordered = T)
         val_range_chr$pos <- val_range_chr$pos + chr.cum.len[val_range_chr$chr]
         val_range_chr$chr <- as.character(val_range_chr$chr)
-        val_range_chr <- val_range_chr[c(which(val_range_chr$pos == min(val_range_chr$pos)), 
+        val_range_chr <- val_range_chr[c(which(val_range_chr$pos == min(val_range_chr$pos)),
                                          which(val_range_chr$pos == max(val_range_chr$pos))), ]
       }
       val_range_chr <- melt(data = val_range_chr, id.vars = c("chr", "pos"))
       val_range_chr$variable <- NULL
-      
-      selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow", 
+
+      selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow",
 	               "navy", "seagreen", "maroon", "burlywood3", "magenta2")
-				   
-      col_dis_rand <- c(brewer.pal(11, 'Set3'), brewer.pal(9, 'Set1')[c(-1, -3, -6)], brewer.pal(8, 'Dark2'), 
-                      "chartreuse", "aquamarine", "cornflowerblue", "blue", "cyan", "bisque1", "darkorchid2", 
-                      "firebrick1", "gold1", "magenta1", "olivedrab1", "navy", "maroon1", "tan", "yellow3", 
-                      "black", "bisque4", "seagreen3", "plum2", "yellow1", "springgreen", "slateblue1", 
+
+      col_dis_rand <- c(brewer.pal(11, 'Set3'), brewer.pal(9, 'Set1')[c(-1, -3, -6)], brewer.pal(8, 'Dark2'),
+                      "chartreuse", "aquamarine", "cornflowerblue", "blue", "cyan", "bisque1", "darkorchid2",
+                      "firebrick1", "gold1", "magenta1", "olivedrab1", "navy", "maroon1", "tan", "yellow3",
+                      "black", "bisque4", "seagreen3", "plum2", "yellow1", "springgreen", "slateblue1",
                       "lightsteelblue1", "lightseagreen", "limegreen")
-					 
+
       ## *** Set ploting panel ***
       p1 <- ggplot() + geom_point(data = val_range_chr, aes(pos, value), color = NA)
       yaxis_breaks <- list()
       yaxis_labels <- list()
-      
+
       ## *** Set priority level ***
-      indx <- lapply(c("heatmap_gradual", "heatmap_discrete", "rect_gradual", "rect_discrete", "bar", "line", 
+      indx <- lapply(c("heatmap_gradual", "heatmap_discrete", "rect_gradual", "rect_discrete", "bar", "line",
                        "segment", "point", "vertical_line", "horizontal_line", "text", "ideogram"), function(x) {
           indx <- which(plot_type %in% x)
           return(indx)
         })
-		
+
       indx <- unlist(indx)
       laycolor.export <<- list()
       rect_discol.export <<- list()
       heatmap_discol.export <<- list()
-      
+
       ## *** Cyclic ploting for all tracks ***
       for (i in indx) {
         data.track.single <- data.track[[i]]
@@ -254,16 +253,16 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         } else if (plot_type[i] %in% "ideogram") {
           names(data.track.single)[1:5] <- c("chr", "xmin", "xmax", "value1", "value2")
         }
-        
+
         if(plot_type[i] %in% c("bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "horizontal_line", "ideogram")) {
           data.track.single[c("xmin", "xmax")] <- sapply(data.track.single[c("xmin", "xmax")],as.numeric)
         }
-		
+
         ## *** Raw value ***
         if (plot_type[i] %in% c("point", "line", "bar")) {
           data.track.single$raw_value <- data.track.single$value
         }
-		
+
         ## *** Color ***
         if (plot_type[i] %in% c("point", "line", "bar", "segment")) {
           col_typep <- col_type[i]
@@ -272,10 +271,10 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             laycolor.export <<- c(laycolor.export, NA)
           } else if (col_typep == 3 & ("color" %in% colnames(data.track.single))) {
             data.track.single <- dat_cus_cols(i, color_mulgp, data.track.single)
-			
+
             jd_col <- laycolor$cols
             output$errorinfo2 <- renderPrint({
-              if (input[[paste("plot_type", i, sep = "")]] %in% c("point", "line", "bar", "segment") 
+              if (input[[paste("plot_type", i, sep = "")]] %in% c("point", "line", "bar", "segment")
                   && input[[paste("col_type", i, sep = "")]] == 3) {
                 validate(need(
                   all(areColors(jd_col)),
@@ -286,8 +285,8 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
                 ))
               }
             })
-            outputOptions(output, "errorinfo2", suspendWhenHidden = FALSE)			
-			
+            outputOptions(output, "errorinfo2", suspendWhenHidden = FALSE)
+
             laycolor <- unique(data.track.single$cols)
             data.track.single$raw_color <- data.track.single$color
             data.track.single$color <- data.track.single$cols
@@ -318,7 +317,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           rect_cols <<- rect_grad_cols(i, rect_grad_col, col_rect, rect_grad_cus_cols)
         }
         
-        ## *** The color for rect_discrete type ***		
+        ## *** The color for rect_discrete type ***
         if (plot_type[i] %in% "rect_discrete") {
           dis_col.export <<- NULL
           data.track.single <- dis_type_cols(i, data.track.single, rect_col, plot_type, col_dis_rand, rect_col_dis_cus, rect_col_dis)
@@ -337,7 +336,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             }
           })
           outputOptions(output, "errorinfo3", suspendWhenHidden = FALSE)
-		  
+
           names(data.track.single)[4] <- "raw_color"
           dat_val <<- NULL
           dat_col <<- NULL
@@ -393,7 +392,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         }
         
         ## *** Color transparency ***
-        if (!plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete", "text", 
+        if (!plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete", "text",
                                 "rect_gradual", "rect_discrete", "ideogram")) {
           dat_val <<- NULL
           dat_col <<- NULL
@@ -495,7 +494,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
               labels_1 <<- NULL
               data.track.single <- col_lgd_mdy_labels(data.track.single, col_lgd_label_1, rectcol_1, rectval_1)
               rectval_1 <- labels_1
-            } else if (plot_type[i] %in% "heatmap_discrete") {						
+            } else if (plot_type[i] %in% "heatmap_discrete") {
               col_lgd_label_1 <- rep(col_lgd_label_1, length(hmapcol_1))[1:length(hmapcol_1)]
               names(col_lgd_label_1) <- hmapval_1
               hmapval_1 <- unname(col_lgd_label_1)
@@ -504,7 +503,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             }
           }
         }
-		
+	
         if (plot_type[i] %in% "point" && size_lgd[i] == 1) {
           add_size_lgd <- "legend"
           if (size_lgd_mdy_label[i] == 1) {
@@ -512,7 +511,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             labelscex <- rep(size_lgd_labelp, length(breakscex))[1:length(breakscex)]
           }
         }
-		
+	
         if (plot_type[i] %in% "point" && shape_lgd[i] == 1) {
           add_shape_lgd <- "legend"
           if (shape_lgd_mdy_label[i] == 1) {
@@ -520,7 +519,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             labelspch <- rep(shape_lgd_labelp, length(breakspch))[1:length(breakspch)]
           }
         }
-		
+	
         if (plot_type[i] %in% c("vertical_line", "horizontal_line") && line_type_lgd[i] == 1) {
           add_line_type_lgd <- "legend"
           if (line_type_lgd_mdy_label[i] == 1) {
@@ -528,7 +527,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
             labels_line_type <- rep(line_type_lgd_labelp, length(linetypep))[1:length(linetypep)]
           }
         }
-		
+	
         ## *** Legend of fill area ***
         if (plot_type[i] %in% "line" & fill_area[i] == 1 & add_col_lgd %in% "legend") {
           data.track.single$raw_areacol <- as.character(data.track.single$raw_color)
@@ -539,15 +538,15 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           data.track.single$areacol <- factor(data.track.single$areacol, levels = areacol_1, ordered = T)
           data.track.single$raw_areacol <- factor(data.track.single$raw_areacol, levels = raw_areacol_1, ordered = T)
         }
-		
+	
         ## *** Number of chromosomes ***
         data.track.single$layer <- layer_index[i]
         data.track.single <- merge(data.track.single, track_layout, by.x = "layer", by.y = "num", all.x = T)
-        if (!plot_type[i] %in% c("rect_gradual", "rect_discrete", "heatmap_gradual", 
+        if (!plot_type[i] %in% c("rect_gradual", "rect_discrete", "heatmap_gradual",
                                  "heatmap_discrete", "vertical_line", "ideogram")) {
           min_val <- val_range$min_val[val_range$layer == layer_index[i]]
-          max_val <- val_range$max_val[val_range$layer == layer_index[i]]            
-			
+          max_val <- val_range$max_val[val_range$layer == layer_index[i]]
+
           if (min_val > 0 & plot_type[i] %in% "horizontal_line" & length(which(layer_index == layer_index[i])) == 1) {
             fold_1 <- abs(as.numeric(height_layer[names(height_layer) == layer_index[i]]) / (1.02 * max_val))
           } else{
@@ -559,14 +558,14 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
               fold_1 <- abs(as.numeric(height_layer[names(height_layer) == layer_index[i]]) / (1.02 * max_val))
             }
           }
-			
+	
           if (min_val < 0) {
             minnum_1 <- unique(abs(min_val) * fold_1 + data.track.single$ystart)
           } else{
             minnum_1 <- unique(data.track.single$ystart)
           }
           minnum_p <- minnum_1
-			
+	
           if (plot_type[i] %in% "segment") {
             if (min_val < 0) {
               data.track.single$ypos1 <- data.track.single$ypos1 + abs(min_val)
@@ -582,30 +581,30 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           }
           minnum_p <- minnum_1
         }
-		  
+	
         if (plot_type[i] %in% "heatmap_gradual") {
           fold_2 <- as.numeric(height_layer[names(height_layer) == layer_index[i]]) / max(data.track.single$value, na.rm = T)
           data.track.single$yvalue <- fold_2 * data.track.single$value - fold_2 / 2 + data.track.single$ystart[1]
         }
-		  
+	
         if (plot_type[i] %in% "heatmap_discrete") {
           fold_2 <- as.numeric(height_layer[names(height_layer) == layer_index[i]]) / max(as.numeric(as.character(data.track.single$value)), na.rm = T)
           data.track.single$yvalue1 <- fold_2 * as.numeric(as.character(data.track.single$value)) - fold_2 + data.track.single$ystart[1]
           data.track.single$yvalue2 <- fold_2 * as.numeric(as.character(data.track.single$value)) + data.track.single$ystart[1]
         }
-		  
+	
         if (plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete")) {
           data.track.single$xpos <- (data.track.single$xmin + data.track.single$xmax) / 2
           data.track.single$width <- (data.track.single$xmax - data.track.single$xpos) * 2
         }
         
         data.track.single.lgd <- data.track.single
-        
+
         ## *** Fix the chromosomes order ***
         data.track.single$chr.f <- factor(data.track.single$chr, levels = chr_order, ordered = T)
-        
+
         data.track.single.lgd$chr <- factor(data.track.single.lgd$chr, levels = names(chr.cum.len), ordered = T)
-		
+	
         ## *** The position of concatenated chromosomes ***
         if (plot_type[i] %in% c("point", "line", "vertical_line", "text")) {
           data.track.single.lgd$pos <- data.track.single.lgd$pos + chr.cum.len[data.track.single.lgd$chr]
@@ -621,12 +620,12 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           data.chr.ideo$start <- data.chr.ideo$start + chr.cum.len[data.chr.ideo$chr]
           data.chr.ideo$size <- data.chr.ideo$size + chr.cum.len[data.chr.ideo$chr]
         }
-		
+
         if (plot_type[i] %in% c("bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "ideogram")) {
           data.track.single.lgd$xmin <- data.track.single.lgd$xmin + chr.cum.len[data.track.single.lgd$chr]
           data.track.single.lgd$xmax <- data.track.single.lgd$xmax + chr.cum.len[data.track.single.lgd$chr]
-        }  
-		  
+        }
+	
         if (plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete")) {
           data.track.single.lgd$xpos <- (data.track.single.lgd$xmin + data.track.single.lgd$xmax) / 2
           data.track.single.lgd$width <- (data.track.single.lgd$xmax - data.track.single.lgd$xpos) * 2
@@ -634,7 +633,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           data.track.single$width <- (data.track.single$xmax - data.track.single$xpos) * 2
         }
         data.track.single.lgd$chr <- as.character(data.track.single.lgd$chr)
-		
+
         ## *** Concatenated chromosomes or Separated chromosomes ***
         if (chr_plotype == 1) {
           data.track.single <- data.track.single.lgd
@@ -683,12 +682,12 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
               if (lgd_pos == 1) {
                 lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue, color = color), size = line_size[i], linetype = linetypep)
                 lg1 <- lg1 + scale_color_identity(name = col_lgd_name[i], guide = add_col_lgd, breaks = breakscol, labels = labelscol)
-                lg1 <- lg1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
+                lg1 <- lg1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                                    legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
               } else{
                 lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue, color = color), size = line_size[i], linetype = linetypep)
                 lg1 <- lg1 + scale_color_identity(name = col_lgd_name[i], guide = add_col_lgd, breaks = breakscol, labels = labelscol)
-                lg1 <- lg1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
+                lg1 <- lg1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                                    legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
               }
               assign(paste("legend", i, sep = ""), g_legend(lg1))
@@ -704,18 +703,18 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           } else{
             if (add_col_lgd %in% "legend") {
               if (lgd_pos == 1) {
-                lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue), color = as.character(data.track.single.lgd$color), 
+                lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue), color = as.character(data.track.single.lgd$color),
                                             size = line_size[i], linetype = linetypep)
                 lg1 <- lg1 + geom_area(data = data.track.single.lgd, aes(x = pos, y = yvalue, fill = areacol))
                 lg1 <- lg1 + scale_fill_identity( name = col_lgd_name[i], guide = add_col_lgd, breaks = areacol_1, labels = raw_areacol_1)
-                lg1 <- lg1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
+                lg1 <- lg1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                                    legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
               } else{
-                lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue), color = as.character(data.track.single.lgd$color), 
+                lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue), color = as.character(data.track.single.lgd$color),
                                             size = line_size[i], linetype = linetypep)
                 lg1 <- lg1 + geom_area(data = data.track.single.lgd, aes(x = pos, y = yvalue, fill = areacol))
                 lg1 <- lg1 + scale_fill_identity(name = col_lgd_name[i], guide = add_col_lgd, breaks = areacol_1, labels = raw_areacol_1)
-                lg1 <- lg1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
+                lg1 <- lg1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                                    legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
               }
               assign(paste("legend", i, sep = ""), g_legend(lg1))
@@ -760,7 +759,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
                   for (j in unique(data.track.single$color[data.track.single$chr %in% f])) {
                     dat <- data.track.single[data.track.single$chr %in% f & data.track.single$color %in% j, ]
                     #p1 <- p1 + geom_rect(data=dat, aes(xmin=xmin, xmax=xmax, ymax=yvalue), ymin=dat$ystart[1]+minnum_p, fill=as.character(dat$color), color=border_colp)
-                    p1 <- p1 + geom_rect(data = dat, aes(xmin = xmin, xmax = xmax, ymax = yvalue), ymin = dat$ystart[1], 
+                    p1 <- p1 + geom_rect(data = dat, aes(xmin = xmin, xmax = xmax, ymax = yvalue), ymin = dat$ystart[1],
                                          fill = as.character(dat$color), color = border_colp)
                   }
                 }
@@ -886,7 +885,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
                                                 mid = rect_cols[2], high = rect_cols[3], na.value = "#FFFFFF00")
               lg1 <- lg1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
-            } else{            
+            } else{
               lg1 <- ggplot() + geom_rect(data = data.track.single.lgd, aes(xmin = xmin, xmax = xmax, ymin = ystart, ymax = yend, 
                                                                fill = value), color = border_colp)
               lg1 <- lg1 + scale_fill_gradient2(name = col_lgd_name[i], low = rect_cols[1], midpoint = midpoint, 
@@ -969,7 +968,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           }
         }
         
-        ## *** Heatmap_discrete ***		
+        ## *** Heatmap_discrete ***
         if (plot_type[i] %in% "heatmap_discrete") {
           if (lgd_pos == 1) {
             lg1 <- ggplot() + geom_rect(data = data.track.single.lgd, aes(xmin = xmin, xmax = xmax, ymin = ystart, ymax = yend, 
@@ -1081,7 +1080,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
                                hjust = 0, angle = text_angle[i], fontface = font_face[i])
         }
         
-        ## *** Segment ***		
+        ## *** Segment ***
         if (plot_type[i] %in% "segment") {
           if (length(unique(data.track.single.lgd$color)) > 1) {
             linetypep <- "solid"
@@ -1206,18 +1205,18 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       
       ## *** The x and y axis title ***
       p1 <- p1 + xlab(xtitle) + ylab(ytitle)
-	  
+
       ## *** Font face ***
       p1 <- p1 + theme(axis.title = element_text(face = title_font_face))
-	  
+
       ## *** Font size ***
       p1 <- p1 + theme(text = element_text(size = font_size))
-	  
+
       ## *** Orientation ***
       if (plot_direct == 2) {
         p1 <- p1 + coord_flip()
       }
-	  
+
       ## *** Lay out panels ***
       if (chr_plotype == 2) {
         if (plot_direct == 2) {
@@ -1226,7 +1225,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           p1 <- p1 + facet_grid(chr.f ~ .)
         }
       }
-      
+
       ## *** Legends ***
       legends <- NA
       lgd_width <- 0
@@ -1257,7 +1256,6 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
 	  
       grid.draw(p1)
       figure_1 <<- recordPlot()
-      #      incProgress(1/1, detail="Finished")
-      #      })
     }, height = Height, width = Width)
   }
+
