@@ -5,7 +5,7 @@ output:
     keep_md: TRUE
 ---
 
-
+<h1><center> Input data format </center></h1>
 
 The detail format of input data for different types of plots are described in the following sections.  
 

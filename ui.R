@@ -3501,7 +3501,7 @@ shinyUI(
 	
 	navbarMenu("Help",
 	           tabPanel("Usage and installation", includeMarkdown("README.md")),
-	           tabPanel("Input Data Format", includeMarkdown("In_Data_Format.md")),
+	           tabPanel("Input data format", includeMarkdown("In_Data_Format.md")),
 	           tabPanel("User manual", uiOutput("pdfview"))
 	),
 	
