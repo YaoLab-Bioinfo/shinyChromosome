@@ -258,6 +258,7 @@ shinyServer(function(input, output, session) {
         tc_lgd_text_size <<- input$tc_lgd_text_size; tc_chr_data1 <<- input$tc_upload_chr_data_1
         tc_chr_data2 <<- input$tc_upload_chr_data_2
 
+	# user input data
         if (!is.null(tc_chr_data1)) {
           data.chr1 <<- data.frame(fread(tc_chr_data1$datapath), stringsAsFactors = F)
         } else{
@@ -277,6 +278,7 @@ shinyServer(function(input, output, session) {
           data.2geno.plot <<- NULL
         }
 
+	# user input options
         if (!is.null(data.2geno.plot)) {
           tc_plot_type <<- input$tc_plot_type; tc_sel_gral_col <<- input$tc_sel_gral_col; tc_gral_col_tp <<- input$tc_gral_col
           tc_gral_col_ct <<- c(input$tc_lowColor, input$tc_midColor, input$tc_highColor); tc_col_type <<- input$tc_col_type
@@ -295,6 +297,7 @@ shinyServer(function(input, output, session) {
           tc_size_lgd_label <<- input$tc_size_lgd_label; tc_shape_lgd_mdy_label <<- input$tc_shape_lgd_mdy_label
           tc_shape_lgd_label <<- input$tc_shape_lgd_label
 
+	  # error information
           output$errorinfo6 <- renderPrint({
             validate(need(!is.null(data.chr1), "Please upload genome1 data!"))
             validate(need(!is.null(data.chr2), "Please upload genome2 data!"))
@@ -616,7 +619,7 @@ shinyServer(function(input, output, session) {
   
   ## *** User Manual ***
   output$pdfview <- renderUI({
-    tags$iframe(style = "height:1500px; width:100%; scrolling=yes", src = "shinyChromosome_Help_Manual.pdf")
+    tags$iframe(style = "height:1500px; width:100%; scrolling=yes", src = "shinyChromosome_User_Manual.pdf")
   })
 
   ## *** View example data ***

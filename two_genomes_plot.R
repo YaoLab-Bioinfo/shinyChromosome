@@ -8,6 +8,7 @@ dat_chr_cum <- function(dat, chr.cum.len) {
   return(dat)
 }
 
+# the main function to make two genomes plot
 two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plot, Height, Width, sel_gral_col, 
                        gral_col_tp, gral_col_ct, col_type, color_cus, color_mulgp, col_transpt, 
                        theme_sty, font_size, xtitle, ytitle, title_font_face, xlabel, ylabel, 
@@ -212,7 +213,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       data.2geno.plot$chr2 <- as.character(data.2geno.plot$chr2)
       
       ## *** Point_gradual ***
-      if (plot_type %in% "point_gradual") {
+      if (plot_type == "point_gradual") {
         midpoint <- mean(data.2geno.plot$color, na.rm = T)
         if (is.numeric(labelscex)) {
           labelscex <- sprintf("%.1f", sort(labelscex))
@@ -234,7 +235,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
           tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
         }
-        if (add_col_lgd %in% "colourbar") {
+        if (add_col_lgd == "colourbar") {
           tc_p1 <- tc_p1 + guides(color = guide_colorbar(order = 1, title.vjust = 0.8, title.hjust = 0.4), size = guide_legend(order = 2))
         } else{
           tc_p1 <- tc_p1 + guides(size = guide_legend(order = 1))
@@ -242,7 +243,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       }
       
       ## *** Point_discrete ***
-      if (plot_type %in% "point_discrete") {
+      if (plot_type == "point_discrete") {
         if (is.numeric(labelscex)) {
           labelscex <- sprintf("%.1f", sort(labelscex))
         }
@@ -266,7 +267,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       }
       
       ## *** Segment ***
-      if (plot_type %in% "segment") {
+      if (plot_type == "segment") {
         if (length(unique(data.2geno.plot$color)) > 1) {
           linetype <- "solid"
         }
@@ -286,7 +287,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       }
       
       ## *** Rect_gradual ***
-      if (plot_type %in% "rect_gradual") {
+      if (plot_type == "rect_gradual") {
         midpoint <- mean(data.2geno.plot$color, na.rm = T)
         if (lgd_pos == 1) {
           tc_p1 <- tc_p1 + geom_rect(data = data.2geno.plot, aes(xmin = xpos1, xmax = xpos2, ymin = ypos1, ymax = ypos2, 
@@ -306,7 +307,7 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       }
       
       ## *** Rect_discrete ***
-      if (plot_type %in% "rect_discrete") {
+      if (plot_type == "rect_discrete") {
         if (lgd_pos == 1) {
           tc_p1 <- tc_p1 + geom_rect(data = data.2geno.plot, aes(xmin = xpos1, xmax = xpos2, ymin = ypos1, ymax = ypos2, 
                                                          fill = color), color = border_col)
@@ -358,5 +359,5 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       grid.draw(tc_p1)
       figure_2 <<- recordPlot()
     }, height = Height, width = Width)
-  }
+}
 
