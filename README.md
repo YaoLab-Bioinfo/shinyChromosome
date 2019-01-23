@@ -1,4 +1,4 @@
-<h1><center> Usage and installation </center></h1>
+<h1><center> Usage and installation of shinyChromosome </center></h1>
 
 This is the repository for the Shiny application presented in "shinyChromosome: an R/Shiny application for interactive creation of non-circular plots of whole genomes" (Yu et al. 2018).
 
