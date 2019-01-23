@@ -238,6 +238,54 @@ shinyServer(function(input, output, session) {
             size_lgd_label = size_lgd_label, shape_lgd_mdy_label = shape_lgd_mdy_label, shape_lgd_label = shape_lgd_label,
             line_type_lgd_mdy_label = line_type_lgd_mdy_label, line_type_lgd_label = line_type_lgd_label
           )
+	  	  
+	  ## *** Download PDF file ***
+          output$downloadpdf1 <- renderUI({
+            req(figure_1)
+            downloadButton("Visualization_1.pdf", "Download pdf-file")
+          })
+
+          output$Visualization_1.pdf <- downloadHandler(
+            filename <- function() {
+              paste('Visualization_1.pdf')
+            },
+            content <- function(file) {
+              pdf(file, width = input$Width / 72, height = input$Height / 72)
+              print(figure_1)
+              dev.off()
+            }, contentType = 'application/pdf')
+	
+          ## *** Download SVG file ***
+          output$downloadsvg1 <- renderUI({
+            req(figure_1)
+            downloadButton("Visualization_1.svg", "Download svg-file")
+          })
+
+          output$Visualization_1.svg <- downloadHandler(
+            filename <- function() {
+              paste('Visualization_1.svg')
+            },
+            content <- function(file) {
+              svg(file, width = input$Width / 72, height = input$Height / 72)
+              print(figure_1)
+              dev.off()
+            }, contentType = 'image/svg')
+	
+          ## *** Download R Source code file ***
+          output$downloadscript1 <- renderUI({
+            req(figure_1)
+            downloadButton("Script_1.R", "Download the R scripts to reproduce the plot")
+          })
+
+          output$Script_1.R <- downloadHandler(
+            filename <- function() {
+            paste('Script_1.R')
+          },
+          content <- function(file) {
+            source("writeCmd-1.R")
+            writeLines(out, con = file)
+          }, contentType = NULL)
+	
         }
       })
     } else {
@@ -369,6 +417,54 @@ shinyServer(function(input, output, session) {
             col_lgd_mdy_label = tc_col_lgd_mdy_label, col_lgd_label = tc_col_lgd_label, size_lgd_mdy_label = tc_size_lgd_mdy_label,
             size_lgd_label = tc_size_lgd_label, shape_lgd_mdy_label = tc_shape_lgd_mdy_label, shape_lgd_label = tc_shape_lgd_label
           )
+		  
+	  ## *** Download PDF file ***
+          output$downloadpdf2 <- renderUI({
+            req(figure_2)
+            downloadButton("Visualization_2.pdf", "Download pdf-file")
+          })
+
+          output$Visualization_2.pdf <- downloadHandler(
+            filename <- function() {
+              paste('Visualization_2.pdf')
+            },
+            content <- function(file) {
+              pdf(file, width = input$tc_Width / 72, height = input$tc_Height / 72)
+              print(figure_2)
+              dev.off()
+            }, contentType = 'application/pdf')
+
+          ## *** Download SVG file ***
+          output$downloadsvg2 <- renderUI({
+            req(figure_2)
+            downloadButton("Visualization_2.svg", "Download svg-file")
+          })
+
+          output$Visualization_2.svg <- downloadHandler(
+            filename <- function() {
+              paste('Visualization_2.svg')
+            },
+            content <- function(file) {
+              svg(file, width = input$tc_Width / 72, height = input$tc_Height / 72)
+              print(figure_2)
+              dev.off()
+            }, contentType = 'image/svg')
+
+          ## *** Download R Source code file ***
+          output$downloadscript2 <- renderUI({
+            req(figure_2)
+            downloadButton("Script_2.R", "Download the R scripts to reproduce the plot")
+          })
+
+          output$Script_2.R <- downloadHandler(
+            filename <- function() {
+            paste('Script_2.R')
+          },
+          content <- function(file) {
+            source("writeCmd-2.R")
+            writeLines(out, con = file)
+          }, contentType = NULL)
+  
         }
       })
     } else {
@@ -376,97 +472,7 @@ shinyServer(function(input, output, session) {
     }
   })
 
-  ## *** Download PDF file ***
-  output$downloadpdf1 <- renderUI({
-    req(input$submit1)
-    downloadButton("Visualization_1.pdf", "Download pdf-file")
-  })
-
-  output$Visualization_1.pdf <- downloadHandler(
-    filename <- function() {
-      paste('Visualization_1.pdf')
-    },
-    content <- function(file) {
-      pdf(file, width = input$Width / 72, height = input$Height / 72)
-      print(figure_1)
-      dev.off()
-    }, contentType = 'application/pdf')
-
-  output$downloadpdf2 <- renderUI({
-    req(input$submit2)
-    downloadButton("Visualization_2.pdf", "Download pdf-file")
-  })
-
-  output$Visualization_2.pdf <- downloadHandler(
-    filename <- function() {
-      paste('Visualization_2.pdf')
-    },
-    content <- function(file) {
-      pdf(file, width = input$tc_Width / 72, height = input$tc_Height / 72)
-      print(figure_2)
-      dev.off()
-    }, contentType = 'application/pdf')
-
-  ## *** Download SVG file ***
-  output$downloadsvg1 <- renderUI({
-    req(input$submit1)
-    downloadButton("Visualization_1.svg", "Download svg-file")
-  })
-
-  output$Visualization_1.svg <- downloadHandler(
-    filename <- function() {
-      paste('Visualization_1.svg')
-    },
-    content <- function(file) {
-      svg(file, width = input$Width / 72, height = input$Height / 72)
-      print(figure_1)
-      dev.off()
-    }, contentType = 'image/svg')
-
-  output$downloadsvg2 <- renderUI({
-    req(input$submit2)
-    downloadButton("Visualization_2.svg", "Download svg-file")
-  })
-
-  output$Visualization_2.svg <- downloadHandler(
-    filename <- function() {
-      paste('Visualization_2.svg')
-    },
-    content <- function(file) {
-      svg(file, width = input$tc_Width / 72, height = input$tc_Height / 72)
-      print(figure_2)
-      dev.off()
-    }, contentType = 'image/svg')
-
-  ## *** Download R Source code file ***
-  output$downloadscript1 <- renderUI({
-    req(input$submit1)
-    downloadButton("Script_1.R", "Download the R scripts to reproduce the plot")
-  })
-
-  output$Script_1.R <- downloadHandler(
-    filename <- function() {
-    paste('Script_1.R')
-  },
-  content <- function(file) {
-    source("writeCmd-1.R")
-    writeLines(out, con = file)
-  }, contentType = NULL)
-
-  output$downloadscript2 <- renderUI({
-    req(input$submit2)
-    downloadButton("Script_2.R", "Download the R scripts to reproduce the plot")
-  })
-
-  output$Script_2.R <- downloadHandler(
-    filename <- function() {
-    paste('Script_2.R')
-  },
-  content <- function(file) {
-    source("writeCmd-2.R")
-    writeLines(out, con = file)
-  }, contentType = NULL)
-
+  
   ## *** Download data file ***
   output$data.zip <- downloadHandler(
     filename <- function() {

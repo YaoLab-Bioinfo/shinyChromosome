@@ -3475,9 +3475,9 @@ shinyUI(
 		),
        mainPanel(id = "mainPanel_2",
         fluidRow(
-          column(2, uiOutput("downloadpdf2")),
-          column(2, uiOutput("downloadsvg2")),
-		  column(2, uiOutput("downloadscript2"))
+          column(3, uiOutput("downloadpdf2")),
+          column(3, uiOutput("downloadsvg2")),
+		  column(6, uiOutput("downloadscript2"))
         ),			   
 		   br(),
            br(),
