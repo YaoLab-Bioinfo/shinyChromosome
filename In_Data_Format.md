@@ -1,13 +1,15 @@
 ---
-title: <center>Input Data Format</center>
+title:
 output: 
   html_document:
     keep_md: TRUE
 ---
 
+
+
 <h1><center> Input data format </center></h1>
 
-The detail format of input data for different types of plots are described in the following sections.  
+The detailed format of input data for different types of plots are described in the following sections.  
 
 ## **1. Single genome plot**
 
@@ -17,6 +19,8 @@ The dataset should contain only 2 columns. Column names are **optional**.
 **1st column**: chromosome ID.  
 **2nd column**: chromosome length.  
 
+Acceptable input data format can be  
+
 
 ```
  chr     size
@@ -25,12 +29,25 @@ The dataset should contain only 2 columns. Column names are **optional**.
    3 36406689
 ```
 
+or 
+
+
+```
+1	43268879
+2	35930381
+3	36406689
+```
+
+
 ### **1.2 Point**
 
-The dataset should contain >=3 columns. Column names are **optional**.  
+The dataset should contain >=3 columns.  
+In the simplest situation, the dataset should contain 3 columns. In this case, column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome position.  
 **3rd column**: data value.  
+
+Acceptable input data format can be  
 
 
 ```
@@ -40,7 +57,16 @@ The dataset should contain >=3 columns. Column names are **optional**.
    1   218457 0.393112
 ```
 
-To control the color of points, add a **color** column to classify data into different groups. Then different colors will be assigned to different groups of data. Column names are **compulsory**.  
+or  
+
+
+```
+1	202360	0.315323
+1	213775	1.113439
+1	218457	0.393112
+```
+
+To control the color of points, add a **color** column to divide the data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**.  
 
 
 ```
@@ -50,8 +76,7 @@ To control the color of points, add a **color** column to classify data into dif
    1   218457 0.393112     a
 ```
 
-
-To control the symbol used for each point, add a **shape** column. Type '?pch' at the console of R for more information. Column names are **compulsory**.  
+To control the symbol used for each point, add a **shape** column. Check http://www.endmemo.com/program/R/pchsymbols.php for more information. In this case, column names are **compulsory**.  
 
 
 ```
@@ -61,7 +86,7 @@ To control the symbol used for each point, add a **shape** column. Type '?pch' a
    1   200001    22    15
 ```
 
-To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. Column names are **compulsory**.  
+To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. In this case, column names are **compulsory**.  
 
 
 ```
@@ -71,7 +96,7 @@ To control the size of each point, add a **size** column. Larger number in the *
    1   200001    22  1.1
 ```
 
-Acceptable data format can also be  
+Users can choose to control two or more of the **color**, **shape** and **size** features at the same time. Acceptable input data can be  
 
 
 ```
@@ -114,10 +139,13 @@ or
 
 ### **1.3 Line**
 
-The dataset should contain >=3 columns. Column names are **optional**.  
+The dataset should contain >=3 columns.  
+In the simplest situation, the dataset should contain 3 columns. In this case, column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome position.  
 **3rd column**: data value.  
+
+Acceptable input data format can be  
 
 
 ```
@@ -127,7 +155,16 @@ The dataset should contain >=3 columns. Column names are **optional**.
    1   599000 0.0674
 ```
 
-To add multiple lines and assign different colors to different lines, add a **color** column to classify data into different groups. Column names are **compulsory**.  
+or  
+
+
+```
+1	     0	0.0428
+1	565000	0.0522
+1	599000	0.0674
+```
+
+To add multiple lines and assign different colors to different lines, add a **color** column to divide the data into different groups. In this case, column names are **compulsory**.  
 
 
 ```
@@ -141,11 +178,14 @@ To add multiple lines and assign different colors to different lines, add a **co
 
 ### **1.4 Bar**
 
-The dataset should contain >=4 columns. Column names are **optional**.  
+The dataset should contain >=4 columns.  
+In the simplest situation, the dataset should contain 4 columns. In this case, column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: start coordinate of bars.  
 **3rd column**: end coordinate of bars.  
 **4th column**: data value.  
+
+Acceptable input data format can be  
 
 
 ```
@@ -155,11 +195,20 @@ The dataset should contain >=4 columns. Column names are **optional**.
    1 200001 300000   650
 ```
 
-To control the color of bars, add a **color** column to classify data into different groups. Then different colors will be assigned to different groups of data. Column names are **compulsory**.  
+or  
 
 
 ```
- chr  start    end    LOD color
+1	     1	100000	672
+1	100001	200000	486
+1	200001	300000	650
+```
+
+To control the color of bars, add a **color** column to divide the data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**.  
+
+
+```
+ chr  start    end  value color
    1      0 565000 0.5923     a
    1 565000 599000 0.6701     a
    1 599000 922000 0.6785     a
@@ -176,7 +225,7 @@ The dataset should contain 4 columns. Column names are **optional**.
 
 The 4th column can be a character vector or a numeric vector. For a character vector, choose the `rect_discrete` plot type. For a numeric vector, choose the `rect_gradual` plot type.  
 
-Acceptable data format can be  
+Acceptable input data format can be  
 
 
 ```
@@ -186,7 +235,16 @@ Acceptable data format can be
    1 200001 300000     A
 ```
 
-or  
+or
+
+
+```
+1	     1	100000	A
+1	100001	200000	C
+1	200001	300000	A
+```
+
+or
 
 
 ```
@@ -196,6 +254,14 @@ or
    1 200001 300000  22
 ```
 
+or
+
+
+```
+1	     1	100000	29
+1	100001	200000	18
+1	200001	300000	22
+```
 
 ### **1.6 Heatmap**
 
@@ -208,7 +274,7 @@ Except for the first three columns, all the rest columns are treated as data val
 The rest columns can be character vectors or numeric vectors. Mix of character vector and numeric vector are not allowed.  
 For character vectors, choose the `heatmap_discrete` plot type. For numeric vectors, choose the `heatmap_gradual` plot type.  
 
-Acceptable data format can be  
+Acceptable input data format can be  
 
 
 ```
@@ -222,12 +288,29 @@ or
 
 
 ```
+1	      0	 631164	a	e	c	c	a	b
+1	 631165	1749192	b	b	c	d	d	c
+1	1749193	2077793	c	e	a	b	e	e
+```
+
+or 
+
+
+```
  chr    start      end TE NTE TR NTR
    1        1   100000  4  29 17  45
    1 10000001 10100000  9  14 20  28
    1  1000001  1100000  1  16 -5  29
 ```
 
+or 
+
+
+```
+1	       1	  100000	4	29	17	45
+1	10000001	10100000	9	14	20	28
+1	 1000001	 1100000	1	16	-5	29
+```
 
 ### **1.7 Segment**
 
@@ -238,6 +321,8 @@ The dataset should contain 5 columns. Column names are **optional**.
 **4th column**: X-axis end coordinate of segments.  
 **5th column**: Y-axis end coordinate of segments.  
 
+Acceptable input data format can be  
+
 
 ```
  chr   xstart ystart     xend yend
@@ -246,6 +331,14 @@ The dataset should contain 5 columns. Column names are **optional**.
    1 24392841      0 24392841  2.8
 ```
 
+or  
+
+
+```
+1	  134291	0	  134291	2.8
+1	 2665412	0	 2665412	2.8
+1	24392841	0	24392841	2.8
+```
 
 ### **1.8 Text**
 
@@ -255,6 +348,8 @@ The dataset should contain 4 columns. Column names are **optional**.
 **3rd column**: Y-axis position of texts.  
 **4th column**: the symbols of texts.  
 
+Acceptable input data format can be  
+
 
 ```
  chr     xpos ypos  symbol
@@ -263,12 +358,22 @@ The dataset should contain 4 columns. Column names are **optional**.
    1 24392841    3   OCPI1
 ```
 
+or 
+
+
+```
+1	  134291	3	OsTLP27
+1	 2665412	3	   MT2D
+1	24392841	3	  OCPI1
+```
 
 ### **1.9 Vertical line**
 
 The dataset should contain 2 columns. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: genomic position of vertical lines.  
+
+Acceptable input data format can be  
 
 
 ```
@@ -278,11 +383,21 @@ The dataset should contain 2 columns. Column names are **optional**.
    2 35930381
 ```
 
+or 
+
+
+```
+1	       0
+1	43268879
+2	35930381
+```
 
 ### **1.10 Horizontal line**
 
 The dataset should contain 1 column. Column names are **optional**.  
 **1st column**: Y-axis value of horizontal lines.  
+
+Acceptable input data format can be  
 
 
 ```
@@ -292,6 +407,14 @@ The dataset should contain 1 column. Column names are **optional**.
         5
 ```
 
+or  
+
+
+```
+ 8
+12
+ 5
+```
 
 ## **2. Two genomes plot**
 
@@ -301,6 +424,8 @@ The dataset should contain only 2 columns. Column names are **optional**.
 **1st column**: chromosome ID.  
 **2nd column**: chromosome length.  
 
+Acceptable input data format can be  
+
 
 ```
  chr     size
@@ -309,12 +434,22 @@ The dataset should contain only 2 columns. Column names are **optional**.
    3 36406689
 ```
 
+or  
+
+
+```
+1	43268879
+2	35930381
+3	36406689
+```
 
 ### **2.2 Data of genome along the vertical axis**
 
 The dataset should contain only 2 columns. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome length.  
+
+Acceptable input data format can be  
 
 
 ```
@@ -324,13 +459,25 @@ The dataset should contain only 2 columns. Column names are **optional**.
  Chr03 37032663
 ```
 
+or  
+
+
+```
+Chr01	41185095
+Chr02	34608401
+Chr03	37032663
+```
+
 ### **2.3 Point**
 
-The dataset should contain >=4 columns. Column names are **optional**.  
+The dataset should contain >=4 columns.  
+In the simplest situation, the dataset should contain 4 columns. In this case, column names are **optional**.  
 **1st column**: chromosome ID of genome along the horizontal axis.  
 **2nd column**: chromosome position in genome along the horizontal axis.  
 **3rd column**: chromosome ID of genome along the horizontal axis.  
 **4th column**: chromosome position in genome along the vertical axis.  
+
+Acceptable input data format can be  
 
 
 ```
@@ -340,7 +487,16 @@ The dataset should contain >=4 columns. Column names are **optional**.
    11 17015000    6 27706228
 ```
 
-To control the color of points, add a **color** column. Column names are **compulsory**. The color column can be a character vector or a numeric vector. If the color column is a character vector, choose the `point_discrete` plot type.    
+or  
+
+
+```
+ 4	23006000	6	27706220
+ 6	26269000	6	27706227
+11	17015000	6	27706228
+```
+
+To control the color of points, add a **color** column. In this case, column names are **compulsory**. The color column can be a character vector or a numeric vector. If the color column is a character vector, choose the `point_discrete` plot type.    
 
 
 ```
@@ -360,7 +516,7 @@ If the color column is a numeric vector, choose the `point_gradual` plot type.
    11 17015000    6 27706228  5.802
 ```
 
-To control the symbol used for each point, add a **shape** column. Type '?pch' at the console of R for more information. Column names are **compulsory**.  
+To control the symbol used for each point, add a **shape** column. Check http://www.endmemo.com/program/R/pchsymbols.php for more information. Column names are **compulsory**.  
 
 
 ```
@@ -370,7 +526,7 @@ To control the symbol used for each point, add a **shape** column. Type '?pch' a
     1  2583523    1  2546654    12
 ```
 
-To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. Column names are **compulsory**.  
+To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. In this case, column names are **compulsory**.  
 
 
 ```
@@ -380,7 +536,7 @@ To control the size of each point, add a **size** column. Larger number in the *
     1  2583523    1  2546654  1.2
 ```
 
-Acceptable data format can also be  
+Acceptable input data can also be  
 
 
 ```
@@ -423,13 +579,16 @@ or
 
 ### **2.4 Segment**
 
-The dataset should contain >=6 columns. Column names are **optional**.  
+The dataset should contain >=6 columns.  
+In the simplest situation, the dataset should contain 6 columns. In this case, column names are **optional**.  
 **1st column**: chromosome ID of genome along the horizontal axis.  
 **2nd column**: X-axis start coordinate of segments.  
 **3rd column**: X-axis end coordinate of segments.  
 **4th column**: chromosome ID of genome along the vertical axis.  
 **5th column**: Y-axis start coordinate of segments.  
 **6th column**: Y-axis end coordinate of segments.  
+
+Acceptable input data can be  
 
 
 ```
@@ -439,7 +598,16 @@ The dataset should contain >=6 columns. Column names are **optional**.
  Chr01  49604 67964 Chr01  65681 84044
 ```
 
-To control the color of segments, add a **color** column to classify data into different groups. Then different colors will be assigned to different groups of data. Column names are **compulsory**.  
+or  
+
+
+```
+Chr01	  101	21963	Chr01	19600	41490
+Chr01	25221	49370	Chr01	41483	65682
+Chr01	49604	67964	Chr01	65681	84044
+```
+
+To control the color of segments, add a **color** column to divide data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**.  
 
 
 ```
@@ -463,7 +631,7 @@ The dataset should contain 7 columns. Column names are **optional**.
 
 The 7th column can be a character vector or a numeric vector. For a character vector, choose the `rect_discrete` plot type. For a numeric vector, choose the `rect_gradual` plot type.  
 
-Acceptable data format can be  
+Acceptable input data format can be  
 
 
 ```
