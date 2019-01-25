@@ -66,8 +66,10 @@ dis_type_cols <- function(i, dat, col_dis, plot_type, col_dis_rand, col_dis_cus,
       dat$color <- NA
       dis_col.export <<- NA
     }
-    dat$value <- dat$color
-    dat <- dat[, c(1:3, 5, 4)]
+	if(plot_type[i] == "rect_discrete"){
+      dat$value <- dat$color
+      dat <- dat[, c(1:3, 5, 4)]
+	}
   } else if ((plot_type[i] == "rect_discrete" & col_dis[i] == 3) |
              (plot_type[i] == "heatmap_discrete" & col_dis[i] == 2)) {
     dat <- dat_cus_cols(i, col_dis_cus, dat)
@@ -207,9 +209,9 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       ## *** Set priority level of each dataset ***
       indx <- lapply(c("heatmap_gradual", "heatmap_discrete", "rect_gradual", "rect_discrete", "bar", "line",
                        "segment", "point", "vertical_line", "horizontal_line", "text", "ideogram"), function(x) {
-          indx <- which(plot_type %in% x)
-          return(indx)
-        })
+                         indx <- which(plot_type %in% x)
+                         return(indx)
+                       })
 
       indx <- unlist(indx)
       laycolor.export <<- list()
@@ -366,7 +368,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           dis_col.export <<- NULL
           data.track.single <- dis_type_cols(i, data.track.single, hmap_col_dis, plot_type, col_dis_rand, hmap_col_dis_cus)
           heatmap_discol.export <<- c(heatmap_discol.export, dis_col.export)
-
+          
           jd_col <- data.track.single$color
           output$errorinfo4 <- renderPrint({
             if (input[[paste("plot_type", i, sep = "")]] == "heatmap_discrete" && input[[paste("hmap_col_dis", i, sep = "")]] != 1) {
@@ -390,7 +392,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
           heatmap_discol.export <<- c(heatmap_discol.export, NA)
         }
         
-        ## *** The color to fill heatmap_discrete plot ***
+        ## *** The color for vertical_line or horizontal_line plot ***
         if (plot_type[i] %in% c("vertical_line", "horizontal_line")) {
           data.track.single <- dat_dis_col(i, line_color, data.track.single)
         }
@@ -761,7 +763,6 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
                 for (f in unique(data.track.single$chr)) {
                   for (j in unique(data.track.single$color[data.track.single$chr %in% f])) {
                     dat <- data.track.single[data.track.single$chr %in% f & data.track.single$color %in% j, ]
-                    #p1 <- p1 + geom_rect(data=dat, aes(xmin=xmin, xmax=xmax, ymax=yvalue), ymin=dat$ystart[1]+minnum_p, fill=as.character(dat$color), color=border_colp)
                     p1 <- p1 + geom_rect(data = dat, aes(xmin = xmin, xmax = xmax, ymax = yvalue), ymin = dat$ystart[1],
                                          fill = as.character(dat$color), color = border_colp)
                   }

@@ -106,7 +106,6 @@ cols_adjust <- function(i, dat, col_transpt, plot_type, type) {
   }
   dat_val <- dat_val[!duplicated(dat_col)]
   dat_col <- dat_col[!duplicated(dat_col)]
-
   dat$raw_color <- factor(dat$raw_color, levels = dat_val, ordered = T)
   dat$color <- factor(dat$color, levels = dat_col, ordered = T)
   dat_val <<- dat_val[which(!dat_col %in% "#FFFFFF00")]

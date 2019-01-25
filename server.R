@@ -6,7 +6,7 @@ shinyServer(function(input, output, session) {
   observe({
     if (input$submit1 > 0) {
       isolate({
-	# general input options
+        # general input options
         Height <<- input$Height; Width <<- input$Width; chr_plotype <<- input$plotype
         plot_direct <<- input$plot_direct; theme_sty <<- input$theme_sty; font_size <<- input$font_size
         xtitle <<- input$xtitle; ytitle <<- input$ytitle; title_font_face <<- input$title_font_face
@@ -21,7 +21,7 @@ shinyServer(function(input, output, session) {
           data.chr <<- NULL
         }
 
-	# user input data
+        # user input data
         sel_upload_data.export <<- c()
         upload_file.export <<- c()
         data.track <<- lapply(1:10, function(x) {
@@ -45,7 +45,7 @@ shinyServer(function(input, output, session) {
         }
 
         if (!is.null(data.track)) {
-	  # input options for each dataset
+          # input options for each dataset
           plot_type <<- c(); col_type <<- c(); color_cus <<- c(); color_mulgp <<- c(); col_transpt <<- c()
           height_layer <<- c(); margin_layer <<- c(); add_border <<- c(); border_col <<- c(); rect_col <<- c()
           rect_col_dis <<- c(); rect_col_dis_cus <<- c(); rect_grad_col <<- c(); col_rect <<- c(); ylabel <<- c()
@@ -124,7 +124,7 @@ shinyServer(function(input, output, session) {
             margin_layer <<- c(margin_layer, input[[paste("margin_layer", i, sep = "")]])
           }
 
-	  # error infomation
+          # error infomation
           output$errorinfo1 <- renderPrint({
             validate(need(!is.null(data.chr), "Please upload genome data!"))
             validate(need(!is.null(data.track), "Please upload track data!"))
@@ -239,7 +239,7 @@ shinyServer(function(input, output, session) {
             line_type_lgd_mdy_label = line_type_lgd_mdy_label, line_type_lgd_label = line_type_lgd_label
           )
 	  	  
-	  ## *** Download PDF file ***
+          ## *** Download PDF file ***
           output$downloadpdf1 <- renderUI({
             req(figure_1)
             downloadButton("Visualization_1.pdf", "Download pdf-file")
@@ -297,7 +297,7 @@ shinyServer(function(input, output, session) {
   observe({
     if (input$submit2 > 0) {
       isolate({
-	# user input options
+        # user input options
         tc_Height <<- input$tc_Height; tc_Width <<- input$tc_Width; tc_theme_sty <<- input$tc_theme_sty
         tc_font_size <<- input$tc_font_size; tc_xtitle <<- input$tc_xtitle; tc_ytitle <<- input$tc_ytitle
         tc_title_font_face <<- input$tc_title_font_face; tc_xlabel <<- input$tc_xlabel; tc_ylabel <<- input$tc_ylabel
@@ -306,7 +306,7 @@ shinyServer(function(input, output, session) {
         tc_lgd_text_size <<- input$tc_lgd_text_size; tc_chr_data1 <<- input$tc_upload_chr_data_1
         tc_chr_data2 <<- input$tc_upload_chr_data_2
 
-	# user input data
+        # user input data
         if (!is.null(tc_chr_data1)) {
           data.chr1 <<- data.frame(fread(tc_chr_data1$datapath), stringsAsFactors = F)
         } else{
@@ -326,7 +326,7 @@ shinyServer(function(input, output, session) {
           data.2geno.plot <<- NULL
         }
 
-	# user input options
+        # user input options
         if (!is.null(data.2geno.plot)) {
           tc_plot_type <<- input$tc_plot_type; tc_sel_gral_col <<- input$tc_sel_gral_col; tc_gral_col_tp <<- input$tc_gral_col
           tc_gral_col_ct <<- c(input$tc_lowColor, input$tc_midColor, input$tc_highColor); tc_col_type <<- input$tc_col_type
@@ -345,7 +345,7 @@ shinyServer(function(input, output, session) {
           tc_size_lgd_label <<- input$tc_size_lgd_label; tc_shape_lgd_mdy_label <<- input$tc_shape_lgd_mdy_label
           tc_shape_lgd_label <<- input$tc_shape_lgd_label
 
-	  # error information
+          # error information
           output$errorinfo6 <- renderPrint({
             validate(need(!is.null(data.chr1), "Please upload genome1 data!"))
             validate(need(!is.null(data.chr2), "Please upload genome2 data!"))
@@ -418,7 +418,7 @@ shinyServer(function(input, output, session) {
             size_lgd_label = tc_size_lgd_label, shape_lgd_mdy_label = tc_shape_lgd_mdy_label, shape_lgd_label = tc_shape_lgd_label
           )
 		  
-	  ## *** Download PDF file ***
+          ## *** Download PDF file ***
           output$downloadpdf2 <- renderUI({
             req(figure_2)
             downloadButton("Visualization_2.pdf", "Download pdf-file")
