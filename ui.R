@@ -83,34 +83,34 @@ shinyUI(
                    br(),
 
                    checkboxInput("data1", HTML("<font color='red'>Data1</font>"), FALSE),
-                   uiOutput("sig_data1"),
+				   source("sig_data1_ui.R")$value,
 
                    checkboxInput("data2", HTML("<font color='red'>Data2</font>"), FALSE),
-                   uiOutput("sig_data2"),
+                   source("sig_data2_ui.R")$value,
 
                    checkboxInput("data3", HTML("<font color='red'>Data3</font>"), FALSE),
-                   uiOutput("sig_data3"),
+                   source("sig_data3_ui.R")$value,
 
                    checkboxInput("data4", HTML("<font color='red'>Data4</font>"), FALSE),
-                   uiOutput("sig_data4"),
+                   source("sig_data4_ui.R")$value,
 
                    checkboxInput("data5", HTML("<font color='red'>Data5</font>"), FALSE),
-                   uiOutput("sig_data5"),
+                   source("sig_data5_ui.R")$value,
 
                    checkboxInput("data6", HTML("<font color='red'>Data6</font>"), FALSE),
-                   uiOutput("sig_data6"),
+                   source("sig_data6_ui.R")$value,
 
                    checkboxInput("data7", HTML("<font color='red'>Data7</font>"), FALSE),
-                   uiOutput("sig_data7"),
+                   source("sig_data7_ui.R")$value,
 
                    checkboxInput("data8", HTML("<font color='red'>Data8</font>"), FALSE),
-                   uiOutput("sig_data8"),
+                   source("sig_data8_ui.R")$value,
 
                    checkboxInput("data9", HTML("<font color='red'>Data9</font>"), FALSE),
-                   uiOutput("sig_data9"),
+                   source("sig_data9_ui.R")$value,
 
                    checkboxInput("data10", HTML("<font color='red'>Data10</font>"), FALSE),
-                   uiOutput("sig_data10"),
+                   source("sig_data10_ui.R")$value,
 
                    br(),
                    actionButton("submit1", strong("Go!",

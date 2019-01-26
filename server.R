@@ -711,17 +711,5 @@ shinyServer(function(input, output, session) {
     return(x)
   }, options = list(pageLength = 10))
 
-  # single genome plot sidepanel UI
-  source("sig_data1_ui.R", local = TRUE)
-  source("sig_data2_ui.R", local = TRUE)
-  source("sig_data3_ui.R", local = TRUE)
-  source("sig_data4_ui.R", local = TRUE)
-  source("sig_data5_ui.R", local = TRUE)
-  source("sig_data6_ui.R", local = TRUE)
-  source("sig_data7_ui.R", local = TRUE)
-  source("sig_data8_ui.R", local = TRUE)
-  source("sig_data9_ui.R", local = TRUE)
-  source("sig_data10_ui.R", local = TRUE)
-
 })
 

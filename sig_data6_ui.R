@@ -1,6 +1,5 @@
 
-output$sig_data6 <- renderUI({
-  conditionalPanel(condition = "input.data6",
+sig_data6 <- conditionalPanel(condition = "input.data6",
                    radioButtons("sel_upload_data6", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
                    conditionalPanel(condition = "input.sel_upload_data6 == '2'",
                                     fileInput("uploaddata6", h5("Upload data6:",
@@ -324,5 +323,4 @@ output$sig_data6 <- renderUI({
                                     )
                    )
   )
-})
 
