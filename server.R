@@ -76,11 +76,11 @@ shinyServer(function(input, output, session) {
             sel_heatmap_col <<- c(sel_heatmap_col, input[[paste("sel_heatmap_col", track_indx[k], sep = "")]])
             hmap_col <<- c(hmap_col, input[[paste("hmap_col", track_indx[k], sep = "")]])
             heatmap_col_cus <<- c(heatmap_col_cus, paste(input[[paste("lowColor", track_indx[k], sep = "")]],
-                                                 input[[paste("midColor", track_indx[k], sep = "")]],
-                                                 input[[paste("highColor", track_indx[k], sep = "")]], sep = "."))
+                                                         input[[paste("midColor", track_indx[k], sep = "")]],
+                                                         input[[paste("highColor", track_indx[k], sep = "")]], sep = "."))
             rect_grad_cus_cols <<- c(rect_grad_cus_cols, paste(input[[paste("rect_lowColor", track_indx[k], sep = "")]],
-                                                           input[[paste("rect_midColor", track_indx[k], sep = "")]],
-                                                           input[[paste("rect_highColor", track_indx[k], sep = "")]], sep = "."))
+                                                               input[[paste("rect_midColor", track_indx[k], sep = "")]],
+                                                               input[[paste("rect_highColor", track_indx[k], sep = "")]], sep = "."))
             hmap_col_dis <<- c(hmap_col_dis, input[[paste("hmap_col_dis", track_indx[k], sep = "")]])
             hmap_col_dis_cus <<- c(hmap_col_dis_cus, input[[paste("hmap_col_dis_cus", track_indx[k], sep = "")]])
             symbol_point <<- c(symbol_point, input[[paste("symbol_point", track_indx[k], sep = "")]])
@@ -238,7 +238,7 @@ shinyServer(function(input, output, session) {
             size_lgd_label = size_lgd_label, shape_lgd_mdy_label = shape_lgd_mdy_label, shape_lgd_label = shape_lgd_label,
             line_type_lgd_mdy_label = line_type_lgd_mdy_label, line_type_lgd_label = line_type_lgd_label
           )
-	  	  
+
           ## *** Download PDF file ***
           output$downloadpdf1 <- renderUI({
             req(figure_1)
@@ -254,7 +254,7 @@ shinyServer(function(input, output, session) {
               print(figure_1)
               dev.off()
             }, contentType = 'application/pdf')
-	
+
           ## *** Download SVG file ***
           output$downloadsvg1 <- renderUI({
             req(figure_1)
@@ -270,7 +270,7 @@ shinyServer(function(input, output, session) {
               print(figure_1)
               dev.off()
             }, contentType = 'image/svg')
-	
+
           ## *** Download R Source code file ***
           output$downloadscript1 <- renderUI({
             req(figure_1)
@@ -285,7 +285,7 @@ shinyServer(function(input, output, session) {
             source("writeCmd-1.R")
             writeLines(out, con = file)
           }, contentType = NULL)
-	
+
         }
       })
     } else {
@@ -417,7 +417,7 @@ shinyServer(function(input, output, session) {
             col_lgd_mdy_label = tc_col_lgd_mdy_label, col_lgd_label = tc_col_lgd_label, size_lgd_mdy_label = tc_size_lgd_mdy_label,
             size_lgd_label = tc_size_lgd_label, shape_lgd_mdy_label = tc_shape_lgd_mdy_label, shape_lgd_label = tc_shape_lgd_label
           )
-		  
+
           ## *** Download PDF file ***
           output$downloadpdf2 <- renderUI({
             req(figure_2)
@@ -464,7 +464,7 @@ shinyServer(function(input, output, session) {
             source("writeCmd-2.R")
             writeLines(out, con = file)
           }, contentType = NULL)
-  
+
         }
       })
     } else {
@@ -472,7 +472,6 @@ shinyServer(function(input, output, session) {
     }
   })
 
-  
   ## *** Download data file ***
   output$data.zip <- downloadHandler(
     filename <- function() {
@@ -622,7 +621,7 @@ shinyServer(function(input, output, session) {
       example_dat <- read.table(input_file, head = T, as.is = T, sep = "\t", quote = "")
       write.table(example_dat, file = file, row.names = F, quote = F, sep = "\t")
     }, contentType = 'text/csv')
-  
+
   ## *** User Manual ***
   output$pdfview <- renderUI({
     tags$iframe(style = "height:1500px; width:100%; scrolling=yes", src = "shinyChromosome_User_Manual.pdf")
@@ -711,6 +710,18 @@ shinyServer(function(input, output, session) {
     x <- fread(input_file)
     return(x)
   }, options = list(pageLength = 10))
+
+  # single genome plot sidepanel UI
+  source("sig_data1_ui.R", local = TRUE)
+  source("sig_data2_ui.R", local = TRUE)
+  source("sig_data3_ui.R", local = TRUE)
+  source("sig_data4_ui.R", local = TRUE)
+  source("sig_data5_ui.R", local = TRUE)
+  source("sig_data6_ui.R", local = TRUE)
+  source("sig_data7_ui.R", local = TRUE)
+  source("sig_data8_ui.R", local = TRUE)
+  source("sig_data9_ui.R", local = TRUE)
+  source("sig_data10_ui.R", local = TRUE)
 
 })
 
