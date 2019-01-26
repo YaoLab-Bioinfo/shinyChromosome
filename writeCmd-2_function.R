@@ -30,7 +30,7 @@ dat_cus_cols <- function(i, cus_cols, dat) {
   dat <- dat[c(colname, "cols")]
   return(dat)
 }
-			
+
 lgd_mdy_label <- function(i, lgd_labels) {
   lgd_label <- gsub("\\s", "", strsplit(lgd_labels[i], ",")[[1]])
   lgd_label <- gsub('\\"', "", lgd_label)
@@ -39,7 +39,7 @@ lgd_mdy_label <- function(i, lgd_labels) {
   }
   return(lgd_label)
 }
-			
+
 chr_cumsum <- function(dat, i) {
   chr.len <- dat$size
   names(chr.len) <- dat$chr
@@ -79,7 +79,7 @@ cols_adjust <- function(i, dat, col_transpt, plot_type, type) {
     dat$color[!areColors(dat$color)] <- NA
     dat$color <- adjustcolor(dat$color, alpha.f = col_transpt[i])
     dat_col <- dat$color[match(dat_val, dat$raw_color)]
-  }		  
+  }
   dat_val <- dat_val[!duplicated(dat_col)]
   dat_col <- dat_col[!duplicated(dat_col)]
   
@@ -90,7 +90,7 @@ cols_adjust <- function(i, dat, col_transpt, plot_type, type) {
   return(dat)
 }
 
-# the main function to make two genomes plot	  
+# the main function to make two genomes plot
 two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Width, theme_sty, font_size, xtitle, ytitle, title_font_face, xlabel, 
                              ylabel, lgd_pos, lgd_title_size, lgd_title_font_face, lgd_text_size, lgd_text_font_face, tc_chr_data1, 
                              tc_chr_data2, trackfil, plot_type, sel_gral_col, gral_col_tp, gral_col_ct, col_type, color_cus, color_mulgp, 
@@ -137,7 +137,7 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
   
   if (plot_type %in% c("point_discrete", "segment", "rect_discrete")) {
     if (col_type == 2) {
-      data.2geno.plot <- dat_dis_col(1, color_cus, data.2geno.plot)	
+      data.2geno.plot <- dat_dis_col(1, color_cus, data.2geno.plot)
     } else if (col_type == 3 & ("color" %in% colnames(data.2geno.plot))) {
       data.2geno.plot <- dat_cus_cols(1, color_mulgp, data.2geno.plot)
       laycolor <- unique(data.2geno.plot$cols)
@@ -291,7 +291,7 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
     if (add_col_lgd == "colourbar") {
       tc_p1 <- tc_p1 + guides(color = guide_colorbar(order = 1, title.vjust = 0.8, title.hjust = 0.4), size = guide_legend(order = 2))
     } else{
-      tc_p1 <- tc_p1 + guides(size = guide_legend(order = 1))			 
+      tc_p1 <- tc_p1 + guides(size = guide_legend(order = 1))
     }
   }
   
@@ -395,7 +395,7 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
     tc_p1 <- tc_p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
   }
   if (ylabel == 1) {
-    tc_p1 <- tc_p1 + scale_y_continuous(breaks = data.chr2$pos, labels = data.chr2$chr)		 
+    tc_p1 <- tc_p1 + scale_y_continuous(breaks = data.chr2$pos, labels = data.chr2$chr)
   } else{
     tc_p1 <- tc_p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
   }
@@ -410,3 +410,4 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
   tc_p1 <- tc_p1 + theme(text = element_text(size = font_size))
   return(tc_p1)
 }
+

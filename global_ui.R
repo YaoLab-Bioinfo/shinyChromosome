@@ -86,3 +86,4 @@ ADVANCED_OPTIONS_PANEL <- function(options_list){
     conditionalPanel(condition = "input.advancedOptionsButton%2", wellPanel(options_list))
   )
 }
+
