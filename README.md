@@ -14,7 +14,7 @@ Once it was activated, shinyChromosome could be used smoothly and easily.
 
 *****
 
-#	<font color="red">Launch shinyChromosome directly from R and GitHub (preferred approach)</font>
+#	Launch shinyChromosome directly from R and GitHub
 
 User can choose to run shinyChromosome installed on local computers (Windows, Mac or Linux) for a more preferable experience.
 
