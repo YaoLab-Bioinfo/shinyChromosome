@@ -9,15 +9,14 @@ dat_chr_cum <- function(dat, chr.cum.len) {
 }
 
 # the main function to make two genomes plot
-two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plot, Height, Width, sel_gral_col,
-                       gral_col_tp, gral_col_ct, col_type, color_cus, color_mulgp, col_transpt,
-                       theme_sty, font_size, xtitle, ytitle, title_font_face, xlabel, ylabel,
-                       lgd_pos, lgd_title_size, lgd_title_font_face, lgd_text_size, lgd_text_font_face,
-                       symbol_point, symbol_point_type, point_size_type, point_size, line_size, vertical,
-                       vertical_col, vertical_size, vertical_type, horizontal, horizontal_col,
-                       horizontal_size, horizontal_type, add_border, border_col, linetype, curvature,
-                       col_lgd, col_lgd_name, size_lgd, size_lgd_name, shape_lgd, shape_lgd_name,
-                       col_lgd_mdy_label, col_lgd_label, size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label,
+two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plot, Height, Width, sel_gral_col, 
+                       gral_col_tp, gral_2cols_ct, gral_3cols_ct, col_type, color_cus, color_mulgp, col_transpt, 
+                       theme_sty, font_size, xtitle, ytitle, title_font_face, xlabel, ylabel, lgd_pos, lgd_title_size, 
+                       lgd_title_font_face, lgd_text_size, lgd_text_font_face, symbol_point, symbol_point_type, 
+                       point_size_type, point_size, line_size, vertical, vertical_col, vertical_size, vertical_type, 
+                       horizontal, horizontal_col, horizontal_size, horizontal_type, add_border, border_col, linetype, 
+                       curvature, col_lgd, col_lgd_name, size_lgd, size_lgd_name, shape_lgd, shape_lgd_name, 
+                       col_lgd_mdy_label, col_lgd_label, size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label, 
                        shape_lgd_label, plot_type) {
     output$figure_2 <- renderPlot({
       ## *** Modify two genomes data ***
@@ -52,8 +51,10 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       if (plot_type %in% c("point_gradual", "rect_gradual")) {
         if (sel_gral_col == 1) {
           gralcols <- gsub('\\"', "", gral_col_tp)
-        } else{
-          gralcols <- gral_col_ct
+        }else if(sel_gral_col == 2){
+          gralcols <- gral_2cols_ct
+        }else if (sel_gral_col == 3){
+          gralcols <- gral_3cols_ct
         }
         gralcols <- unlist(strsplit(gralcols, "\\."))
       }
@@ -181,7 +182,6 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       }
 
       ## *** The position of concatenated genome1 ***
-      chr.cum.len.tmp <- NULL
       chr.cum.len <- chr_cumsum(data.chr1, 2)
       chr.cum.len_1 <- chr.cum.len.tmp
 
@@ -197,7 +197,6 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       data.2geno.plot$chr1 <- as.character(data.2geno.plot$chr1)
 
       ## *** The position of concatenated genome2 ***
-      chr.cum.len.tmp <- NULL
       chr.cum.len <- chr_cumsum(data.chr2, 2)
       chr.cum.len_2 <- chr.cum.len.tmp
 
@@ -220,19 +219,31 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
         }
         if (lgd_pos == 1) {
           tc_p1 <- tc_p1 + geom_point(data = data.2geno.plot, aes(x = pos1, y = pos2, color = color, shape = as.character(shape), size = size))
-          tc_p1 <- tc_p1 + scale_color_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint,
-                                                 mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
+          
+          if(sel_gral_col == 2){
+            tc_p1 <- tc_p1 + scale_color_gradient(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], high = gralcols[2], na.value = "#FFFFFF00")
+          }else{
+            tc_p1 <- tc_p1 + scale_color_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint, 
+                                                   mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
+          }
+          
           tc_p1 <- tc_p1 + scale_size_identity(name = size_lgd_name, guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
           tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
-          tc_p1 <- tc_p1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
+          tc_p1 <- tc_p1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
         } else{
           tc_p1 <- tc_p1 + geom_point(data = data.2geno.plot, aes(x = pos1, y = pos2, color = color, shape = as.character(shape), size = size))
-          tc_p1 <- tc_p1 + scale_color_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint,
-                                                 mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
+          
+          if(sel_gral_col == 2){
+            tc_p1 <- tc_p1 + scale_color_gradient(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], high = gralcols[2], na.value = "#FFFFFF00")
+          }else{          
+            tc_p1 <- tc_p1 + scale_color_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint, 
+                                                   mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
+          }
+          
           tc_p1 <- tc_p1 + scale_size_identity(name = size_lgd_name, guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
           tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
-          tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
+          tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
         }
         if (add_col_lgd == "colourbar") {
@@ -290,17 +301,29 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       if (plot_type == "rect_gradual") {
         midpoint <- mean(data.2geno.plot$color, na.rm = T)
         if (lgd_pos == 1) {
-          tc_p1 <- tc_p1 + geom_rect(data = data.2geno.plot, aes(xmin = xpos1, xmax = xpos2, ymin = ypos1, ymax = ypos2,
-                                                         fill = color), color = border_col)
-          tc_p1 <- tc_p1 + scale_fill_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint,
-                                                mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
-          tc_p1 <- tc_p1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
+          tc_p1 <- tc_p1 + geom_rect(data = data.2geno.plot, aes(xmin = xpos1, xmax = xpos2, ymin = ypos1, ymax = ypos2, 
+                                                                 fill = color), color = border_col)
+          
+          if(sel_gral_col == 2){
+            tc_p1 <- tc_p1 + scale_fill_gradient(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], high = gralcols[2], na.value = "#FFFFFF00")
+          }else{
+            tc_p1 <- tc_p1 + scale_fill_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint, 
+                                                  mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
+          }
+          
+          tc_p1 <- tc_p1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
         } else{
           tc_p1 <- tc_p1 + geom_rect(data = data.2geno.plot, aes(xmin = xpos1, xmax = xpos2, ymin = ypos1, ymax = ypos2, fill = color), color = border_col)
-          tc_p1 <- tc_p1 + scale_fill_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint,
-                                                mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
-          tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
+          
+          if(sel_gral_col == 2){
+            tc_p1 <- tc_p1 + scale_fill_gradient(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], high = gralcols[2], na.value = "#FFFFFF00")
+          }else{		  
+            tc_p1 <- tc_p1 + scale_fill_gradient2(name = col_lgd_name, guide = add_col_lgd, low = gralcols[1], midpoint = midpoint, 
+                                                  mid = gralcols[2], high = gralcols[3], na.value = "#FFFFFF00")
+          }
+          
+          tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
           tc_p1 <- tc_p1 + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))
         }

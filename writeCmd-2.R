@@ -26,13 +26,15 @@ cat(paste("Height <- ", tc_Height, sep = ""), paste("Width <- ", tc_Width, sep =
     paste('lgd_title_font_face <- "', tc_lgd_title_font_face, '"', sep = ""),
     paste("lgd_text_size <- ", tc_lgd_text_size, sep = ""), paste('lgd_text_font_face <- "', tc_lgd_text_font_face, '"', sep = ""),
     paste('tc_chr_data1 <- "', tc_chr_data1$name, '"', sep = ""),
-    paste('tc_chr_data2 <- "', tc_chr_data2$name, '"', sep = ""), "data.chr1 <- data.frame(fread(tc_chr_data1), stringsAsFactors = F)",
-    "data.chr2 <- data.frame(fread(tc_chr_data2), stringsAsFactors = F)",
-    paste('trackfil <- "', trackfil$name, '"', sep = ""), "data.2geno.plot <- data.frame(fread(trackfil), stringsAsFactors = F)", file = "code.R", append = TRUE, sep = "\n")
+    paste('tc_chr_data2 <- "', tc_chr_data2$name, '"', sep = ""), 'data.chr1 <- data.frame(fread(tc_chr_data1, quote=""), stringsAsFactors = F)',
+    'data.chr2 <- data.frame(fread(tc_chr_data2, quote=""), stringsAsFactors = F)',
+    paste('trackfil <- "', trackfil$name, '"', sep = ""), 'data.2geno.plot <- data.frame(fread(trackfil, quote=""), stringsAsFactors = F)', 
+    file = "code.R", append = TRUE, sep = "\n")
 
 cat(paste('plot_type <- "', tc_plot_type, '"', sep = ""), paste("sel_gral_col <- ", tc_sel_gral_col, sep = ""),
-    paste('gral_col_tp <- "', tc_gral_col_tp, '"', sep = ""),
-    paste('gral_col_ct <- c("', paste(tc_gral_col_ct, collapse = '", "'), '")', sep = ""),
+    paste('gral_col_tp <- "', tc_gral_col_tp, '"', sep = ""),	
+    paste('gral_2cols_ct <- c("', paste(tc_gral_2cols_ct, collapse = '", "'), '")', sep = ""),
+    paste('gral_3cols_ct <- c("', paste(tc_gral_3cols_ct, collapse = '", "'), '")', sep = ""),
     paste("col_type <- ", tc_col_type, sep = ""), paste('color_cus <- "', tc_color_cus, '"', sep = ""),
     paste('color_mulgp <- "', tc_color_mulgp, '"', sep = ""), paste("col_transpt <- ", tc_col_transpt, sep = ""),
     paste("symbol_point <- ", tc_symbol_point, sep = ""),
@@ -54,16 +56,20 @@ cat(paste('plot_type <- "', tc_plot_type, '"', sep = ""), paste("sel_gral_col <-
     paste('shape_lgd_label <- "', tc_shape_lgd_label, '"', sep = ""),
     paste('laycolor.export <- "', laycolor.export, '"', sep = ""), file = "code.R", append = TRUE, sep = "\n")
 
-cat("tc_p1 <- two_genomes_plot(data.chr1, data.chr2, data.2geno.plot, Height, Width, theme_sty, font_size, xtitle, ytitle, title_font_face, xlabel, ylabel, lgd_pos, lgd_title_size, lgd_title_font_face, lgd_text_size, lgd_text_font_face, tc_chr_data1,
-tc_chr_data2, trackfil, plot_type, sel_gral_col, gral_col_tp, gral_col_ct, col_type, color_cus, color_mulgp, col_transpt, symbol_point, symbol_point_type, point_size, point_size_type, line_size, vertical, vertical_col, vertical_size, vertical_type,
-horizontal, horizontal_col, horizontal_size, horizontal_type, add_border, border_col, linetype, col_lgd, col_lgd_name, size_lgd, size_lgd_name, shape_lgd, shape_lgd_name, col_lgd_mdy_label, col_lgd_label, size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label,
-shape_lgd_label, laycolor.export)", file = "code.R", append = TRUE, sep = "\n")
+cat("p1 <- two_genomes_plot(data.chr1, data.chr2, data.2geno.plot, Height, Width, theme_sty, font_size, xtitle, ytitle, 
+     title_font_face, xlabel, ylabel, lgd_pos, lgd_title_size, lgd_title_font_face, lgd_text_size, lgd_text_font_face, 
+     tc_chr_data1, tc_chr_data2, trackfil, plot_type, sel_gral_col, gral_col_tp, gral_2cols_ct, gral_3cols_ct, col_type, 
+     color_cus, color_mulgp, col_transpt, symbol_point, symbol_point_type, point_size, point_size_type, line_size, vertical, 
+     vertical_col, vertical_size, vertical_type, horizontal, horizontal_col, horizontal_size, horizontal_type, add_border, 
+     border_col, linetype, col_lgd, col_lgd_name, size_lgd, size_lgd_name, shape_lgd, shape_lgd_name, col_lgd_mdy_label, 
+     col_lgd_label, size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label, shape_lgd_label, laycolor.export)", 
+    file = "code.R", append = TRUE, sep = "\n")
 
 cat("", file = "code.R", append = TRUE, sep = "\n")
 
 cat(paste('pdf("Visualization_2.pdf", width = ', tc_Width, "/72, ", " height = ", tc_Height, "/72)", sep = ""),
     paste('## svg("Visualization_2.svg", width = ', tc_Width, "/72, ", " height = ", tc_Height, "/72)", sep = ""),
-    "grid.draw(tc_p1)", "dev.off()", file = "code.R", append = TRUE, sep = "\n")
+    "grid.draw(p1)", "dev.off()", file = "code.R", append = TRUE, sep = "\n")
 
 out <<- readLines("code.R")
 file.remove("code.R")

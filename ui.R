@@ -6,7 +6,7 @@ shinyUI(
     title = "shinyChromosome",
     theme = shinytheme("flatly"),
     windowTitle = "interactive creation of non-circular whole genome diagram",
-
+    
     tabPanel(
       "Single genome plot", tags$head(
         tags$style("
@@ -18,16 +18,27 @@ shinyUI(
         .popover-title{color:#FFFFFF;font-size:16px;background-color:#000000;border-color:#000000;}
 
         #sidebarPanel_1 {width:25em;}
-        #lowColor1, #midColor1, #highColor1 {width:100%}
-        #lowColor2, #midColor2, #highColor2 {width:100%}
-        #lowColor3, #midColor3, #highColor3 {width:100%}
-        #lowColor4, #midColor4, #highColor4 {width:100%}
-        #lowColor5, #midColor5, #highColor5 {width:100%}
-        #lowColor6, #midColor6, #highColor6 {width:100%}
-        #lowColor7, #midColor7, #highColor7 {width:100%}
-        #lowColor8, #midColor8, #highColor8 {width:100%}
-        #lowColor9, #midColor9, #highColor9 {width:100%}
-        #lowColor10, #midColor10, #highColor10 {width:100%}
+        #hmap_2cols_low1, #hmap_2cols_high1 {width:100%}
+        #hmap_2cols_low2, #hmap_2cols_high2 {width:100%}
+        #hmap_2cols_low3, #hmap_2cols_high3 {width:100%}
+        #hmap_2cols_low4, #hmap_2cols_high4 {width:100%}
+        #hmap_2cols_low5, #hmap_2cols_high5 {width:100%}
+        #hmap_2cols_low6, #hmap_2cols_high6 {width:100%}
+        #hmap_2cols_low7, #hmap_2cols_high7 {width:100%}
+        #hmap_2cols_low8, #hmap_2cols_high8 {width:100%}
+        #hmap_2cols_low9, #hmap_2cols_high9 {width:100%}
+        #hmap_2cols_low10, #hmap_2cols_high10 {width:100%}
+
+        #hmap_3cols_low1, #hmap_3cols_mid1, #hmap_3cols_high1 {width:100%}
+        #hmap_3cols_low2, #hmap_3cols_mid2, #hmap_3cols_high2 {width:100%}
+        #hmap_3cols_low3, #hmap_3cols_mid3, #hmap_3cols_high3 {width:100%}
+        #hmap_3cols_low4, #hmap_3cols_mid4, #hmap_3cols_high4 {width:100%}
+        #hmap_3cols_low5, #hmap_3cols_mid5, #hmap_3cols_high5 {width:100%}
+        #hmap_3cols_low6, #hmap_3cols_mid6, #hmap_3cols_high6 {width:100%}
+        #hmap_3cols_low7, #hmap_3cols_mid7, #hmap_3cols_high7 {width:100%}
+        #hmap_3cols_low8, #hmap_3cols_mid8, #hmap_3cols_high8 {width:100%}
+        #hmap_3cols_low9, #hmap_3cols_mid9, #hmap_3cols_high9 {width:100%}
+        #hmap_3cols_low10, #hmap_3cols_mid10, #hmap_3cols_high10 {width:100%}
 
         #color_cus1, #color_cus2, #color_cus3, #color_cus4, #color_cus5, #color_cus6, #color_cus7, #color_cus8, #color_cus9, #color_cus10 {width:100%}
         #text_col1, #text_col2, #text_col3, #text_col4, #text_col5, #text_col6, #text_col7, #text_col8, #text_col9, #text_col10 {width:100%}
@@ -36,24 +47,35 @@ shinyUI(
         #border_col1, #border_col2, #border_col3, #border_col4, #border_col5, #border_col6, #border_col7, #border_col8, #border_col9, #border_col10 {width:100%}
         #border_area1, #border_area2, #border_area3, #border_area4, #border_area5, #border_area6, #border_area7, #border_area8, #border_area9, #border_area10 {width:100%}
 
-        #rect_lowColor1, #rect_midColor1, #rect_highColor1 {width:100%}
-        #rect_lowColor2, #rect_midColor2, #rect_highColor2 {width:100%}
-        #rect_lowColor3, #rect_midColor3, #rect_highColor3 {width:100%}
-        #rect_lowColor4, #rect_midColor4, #rect_highColor4 {width:100%}
-        #rect_lowColor5, #rect_midColor5, #rect_highColor5 {width:100%}
-        #rect_lowColor6, #rect_midColor6, #rect_highColor6 {width:100%}
-        #rect_lowColor7, #rect_midColor7, #rect_highColor7 {width:100%}
-        #rect_lowColor8, #rect_midColor8, #rect_highColor8 {width:100%}
-        #rect_lowColor9, #rect_midColor9, #rect_highColor9 {width:100%}
-        #rect_lowColor10, #rect_midColor10, #rect_highColor10 {width:100%}
+        #rect_2cols_low1, #rect_2cols_high1 {width:100%}
+        #rect_2cols_low2, #rect_2cols_high2 {width:100%}
+        #rect_2cols_low3, #rect_2cols_high3 {width:100%}
+        #rect_2cols_low4, #rect_2cols_high4 {width:100%}
+        #rect_2cols_low5, #rect_2cols_high5 {width:100%}
+        #rect_2cols_low6, #rect_2cols_high6 {width:100%}
+        #rect_2cols_low7, #rect_2cols_high7 {width:100%}
+        #rect_2cols_low8, #rect_2cols_high8 {width:100%}
+        #rect_2cols_low9, #rect_2cols_high9 {width:100%}
+        #rect_2cols_low10, #rect_2cols_high10 {width:100%}
+		
+        #rect_3cols_low1, #rect_3cols_mid1, #rect_3cols_high1 {width:100%}
+        #rect_3cols_low2, #rect_3cols_mid2, #rect_3cols_high2 {width:100%}
+        #rect_3cols_low3, #rect_3cols_mid3, #rect_3cols_high3 {width:100%}
+        #rect_3cols_low4, #rect_3cols_mid4, #rect_3cols_high4 {width:100%}
+        #rect_3cols_low5, #rect_3cols_mid5, #rect_3cols_high5 {width:100%}
+        #rect_3cols_low6, #rect_3cols_mid6, #rect_3cols_high6 {width:100%}
+        #rect_3cols_low7, #rect_3cols_mid7, #rect_3cols_high7 {width:100%}
+        #rect_3cols_low8, #rect_3cols_mid8, #rect_3cols_high8 {width:100%}
+        #rect_3cols_low9, #rect_3cols_mid9, #rect_3cols_high9 {width:100%}
+        #rect_3cols_low10, #rect_3cols_mid10, #rect_3cols_high10 {width:100%}
         #mainPanel_1 {left:28em; position:absolute; min-width:27em;}"
         ),
-
+        
         tags$style(HTML(".shiny-output-error-validation {color: red;}")),
         tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')),
         includeScript("www/google-analytics.js")
       ),
-
+      
       sidebarPanel(id = "sidebarPanel_1",
                    radioButtons("plotype",
                                 h4("*Image type", bsButton("bsb1", label="", icon=icon("question"), style="info", size="small")
@@ -67,7 +89,7 @@ shinyUI(
                    bsPopover("bsb2",
                              "Chromosomes could be aligned to the horizontal axis or the vertical axis.",
                              trigger = "focus"),
-
+                   
                    fileInput("upload_chr_data",
                              h4("*Upload genome data",
                                 bsButton("bsb3", label="", icon=icon("question"), style="info", size="small")
@@ -75,52 +97,52 @@ shinyUI(
                    bsPopover("bsb3",
                              'Click "Browse" to upload the genome data, which is compulsory and defines the frame of the non-circular plot.',
                              trigger = "focus"),
-
+                   
                    actionButton("tabBut1", "View example data"),
                    tags$script('$( "#upload_chr_data" ).on( "click", function() { this.value = null; });'),
                    downloadButton("genome_data.txt", "Example data"),
-
+                   
                    br(),
-
+                   
                    checkboxInput("data1", HTML("<font color='red'>Data1</font>"), FALSE),
-				   source("sig_data1_ui.R")$value,
-
+                   source("sig_data1_ui.R")$value,
+                   
                    checkboxInput("data2", HTML("<font color='red'>Data2</font>"), FALSE),
                    source("sig_data2_ui.R")$value,
-
+                   
                    checkboxInput("data3", HTML("<font color='red'>Data3</font>"), FALSE),
                    source("sig_data3_ui.R")$value,
-
+                   
                    checkboxInput("data4", HTML("<font color='red'>Data4</font>"), FALSE),
                    source("sig_data4_ui.R")$value,
-
+                   
                    checkboxInput("data5", HTML("<font color='red'>Data5</font>"), FALSE),
                    source("sig_data5_ui.R")$value,
-
+                   
                    checkboxInput("data6", HTML("<font color='red'>Data6</font>"), FALSE),
                    source("sig_data6_ui.R")$value,
-
+                   
                    checkboxInput("data7", HTML("<font color='red'>Data7</font>"), FALSE),
                    source("sig_data7_ui.R")$value,
-
+                   
                    checkboxInput("data8", HTML("<font color='red'>Data8</font>"), FALSE),
                    source("sig_data8_ui.R")$value,
-
+                   
                    checkboxInput("data9", HTML("<font color='red'>Data9</font>"), FALSE),
                    source("sig_data9_ui.R")$value,
-
+                   
                    checkboxInput("data10", HTML("<font color='red'>Data10</font>"), FALSE),
                    source("sig_data10_ui.R")$value,
-
+                   
                    br(),
                    actionButton("submit1", strong("Go!",
                                                   bsButton("bsb322", label="", icon=icon("question"), style="info", size="small")
                    )),
-
+                   
                    conditionalPanel(condition="input.submit1 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
                    bsPopover("bsb322", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus"),
                    br(),
-
+                   
                    h4("Plot options"),
                    ADVANCED_OPTIONS_PANEL(
                      list(
@@ -137,12 +159,12 @@ shinyUI(
                                                                                    "theme12", "theme13", "theme14", "theme15",
                                                                                    "theme16","theme17","theme18"), selected="theme1")
                        ),
-
+                       
                        checkboxInput("selfontsize", "Font size", FALSE),
                        conditionalPanel(condition = "input.selfontsize",
                                         sliderInput("font_size", NULL, min=0, max=50, value=16, step=0.5)
                        ),
-
+                       
                        checkboxInput("addtitle", "Axis title", FALSE),
                        conditionalPanel(
                          condition = "input.addtitle",
@@ -150,12 +172,12 @@ shinyUI(
                          textInput("ytitle", "Y axis title:", value = "Value"),
                          selectInput("title_font_face", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain")
                        ),
-
+                       
                        checkboxInput("addlabels", "X axis label", FALSE),
                        conditionalPanel(condition = "input.addlabels",
                                         selectInput("xlabel", NULL, choices = c("Show" = "1", "Hide" = "2"), selected="1")
                        ),
-
+                       
                        checkboxInput("legends", "Legend", FALSE),
                        conditionalPanel(condition = "input.legends",
                                         selectInput("lgd_pos", h5("Legend position",
@@ -168,7 +190,7 @@ shinyUI(
                                         bsPopover("bsb327", "Percent of legend size relative to the main plotting region. Applicable values are numbers in [0-1].", trigger = "focus"),
                                         sliderInput("lgd_intra_size", h5("Intra-spacing",
                                                                          bsButton("bsb328", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 150, value = 15, step = 0.5),
+                                        ), min = 0, max = 150, value = 40, step = 0.5),
                                         bsPopover("bsb328", "Intra-spacing between different legends.", trigger = "focus"),
                                         sliderInput("lgd_title_size", h5("Title font size",
                                                                          bsButton("bsb329", label="", icon=icon("question"), style="info", size="small")
@@ -187,183 +209,183 @@ shinyUI(
                                         ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                         bsPopover("bsb332", "The font face of legend tick label.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer1", HTML("<font color='red'>Track1</font>"), FALSE),
                        conditionalPanel(condition="input.layer1",
                                         sliderInput("height_layer1", h5("Track height:",
                                                                         bsButton("bsb333", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb333", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer1", h5("Track margin:",
                                                                         bsButton("bsb334", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb334", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer2", HTML("<font color='red'>Track2</font>"), FALSE),
                        conditionalPanel(condition="input.layer2",
                                         sliderInput("height_layer2", h5("Track height:",
                                                                         bsButton("bsb335", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb335", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer2", h5("Track margin:",
                                                                         bsButton("bsb336", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb336", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer3", HTML("<font color='red'>Track3</font>"), FALSE),
                        conditionalPanel(condition="input.layer3",
                                         sliderInput("height_layer3", h5("Track height:",
                                                                         bsButton("bsb337", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb337", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer3", h5("Track margin:",
                                                                         bsButton("bsb338", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb338", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer4", HTML("<font color='red'>Track4</font>"), FALSE),
                        conditionalPanel(condition = "input.layer4",
                                         sliderInput("height_layer4", h5("Track height:",
                                                                         bsButton("bsb339", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb339", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer4", h5("Track margin:",
                                                                         bsButton("bsb340", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb340", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer5", HTML("<font color='red'>Track5</font>"), FALSE),
                        conditionalPanel(condition = "input.layer5",
                                         sliderInput("height_layer5", h5("Track height:",
                                                                         bsButton("bsb341", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb341", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer5", h5("Track margin:",
                                                                         bsButton("bsb342", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb342", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer6", HTML("<font color='red'>Track6</font>"), FALSE),
                        conditionalPanel(condition="input.layer6",
                                         sliderInput("height_layer6", h5("Track height:",
                                                                         bsButton("bsb343", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb343", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer6", h5("Track margin:",
                                                                         bsButton("bsb344", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb344", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer7", HTML("<font color='red'>Track7</font>"), FALSE),
                        conditionalPanel(condition = "input.layer7",
                                         sliderInput("height_layer7", h5("Track height:",
                                                                         bsButton("bsb345", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb345", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer7", h5("Track margin:",
                                                                         bsButton("bsb346", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb346", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer8", HTML("<font color='red'>Track8</font>"), FALSE),
                        conditionalPanel(condition = "input.layer8",
                                         sliderInput("height_layer8", h5("Track height:",
                                                                         bsButton("bsb347", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb347", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer8", h5("Track margin:",
                                                                         bsButton("bsb348", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb348", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer9", HTML("<font color='red'>Track9</font>"), FALSE),
                        conditionalPanel(condition = "input.layer9",
                                         sliderInput("height_layer9", h5("Track height:",
                                                                         bsButton("bsb349", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb349", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer9", h5("Track margin:",
                                                                         bsButton("bsb350", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb350", "Margin size of the track.", trigger = "focus")
                        ),
-
+                       
                        checkboxInput("layer10", HTML("<font color='red'>Track10</font>"), FALSE),
                        conditionalPanel(condition = "input.layer10",
                                         sliderInput("height_layer10", h5("Track height:",
                                                                          bsButton("bsb351", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.06, step = 0.01),
+                                        ), min = 0, max = 1, value = 0.06, step = 0.01),
                                         bsPopover("bsb351", "Height of the track.", trigger = "focus"),
                                         sliderInput("margin_layer10", h5("Track margin:",
                                                                          bsButton("bsb352", label="", icon=icon("question"), style="info", size="small")
-                                        ), min = 0, max = 5, value = 0.01, step = 0.005),
+                                        ), min = 0, max = 1, value = 0.01, step = 0.005),
                                         bsPopover("bsb352", "Margin size of the track.", trigger = "focus")
                        )
                      )
                    )
       ),
-
+      
       mainPanel(id = "mainPanel_1",
                 fluidRow(
                   column(2, uiOutput("downloadpdf1")),
                   column(2, uiOutput("downloadsvg1")),
                   column(2, uiOutput("downloadscript1"))
                 ),
-
+                
                 br(),
                 br(),
-
+                
                 textOutput("errorinfo1"),
                 textOutput("errorinfo2"),
                 textOutput("errorinfo3"),
                 textOutput("errorinfo4"),
                 textOutput("errorinfo7"),
-
+                
                 plotOutput("figure_1", height = '100%', width = '100%'),
-
+                
                 bsModal("Example1", "Data Table", "tabBut1", size = "large",
                         dataTableOutput("Table1")),
-
+                
                 bsModal("Example2", "Data Table", "tabBut2", size = "large",
                         dataTableOutput("Table2")),
-
+                
                 bsModal("Example3", "Data Table", "tabBut3", size = "large",
                         dataTableOutput("Table3")),
-
+                
                 bsModal("Example4", "Data Table", "tabBut4", size = "large",
                         dataTableOutput("Table4")),
-
+                
                 bsModal("Example5", "Data Table", "tabBut5", size = "large",
                         dataTableOutput("Table5")),
-
+                
                 bsModal("Example6", "Data Table", "tabBut6", size = "large",
                         dataTableOutput("Table6")),
-
+                
                 bsModal("Example7", "Data Table", "tabBut7", size = "large",
                         dataTableOutput("Table7")),
-
+                
                 bsModal("Example8", "Data Table", "tabBut8", size = "large",
                         dataTableOutput("Table8")),
-
+                
                 bsModal("Example9", "Data Table", "tabBut9", size = "large",
                         dataTableOutput("Table9")),
-
+                
                 bsModal("Example10", "Data Table", "tabBut10", size = "large",
                         dataTableOutput("Table10")),
-
+                
                 bsModal("Example11", "Data Table", "tabBut11", size = "large",
                         dataTableOutput("Table11"))
       )
     ),
-
+    
     tabPanel(
       "Two genomes plot", tags$head(
         tags$style("
@@ -375,9 +397,10 @@ shinyUI(
           .popover-title{color:#FFFFFF;font-size:16px;background-color:#000000;border-color:#000000;}
 
           #sidebarPanel_2 {width:25em;}
-          #tc_lowColor, #tc_midColor, #tc_highColor, #tc_color_cus, #tc_border_col, #tc_vertical_col, #tc_horizontal_col {width:100%}
+          #tc_color_cus, #tc_border_col, #tc_vertical_col, #tc_horizontal_col {width:100%}
+          #tc_2cols_low, #tc_2cols_high, #tc_3cols_low, #tc_3cols_mid, #tc_3cols_high {width:100%}
           #mainPanel_2 {left:28em; position:absolute; min-width:27em;}"),
-
+        
         tags$style(HTML(".shiny-output-error-validation {color: red;}")),
         tags$script(HTML('Shiny.addCustomMessageHandler("jsCode",function(message) {eval(message.value);});')), includeScript("www/google-analytics.js")
       ),
@@ -387,14 +410,14 @@ shinyUI(
                                 bsButton("bsb353", label="", icon=icon("question"), style="info", size="small")
                              ), multiple = FALSE),
                    bsPopover("bsb353", 'Click "Browse" to upload the genome data aligned along the X-axis.', trigger = "focus"),
-
+                   
                    actionButton("tabBut12", "View example data"),
                    tags$script('$( "#tc_upload_chr_data_1" ).on( "click", function() { this.value = null; });'),
                    downloadButton("genome1_data.txt", "Example data"),
-
+                   
                    br(),
                    br(),
-
+                   
                    fileInput("tc_upload_chr_data_2",
                              h5("*Upload genome2 data:",
                                 bsButton("bsb354", label="", icon=icon("question"), style="info", size="small")
@@ -403,10 +426,10 @@ shinyUI(
                    actionButton("tabBut13", "View example data"),
                    tags$script('$( "#tc_upload_chr_data_2" ).on( "click", function() { this.value = null; });'),
                    downloadButton("genome2_data.txt", "Example data"),
-
+                   
                    br(),
                    br(),
-
+                   
                    fileInput("tc_uploaddata",
                              h5("*Upload main plot data:",
                                 bsButton("bsb355", label="", icon=icon("question"), style="info", size="small")
@@ -415,10 +438,10 @@ shinyUI(
                    actionButton("tabBut14", "View example data"),
                    tags$script('$( "#tc_uploaddata" ).on( "click", function() { this.value = null; });'),
                    downloadButton("example_plot_data.txt", "Example data"),
-
+                   
                    br(),
                    br(),
-
+                   
                    selectInput("tc_plot_type", "Plot type:",
                                choices = c("point_gradual", "point_discrete", "segment" , "rect_gradual", "rect_discrete"), selected="point_gradual"),
                    ADVANCED_OPTIONS_PANEL_tc(
@@ -428,24 +451,30 @@ shinyUI(
                                         conditionalPanel(condition = "input.tc_plot_type=='point_gradual' | input.tc_plot_type=='rect_gradual'",
                                                          selectInput("tc_sel_gral_col", h5("Colors",
                                                                                            bsButton("bsb356", label="", icon=icon("question"), style="info", size="small")
-                                                         ), c("Typical" = "1", "Custom" = "2"), selected = "1"),
+                                                         ), c("Typical" = "1", "Low_high_color" = "2", "Low_middle_high_color" = "3"), selected = "1"),
                                                          bsPopover("bsb356", "Colors to be used to plot the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
-
+                                                         
                                                          conditionalPanel(condition = "input.tc_sel_gral_col=='1'",
                                                                           selectInput("tc_gral_col", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
                                                                                                                        "purple.yellow.red", "blue.green.red", "blue.yellow.green",
                                                                                                                        "cyan.white.deeppink1"), selected="blue.white.red")
                                                          ),
-
+                                                         
                                                          conditionalPanel(condition="input.tc_sel_gral_col=='2'",
-                                                                          fluidRow(
-                                                                            column(4, jscolorInput("tc_lowColor", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")),
-                                                                            column(4, jscolorInput("tc_midColor", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")),
-                                                                            column(4, jscolorInput("tc_highColor", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+                                                                          fluidRow(			                                        
+                                                                            column(6, jscolorInput("tc_2cols_low", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+                                                                            column(6, jscolorInput("tc_2cols_high", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
                                                                           br()
-                                                         )
+                                                         ),																											  
+                                                         conditionalPanel(condition="input.tc_sel_gral_col=='3'",
+                                                                          fluidRow(			                                        
+                                                                            column(4, jscolorInput("tc_3cols_low", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
+                                                                            column(4, jscolorInput("tc_3cols_mid", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")), 
+                                                                            column(4, jscolorInput("tc_3cols_high", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+                                                                          br()
+                                                         )	
                                         ),
-
+                                        
                                         conditionalPanel(condition = "input.tc_plot_type=='point_discrete' | input.tc_plot_type=='segment' | input.tc_plot_type=='rect_discrete'",
                                                          selectInput("tc_col_type", h5("Data color",
                                                                                        bsButton("bsb357", label="", icon=icon("question"), style="info", size="small")
@@ -462,12 +491,12 @@ shinyUI(
                                                                           textInput("tc_color_mulgp", NULL, value = "a:red;b:blue;c:cyan")
                                                          )
                                         ),
-
+                                        
                                         selectInput("tc_col_lgd", h5("Color legend",
                                                                      bsButton("bsb358", label="", icon=icon("question"), style="info", size="small")
                                         ), choices = c("Yes" = "1", "No" = "2"), "2"),
                                         bsPopover("bsb358", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
-
+                                        
                                         conditionalPanel(condition = "input.tc_col_lgd=='1'",
                                                          textInput("tc_col_lgd_name", h5("Legend title:",
                                                                                          bsButton("bsb359", label="", icon=icon("question"), style="info", size="small")
@@ -485,7 +514,7 @@ shinyUI(
                                                                           )
                                                          )
                                         ),
-
+                                        
                                         conditionalPanel(condition = "input.tc_plot_type=='point_discrete' | input.tc_plot_type=='segment' | input.tc_plot_type=='rect_discrete'",
                                                          sliderInput("tc_col_transpt",
                                                                      h5("Color transparency:",
@@ -494,7 +523,7 @@ shinyUI(
                                                          bsPopover("bsb361", "A decimal number in [0, 1] to adjust the color transparency. The higher the value, the deeper the color.", trigger = "focus")
                                         )
                        ),
-
+                       
                        conditionalPanel(condition = "input.tc_plot_type == 'point_gradual' | input.tc_plot_type == 'point_discrete'",
                                         checkboxInput("symbol_opt_tc", HTML("<font color='red'>Symbol</font>"), FALSE),
                                         conditionalPanel(condition = "input.symbol_opt_tc",
@@ -505,7 +534,7 @@ shinyUI(
                                                          bsPopover("bsb362",
                                                                    'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.',
                                                                    trigger = "focus"),
-
+                                                         
                                                          conditionalPanel(condition = "input.sel_tc_symbol_point_type=='1'",
                                                                           sliderInput("tc_symbol_point", NULL, min=0, max=25, value=16, step=1)
                                                          ),
@@ -513,7 +542,7 @@ shinyUI(
                                                                                         bsButton("bsb363", label="", icon=icon("question"), style="info", size="small")
                                                          ), choices = c("Yes" = "1", "No" = "2"), "2"),
                                                          bsPopover("bsb363", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
-
+                                                         
                                                          conditionalPanel(condition = "input.tc_shape_lgd=='1'",
                                                                           textInput("tc_shape_lgd_name", h5("Legend title:",
                                                                                                             bsButton("bsb364", label="", icon=icon("question"), style="info", size="small")
@@ -531,7 +560,7 @@ shinyUI(
                                                                           )
                                                          )
                                         ),
-
+                                        
                                         checkboxInput("size_opt_tc", HTML("<font color='red'>Size</font>"), FALSE),
                                         conditionalPanel(condition = "input.size_opt_tc",
                                                          selectInput("sel_tc_point_size_type", h5("Point size",
@@ -540,7 +569,7 @@ shinyUI(
                                                          bsPopover("bsb366",
                                                                    'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.',
                                                                    trigger = "focus"),
-
+                                                         
                                                          conditionalPanel(condition = "input.sel_tc_point_size_type=='1'",
                                                                           sliderInput("tc_point_size", NULL, min=0, max=5, value=0.8, step=0.1)
                                                          ),
@@ -548,7 +577,7 @@ shinyUI(
                                                                                        bsButton("bsb367", label="", icon=icon("question"), style="info", size="small")
                                                          ), choices = c("Yes" = "1", "No" = "2"), "2"),
                                                          bsPopover("bsb367", "Control the appearance of the size legend in the plotting region.", trigger = "focus"),
-
+                                                         
                                                          conditionalPanel(condition = "input.tc_size_lgd=='1'",
                                                                           textInput("tc_size_lgd_name", h5("Legend title:",
                                                                                                            bsButton("bsb368", label="", icon=icon("question"), style="info", size="small")
@@ -561,14 +590,14 @@ shinyUI(
                                                                           bsPopover("bsb3680",
                                                                                     'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".',
                                                                                     trigger = "focus"),
-
+                                                                          
                                                                           conditionalPanel(condition = "input.tc_size_lgd_mdy_label=='1'",
                                                                                            textInput("tc_size_lgd_label", NULL, value="a,b,c")
                                                                           )
                                                          )
                                         )
                        ),
-
+                       
                        conditionalPanel(condition = "input.tc_plot_type=='segment'",
                                         checkboxInput("linetype_opt_tc", HTML("<font color='red'>Linetype</font>"), FALSE),
                                         conditionalPanel(condition = "input.linetype_opt_tc",
@@ -583,7 +612,7 @@ shinyUI(
                                                      bsButton("bsb370", label="", icon=icon("question"), style="info", size="small")
                        ), c("Show" = "1", "Hide" = "2"), selected = "2"),
                        bsPopover("bsb370", "Create a set of vertical lines across the X-axis to separate different chromosomes.", trigger = "focus"),
-
+                       
                        conditionalPanel(condition = "input.tc_vertical=='1'",
                                         fluidRow(column(12, jscolorInput("tc_vertical_col", label = h5('Vertical line color:',
                                                                                                        bsButton("bsb371", label="", icon=icon("question"), style="info", size="small")), value = "#000000"))),
@@ -604,27 +633,27 @@ shinyUI(
                                                        bsButton("bsb374", label="", icon=icon("question"), style="info", size="small")
                        ), c("Show" = "1", "Hide" = "2"), selected = "2"),
                        bsPopover("bsb374", "Create a set of horizontal lines across the Y-axis to separate different chromosomes.", trigger = "focus"),
-
+                       
                        conditionalPanel(condition = "input.tc_horizontal=='1'",
                                         fluidRow(column(12, jscolorInput("tc_horizontal_col", label = h5('Horizontal line color:',
                                                                                                          bsButton("bsb375", label="", icon=icon("question"), style="info", size="small")
                                         ), value = "#000000"))),
                                         bsPopover("bsb375", "Color of the horizontal lines",trigger = "focus"),
                                         br(),
-
+                                        
                                         sliderInput("tc_horizontal_size",
                                                     h5("Horizontal line width:",
                                                        bsButton("bsb376", label="", icon=icon("question"), style="info", size="small")
                                                     ), min = 0, max = 3, value = 0.2, step = 0.05),
                                         bsPopover("bsb376", "Line width of the horizontal lines",trigger = "focus"),
-
+                                        
                                         selectInput("tc_horizontal_type",
                                                     h5("Horizontal line type",
                                                        bsButton("bsb377", label="", icon=icon("question"), style="info", size="small")
                                                     ), choices = c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash"), selected = "solid"),
                                         bsPopover("bsb377", "Line type of the horizontal lines",trigger = "focus")
                        ),
-
+                       
                        conditionalPanel(condition = "input.tc_plot_type=='rect_gradual' | input.tc_plot_type=='rect_discrete'",
                                         selectInput("tc_add_border", h5("Add cell borders",
                                                                         bsButton("bsb378", label="", icon=icon("question"), style="info", size="small")
@@ -636,26 +665,26 @@ shinyUI(
                        )
                      )
                    ),
-
+                   
                    br(),
                    br(),
-
+                   
                    actionButton("submit2", strong("Go!",
                                                   bsButton("bsb380", label="", icon=icon("question"), style="info", size="small")
                    )),
-
+                   
                    conditionalPanel(condition="input.submit2 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
                    bsPopover("bsb380", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus"),
-
+                   
                    br(),
                    h4("Plot options"),
-
+                   
                    checkboxInput("tc_plotSize", "Adjust plot size", FALSE),
                    conditionalPanel(condition = "input.tc_plotSize",
                                     numericInput("tc_Height", "Plot height:", value = 650),
                                     numericInput("tc_Width", "Plot width:", value = 750)
                    ),
-
+                   
                    checkboxInput("tc_plotheme", "Figure theme", FALSE),
                    conditionalPanel(condition = "input.tc_plotheme",
                                     selectInput("tc_theme_sty", NULL, choices = c("theme1", "theme2", "theme3",
@@ -664,19 +693,19 @@ shinyUI(
                                                                                   "theme12", "theme13", "theme14", "theme15",
                                                                                   "theme16","theme17","theme18"), selected="theme1")
                    ),
-
+                   
                    checkboxInput("tc_sel_font_size", "Font size", FALSE),
                    conditionalPanel(condition = "input.tc_sel_font_size",
                                     sliderInput("tc_font_size", NULL, min=0, max=50, value=16, step=0.5)
                    ),
-
+                   
                    checkboxInput("tc_addtitle", "Axis title", FALSE),
                    conditionalPanel(condition = "input.tc_addtitle",
                                     textInput("tc_xtitle", "X axis title:", value="Genomic position 1"),
                                     textInput("tc_ytitle", "Y axis title:", value="Genomic position 2"),
                                     selectInput("tc_title_font_face", "Font face:", choices = c("plain", "italic", "bold", "bold.italic"), selected="plain")
                    ),
-
+                   
                    checkboxInput("tc_addlabels", "Axis label", FALSE),
                    conditionalPanel(condition = "input.tc_addlabels",
                                     selectInput("tc_xlabel", h5("X axis label",
@@ -688,7 +717,7 @@ shinyUI(
                                     ), choices = c("Show" = "1", "Hide" = "2"), selected = "1"),
                                     bsPopover("bsb385", "Add tick labels on the Y-axis.", trigger = "focus")
                    ),
-
+                   
                    checkboxInput("tc_legends", "Legend", FALSE),
                    conditionalPanel(condition = "input.tc_legends",
                                     selectInput("tc_lgd_pos", h5("Legend position",
@@ -715,44 +744,44 @@ shinyUI(
                                     bsPopover("bsb390", "The font face of legend tick label.", trigger = "focus")
                    )
       ),
-
+      
       mainPanel(id = "mainPanel_2",
                 fluidRow(
                   column(3, uiOutput("downloadpdf2")),
                   column(3, uiOutput("downloadsvg2")),
                   column(6, uiOutput("downloadscript2"))
                 ),
-
+                
                 br(),
                 br(),
-
+                
                 textOutput("errorinfo5"),
                 textOutput("errorinfo6"),
                 textOutput("errorinfo8"),
-
+                
                 plotOutput("figure_2", height = '100%', width = '100%'),
-
+                
                 bsModal("Example12", "Data Table", "tabBut12", size = "large",
                         dataTableOutput("Table12")),
-
+                
                 bsModal("Example13", "Data Table", "tabBut13", size = "large",
                         dataTableOutput("Table13")),
-
+                
                 bsModal("Example14", "Data Table", "tabBut14", size = "large",
                         dataTableOutput("Table14"))
       )
     ),
-
+    
     tabPanel("Gallery", includeHTML("www/gallery.html")),
-
+    
     navbarMenu("Help",
                tabPanel("Usage and installation", includeMarkdown("README.md")),
                tabPanel("Input data format", includeMarkdown("In_Data_Format.md")),
                tabPanel("User manual", uiOutput("pdfview"))
     ),
-
+    
     tabPanel("About", includeMarkdown("About.md"))
-
+    
   )
 )
 

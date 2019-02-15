@@ -114,12 +114,12 @@ cols_adjust <- function(i, dat, col_transpt, plot_type, type) {
 }
 
 col_lgd_mdy_labels <- function(dat, col_lgd_labels, breakscol, labelscol) {
-    col_lgd_labels <- rep(col_lgd_labels, length(breakscol))[1:length(breakscol)]
-    names(col_lgd_labels) <- labelscol
-    labels_1 <<- unname(col_lgd_labels)
-    dat$raw_color <- as.character(dat$raw_color)
-    dat$raw_color <- col_lgd_labels[dat$raw_color]
-    dat$raw_color <- factor(dat$raw_color, levels = unique(labels_1), ordered = T)
-    return(dat)
+  col_lgd_labels <- rep(col_lgd_labels, length(breakscol))[1:length(breakscol)]
+  names(col_lgd_labels) <- labelscol
+  labels_1 <<- unname(col_lgd_labels)
+  dat$raw_color <- as.character(dat$raw_color)
+  dat$raw_color <- col_lgd_labels[dat$raw_color]
+  dat$raw_color <- factor(dat$raw_color, levels = unique(labels_1), ordered = T)
+  return(dat)
 }
 

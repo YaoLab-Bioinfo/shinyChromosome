@@ -30,14 +30,14 @@ cat(paste("Height <- ",Height, sep = ""), paste("Width <- ", Width, sep = ""),
     paste("lgd_text_size <- ", lgd_text_size, sep = ""), paste('lgd_text_font_face <- "', lgd_text_font_face, '"', sep = ""),
     paste("chr_data <- ", '"', chr_data$name, '"', sep = ""), file = "code.R", append = TRUE, sep = "\n")
 
-cat('data.chr <- data.frame(fread(chr_data), stringsAsFactors = F)', file = "code.R", append = TRUE, sep = "\n")
+cat('data.chr <- data.frame(fread(chr_data, quote=""), stringsAsFactors = F)', file = "code.R", append = TRUE, sep = "\n")
 cat(paste('data.track.file <- c("', paste(upload_file.export,collapse ='", "'), '")', sep = ""), file = "code.R", append = TRUE, sep = "\n")
 cat(paste("sel_upload_data <- c(", paste(sel_upload_data.export,collapse =", "), ")", sep = ""), file = "code.R", append = TRUE, sep = "\n")
-cat("data.track <- lapply(1:10,function(x){
+cat('data.track <- lapply(1:10,function(x){
     if(sel_upload_data[x] == 2 && data.track.file[x] != 1) {
-       data.frame(fread(data.track.file[x]), stringsAsFactors=F)
+       data.frame(fread(data.track.file[x], quote=""), stringsAsFactors=F)
     }
-   })", file = "code.R", append = TRUE, sep = "\n")
+   })', file = "code.R", append = TRUE, sep = "\n")
 cat(paste("track_indx <- c(", paste(track_indx,collapse =","), ")", sep = ""),
     "data.track <- data.track[track_indx]", file = "code.R", append = TRUE, sep = "\n")
 
@@ -58,10 +58,12 @@ cat(paste('plot_type <- c("', paste(plot_type, collapse = '", "'), '")', sep = "
     paste('rect_col_dis_cus <- c("', paste(rect_col_dis_cus, collapse = '", "'), '")', sep = ""),
     paste('col_rect <- c("', paste(col_rect, collapse = '", "'), '")', sep = ""),
     paste("rect_grad_col <- c(", paste(rect_grad_col, collapse = ', '), ")", sep = ""),
-    paste('rect_grad_cus_cols <- c("', paste(rect_grad_cus_cols, collapse = '", "'), '")', sep = ""),
     paste("sel_heatmap_col <- c(", paste(sel_heatmap_col, collapse = ', '), ")", sep = ""),
-    paste('hmap_col <- c("', paste(hmap_col, collapse = '", "'), '")', sep = ""),
-    paste('heatmap_col_cus <- c("', paste(heatmap_col_cus, collapse = '", "'), '")', sep = ""),
+    paste('hmap_col <- c("', paste(hmap_col, collapse = '", "'), '")', sep = ""),	
+    paste('heatmap_col_cus_2cols <- c("', paste(heatmap_col_cus_2cols, collapse = '", "'), '")', sep = ""),
+    paste('heatmap_col_cus_3cols <- c("', paste(heatmap_col_cus_3cols, collapse = '", "'), '")', sep = ""),
+    paste('rect_grad_cus_2cols <- c("', paste(rect_grad_cus_2cols, collapse = '", "'), '")', sep = ""),
+    paste('rect_grad_cus_3cols <- c("', paste(rect_grad_cus_3cols, collapse = '", "'), '")', sep = ""),
     paste("hmap_col_dis <- c(", paste(hmap_col_dis, collapse = ', '), ")", sep = ""),
     paste('hmap_col_dis_cus <- c("', paste(hmap_col_dis_cus, collapse = '", "'), '")', sep = ""),
     paste("symbol_point <- c(", paste(symbol_point, collapse = ', '), ")", sep = ""),
@@ -105,16 +107,15 @@ cat(paste('plot_type <- c("', paste(plot_type, collapse = '", "'), '")', sep = "
     paste('heatmap_discol.export <- c("', paste(heatmap_discol.export, collapse = '", "'), '")', sep = ""),
     file = "code.R", append = TRUE, sep = "\n")
 
-cat("p1 <- single_genome_plot(data.chr, data.track, plot_type, layer_index, col_type, color_cus,
-    color_mulgp, col_transpt, add_border, border_col, rect_col, rect_col_dis, rect_col_dis_cus, col_rect,
-    rect_grad_col, rect_grad_cus_cols, sel_heatmap_col, hmap_col, heatmap_col_cus,
-    hmap_col_dis, hmap_col_dis_cus, symbol_point, sel_symbol_point, point_size, sel_point_size,
-    line_color, line_size, fill_area, sel_area_type, border_area, linetype, add_arrow, arrow_pos,
-    arrow_size, text_col, text_size, font_face, text_angle, col_lgd, col_lgd_name,
-    size_lgd, size_lgd_name,shape_lgd, shape_lgd_name, line_type_lgd, line_type_lgd_name,
-    col_lgd_mdy_label, col_lgd_label, size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label,
-    shape_lgd_label, line_type_lgd_mdy_label, line_type_lgd_label, ylabel, height_layer,
-    margin_layer, laycolor.export, rect_discol.export, heatmap_discol.export)", file = "code.R", append = TRUE, sep = "\n")
+cat("p1 <- single_genome_plot(data.chr, data.track, plot_type, layer_index, col_type, color_cus, color_mulgp, col_transpt, 
+     add_border, border_col, rect_col, rect_col_dis, rect_col_dis_cus, col_rect, rect_grad_col, sel_heatmap_col, hmap_col, 
+	 heatmap_col_cus_2cols, heatmap_col_cus_3cols, rect_grad_cus_2cols, rect_grad_cus_3cols, hmap_col_dis, hmap_col_dis_cus, 
+	 symbol_point, sel_symbol_point, point_size, sel_point_size, line_color, line_size, fill_area, sel_area_type, border_area, 
+	 linetype, add_arrow, arrow_pos, arrow_size, text_col, text_size, font_face, text_angle, col_lgd, col_lgd_name, size_lgd, 
+	 size_lgd_name,shape_lgd, shape_lgd_name, line_type_lgd, line_type_lgd_name, col_lgd_mdy_label, col_lgd_label, 
+	 size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label, shape_lgd_label, line_type_lgd_mdy_label, line_type_lgd_label, 
+	 ylabel, height_layer, margin_layer, laycolor.export, rect_discol.export, heatmap_discol.export)", 
+	 file = "code.R", append = TRUE, sep = "\n")
 
 cat("", file = "code.R", append = TRUE, sep = "\n")
 

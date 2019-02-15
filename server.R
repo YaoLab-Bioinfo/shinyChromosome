@@ -16,7 +16,7 @@ shinyServer(function(input, output, session) {
         lgd_text_size <<- input$lgd_text_size; chr_data <<- input$upload_chr_data
 
         if (!is.null(input$upload_chr_data)) {
-          data.chr <<- data.frame(fread(chr_data$datapath), stringsAsFactors = F)
+          data.chr <<- data.frame(fread(chr_data$datapath, quote=""), stringsAsFactors = F)
         } else{
           data.chr <<- NULL
         }
@@ -30,7 +30,7 @@ shinyServer(function(input, output, session) {
           trackfil <- input[[paste("uploaddata", x, sep = "")]]
           if (get(paste("sel_upload_data", x, sep = "")) == 2 & !is.null(trackfil)) {
             upload_file.export <<- c(upload_file.export, trackfil$name)
-            data.frame(fread(trackfil$datapath), stringsAsFactors = F)
+            data.frame(fread(trackfil$datapath, quote=""), stringsAsFactors = F)
           }
         })
 
@@ -43,21 +43,22 @@ shinyServer(function(input, output, session) {
         if (length(data.track) == 0) {
           data.track <<- NULL
         }
-
+        
         if (!is.null(data.track)) {
           # input options for each dataset
           plot_type <<- c(); col_type <<- c(); color_cus <<- c(); color_mulgp <<- c(); col_transpt <<- c()
           height_layer <<- c(); margin_layer <<- c(); add_border <<- c(); border_col <<- c(); rect_col <<- c()
           rect_col_dis <<- c(); rect_col_dis_cus <<- c(); rect_grad_col <<- c(); col_rect <<- c(); ylabel <<- c()
-          sel_heatmap_col <<- c(); hmap_col <<- c(); heatmap_col_cus <<- c(); rect_grad_cus_cols <<- c()
-          hmap_col_dis <<- c(); hmap_col_dis_cus <<- c(); symbol_point <<- c(); sel_symbol_point <<- c()
-          point_size <<- c(); sel_point_size <<- c(); line_color <<- c(); line_size <<- c(); fill_area <<- c()
-          sel_area_type <<- c(); border_area <<- c(); linetype <<- c(); add_arrow <<- c(); arrow_pos <<- c()
-          arrow_size <<- c(); text_col <<- c(); text_size <<- c(); font_face <<- c(); text_angle <<- c()
-          col_lgd <<- c(); col_lgd_name <<- c(); size_lgd <<- c(); size_lgd_name <<- c(); shape_lgd <<- c()
-          shape_lgd_name <<- c(); line_type_lgd <<- c(); line_type_lgd_name <<- c(); col_lgd_mdy_label <<- c()
-          col_lgd_label <<- c(); size_lgd_mdy_label <<- c(); size_lgd_label <<- c(); shape_lgd_mdy_label <<- c()
-          shape_lgd_label <<- c(); line_type_lgd_mdy_label <<- c(); line_type_lgd_label <<- c(); layer_index <<- c()
+          sel_heatmap_col <<- c(); hmap_col <<- c(); heatmap_col_cus_2cols <<- c(); heatmap_col_cus_3cols <<- c()
+          rect_grad_cus_2cols <<- c(); rect_grad_cus_3cols <<- c(); hmap_col_dis <<- c(); hmap_col_dis_cus <<- c()
+          symbol_point <<- c(); sel_symbol_point <<- c(); point_size <<- c(); sel_point_size <<- c(); line_color <<- c()
+          line_size <<- c(); fill_area <<- c(); sel_area_type <<- c(); border_area <<- c(); linetype <<- c()
+          add_arrow <<- c(); arrow_pos <<- c(); arrow_size <<- c(); text_col <<- c(); text_size <<- c(); font_face <<- c()
+          text_angle <<- c(); col_lgd <<- c(); col_lgd_name <<- c(); size_lgd <<- c(); size_lgd_name <<- c()
+          shape_lgd <<- c(); shape_lgd_name <<- c(); line_type_lgd <<- c(); line_type_lgd_name <<- c()
+          col_lgd_mdy_label <<- c(); col_lgd_label <<- c(); size_lgd_mdy_label <<- c(); size_lgd_label <<- c()
+          shape_lgd_mdy_label <<- c(); shape_lgd_label <<- c(); line_type_lgd_mdy_label <<- c()
+          line_type_lgd_label <<- c(); layer_index <<- c()
 
           for (k in 1:length(data.track)) {
             plot_type <<- c(plot_type, input[[paste("plot_type", track_indx[k], sep = "")]])
@@ -75,12 +76,16 @@ shinyServer(function(input, output, session) {
             col_rect <<- c(col_rect, input[[paste("col_rect", track_indx[k], sep = "")]])
             sel_heatmap_col <<- c(sel_heatmap_col, input[[paste("sel_heatmap_col", track_indx[k], sep = "")]])
             hmap_col <<- c(hmap_col, input[[paste("hmap_col", track_indx[k], sep = "")]])
-            heatmap_col_cus <<- c(heatmap_col_cus, paste(input[[paste("lowColor", track_indx[k], sep = "")]],
-                                                         input[[paste("midColor", track_indx[k], sep = "")]],
-                                                         input[[paste("highColor", track_indx[k], sep = "")]], sep = "."))
-            rect_grad_cus_cols <<- c(rect_grad_cus_cols, paste(input[[paste("rect_lowColor", track_indx[k], sep = "")]],
-                                                               input[[paste("rect_midColor", track_indx[k], sep = "")]],
-                                                               input[[paste("rect_highColor", track_indx[k], sep = "")]], sep = "."))
+            heatmap_col_cus_2cols <<- c(heatmap_col_cus_2cols, paste(input[[paste("hmap_2cols_low", track_indx[k], sep = "")]],
+                                                 input[[paste("hmap_2cols_high", track_indx[k], sep = "")]], sep = "."))
+            heatmap_col_cus_3cols <<- c(heatmap_col_cus_3cols, paste(input[[paste("hmap_3cols_low", track_indx[k], sep = "")]],
+                                                 input[[paste("hmap_3cols_mid", track_indx[k], sep = "")]],
+                                                 input[[paste("hmap_3cols_high", track_indx[k], sep = "")]], sep = "."))
+            rect_grad_cus_2cols <<- c(rect_grad_cus_2cols, paste(input[[paste("rect_2cols_low", track_indx[k], sep = "")]],
+                                                           input[[paste("rect_2cols_high", track_indx[k], sep = "")]], sep = "."))												 
+            rect_grad_cus_3cols <<- c(rect_grad_cus_3cols, paste(input[[paste("rect_3cols_low", track_indx[k], sep = "")]],
+                                                           input[[paste("rect_3cols_mid", track_indx[k], sep = "")]],
+                                                           input[[paste("rect_3cols_high", track_indx[k], sep = "")]], sep = "."))
             hmap_col_dis <<- c(hmap_col_dis, input[[paste("hmap_col_dis", track_indx[k], sep = "")]])
             hmap_col_dis_cus <<- c(hmap_col_dis_cus, input[[paste("hmap_col_dis_cus", track_indx[k], sep = "")]])
             symbol_point <<- c(symbol_point, input[[paste("symbol_point", track_indx[k], sep = "")]])
@@ -226,10 +231,10 @@ shinyServer(function(input, output, session) {
             lgd_title_size = lgd_title_size, lgd_title_font_face = lgd_title_font_face, lgd_text_font_face = lgd_text_font_face,
             lgd_text_size = lgd_text_size, add_border = add_border, border_col = border_col, rect_col = rect_col,
             rect_col_dis = rect_col_dis, rect_col_dis_cus = rect_col_dis_cus, rect_grad_col = rect_grad_col, col_rect = col_rect,
-            sel_heatmap_col = sel_heatmap_col, hmap_col = hmap_col, heatmap_col_cus = heatmap_col_cus,
-            rect_grad_cus_cols = rect_grad_cus_cols, hmap_col_dis = hmap_col_dis, hmap_col_dis_cus = hmap_col_dis_cus,
-            symbol_point = symbol_point, sel_symbol_point = sel_symbol_point, point_size = point_size,
-            sel_point_size = sel_point_size, line_color = line_color, line_size = line_size, fill_area = fill_area,
+            sel_heatmap_col = sel_heatmap_col, hmap_col = hmap_col, heatmap_col_cus_2cols = heatmap_col_cus_2cols, 
+            heatmap_col_cus_3cols = heatmap_col_cus_3cols, rect_grad_cus_2cols = rect_grad_cus_2cols, rect_grad_cus_3cols = rect_grad_cus_3cols, 
+            hmap_col_dis = hmap_col_dis, hmap_col_dis_cus = hmap_col_dis_cus, symbol_point = symbol_point, sel_symbol_point = sel_symbol_point, 
+            point_size = point_size, sel_point_size = sel_point_size, line_color = line_color, line_size = line_size, fill_area = fill_area,
             sel_area_type = sel_area_type, border_area = border_area, linetype = linetype, add_arrow = add_arrow,
             arrow_pos = arrow_pos, arrow_size = arrow_size, text_col = text_col, text_size = text_size, font_face = font_face,
             text_angle = text_angle, col_lgd = col_lgd, col_lgd_name = col_lgd_name, size_lgd = size_lgd, size_lgd_name = size_lgd_name,
@@ -308,20 +313,20 @@ shinyServer(function(input, output, session) {
 
         # user input data
         if (!is.null(tc_chr_data1)) {
-          data.chr1 <<- data.frame(fread(tc_chr_data1$datapath), stringsAsFactors = F)
+          data.chr1 <<- data.frame(fread(tc_chr_data1$datapath, quote=""), stringsAsFactors = F)
         } else{
           data.chr1 <<- NULL
         }
 
         if (!is.null(tc_chr_data2)) {
-          data.chr2 <<- data.frame(fread(tc_chr_data2$datapath), stringsAsFactors = F)
+          data.chr2 <<- data.frame(fread(tc_chr_data2$datapath, quote=""), stringsAsFactors = F)
         } else{
           data.chr2 <<- NULL
         }
 
         trackfil <<- input$tc_uploaddata
         if (!is.null(trackfil)) {
-          data.2geno.plot <<- data.frame(fread(trackfil$datapath), stringsAsFactors = F)
+          data.2geno.plot <<- data.frame(fread(trackfil$datapath, quote=""), stringsAsFactors = F)
         } else{
           data.2geno.plot <<- NULL
         }
@@ -329,7 +334,8 @@ shinyServer(function(input, output, session) {
         # user input options
         if (!is.null(data.2geno.plot)) {
           tc_plot_type <<- input$tc_plot_type; tc_sel_gral_col <<- input$tc_sel_gral_col; tc_gral_col_tp <<- input$tc_gral_col
-          tc_gral_col_ct <<- c(input$tc_lowColor, input$tc_midColor, input$tc_highColor); tc_col_type <<- input$tc_col_type
+          tc_gral_2cols_ct <<- c(input$tc_2cols_low, input$tc_2cols_high); tc_shape_lgd_label <<- input$tc_shape_lgd_label
+          tc_gral_3cols_ct <<- c(input$tc_3cols_low, input$tc_3cols_mid, input$tc_3cols_high); tc_col_type <<- input$tc_col_type
           tc_color_cus <<- input$tc_color_cus; tc_color_mulgp <<- input$tc_color_mulgp; tc_col_transpt <<- input$tc_col_transpt
           tc_symbol_point <<- input$tc_symbol_point; sel_tc_symbol_point_type <<- input$sel_tc_symbol_point_type
           tc_point_size <<- input$tc_point_size; sel_tc_point_size_type <<- input$sel_tc_point_size_type
@@ -343,7 +349,6 @@ shinyServer(function(input, output, session) {
           tc_shape_lgd_name <<- input$tc_shape_lgd_name; tc_col_lgd_mdy_label <<- input$tc_col_lgd_mdy_label
           tc_col_lgd_label <<- input$tc_col_lgd_label; tc_size_lgd_mdy_label <<- input$tc_size_lgd_mdy_label
           tc_size_lgd_label <<- input$tc_size_lgd_label; tc_shape_lgd_mdy_label <<- input$tc_shape_lgd_mdy_label
-          tc_shape_lgd_label <<- input$tc_shape_lgd_label
 
           # error information
           output$errorinfo6 <- renderPrint({
@@ -403,9 +408,9 @@ shinyServer(function(input, output, session) {
           two_genomes_plot(
             input = input, output = output, data.chr1 = data.chr1, data.chr2 = data.chr2, data.2geno.plot = data.2geno.plot,
             Height = tc_Height, Width = tc_Width, sel_gral_col = tc_sel_gral_col, gral_col_tp = tc_gral_col_tp,
-            gral_col_ct = tc_gral_col_ct, col_type = tc_col_type, color_cus = tc_color_cus, color_mulgp = tc_color_mulgp,
-            col_transpt = tc_col_transpt, theme_sty = tc_theme_sty, font_size = tc_font_size, xtitle = tc_xtitle,
-            ytitle = tc_ytitle, title_font_face = tc_title_font_face, xlabel = tc_xlabel, ylabel = tc_ylabel,
+            gral_2cols_ct = tc_gral_2cols_ct, gral_3cols_ct = tc_gral_3cols_ct, col_type = tc_col_type, color_cus = tc_color_cus, 
+            color_mulgp = tc_color_mulgp, col_transpt = tc_col_transpt, theme_sty = tc_theme_sty, font_size = tc_font_size, 
+            xtitle = tc_xtitle, ytitle = tc_ytitle, title_font_face = tc_title_font_face, xlabel = tc_xlabel, ylabel = tc_ylabel,
             lgd_pos = tc_lgd_pos,lgd_title_size = tc_lgd_title_size, lgd_title_font_face = tc_lgd_title_font_face,
             lgd_text_font_face = tc_lgd_text_font_face, lgd_text_size = tc_lgd_text_size, symbol_point = tc_symbol_point,
             symbol_point_type = sel_tc_symbol_point_type, point_size = tc_point_size, point_size_type = sel_tc_point_size_type,
@@ -629,85 +634,85 @@ shinyServer(function(input, output, session) {
 
   ## *** View example data ***
   output$Table1 <- renderDataTable({
-    x <- fread("www/data/download_example_data/single_genome/genome_data.txt")
+    x <- fread("www/data/download_example_data/single_genome/genome_data.txt", quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table2 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type1, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table3 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type2, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table4 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type3, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table5 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type4, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table6 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type5, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table7 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type6, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table8 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type7, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table9 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type8, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table10 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type9, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table11 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/single_genome/", input$plot_type10, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table12 <- renderDataTable({
     input_file <- "www/data/download_example_data/two_genome/genome1_data.txt"
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table13 <- renderDataTable({
     input_file <- "www/data/download_example_data/two_genome/genome2_data.txt"
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
   output$Table14 <- renderDataTable({
     input_file <- paste0("www/data/download_example_data/two_genome/", input$tc_plot_type, ".txt")
-    x <- fread(input_file)
+    x <- fread(input_file, quote="")
     return(x)
   }, options = list(pageLength = 10))
 
