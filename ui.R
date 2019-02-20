@@ -532,7 +532,7 @@ shinyUI(
                                                          ), c("One custom symbol" = "1",
                                                               'Custom for data with a "shape" column' = "2"), selected = "1"),
                                                          bsPopover("bsb362",
-                                                                   'Symbol used for different points. Applicable values are integers in [0-25]. Type ?pch in R console for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.',
+                                                                   'Symbol used for different points. Applicable values are integers in [0-25]. Check http://www.endmemo.com/program/R/pchsymbols.php for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.',
                                                                    trigger = "focus"),
                                                          
                                                          conditionalPanel(condition = "input.sel_tc_symbol_point_type=='1'",
