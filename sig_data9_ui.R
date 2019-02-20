@@ -1,6 +1,6 @@
 
 sig_data9 <- conditionalPanel(condition="input.data9",
-                              radioButtons("sel_upload_data9", NULL, c("NULL" = "1", "Upload" = "2"), "1"),
+                              radioButtons("sel_upload_data9", NULL, c("Close data input" = "1", "Upload input data" = "2"), "1"),
                               conditionalPanel(condition="input.sel_upload_data9 == '2'",
                                                fileInput("uploaddata9", 
                                                          h5("Upload data9:",
