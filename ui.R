@@ -196,7 +196,7 @@ shinyUI(
                                                                          bsButton("bsb329", label="", icon=icon("question"), style="info", size="small")
                                         ), min = 0, max = 40, value = 12, step = 0.1),
                                         bsPopover("bsb329", "The font size of legend title.", trigger = "focus"),
-                                        selectInput("lgd_title_font_face", h5("Title font face:",
+                                        selectInput("lgd_title_font_face", h5("Title font face",
                                                                               bsButton("bsb330", label="", icon=icon("question"), style="info", size="small")
                                         ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                         bsPopover("bsb330", "The font face of legend title.", trigger = "focus"),
@@ -204,7 +204,7 @@ shinyUI(
                                                                         bsButton("bsb331", label="", icon=icon("question"), style="info", size="small")
                                         ), min = 0, max = 40, value = 10, step = 0.1),
                                         bsPopover("bsb331", "The font size of legend tick label.", trigger = "focus"),
-                                        selectInput("lgd_text_font_face", h5("Label font face:",
+                                        selectInput("lgd_text_font_face", h5("Label font face",
                                                                              bsButton("bsb332", label="", icon=icon("question"), style="info", size="small")
                                         ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                         bsPopover("bsb332", "The font face of legend tick label.", trigger = "focus")
@@ -638,7 +638,7 @@ shinyUI(
                                         fluidRow(column(12, jscolorInput("tc_horizontal_col", label = h5('Horizontal line color:',
                                                                                                          bsButton("bsb375", label="", icon=icon("question"), style="info", size="small")
                                         ), value = "#000000"))),
-                                        bsPopover("bsb375", "Color of the horizontal lines",trigger = "focus"),
+                                        bsPopover("bsb375", "Color of the horizontal lines.",trigger = "focus"),
                                         br(),
                                         
                                         sliderInput("tc_horizontal_size",
@@ -729,7 +729,7 @@ shinyUI(
                                     ), min = 0, max = 40, value = 12, step = 0.1),
                                     bsPopover("bsb387", "The font size of legend title.", trigger = "focus"),
                                     selectInput("tc_lgd_title_font_face",
-                                                h5("Title font face:",
+                                                h5("Title font face",
                                                    bsButton("bsb388", label="", icon=icon("question"), style="info", size="small")
                                                 ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                     bsPopover("bsb388", "The font face of legend title.", trigger = "focus"),
@@ -738,7 +738,7 @@ shinyUI(
                                     ), min = 0, max = 40, value = 10, step = 0.1),
                                     bsPopover("bsb389", "The font size of legend tick label.", trigger = "focus"),
                                     selectInput("tc_lgd_text_font_face",
-                                                h5("Label font face:",
+                                                h5("Label font face",
                                                    bsButton("bsb390", label="", icon=icon("question"), style="info", size="small")
                                                 ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                     bsPopover("bsb390", "The font face of legend tick label.", trigger = "focus")
