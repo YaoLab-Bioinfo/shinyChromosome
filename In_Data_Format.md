@@ -15,7 +15,7 @@ The detailed format of input data for different types of plots are described in 
 
 ### **1.1 Genome data**
 
-The dataset should contain only 2 columns. Column names are **optional**.  
+The dataset should contain only 2 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome length.  
 
@@ -42,7 +42,7 @@ or
 ### **1.2 Point**
 
 The dataset should contain >=3 columns.  
-In the simplest situation, the dataset should contain 3 columns. In this case, column names are **optional**.  
+In the simplest situation, the dataset should contain 3 columns with fixed order. In this case, column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome position.  
 **3rd column**: data value.  
@@ -66,7 +66,7 @@ or
 1	218457	0.393112
 ```
 
-To control the color of points, add a **color** column to divide the data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**.  
+To control the color of points, add a **color** column to categorize the data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**. The name of the first three columns can be any appropriate variable names in R and the order of the first three columns must be fixed as the simplest situation. The name of the **color** column must be 'color'. 
 
 
 ```
@@ -76,7 +76,7 @@ To control the color of points, add a **color** column to divide the data into d
    1   218457 0.393112     a
 ```
 
-To control the symbol used for each point, add a **shape** column. Check http://www.endmemo.com/program/R/pchsymbols.php for more information. In this case, column names are **compulsory**.  
+To control the symbol used for each point, add a **shape** column. Check http://www.endmemo.com/program/R/pchsymbols.php for more information. In this case, column names are **compulsory**. The name of the first three columns can be any appropriate variable names in R and the order of the first three columns must be fixed as the simplest situation. The name of the **shape** column must be 'shape'. 
 
 
 ```
@@ -86,7 +86,7 @@ To control the symbol used for each point, add a **shape** column. Check http://
    1   200001    22    15
 ```
 
-To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. In this case, column names are **compulsory**.  
+To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. In this case, column names are **compulsory**. The name of the first three columns can be any appropriate variable names in R and the order of the first three columns must be fixed as the simplest situation. The name of the **size** column must be 'size'.  
 
 
 ```
@@ -96,7 +96,7 @@ To control the size of each point, add a **size** column. Larger number in the *
    1   200001    22  1.1
 ```
 
-Users can choose to control two or more of the **color**, **shape** and **size** features at the same time. Acceptable input data can be  
+Users can choose to control two or more of the **color**, **shape** and **size** features at the same time. In this case, column names are **compulsory**. The name of the first three columns can be any appropriate variable names in R and the order of the first three columns must be fixed as the simplest situation. The name of the **shape** column must be 'shape'. The name of the **color** column must be 'color'. The name of the **size** column must be 'size'. The order of the **color**, **shape** and **size** columns is flexible. Acceptable input data can be  
 
 
 ```
@@ -140,7 +140,7 @@ or
 ### **1.3 Line**
 
 The dataset should contain >=3 columns.  
-In the simplest situation, the dataset should contain 3 columns. In this case, column names are **optional**.  
+In the simplest situation, the dataset should contain 3 columns with fixed order. In this case, column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome position.  
 **3rd column**: data value.  
@@ -164,7 +164,7 @@ or
 1	599000	0.0674
 ```
 
-To add multiple lines and assign different colors to different lines, add a **color** column to divide the data into different groups. In this case, column names are **compulsory**.  
+To add multiple lines and assign different colors to different lines, add a **color** column to categorize the data into different groups. In this case, column names are **compulsory**. The name of the first three columns can be any appropriate variable names in R and the order of the first three columns must be fixed as the simplest situation. The name of the **color** column must be 'color'. 
 
 
 ```
@@ -179,7 +179,7 @@ To add multiple lines and assign different colors to different lines, add a **co
 ### **1.4 Bar**
 
 The dataset should contain >=4 columns.  
-In the simplest situation, the dataset should contain 4 columns. In this case, column names are **optional**.  
+In the simplest situation, the dataset should contain 4 columns with fixed order. In this case, column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: start coordinate of bars.  
 **3rd column**: end coordinate of bars.  
@@ -204,7 +204,7 @@ or
 1	200001	300000	650
 ```
 
-To control the color of bars, add a **color** column to divide the data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**.  
+To control the color of bars, add a **color** column to categorize the data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**. The name of the first four columns can be any appropriate variable names in R and the order of the first four columns must be fixed as the simplest situation. The name of the **color** column must be 'color'.  
 
 
 ```
@@ -217,7 +217,7 @@ To control the color of bars, add a **color** column to divide the data into dif
 
 ### **1.5 Rect**
 
-The dataset should contain 4 columns. Column names are **optional**.  
+The dataset should contain 4 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: start coordinate of rects.  
 **3rd column**: end coordinate of rects.  
@@ -265,7 +265,7 @@ or
 
 ### **1.6 Heatmap**
 
-The dataset should contain >=4 columns. Column names are **optional**.  
+The dataset should contain >=4 columns. Column names are **optional**. The order of the first three columns must be fixed as follows.  
 **1st column**: chromosome ID.  
 **2nd column**: start coordinate of cells.  
 **3rd column**: end coordinate of cells.  
@@ -314,7 +314,7 @@ or
 
 ### **1.7 Segment**
 
-The dataset should contain 5 columns. Column names are **optional**.  
+The dataset should contain 5 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: X-axis start coordinate of segments.  
 **3rd column**: Y-axis start coordinate of segments.  
@@ -342,7 +342,7 @@ or
 
 ### **1.8 Text**
 
-The dataset should contain 4 columns. Column names are **optional**.  
+The dataset should contain 4 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: X-axis position of texts.  
 **3rd column**: Y-axis position of texts.  
@@ -369,7 +369,7 @@ or
 
 ### **1.9 Vertical line**
 
-The dataset should contain 2 columns. Column names are **optional**.  
+The dataset should contain 2 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: genomic position of vertical lines.  
 
@@ -420,7 +420,7 @@ or
 
 ### **2.1 Data of genome along the horizontal axis**
 
-The dataset should contain only 2 columns. Column names are **optional**.  
+The dataset should contain only 2 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome length.  
 
@@ -445,7 +445,7 @@ or
 
 ### **2.2 Data of genome along the vertical axis**
 
-The dataset should contain only 2 columns. Column names are **optional**.  
+The dataset should contain only 2 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID.  
 **2nd column**: chromosome length.  
 
@@ -471,7 +471,7 @@ Chr03	37032663
 ### **2.3 Point**
 
 The dataset should contain >=4 columns.  
-In the simplest situation, the dataset should contain 4 columns. In this case, column names are **optional**.  
+In the simplest situation, the dataset should contain 4 columns with fixed order. In this case, column names are **optional**.  
 **1st column**: chromosome ID of genome along the horizontal axis.  
 **2nd column**: chromosome position in genome along the horizontal axis.  
 **3rd column**: chromosome ID of genome along the horizontal axis.  
@@ -496,7 +496,7 @@ or
 11	17015000	6	27706228
 ```
 
-To control the color of points, add a **color** column. In this case, column names are **compulsory**. The color column can be a character vector or a numeric vector. If the color column is a character vector, choose the `point_discrete` plot type.    
+To control the color of points, add a **color** column. In this case, column names are **compulsory**. The name of the first four columns can be any appropriate variable names in R and the order of the first four columns must be fixed as the simplest situation. The name of the **color** column must be 'color'. The color column can be a character vector or a numeric vector. If the color column is a character vector, choose the `point_discrete` plot type.    
 
 
 ```
@@ -516,7 +516,7 @@ If the color column is a numeric vector, choose the `point_gradual` plot type.
    11 17015000    6 27706228  5.802
 ```
 
-To control the symbol used for each point, add a **shape** column. Check http://www.endmemo.com/program/R/pchsymbols.php for more information. Column names are **compulsory**.  
+To control the symbol used for each point, add a **shape** column. Check http://www.endmemo.com/program/R/pchsymbols.php for more information. In this case, column names are **compulsory**. The name of the first four columns can be any appropriate variable names in R and the order of the first four columns must be fixed as the simplest situation. The name of the **shape** column must be 'shape'. The **shape** column should be an integer vector.  
 
 
 ```
@@ -526,7 +526,7 @@ To control the symbol used for each point, add a **shape** column. Check http://
     1  2583523    1  2546654    12
 ```
 
-To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. In this case, column names are **compulsory**.  
+To control the size of each point, add a **size** column. Larger number in the **size** column means lareger point size. In this case, column names are **compulsory**. The name of the first four columns can be any appropriate variable names in R and the order of the first four columns must be fixed as the simplest situation. The name of the **size** column must be 'size'. The **size** column should be an integer vector. 
 
 
 ```
@@ -580,7 +580,7 @@ or
 ### **2.4 Segment**
 
 The dataset should contain >=6 columns.  
-In the simplest situation, the dataset should contain 6 columns. In this case, column names are **optional**.  
+In the simplest situation, the dataset should contain 6 columns with fixed order. In this case, column names are **optional**.  
 **1st column**: chromosome ID of genome along the horizontal axis.  
 **2nd column**: X-axis start coordinate of segments.  
 **3rd column**: X-axis end coordinate of segments.  
@@ -607,7 +607,7 @@ Chr01	25221	49370	Chr01	41483	65682
 Chr01	49604	67964	Chr01	65681	84044
 ```
 
-To control the color of segments, add a **color** column to divide data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**.  
+To control the color of segments, add a **color** column to categorize data into different groups. Then different colors will be assigned to different groups of data. In this case, column names are **compulsory**. The name of the first six columns can be any appropriate variable names in R and the order of the first six columns must be fixed as the simplest situation. The name of the **color** column must be 'color'.  
 
 
 ```
@@ -620,7 +620,7 @@ To control the color of segments, add a **color** column to divide data into dif
 
 ### **2.5 Rect**
 
-The dataset should contain 7 columns. Column names are **optional**.  
+The dataset should contain 7 columns with fixed order. Column names are **optional**.  
 **1st column**: chromosome ID of genome along the horizontal axis.  
 **2nd column**: X-axis start coordinate of rects.  
 **3rd column**: X-axis end coordinate of rects.  
