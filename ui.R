@@ -449,7 +449,7 @@ shinyUI(
                        checkboxInput("color_opt_tc", HTML("<font color='red'>Color</font>"), FALSE),
                        conditionalPanel(condition = "input.color_opt_tc",
                                         conditionalPanel(condition = "input.tc_plot_type=='point_gradual' | input.tc_plot_type=='rect_gradual'",
-                                                         selectInput("tc_sel_gral_col", h5("Colors",
+                                                         selectInput("tc_sel_gral_col", h5("Data color",
                                                                                            bsButton("bsb356", label="", icon=icon("question"), style="info", size="small")
                                                          ), c("Typical" = "1", "Low_high_color" = "2", "Low_middle_high_color" = "3"), selected = "1"),
                                                          bsPopover("bsb356", "Colors to be used to plot the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
