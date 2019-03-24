@@ -452,7 +452,7 @@ shinyUI(
                                                          selectInput("tc_sel_gral_col", h5("Data color",
                                                                                            bsButton("bsb356", label="", icon=icon("question"), style="info", size="small")
                                                          ), c("Typical" = "1", "Low_high_color" = "2", "Low_middle_high_color" = "3"), selected = "1"),
-                                                         bsPopover("bsb356", "Colors to be used to plot the data, which can be assigned by the application or be specified by the users.", trigger = "focus"),
+                                                         bsPopover("bsb356", "Colors to be used to plot the data, which can be assigned by the application or be specified by the users. By default, predefined color would be used.", trigger = "focus"),
                                                          
                                                          conditionalPanel(condition = "input.tc_sel_gral_col=='1'",
                                                                           selectInput("tc_gral_col", NULL, choices = c("blue.white.red", "green.black.red", "green.yellow.red",
@@ -481,7 +481,7 @@ shinyUI(
                                                          ), c("Random" = "1", "One custom color" = "2",
                                                               "Custom for data with multi-group" = "3"), selected = "1"),
                                                          bsPopover("bsb357",
-                                                                   'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.',
+                                                                   'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. By default, random assigned color would be used. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.',
                                                                    trigger = "focus"),
                                                          conditionalPanel(condition = "input.tc_col_type=='2'",
                                                                           fluidRow(column(12, jscolorInput("tc_color_cus", label = NULL, value = "#FF0000"))),
