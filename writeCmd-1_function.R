@@ -653,6 +653,7 @@ single_genome_plot <- function(data.chr, data.track, plot_type, layer_index, col
     }
     
     data.track.single.lgd <- data.track.single
+	data.track.single <- data.track.single[data.track.single$chr %in% chr_order,]
     
     ## *** Fix the chromosomes order ***
     data.track.single$chr.f <- factor(data.track.single$chr, levels = chr_order, ordered = T)

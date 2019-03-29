@@ -354,7 +354,7 @@ shinyServer(function(input, output, session) {
           output$errorinfo6 <- renderPrint({
             validate(need(!is.null(data.chr1), "Please upload genome1 data!"))
             validate(need(!is.null(data.chr2), "Please upload genome2 data!"))
-            if (input$tc_plot_type %in% c("point_gradual", "point_discrete")) {
+            if (tc_plot_type %in% c("point_gradual", "point_discrete")) {
               validate(
                 need(
                   ncol(data.2geno.plot) == 4 | (ncol(data.2geno.plot) > 4 && all(names(data.2geno.plot)[5:ncol(data.2geno.plot)] %in% c("color", "shape", "size"))),
@@ -362,7 +362,7 @@ shinyServer(function(input, output, session) {
                 )
               )
             }
-            if (input$tc_plot_type %in% "segment") {
+            if (tc_plot_type %in% "segment") {
               validate(
                 need(
                   ncol(data.2geno.plot) == 6 | (ncol(data.2geno.plot) == 7 && names(data.2geno.plot)[7] == "color"),
@@ -370,7 +370,7 @@ shinyServer(function(input, output, session) {
                 )
               )
             }
-            if (input$tc_plot_type %in% "point_gradual") {
+            if (tc_plot_type %in% "point_gradual") {
               validate(
                 need(
                   is.numeric(data.2geno.plot[, "color"]),
@@ -378,7 +378,7 @@ shinyServer(function(input, output, session) {
                 )
               )
             }
-            if (input$tc_plot_type %in% "point_discrete") {
+            if (tc_plot_type %in% "point_discrete") {
               validate(
                 need((
                   "color" %in% names(data.2geno.plot) && length(unique(data.2geno.plot[, "color"])) <= 50) | !"color" %in% names(data.2geno.plot),
@@ -386,7 +386,7 @@ shinyServer(function(input, output, session) {
                 )
               )
             }
-            if (input$tc_plot_type %in% "rect_gradual") {
+            if (tc_plot_type %in% "rect_gradual") {
               validate(
                 need(
                   ncol(data.2geno.plot) == 7 && is.numeric(data.2geno.plot[, "color"]),
@@ -394,7 +394,7 @@ shinyServer(function(input, output, session) {
                 )
               )
             }
-            if (input$tc_plot_type %in% "rect_discrete") {
+            if (tc_plot_type %in% "rect_discrete") {
               validate(
                 need(
                   ncol(data.2geno.plot) == 6 | (ncol(data.2geno.plot) == 7 && names(data.2geno.plot)[7] == "color" && length(unique(data.2geno.plot[, "color"])) <= 50),
