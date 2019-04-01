@@ -416,6 +416,24 @@ or
  5
 ```
 
+### **1.11 Ideogram**
+
+Ideogram is a schematic representation of chromosomes. Please check https://www.nature.com/scitable/topicpage/chromosome-mapping-idiograms-302 and http://genome.ucsc.edu/cgi-bin/hgTables?db=hg38&hgta_group=map&hgta_track=cytoBand&hgta_table=cytoBand&hgta_doSchema=describe+table+schema for more information. The input data to create ideogram should contain 5 columns with fixed order. Column names are **optional**.  
+**1st column**: chromosome ID.  
+**2nd column**: Start coordinate in chromosome sequence.  
+**3rd column**: End coordinate in chromosome sequence.  
+**4th column**: Name of cytogenetic band.  
+**5th column**: Giesma stain results.  
+
+Acceptable input data format can be  
+
+
+```
+1	     1	 399271	p36.33	  gneg
+1	399271	 937418	p36.32	gpos25
+1	937418	1249890	p36.31	  gneg
+```
+
 ## **2. Two genomes plot**
 
 ### **2.1 Data of genome along the horizontal axis**
