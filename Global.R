@@ -1,7 +1,7 @@
 
 options(shiny.maxRequestSize=30*1024^2)
 
-library(gplots)
+#library(gplots)
 library(ggplot2)
 library(plyr)
 library(ggthemes)
@@ -12,6 +12,7 @@ library(reshape2)
 library(data.table)
 library(grid)
 library(shinysky)
+library(zip)
 
 source("single_genome_plot.R")
 source("two_genomes_plot.R")

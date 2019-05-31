@@ -5,7 +5,7 @@ areColors <- function(x) {
   })
 }
 
-dat_dis_col <- function(i, dis_cols, data.2geno.plot) {
+dat_dis_col <- function(i, dis_cols, dat) {
   dis_col <- dis_cols[i]
   dis_col <- gsub("\\s", "", strsplit(dis_col, ",")[[1]])
   dis_col <- gsub('\\"', "", dis_col)
@@ -13,8 +13,8 @@ dat_dis_col <- function(i, dis_cols, data.2geno.plot) {
   if (length(dis_col) == 0) {
     dis_col <- NA
   }
-  data.2geno.plot$color <- dis_col
-  return(data.2geno.plot)
+  dat$color <- dis_col
+  return(dat)
 }
 
 dat_cus_cols <- function(i, cus_cols, dat) {

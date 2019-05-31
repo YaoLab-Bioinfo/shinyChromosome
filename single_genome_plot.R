@@ -1251,7 +1251,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
     ## *** Lay out panels ***
     if (chr_plotype == 2) {
       if (plot_direct == 2) {
-        p1 <- p1 + facet_grid(. ~ chr.f)
+        p1 <- p1 + facet_grid(. ~ chr.f) + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
       } else{
         p1 <- p1 + facet_grid(chr.f ~ .)
       }

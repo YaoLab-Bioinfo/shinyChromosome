@@ -1,19 +1,7 @@
 
 sig_data7 <- conditionalPanel(condition = "input.data7",
-                              radioButtons("sel_upload_data7", NULL, c("Close data input" = "1", "Upload input data" = "2"), "1"),
+                              radioButtons("sel_upload_data7", NULL, c("Disable data input" = "1", "Upload input data" = "2"), "1"),
                               conditionalPanel(condition = "input.sel_upload_data7 == '2'",
-                                               fileInput("uploaddata7", 
-                                                         h5("Upload data7:",
-                                                            bsButton("bsb4", label = "", icon = icon("question"), style = "info", size = "small")
-                                                         ), multiple = FALSE),
-                                               bsPopover("bsb194", 'Click "Browse" to upload the track data.', trigger = "focus"),
-                                               
-                                               actionButton("tabBut8", "View example data"),
-                                               tags$script('$( "#uploaddata7" ).on( "click", function() { this.value = null; });'),
-                                               downloadButton("example_data7.txt", "Example data"),
-                                               
-                                               br(),
-                                               
                                                selectInput("layer_index7", h5("Track index:",
                                                                               bsButton("bsb195", label="", icon=icon("question"), style="info", size="small")),
                                                            choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
@@ -26,6 +14,19 @@ sig_data7 <- conditionalPanel(condition = "input.data7",
                                                selectInput("plot_type7", "Plot type:",
                                                            choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", 
                                                                        "text", "segment", "vertical_line", "horizontal_line", "ideogram"), selected = "point"),
+                                               
+											   fileInput("uploaddata7", 
+                                                         h5("Upload data7:",
+                                                            bsButton("bsb4", label = "", icon = icon("question"), style = "info", size = "small")
+                                                         ), multiple = FALSE),
+                                               bsPopover("bsb194", 'Click "Browse" to upload the track data.', trigger = "focus"),
+                                               
+                                               actionButton("tabBut8", "View example data"),
+                                               tags$script('$( "#uploaddata7" ).on( "click", function() { this.value = null; });'),
+                                               downloadButton("example_data7.txt", "Example data"),
+                                               
+                                               br(),
+                                               br(),
                                                
                                                conditionalPanel(condition = "input.plot_type7!='ideogram'",
                                                                 ADVANCED_OPTIONS_PANEL_7(

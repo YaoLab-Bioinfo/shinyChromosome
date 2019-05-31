@@ -134,15 +134,6 @@ shinyUI(
                    checkboxInput("data10", HTML("<font color='red'>Data10</font>"), FALSE),
                    source("sig_data10_ui.R")$value,
                    
-                   br(),
-                   actionButton("submit1", strong("Go!",
-                                                  bsButton("bsb322", label="", icon=icon("question"), style="info", size="small")
-                   )),
-                   
-                   conditionalPanel(condition="input.submit1 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
-                   bsPopover("bsb322", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus"),
-                   br(),
-                   
                    h4("Plot options"),
                    ADVANCED_OPTIONS_PANEL(
                      list(
@@ -330,7 +321,17 @@ shinyUI(
                                         bsPopover("bsb352", "Margin size of the track.", trigger = "focus")
                        )
                      )
-                   )
+                   ),
+
+                   br(),
+                   br(),
+				
+                   actionButton("submit1", strong("Go!",
+                                                  bsButton("bsb322", label="", icon=icon("question"), style="info", size="small")
+                   )),
+                   
+                   conditionalPanel(condition="input.submit1 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
+                   bsPopover("bsb322", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus")	   
       ),
       
       mainPanel(id = "mainPanel_1",
@@ -665,18 +666,7 @@ shinyUI(
                        )
                      )
                    ),
-                   
-                   br(),
-                   br(),
-                   
-                   actionButton("submit2", strong("Go!",
-                                                  bsButton("bsb380", label="", icon=icon("question"), style="info", size="small")
-                   )),
-                   
-                   conditionalPanel(condition="input.submit2 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
-                   bsPopover("bsb380", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus"),
-                   
-                   br(),
+
                    h4("Plot options"),
                    
                    checkboxInput("tc_plotSize", "Adjust plot size", FALSE),
@@ -742,7 +732,14 @@ shinyUI(
                                                    bsButton("bsb390", label="", icon=icon("question"), style="info", size="small")
                                                 ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                     bsPopover("bsb390", "The font face of legend tick label.", trigger = "focus")
-                   )
+                   ),
+                   
+                   actionButton("submit2", strong("Go!",
+                                                  bsButton("bsb380", label="", icon=icon("question"), style="info", size="small")
+                   )),
+                   
+                   conditionalPanel(condition="input.submit2 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
+                   bsPopover("bsb380", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus")				   
       ),
       
       mainPanel(id = "mainPanel_2",

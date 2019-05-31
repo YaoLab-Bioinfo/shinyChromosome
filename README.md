@@ -31,7 +31,7 @@ Start an R session using RStudio and run these lines:
 # try an http CRAN mirror if https CRAN mirror doesn't work
 install.packages("shiny")
 install.packages("rlang")
-install.packages("gplots")
+install.packages("zip")
 install.packages("ggplot2")
 install.packages("plyr")
 install.packages("ggthemes")
@@ -82,7 +82,7 @@ Start an R session and run these lines in R:
 # try an http CRAN mirror if https CRAN mirror doesn't work  
 install.packages("shiny")
 install.packages("rlang")
-install.packages("gplots")
+install.packages("zip")
 install.packages("ggplot2")
 install.packages("plyr")
 install.packages("ggthemes")

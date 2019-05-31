@@ -32,27 +32,6 @@ areColors <- function(x) {
   })
 }
 
-cytoband.col <- function(x) {
-  x <- as.vector(x)
-  col.panel <- c(
-    "gpos100" = rgb(0, 0, 0, maxColorValue = 255),
-    "gpos"    = rgb(0, 0, 0, maxColorValue = 255),
-    "gpos75"  = rgb(130, 130, 130, maxColorValue = 255),
-    "gpos66"  = rgb(160, 160, 160, maxColorValue = 255),
-    "gpos50"  = rgb(200, 200, 200, maxColorValue = 255),
-    "gpos33"  = rgb(210, 210, 210, maxColorValue = 255),
-    "gpos25"  = rgb(200, 200, 200, maxColorValue = 255),
-    "gvar"    = rgb(220, 220, 220, maxColorValue = 255),
-    "gneg"    = rgb(255, 255, 255, maxColorValue = 255),
-    "acen"    = rgb(217, 47, 39, maxColorValue = 255),
-    "stalk"   = rgb(100, 127, 164, maxColorValue = 255)
-  )
-  col <- col.panel[x]
-  col[is.na(col)] <- "#FFFFFF"
-  names(col) <- NULL
-  return(col)
-}
-
 dat_cus_cols <- function(i, cus_cols, dat) {
   laycolor <- cus_cols[i]
   laycolor <- unlist(strsplit(laycolor, ";"))
@@ -653,7 +632,7 @@ single_genome_plot <- function(data.chr, data.track, plot_type, layer_index, col
     }
     
     data.track.single.lgd <- data.track.single
-	data.track.single <- data.track.single[data.track.single$chr %in% chr_order,]
+    data.track.single <- data.track.single[data.track.single$chr %in% chr_order,]
     
     ## *** Fix the chromosomes order ***
     data.track.single$chr.f <- factor(data.track.single$chr, levels = chr_order, ordered = T)
@@ -1290,7 +1269,7 @@ single_genome_plot <- function(data.chr, data.track, plot_type, layer_index, col
   ## *** Lay out panels ***
   if (chr_plotype == 2) {
     if (plot_direct == 2) {
-      p1 <- p1 + facet_grid(. ~ chr.f)
+      p1 <- p1 + facet_grid(. ~ chr.f) + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
     } else{
       p1 <- p1 + facet_grid(chr.f ~ .)
     }
