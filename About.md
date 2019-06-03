@@ -13,7 +13,7 @@ For the detail format of input data, check the `Input data format` submenu of th
 2. RStudio and Inc. <i><a href="http://www.rstudio.com/shiny/" target="_blank">shiny</a>: Web Application Framework for R.</i> R package version 1.0.5 (2017)   
 3. Lionel Henry and Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/rlang/index.html" target="_blank">rlang</a>: Functions for Base Types and Core R and "Tidyverse" Features.</i> R package version 0.2.1 (2018)       
 4. H. Wickham. <i><a href="http://cran.r-project.org/web/packages/ggplot2/index.html" target="_blank">ggplot2</a>: Create Elegant Data Visualisations Using the Grammar of Graphics.</i> R package version 3.0.0 (2018)          
-5. Gregory R. Warnes, Ben Bolker, Lodewijk Bonebakker, Robert Gentleman, et al. <i><a href="http://cran.r-project.org/web/packages/gplots/index.html" target="_blank">gplots</a>: Various R Programming Tools for Plotting Data.</i> R package version 3.0.1 (2016)  
+5. Gábor Csárdi, Kuba Podgórski, Rich Geldreich. <i><a href="https://cran.r-project.org/package=zip" target="_blank">zip</a>: Cross-Platform zip Compression.</i> R package version 2.0.2 (2019)  
 6. Erich Neuwirth. <i><a href="http://cran.r-project.org/web/packages/RColorBrewer/index.html" target="_blank">RColorBrewer</a>: ColorBrewer palettes.</i> R package version 1.1-2 (2014)  
 7. Hadley Wickham. <i><a href="http://cran.r-project.org/web/packages/plyr/index.html" target="_blank">plyr</a>: Tools for Splitting, Applying and Combining Data.</i> R package version 1.8.4 (2016)   
 8. Jeffrey B. Arnold. <i><a href="http://cran.r-project.org/web/packages/ggthemes/index.html" target="_blank">ggthemes</a>: Extra Themes, Scales and Geoms for "ggplot2".</i> R package version 3.4.0 (2017)   
