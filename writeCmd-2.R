@@ -1,7 +1,6 @@
 
-cat('## setwd("absolute path of a directory containing the input data files")', file = "code.R", append = TRUE, sep = "\n")
-cat('## copy the R script "writeCmd-2_function.R" to the directory set by the "setwd" function
-source("writeCmd-2_function.R")
+cat('## setwd("absolute path of current directory containing the download scripts and data files")', file = "code.R", append = TRUE, sep = "\n")
+cat('source("writeCmd-2_function.R")
 
 library(gplots)
 library(ggplot2)

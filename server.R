@@ -281,12 +281,12 @@ shinyServer(function(input, output, session) {
           ## *** Download R Source code file ***
           output$downloadscript1 <- renderUI({
             req(figure_1)
-            downloadButton("scripts_data.zip", "Download the R scripts and data files to reproduce the plot")
+            downloadButton("scripts_data_1.zip", "Download the R scripts and data files to reproduce the plot")
           })
           
-          output$scripts_data.zip <- downloadHandler(
+          output$scripts_data_1.zip <- downloadHandler(
             filename <- function() {
-              paste('scripts_data.zip')
+              paste('scripts_data_1.zip')
             },
             content <- function(file) {
               source("writeCmd-1.R")
@@ -483,12 +483,12 @@ shinyServer(function(input, output, session) {
           ## *** Download R Source code file ***
           output$downloadscript2 <- renderUI({
             req(figure_2)
-            downloadButton("scripts_data.zip", "Download the R scripts and data files to reproduce the plot")
+            downloadButton("scripts_data_2.zip", "Download the R scripts and data files to reproduce the plot")
           })
           
-          output$scripts_data.zip <- downloadHandler(
+          output$scripts_data_2.zip <- downloadHandler(
             filename <- function() {
-              paste('scripts_data.zip')
+              paste('scripts_data_2.zip')
             },
             content <- function(file) {
               source("writeCmd-2.R")
