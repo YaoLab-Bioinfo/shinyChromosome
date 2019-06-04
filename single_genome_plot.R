@@ -1226,6 +1226,9 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       names(yaxis_labels) <- c("layer", "min_val", "max_val")
       p1 <- p1 + scale_y_continuous(breaks = c(yaxis_breaks$min_val, yaxis_breaks$max_val),
                                     labels = c(yaxis_labels$min_val, yaxis_labels$max_val))
+      if (chr_plotype == 2 & plot_direct == 2) {
+        p1 <- p1 + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+        }
     } else{
       if (plot_direct == 1) {
         p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
@@ -1251,7 +1254,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
     ## *** Lay out panels ***
     if (chr_plotype == 2) {
       if (plot_direct == 2) {
-        p1 <- p1 + facet_grid(. ~ chr.f) + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
+        p1 <- p1 + facet_grid(. ~ chr.f)
       } else{
         p1 <- p1 + facet_grid(chr.f ~ .)
       }
