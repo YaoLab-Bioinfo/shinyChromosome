@@ -1228,7 +1228,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
                                     labels = c(yaxis_labels$min_val, yaxis_labels$max_val))
       if (chr_plotype == 2 & plot_direct == 2) {
         p1 <- p1 + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
-        }
+      }
     } else{
       if (plot_direct == 1) {
         p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
@@ -1240,6 +1240,13 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
     ## *** The x and y axis title ***
     p1 <- p1 + xlab(xtitle) + ylab(ytitle)
     
+	## *** The font angle of axis title ***
+    if (plot_direct == 1 & any(theme_sty %in% c("theme8", "theme16"))) {
+      p1 <- p1 + theme(axis.title.x = element_text(hjust = 0.5, vjust = 1), axis.title.y = element_text(angle = 90, hjust = 0.5))
+    }else if(plot_direct == 2 & any(theme_sty %in% c("theme8", "theme16"))){
+      p1 <- p1 + theme(axis.title.x = element_text(hjust = 0.5), axis.title.y = element_text(angle = 90, hjust = 0.5, vjust = 0.1))	
+    }
+	
     ## *** Font face ***
     p1 <- p1 + theme(axis.title = element_text(face = title_font_face))
     

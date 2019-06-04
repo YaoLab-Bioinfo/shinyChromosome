@@ -1,7 +1,6 @@
 
 options(shiny.maxRequestSize=30*1024^2)
 
-#library(gplots)
 library(ggplot2)
 library(plyr)
 library(ggthemes)

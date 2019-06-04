@@ -427,6 +427,11 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
   ## *** The x and y axis title ***
   tc_p1 <- tc_p1 + xlab(xtitle) + ylab(ytitle)
   
+  ## *** The font angle of axis title ***
+  if (any(theme_sty %in% c("theme8", "theme16"))) {
+    tc_p1 <- tc_p1 + theme(axis.title.x = element_text(hjust = 0.5, vjust = 1), axis.title.y = element_text(angle = 90, hjust = 0.5, vjust = 0.1))
+  }
+  
   ## *** Font face ***
   tc_p1 <- tc_p1 + theme(axis.title = element_text(face = title_font_face))
   

@@ -4,13 +4,9 @@ cat('options(scipen=5)
 
 source("writeCmd-1_function.R")
 
-library(gplots)
 library(ggplot2)
-library(plotly)
 library(plyr)
-library(shinyBS)
 library(ggthemes)
-library(RLumShiny)
 library(RColorBrewer)
 library(gridExtra)
 library(reshape2)

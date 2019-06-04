@@ -2,13 +2,9 @@
 cat('## setwd("absolute path of current directory containing the download scripts and data files")', file = "code.R", append = TRUE, sep = "\n")
 cat('source("writeCmd-2_function.R")
 
-library(gplots)
 library(ggplot2)
-library(plotly)
 library(plyr)
-library(shinyBS)
 library(ggthemes)
-library(RLumShiny)
 library(RColorBrewer)
 library(gridExtra)
 library(reshape2)
