@@ -25,3 +25,6 @@ For the detail format of input data, check the `Input data format` submenu of th
          
 ## Further references  
 This application was created by <a href="http://www.researchgate.net/profile/Yiming_Yu6" target="_blank">Yiming Yu</a> and <a href="http://www.researchgate.net/profile/Wen_Yao" target="_blank">Wen Yao</a>. Please send bugs and feature requests to Yiming Yu (yimingyyu at gmail.com) or Wen Yao (venyao at qq.com). This application uses the shiny package from <a href="http://www.rstudio.com/shiny/" target="_blank">RStudio</a>.    
+
+## Note
+For Mac users, we recommend using shinyChromosome with the Google Chrome browser or other browsers developed based on Chrominum.  
