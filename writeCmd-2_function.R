@@ -1,4 +1,13 @@
 
+dat_chr_cum <- function(dat, chr.cum.len) {
+  dat$start <- 0
+  dat$pos <- (dat$start + dat$size) / 2
+  dat$chr <- factor(dat$chr, levels = names(chr.cum.len), ordered = T)
+  dat$pos <- dat$pos + chr.cum.len[dat$chr]
+  dat$chr <- as.character(dat$chr)
+  return(dat)
+}
+
 areColors <- function(x) {
   sapply(x, function(y) {
     tryCatch(is.matrix(col2rgb(y)), error = function(e) FALSE)

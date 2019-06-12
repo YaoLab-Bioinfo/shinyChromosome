@@ -298,12 +298,12 @@ shinyServer(function(input, output, session) {
               writeLines(out, con = "Script_1.R")
               
               files <- c("Script_1.R", "writeCmd-1_function.R", chr_data$name)
-              write.table(data.chr.raw, chr_data$name, row.names = F, col.names = F, sep="\t")
+              write.table(data.chr.raw, chr_data$name, row.names = F, quote=F, sep="\t")			  
               track.files <- upload_file.export[upload_file.export != "1"]
               
               for (i in 1:length(track.files)){
                 fileName <- track.files[i]
-                write.table(data.track.raw[[i]], fileName, row.names = F, col.names = F, sep="\t")
+                write.table(data.track.raw[[i]], fileName, row.names = F, quote=F, sep="\t")				
                 files <- c(files, fileName)
               }
               
@@ -498,10 +498,9 @@ shinyServer(function(input, output, session) {
               nwd <- getwd()
               file.copy(paste0(fwd,"/writeCmd-2_function.R"), paste0(nwd,"/writeCmd-2_function.R"))
               writeLines(out, con = "Script_2.R")
-              write.table(data.chr1.raw, tc_chr_data1$name, row.names = F, col.names = F, sep="\t")
-              write.table(data.chr2.raw, tc_chr_data2$name, row.names = F, col.names = F, sep="\t")	  
-              write.table(data.2geno.plot.raw, trackfil$name, row.names = F, col.names = F, sep="\t")
-              
+              write.table(data.chr1.raw, tc_chr_data1$name, row.names = F, quote=F, sep="\t")
+              write.table(data.chr2.raw, tc_chr_data2$name, row.names = F, quote=F, sep="\t")	  
+              write.table(data.2geno.plot.raw, trackfil$name, row.names = F, quote=F, sep="\t")              
               files <- c("Script_2.R", "writeCmd-2_function.R", tc_chr_data1$name, tc_chr_data2$name, trackfil$name)
               
               #create the zip file
