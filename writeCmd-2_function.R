@@ -216,7 +216,7 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
     }
     if (plot_type %in% c("point_discrete", "segment", "rect_discrete")) {
       if (col_lgd_mdy_label == 1) {
-        col_lgd_labelp <- lgd_mdy_label(i, col_lgd_label)
+        col_lgd_labelp <- lgd_mdy_label(1, col_lgd_label)
         col_lgd_labelp <- rep(col_lgd_labelp, length(breakscol))[1:length(breakscol)]
         names(col_lgd_labelp) <- labelscol
         data.2geno.plot$raw_color <- as.character(data.2geno.plot$raw_color)
@@ -231,14 +231,14 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
     if (size_lgd == 1) {
       add_size_lgd <- "legend"
       if (size_lgd_mdy_label == 1) {
-        size_lgd_labelp <- lgd_mdy_label(i, size_lgd_label)
+        size_lgd_labelp <- lgd_mdy_label(1, size_lgd_label)
         labelscex <- rep(size_lgd_labelp, length(breakscex))[1:length(breakscex)]
       }
     }
     if (shape_lgd == 1) {
       add_shape_lgd <- "legend"
       if (shape_lgd_mdy_label == 1) {
-        shape_lgd_labelp <- lgd_mdy_label(i, shape_lgd_label)
+        shape_lgd_labelp <- lgd_mdy_label(1, shape_lgd_label)
         labelspch <- rep(shape_lgd_labelp, length(breakspch))[1:length(breakspch)]
       }
     }
@@ -280,6 +280,9 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
     if (is.numeric(labelscex)) {
       labelscex <- sprintf("%.1f", sort(labelscex))
     }
+    if (is.numeric(labelspch)) {
+      labelspch <- sort(labelspch)
+    }
     if (lgd_pos == 1) {
       tc_p1 <- tc_p1 + geom_point(data = data.2geno.plot, aes(x = pos1, y = pos2, color = color, shape = as.character(shape), size = size))
       
@@ -291,7 +294,7 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
       }
       
       tc_p1 <- tc_p1 + scale_size_identity(name = size_lgd_name, guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
-      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
+      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = labelspch)
       tc_p1 <- tc_p1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                              legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
     } else{
@@ -305,7 +308,7 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
       }
       
       tc_p1 <- tc_p1 + scale_size_identity(name = size_lgd_name, guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
-      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
+      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = labelspch)
       tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                              legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
     }
@@ -321,11 +324,14 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
     if (is.numeric(labelscex)) {
       labelscex <- sprintf("%.1f", sort(labelscex))
     }
+    if (is.numeric(labelspch)) {
+      labelspch <- sort(labelspch)
+    }
     if (lgd_pos == 1) {
       tc_p1 <- tc_p1 + geom_point(data = data.2geno.plot, aes(pos1, pos2, color = color, shape = as.character(shape), size = size))
       tc_p1 <- tc_p1 + scale_color_identity(name = col_lgd_name, guide = add_col_lgd, breaks = breakscol, labels = labelscol)
       tc_p1 <- tc_p1 + scale_size_identity(name = size_lgd_name, guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
-      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
+      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = labelspch)
       tc_p1 <- tc_p1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                              legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
       tc_p1 <- tc_p1 + guides(color = guide_legend(order = 1), size = guide_legend(order = 2))
@@ -333,7 +339,7 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
       tc_p1 <- tc_p1 + geom_point(data = data.2geno.plot, aes(pos1, pos2, color = color, shape = as.character(shape), size = size))
       tc_p1 <- tc_p1 + scale_color_identity(name = col_lgd_name, guide = add_col_lgd, breaks = breakscol, labels = labelscol)
       tc_p1 <- tc_p1 + scale_size_identity(name = size_lgd_name, guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
-      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
+      tc_p1 <- tc_p1 + scale_shape_manual(name = shape_lgd_name, guide = add_shape_lgd, values = sort(breakspch), labels = labelspch)
       tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                              legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
       tc_p1 <- tc_p1 + guides(color = guide_legend(order = 1), size = guide_legend(order = 2))
@@ -388,7 +394,9 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
       
       tc_p1 <- tc_p1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face), 
                              legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
-      tc_p1 <- tc_p1 + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))
+      if(add_col_lgd != "none"){
+        tc_p1 <- tc_p1 + guides(fill = guide_colourbar(title.vjust = 0.8, title.hjust = 0.4))
+      }
     }
   }
   

@@ -503,7 +503,7 @@ shinyServer(function(input, output, session) {
               write.table(data.2geno.plot.raw, trackfil$name, row.names = F, quote=F, sep="\t")              
               files <- c("Script_2.R", "writeCmd-2_function.R", tc_chr_data1$name, tc_chr_data2$name, trackfil$name)
               
-              #create the zip file
+              # create the zip file
               zip(file, files)
               file.remove(files)
               

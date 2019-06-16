@@ -678,11 +678,14 @@ single_genome_plot <- function(data.chr, data.track, plot_type, layer_index, col
         if (is.numeric(labelscex)) {
           labelscex <- sprintf("%.1f", sort(labelscex))
         }
+        if (is.numeric(labelspch)) {
+          labelspch <- sort(labelspch)
+        }
         if (lgd_pos == 1) {
           lg1 <- ggplot() + geom_point(data = data.track.single.lgd, aes(pos, yvalue, color = color, shape = as.character(shape), size = size))
           lg1 <- lg1 + scale_color_identity(name = col_lgd_name[i], guide = add_col_lgd, breaks = breakscol, labels = labelscol)
           lg1 <- lg1 + scale_size_identity(name = size_lgd_name[i], guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
-          lg1 <- lg1 + scale_shape_manual(name = shape_lgd_name[i], guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
+          lg1 <- lg1 + scale_shape_manual(name = shape_lgd_name[i], guide = add_shape_lgd, values = sort(breakspch), labels = labelspch)
           lg1 <- lg1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                              legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
           lg1 <- lg1 + guides(color = guide_legend(order = 1), size = guide_legend(order = 2))
@@ -690,7 +693,7 @@ single_genome_plot <- function(data.chr, data.track, plot_type, layer_index, col
           lg1 <- ggplot() + geom_point(data = data.track.single.lgd, aes(pos, yvalue, color = color, shape = as.character(shape), size = size))
           lg1 <- lg1 + scale_color_identity(name = col_lgd_name[i], guide = add_col_lgd, breaks = breakscol, labels = labelscol)
           lg1 <- lg1 + scale_size_identity(name = size_lgd_name[i], guide = add_size_lgd, breaks = sort(breakscex), labels = labelscex)
-          lg1 <- lg1 + scale_shape_manual(name = shape_lgd_name[i], guide = add_shape_lgd, values = sort(breakspch), labels = sort(labelspch))
+          lg1 <- lg1 + scale_shape_manual(name = shape_lgd_name[i], guide = add_shape_lgd, values = sort(breakspch), labels = labelspch)
           lg1 <- lg1 + theme(legend.position = "bottom", legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                              legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
           lg1 <- lg1 + guides(color = guide_legend(order = 1), size = guide_legend(order = 2))
