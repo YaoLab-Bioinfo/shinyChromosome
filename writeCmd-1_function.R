@@ -312,8 +312,12 @@ single_genome_plot <- function(data.chr, data.track, plot_type, layer_index, col
     if (plot_type[i] %in% c("point", "line")) {
       names(data.track.single)[1:3] <- c("chr", "pos", "value")
       data.track.single$pos <- as.numeric(data.track.single$pos)
+      data.track.single$value <- as.numeric(data.track.single$value)	  
     } else if (plot_type[i] %in% c("bar", "rect_gradual", "rect_discrete")) {
       names(data.track.single)[1:4] <- c("chr", "xmin", "xmax", "value")
+      if(plot_type[i] %in% c("bar", "rect_gradual")){
+        data.track.single$value <- as.numeric(data.track.single$value)
+      }	  
     } else if (plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete")) {
       raw_names <- colnames(data.track.single)[-c(1:3)]
       names(raw_names) <- paste("v", 1:(ncol(data.track.single) - 3), sep = "")
@@ -323,6 +327,10 @@ single_genome_plot <- function(data.chr, data.track, plot_type, layer_index, col
       data.track.single$raw_names <- raw_names[data.track.single$variable]
       data.track.single$variable <- as.numeric(gsub("v", "", data.track.single$variable))
       colnames(data.track.single) <- c("chr", "xmin", "xmax", "value", "color", "raw_names")
+      if(plot_type[i] %in% "heatmap_gradual"){
+        data.track.single$value <- as.numeric(data.track.single$value)
+        data.track.single$color <- as.numeric(data.track.single$color)
+      }	  
     } else if (plot_type[i] == "vertical_line") {
       names(data.track.single) <- c("chr", "pos")
       data.track.single$ymin <- 1

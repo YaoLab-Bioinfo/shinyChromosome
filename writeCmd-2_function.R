@@ -128,10 +128,16 @@ two_genomes_plot <- function(data.chr1, data.chr2, data.2geno.plot, Height, Widt
   if (plot_type %in% c("point_gradual", "point_discrete")) {
     names(data.2geno.plot)[1:4] <- c("chr1", "pos1", "chr2", "pos2")
     data.2geno.plot[c("pos1", "pos2")] <- sapply(data.2geno.plot[c("pos1", "pos2")], as.numeric)
+    if(plot_type %in% "point_gradual"){
+      data.2geno.plot[,5] <- as.numeric(data.2geno.plot[,5])
+    }	
   }
   if (plot_type %in% c("segment", "rect_gradual", "rect_discrete")) {
     names(data.2geno.plot)[1:6] <- c("chr1", "xpos1", "xpos2", "chr2", "ypos1", "ypos2")
     data.2geno.plot[c("xpos1", "xpos2", "ypos1", "ypos2")] <- sapply(data.2geno.plot[c("xpos1", "xpos2", "ypos1", "ypos2")], as.numeric)
+    if(plot_type %in% "rect_gradual"){
+      data.2geno.plot[,7] <- as.numeric(data.2geno.plot[,7])
+    }
   }
   
   ## *** Color ***

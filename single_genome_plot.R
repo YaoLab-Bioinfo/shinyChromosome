@@ -226,8 +226,12 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       if (plot_type[i] %in% c("point", "line")) {
         names(data.track.single)[1:3] <- c("chr", "pos", "value")
         data.track.single$pos <- as.numeric(data.track.single$pos)
+        data.track.single$value <- as.numeric(data.track.single$value)	
       } else if (plot_type[i] %in% c("bar", "rect_gradual", "rect_discrete")) {
         names(data.track.single)[1:4] <- c("chr", "xmin", "xmax", "value")
+        if(plot_type[i] %in% c("bar", "rect_gradual")){
+          data.track.single$value <- as.numeric(data.track.single$value)
+        }
       } else if (plot_type[i] %in% c("heatmap_gradual", "heatmap_discrete")) {
         raw_names <- colnames(data.track.single)[-c(1:3)]
         names(raw_names) <- paste("v", 1:(ncol(data.track.single) - 3), sep = "")
@@ -237,6 +241,10 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         data.track.single$raw_names <- raw_names[data.track.single$variable]
         data.track.single$variable <- as.numeric(gsub("v", "", data.track.single$variable))
         colnames(data.track.single) <- c("chr", "xmin", "xmax", "value", "color", "raw_names")
+        if(plot_type[i] %in% "heatmap_gradual"){
+          data.track.single$value <- as.numeric(data.track.single$value)
+          data.track.single$color <- as.numeric(data.track.single$color)
+        }
       } else if (plot_type[i] == "vertical_line") {
         names(data.track.single) <- c("chr", "pos")
         data.track.single$ymin <- 1
@@ -261,7 +269,6 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       } else if (plot_type[i] == "ideogram") {
         names(data.track.single)[1:5] <- c("chr", "xmin", "xmax", "value1", "value2")
       }
-      
       if(plot_type[i] %in% c("bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", "horizontal_line", "ideogram")) {
         data.track.single[c("xmin", "xmax")] <- sapply(data.track.single[c("xmin", "xmax")],as.numeric)
       }
@@ -324,7 +331,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       if (plot_type[i] == "rect_gradual") {
         if(rect_grad_col[i] == 2){
           rect_grad_cus_cols <- rect_grad_cus_2cols
-        }else if(rect_grad_col[i] == 3){
+        } else if (rect_grad_col[i] == 3){
           rect_grad_cus_cols <- rect_grad_cus_3cols
         }
         rect_cols <<- rect_grad_cols(i, rect_grad_col, col_rect, rect_grad_cus_cols)
@@ -1246,7 +1253,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
     ## *** The font angle of axis title ***
     if (plot_direct == 1 & any(theme_sty %in% c("theme8", "theme16"))) {
       p1 <- p1 + theme(axis.title.x = element_text(hjust = 0.5, vjust = 1), axis.title.y = element_text(angle = 90, hjust = 0.5))
-    }else if(plot_direct == 2 & any(theme_sty %in% c("theme8", "theme16"))){
+    } else if (plot_direct == 2 & any(theme_sty %in% c("theme8", "theme16"))){
       p1 <- p1 + theme(axis.title.x = element_text(hjust = 0.5), axis.title.y = element_text(angle = 90, hjust = 0.5, vjust = 0.1))	
     }
     

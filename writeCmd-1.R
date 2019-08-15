@@ -25,12 +25,12 @@ cat(paste("Height <- ",Height, sep = ""), paste("Width <- ", Width, sep = ""),
     paste("lgd_text_size <- ", lgd_text_size, sep = ""), paste('lgd_text_font_face <- "', lgd_text_font_face, '"', sep = ""),
     paste("chr_data <- ", '"', chr_data$name, '"', sep = ""), file = "code.R", append = TRUE, sep = "\n")
 
-cat('data.chr <- data.frame(fread(chr_data, quote=""), stringsAsFactors = F)', file = "code.R", append = TRUE, sep = "\n")
+cat('data.chr <- fread(chr_data, quote="", data.table=F)', file = "code.R", append = TRUE, sep = "\n")
 cat(paste('data.track.file <- c("', paste(upload_file.export,collapse ='", "'), '")', sep = ""), file = "code.R", append = TRUE, sep = "\n")
 cat(paste("sel_upload_data <- c(", paste(sel_upload_data.export,collapse =", "), ")", sep = ""), file = "code.R", append = TRUE, sep = "\n")
 cat('data.track <- lapply(1:10,function(x){
     if(sel_upload_data[x] == 2 && data.track.file[x] != 1) {
-       data.frame(fread(data.track.file[x], quote=""), stringsAsFactors=F)
+       fread(data.track.file[x], quote="", data.table=F)
     }
    })', file = "code.R", append = TRUE, sep = "\n")
 cat(paste("track_indx <- c(", paste(track_indx,collapse =","), ")", sep = ""),
@@ -110,7 +110,7 @@ cat("p1 <- single_genome_plot(data.chr, data.track, plot_type, layer_index, col_
 	 size_lgd_name,shape_lgd, shape_lgd_name, line_type_lgd, line_type_lgd_name, col_lgd_mdy_label, col_lgd_label, 
 	 size_lgd_mdy_label, size_lgd_label, shape_lgd_mdy_label, shape_lgd_label, line_type_lgd_mdy_label, line_type_lgd_label, 
 	 ylabel, height_layer, margin_layer, laycolor.export, rect_discol.export, heatmap_discol.export)", 
-	 file = "code.R", append = TRUE, sep = "\n")
+    file = "code.R", append = TRUE, sep = "\n")
 
 cat("", file = "code.R", append = TRUE, sep = "\n")
 

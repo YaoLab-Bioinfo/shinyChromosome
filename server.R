@@ -16,7 +16,7 @@ shinyServer(function(input, output, session) {
         lgd_text_size <<- input$lgd_text_size; chr_data <<- input$upload_chr_data
         
         if (!is.null(input$upload_chr_data)) {
-          data.chr <<- data.frame(fread(chr_data$datapath, quote=""), stringsAsFactors = F)
+          data.chr <<- fread(chr_data$datapath, quote="", data.table = F)
           data.chr.raw <<- data.chr
         } else{
           data.chr <<- NULL
@@ -31,7 +31,7 @@ shinyServer(function(input, output, session) {
           trackfil <- input[[paste("uploaddata", x, sep = "")]]
           if (get(paste("sel_upload_data", x, sep = "")) == 2 & !is.null(trackfil)) {
             upload_file.export <<- c(upload_file.export, trackfil$name)
-            data.frame(fread(trackfil$datapath, quote=""), stringsAsFactors = F)
+            fread(trackfil$datapath, quote="", data.table = F)
           }
         })
         
@@ -335,14 +335,14 @@ shinyServer(function(input, output, session) {
         
         # user input data
         if (!is.null(tc_chr_data1)) {
-          data.chr1 <<- data.frame(fread(tc_chr_data1$datapath, quote=""), stringsAsFactors = F)
+          data.chr1 <<- fread(tc_chr_data1$datapath, quote="", data.table = F)
           data.chr1.raw <<- data.chr1
         } else{
           data.chr1 <<- NULL
         }
         
         if (!is.null(tc_chr_data2)) {
-          data.chr2 <<- data.frame(fread(tc_chr_data2$datapath, quote=""), stringsAsFactors = F)
+          data.chr2 <<- fread(tc_chr_data2$datapath, quote="", data.table = F)
           data.chr2.raw <<- data.chr2
         } else{
           data.chr2 <<- NULL
@@ -350,7 +350,7 @@ shinyServer(function(input, output, session) {
         
         trackfil <<- input$tc_uploaddata
         if (!is.null(trackfil)) {
-          data.2geno.plot <<- data.frame(fread(trackfil$datapath, quote=""), stringsAsFactors = F)
+          data.2geno.plot <<- fread(trackfil$datapath, quote="", data.table = F)
           data.2geno.plot.raw <<- data.2geno.plot
         } else{
           data.2geno.plot <<- NULL

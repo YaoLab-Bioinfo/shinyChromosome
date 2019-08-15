@@ -328,7 +328,7 @@ shinyUI(
 				
                    actionButton("submit1", strong("Go!",
                                                   bsButton("bsb322", label="", icon=icon("question"), style="info", size="small")
-                   )),
+                   ), styleclass = "success"),
                    
                    conditionalPanel(condition="input.submit1 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
                    bsPopover("bsb322", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus")	   
@@ -736,7 +736,7 @@ shinyUI(
                    
                    actionButton("submit2", strong("Go!",
                                                   bsButton("bsb380", label="", icon=icon("question"), style="info", size="small")
-                   )),
+                   ), styleclass = "success"),
                    
                    conditionalPanel(condition="input.submit2 != '0'", busyIndicator(HTML("<div style='color:red;font-size:30px'>Calculation In progress...</div>"), wait = 0)),
                    bsPopover("bsb380", 'Please click the "Go!" button, if suitable data is uploaded or any options are modified.', trigger = "focus")				   

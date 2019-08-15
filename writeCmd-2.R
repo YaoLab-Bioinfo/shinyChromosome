@@ -21,9 +21,9 @@ cat(paste("Height <- ", tc_Height, sep = ""), paste("Width <- ", tc_Width, sep =
     paste('lgd_title_font_face <- "', tc_lgd_title_font_face, '"', sep = ""),
     paste("lgd_text_size <- ", tc_lgd_text_size, sep = ""), paste('lgd_text_font_face <- "', tc_lgd_text_font_face, '"', sep = ""),
     paste('tc_chr_data1 <- "', tc_chr_data1$name, '"', sep = ""),
-    paste('tc_chr_data2 <- "', tc_chr_data2$name, '"', sep = ""), 'data.chr1 <- data.frame(fread(tc_chr_data1, quote=""), stringsAsFactors = F)',
-    'data.chr2 <- data.frame(fread(tc_chr_data2, quote=""), stringsAsFactors = F)',
-    paste('trackfil <- "', trackfil$name, '"', sep = ""), 'data.2geno.plot <- data.frame(fread(trackfil, quote=""), stringsAsFactors = F)', 
+    paste('tc_chr_data2 <- "', tc_chr_data2$name, '"', sep = ""), 'data.chr1 <- fread(tc_chr_data1, quote="", data.table=F)',
+    'data.chr2 <- fread(tc_chr_data2, quote="", data.table=F)',
+    paste('trackfil <- "', trackfil$name, '"', sep = ""), 'data.2geno.plot <- fread(trackfil, quote="", data.table=F)', 
     file = "code.R", append = TRUE, sep = "\n")
 
 cat(paste('plot_type <- "', tc_plot_type, '"', sep = ""), paste("sel_gral_col <- ", tc_sel_gral_col, sep = ""),
