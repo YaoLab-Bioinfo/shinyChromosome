@@ -774,7 +774,8 @@ shinyUI(
     navbarMenu("Help",
                tabPanel("Usage and installation", includeMarkdown("README.md")),
                tabPanel("Input data format", includeMarkdown("In_Data_Format.md")),
-               tabPanel("User manual", uiOutput("pdfview"))
+               tabPanel("User manual", uiOutput("pdfview")),
+			   tabPanel("User manual in Chinese", uiOutput("pdfview1"))
     ),
     
     tabPanel("About", includeMarkdown("About.md"))

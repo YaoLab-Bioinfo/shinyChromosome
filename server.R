@@ -668,7 +668,11 @@ shinyServer(function(input, output, session) {
   
   ## *** User Manual ***
   output$pdfview <- renderUI({
-    tags$iframe(style = "height:1500px; width:100%; scrolling=yes", src = "shinyChromosome_User_Manual.pdf")
+    tags$iframe(style = "height:900px; width:100%; scrolling=yes", src = "shinyChromosome_User_Manual.pdf")
+  })
+  
+  output$pdfview1 <- renderUI({
+    tags$iframe(style = "height:900px; width:100%; scrolling=yes", src = "shinyChromosome_User_Manual_Chinese.pdf")
   })
   
   ## *** View example data ***
