@@ -34,7 +34,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                     checkboxInput("color_opt1", HTML("<font color='red'>Color</font>"), FALSE),
                                                                     conditionalPanel(condition = "input.color_opt1",
                                                                                      conditionalPanel(condition = "input.plot_type1 == 'point' | input.plot_type1 == 'line' | input.plot_type1 == 'bar' | input.plot_type1 == 'segment'",
-                                                                                                      selectInput("col_type1", h5("Data color",
+                                                                                                      selectInput("col_type1", h5("Data color:",
                                                                                                                                   bsButton("bsb6", label = "", icon = icon("question"), style = "info", size = "small")), 
                                                                                                                   c("Random" = "1", "One custom color" = "2", "Custom for data with multi-group" = "3"), selected = "1"
                                                                                                       ),
@@ -52,7 +52,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                      ),
                                                                                      
                                                                                      conditionalPanel(condition = "input.plot_type1=='rect_discrete'",
-                                                                                                      selectInput("rect_col1", h5("Data color",
+                                                                                                      selectInput("rect_col1", h5("Data color:",
                                                                                                                                   bsButton("bsb7", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                       ), c("Random" = "1", "Specific" = "2", "Custom" = "3"), selected = "1"),
                                                                                                       bsPopover("bsb7", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. By default, random assigned color would be used. If "Specific" was chosen, all data will be filled by a specified color. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.',
@@ -66,7 +66,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                      ),
                                                                                      
                                                                                      conditionalPanel(condition = "input.plot_type1=='rect_gradual'",
-                                                                                                      selectInput("rect_grad_col1", h5("Colors",
+                                                                                                      selectInput("rect_grad_col1", h5("Colors:",
                                                                                                                                        bsButton("bsb8", label="", icon=icon("question"), style="info", size="small")
                                                                                                       ), c("Typical" = "1", "Low_high_color" = "2", "Low_middle_high_color" = "3"), selected = "1"),
                                                                                                       bsPopover("bsb8", "Colors to be used for the data, which can be assigned by the application or be specified by the users. By default, predefined color would be used.",
@@ -95,7 +95,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                      
                                                                                      conditionalPanel(condition = "input.plot_type1=='heatmap_gradual'",
                                                                                                       selectInput("sel_heatmap_col1",
-                                                                                                                  h5("Colors", bsButton("bsb9", label = "", icon = icon("question"), style = "info", size = "small")
+                                                                                                                  h5("Colors:", bsButton("bsb9", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                   ), c("Typical" = "1", "Low_high_color" = "2", "Low_middle_high_color" = "3"), selected = "1"),
                                                                                                       bsPopover("bsb9",
                                                                                                                 "Colors to be used for the data, which can be assigned by the application or be specified by the users. By default, predefined color would be used.",
@@ -121,7 +121,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                      ),
                                                                                      
                                                                                      conditionalPanel(condition = "input.plot_type1=='heatmap_discrete'",
-                                                                                                      selectInput("hmap_col_dis1", h5("Data color", bsButton("bsb10", label="", icon=icon("question"), style="info", size="small")
+                                                                                                      selectInput("hmap_col_dis1", h5("Data color:", bsButton("bsb10", label="", icon=icon("question"), style="info", size="small")
                                                                                                       ), c("Random" = "1", "Custom" = "2"), selected = "1"),
                                                                                                       bsPopover("bsb10", 'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. By default, random assigned color would be used. If "Custom" was chosen, the 4th column of the uploaded data should be a categorical character vector with no more than 50 groups. Users should provide values as "a:red;b:green;c:blue", in which "a b c" represent different data categories indicated by the 4th column of the uploaded data. Color for data without custom color will be set as NULL. Hex color codes as "#FF0000" are also supported.',
                                                                                                                 trigger = "focus"),
@@ -139,12 +139,12 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                      ),
                                                                                      
                                                                                      conditionalPanel(condition="input.plot_type1=='line'",
-                                                                                                      selectInput("fill_area1", h5("Fill area",
+                                                                                                      selectInput("fill_area1", h5("Fill area:",
                                                                                                                                    bsButton("bsb12", label="", icon=icon("question"), style="info", size="small")
                                                                                                       ), choices = c("Yes" = "1", "No" = "2"), selected = "2"),
                                                                                                       bsPopover("bsb12", "Fill the area below the lines.", trigger = "focus"),
                                                                                                       conditionalPanel(condition = "input.fill_area1=='1'",
-                                                                                                                       radioButtons("sel_area_type1", h5("Area color",
+                                                                                                                       radioButtons("sel_area_type1", h5("Area color:",
                                                                                                                                                          bsButton("bsb13", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                        ), c("Identical with lines" = "1", "Specific" = "2"),selected="1"),
                                                                                                                        bsPopover("bsb13", 'Color to be used to fill the area, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".',
@@ -162,7 +162,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                                        fluidRow(column(12, jscolorInput("text_col1", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
                                                                                                                        br()
                                                                                                       ),
-                                                                                                      selectInput("col_lgd1", h5("Color legend", bsButton("bsb14", label = "", icon = icon("question"), style = "info", size = "small")
+                                                                                                      selectInput("col_lgd1", h5("Color legend:", bsButton("bsb14", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                       ), choices = c("Show" = "1", "Hide" = "2"), "2"),
                                                                                                       bsPopover("bsb14", "Control the appearance of the color legend in the plotting region.", trigger = "focus"),
                                                                                                       
@@ -173,7 +173,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                                        bsPopover("bsb15", "Title of the color legend. Null value will result in an empty title.", trigger = "focus"),
                                                                                                                        
                                                                                                                        conditionalPanel(condition = "input.plot_type1!='rect_gradual' & input.plot_type1!='heatmap_gradual'",
-                                                                                                                                        selectInput("col_lgd_mdy_label1", h5("Modify legend labels",
+                                                                                                                                        selectInput("col_lgd_mdy_label1", h5("Modify legend labels:",
                                                                                                                                                                              bsButton("bsb16", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                                         ), c("Yes" = "1", "No" = "2"), "2"),
                                                                                                                                         bsPopover("bsb16", 'The labels of different colors in the color legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".', trigger = "focus"),
@@ -198,13 +198,13 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                      
                                                                                      conditionalPanel(condition = "input.linetype_opt1",
                                                                                                       sliderInput("line_size1", "Line width:", min=0, max=3, value=0.2, step=0.05),
-                                                                                                      selectInput("linetype1", h5("Line type",
+                                                                                                      selectInput("linetype1", h5("Line type:",
                                                                                                                                   bsButton("bsb18", label="", icon=icon("question"), style="info", size="small")
                                                                                                       ), choices = c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash"), selected = "solid"),
                                                                                                       bsPopover("bsb18", 'The line type is automatically set as "solid" for line with more than one color.', trigger = "focus"),
                                                                                                       
                                                                                                       conditionalPanel(condition = "input.plot_type1=='vertical_line' | input.plot_type1=='horizontal_line'",
-                                                                                                                       selectInput("line_type_lgd1", h5("Line type legend",
+                                                                                                                       selectInput("line_type_lgd1", h5("Line type legend:",
                                                                                                                                                         bsButton("bsb19", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                        ), c("Show" = "1", "Hide" = "2"), "2"),
                                                                                                                        bsPopover("bsb19", "Control the appearance of the line type legend in the plotting region.", trigger = "focus"),
@@ -216,7 +216,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                                                         bsPopover("bsb20", "Title of line type legend. Null value will result in an empty title.",trigger = "focus"),
                                                                                                                                         
                                                                                                                                         selectInput("line_type_lgd_mdy_label1",
-                                                                                                                                                    h5("Modify legend labels",
+                                                                                                                                                    h5("Modify legend labels:",
                                                                                                                                                        bsButton("bsb21", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                                                     ), c("Yes" = "1", "No" = "2"), "2"),
                                                                                                                                         bsPopover("bsb21", 'The labels of legend can be assigned by the application or be specified by the users, which should contain only one character as "a".',
@@ -229,13 +229,13 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                       ),
                                                                                                       
                                                                                                       conditionalPanel(condition = "input.plot_type1 == 'segment'",
-                                                                                                                       selectInput("add_arrow1", h5("Add arrow head",
+                                                                                                                       selectInput("add_arrow1", h5("Add arrow head:",
                                                                                                                                                     bsButton("bsb22", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                        ), c("Yes" = "1", "No" = "2"), selected = "2"),
                                                                                                                        bsPopover("bsb22", "Add arrow head for the segment.", trigger = "focus"),
                                                                                                                        
                                                                                                                        conditionalPanel(condition = "input.add_arrow1 == '1'",
-                                                                                                                                        selectInput("arrow_pos1", h5("Arrow position",
+                                                                                                                                        selectInput("arrow_pos1", h5("Arrow position:",
                                                                                                                                                                      bsButton("bsb23", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                                         ), c("Line end" = "1", "Line beginning" = "2"), selected = "1"),
                                                                                                                                         bsPopover("bsb23", 'The position of arrow head.', trigger = "focus"),
@@ -251,7 +251,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                     conditionalPanel(condition = "input.plot_type1=='point'",
                                                                                      checkboxInput("symbol_opt1", HTML("<font color='red'>Symbol</font>"), FALSE),
                                                                                      conditionalPanel(condition = "input.symbol_opt1",
-                                                                                                      selectInput("sel_symbol_point1", h5("Symbol type",
+                                                                                                      selectInput("sel_symbol_point1", h5("Symbol type:",
                                                                                                                                           bsButton("bsb25", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                       ), c("One custom symbol" = "1", 'Custom for data with a "shape" column' = "2"), selected = "1"),
                                                                                                       bsPopover("bsb25", 'Symbol used for different points. Applicable values are integers in [0-25]. Check <a href="http://www.endmemo.com/program/R/pchsymbols.php" target="_blank">R_pchsymbols</a> for more details. A single integer can be used to set the shape of all points or a integer column named as "shape" in the input data can be used to set the shape of different points.', trigger = "focus"),
@@ -261,7 +261,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                       ),
                                                                                                       
                                                                                                       selectInput("shape_lgd1",
-                                                                                                                  h5("Symbol legend", bsButton("bsb26", label = "", icon = icon("question"), style = "info", size = "small")
+                                                                                                                  h5("Symbol legend:", bsButton("bsb26", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                   ), choices = c("Show" = "1", "Hide" = "2"), "2"),
                                                                                                       bsPopover("bsb26", "Control the appearance of the symbol legend in the plotting region.", trigger = "focus"),
                                                                                                       conditionalPanel(condition = "input.shape_lgd1=='1'",
@@ -270,7 +270,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                                        ), value = "symbol"),
                                                                                                                        bsPopover("bsb27", "Title of symbol legend. Null value will result in an empty title.", trigger = "focus"),
                                                                                                                        selectInput("shape_lgd_mdy_label1",
-                                                                                                                                   h5("Modify legend labels", bsButton("bsb28", label="", icon=icon("question"), style="info", size="small")), c("Yes" = "1", "No" = "2"), "2"),
+                                                                                                                                   h5("Modify legend labels:", bsButton("bsb28", label="", icon=icon("question"), style="info", size="small")), c("Yes" = "1", "No" = "2"), "2"),
                                                                                                                        bsPopover("bsb28",
                                                                                                                                  'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".',
                                                                                                                                  trigger = "focus"),
@@ -284,7 +284,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                      checkboxInput("size_opt1", HTML("<font color='red'>Size</font>"), FALSE),
                                                                                      conditionalPanel(condition="input.size_opt1",
                                                                                                       selectInput("sel_point_size1",
-                                                                                                                  h5("Point size", bsButton("bsb29", label = "", icon = icon("question"), style = "info", size = "small")
+                                                                                                                  h5("Point size:", bsButton("bsb29", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                                                   ), c("One custom size" = "1", 'Custom for data with a "size" column' = "2"), selected = "1"),
                                                                                                       bsPopover("bsb29", 'Value used for different size of points. A single numeric value can be used to set the size of all points or a numeric column named as "size" in the input data can be used to set the size of different points.', trigger = "focus"),
                                                                                                       
@@ -293,7 +293,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                       ),
                                                                                                       
                                                                                                       selectInput("size_lgd1",
-                                                                                                                  h5("Size legend", bsButton("bsb30", label = "", icon = icon("question"), style = "info", size = "small")),
+                                                                                                                  h5("Size legend:", bsButton("bsb30", label = "", icon = icon("question"), style = "info", size = "small")),
                                                                                                                   choices = c("Show" = "1", "Hide" = "2"), "2"),
                                                                                                       bsPopover("bsb30",
                                                                                                                 "Control the appearance of the size legend in the plotting region.",
@@ -304,7 +304,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                                                                                                       bsButton("bsb31", label = "", icon = icon("question"), style = "info", size = "small")), value = "size"),
                                                                                                                        bsPopover("bsb31", "Title of size legend. Null value will result in an empty title.", trigger = "focus"),
                                                                                                                        selectInput("size_lgd_mdy_label1",
-                                                                                                                                   h5("Modify legend labels", bsButton("bsb32", label="", icon=icon("question"), style="info", size="small")), c("Yes" = "1", "No" = "2"), "2"),
+                                                                                                                                   h5("Modify legend labels:", bsButton("bsb32", label="", icon=icon("question"), style="info", size="small")), c("Yes" = "1", "No" = "2"), "2"),
                                                                                                                        bsPopover("bsb32",
                                                                                                                                  'The labels of legend can be assigned by the application or be specified by the users. Character vector of arbitrary length is accepted and adjusted automatically to the number of groups, which is separated by commas. For example, "a" or "a,b,c".',
                                                                                                                                  trigger = "focus"),
@@ -317,7 +317,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                     ),
                                                                     
                                                                     conditionalPanel(condition = "input.plot_type1=='heatmap_gradual' | input.plot_type1=='heatmap_discrete' | input.plot_type1=='rect_gradual' | input.plot_type1=='rect_discrete' | input.plot_type1=='bar'",
-                                                                                     selectInput("add_border1", h5("Add cell borders",
+                                                                                     selectInput("add_border1", h5("Add cell borders:",
                                                                                                                    bsButton("bsb33", label="", icon=icon("question"), style="info", size="small")
                                                                                      ), c("Yes" = "1", "No" = "2"), selected = "2"),
                                                                                      bsPopover("bsb33",
@@ -331,7 +331,7 @@ sig_data1 <- conditionalPanel(condition = "input.data1",
                                                                     ),
                                                                     
                                                                     conditionalPanel(condition = "input.plot_type1=='line' | input.plot_type1=='point' | input.plot_type1=='bar'",
-                                                                                     selectInput("ylabel1", h5("Y axis label",
+                                                                                     selectInput("ylabel1", h5("Y axis label:",
                                                                                                                bsButton("bsb35", label = "", icon = icon("question"), style = "info", size = "small")
                                                                                      ), choices = c("Show" = "1", "Hide" = "2"), selected="1"),
                                                                                      bsPopover("bsb35", "Add tick labels on the Y-axis.", trigger = "focus")

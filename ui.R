@@ -78,12 +78,12 @@ shinyUI(
       
       sidebarPanel(id = "sidebarPanel_1",
                    radioButtons("plotype",
-                                h4("*Image type", bsButton("bsb1", label="", icon=icon("question"), style="info", size="small")
+                                h4("*Image type:", bsButton("bsb1", label="", icon=icon("question"), style="info", size="small")
                                 ), c("Concatenated chromosomes" = "1", "Separated chromosomes" = "2"), "1"),
                    bsPopover("bsb1", "All chromosomes can either be concatenated or separated.",
                              trigger = "focus"),
                    radioButtons("plot_direct",
-                                h4("*Chromosome orientation",
+                                h4("*Chromosome orientation:",
                                    bsButton("bsb2", label="", icon=icon("question"), style="info", size="small")
                                 ), c("Horizontally aligned" = "1", "Vertically aligned" = "2"), "1"),
                    bsPopover("bsb2",
@@ -91,7 +91,7 @@ shinyUI(
                              trigger = "focus"),
                    
                    fileInput("upload_chr_data",
-                             h4("*Upload genome data",
+                             h4("*Upload genome data:",
                                 bsButton("bsb3", label="", icon=icon("question"), style="info", size="small")
                              ), multiple = FALSE, width = "100%"),
                    bsPopover("bsb3",
@@ -171,31 +171,31 @@ shinyUI(
                        
                        checkboxInput("legends", "Legend", FALSE),
                        conditionalPanel(condition = "input.legends",
-                                        selectInput("lgd_pos", h5("Legend position",
+                                        selectInput("lgd_pos", h5("Legend position:",
                                                                   bsButton("bsb326", label="", icon=icon("question"), style="info", size="small")
                                         ), c("Right" = "1", "Bottom" = "2"), selected = "1"),
                                         bsPopover("bsb326", "The position to place the legend.", trigger = "focus"),
-                                        sliderInput("lgd_space_size", h5("Legend region size",
+                                        sliderInput("lgd_space_size", h5("Legend region size:",
                                                                          bsButton("bsb327", label="", icon=icon("question"), style="info", size="small")
                                         ), min = 0, max = 1, value = 0.04, step = 0.01),
                                         bsPopover("bsb327", "Percent of legend size relative to the main plotting region. Applicable values are numbers in [0-1].", trigger = "focus"),
-                                        sliderInput("lgd_intra_size", h5("Intra-spacing",
+                                        sliderInput("lgd_intra_size", h5("Intra-spacing:",
                                                                          bsButton("bsb328", label="", icon=icon("question"), style="info", size="small")
                                         ), min = 0, max = 150, value = 40, step = 0.5),
                                         bsPopover("bsb328", "Intra-spacing between different legends.", trigger = "focus"),
-                                        sliderInput("lgd_title_size", h5("Title font size",
+                                        sliderInput("lgd_title_size", h5("Title font size:",
                                                                          bsButton("bsb329", label="", icon=icon("question"), style="info", size="small")
                                         ), min = 0, max = 40, value = 12, step = 0.1),
                                         bsPopover("bsb329", "The font size of legend title.", trigger = "focus"),
-                                        selectInput("lgd_title_font_face", h5("Title font face",
+                                        selectInput("lgd_title_font_face", h5("Title font face:",
                                                                               bsButton("bsb330", label="", icon=icon("question"), style="info", size="small")
                                         ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                         bsPopover("bsb330", "The font face of legend title.", trigger = "focus"),
-                                        sliderInput("lgd_text_size", h5("Label font size",
+                                        sliderInput("lgd_text_size", h5("Label font size:",
                                                                         bsButton("bsb331", label="", icon=icon("question"), style="info", size="small")
                                         ), min = 0, max = 40, value = 10, step = 0.1),
                                         bsPopover("bsb331", "The font size of legend tick label.", trigger = "focus"),
-                                        selectInput("lgd_text_font_face", h5("Label font face",
+                                        selectInput("lgd_text_font_face", h5("Label font face:",
                                                                              bsButton("bsb332", label="", icon=icon("question"), style="info", size="small")
                                         ), choices = c("plain", "italic", "bold", "bold.italic"), selected = "plain"),
                                         bsPopover("bsb332", "The font face of legend tick label.", trigger = "focus")
