@@ -249,7 +249,7 @@ shinyServer(function(input, output, session) {
           ## *** Download PDF file ***
           output$downloadpdf1 <- renderUI({
             req(figure_1)
-            downloadButton("Visualization_1.pdf", "Download pdf-file")
+            downloadButton("Visualization_1.pdf", "Download PDF file")
           })
           
           output$Visualization_1.pdf <- downloadHandler(
@@ -265,7 +265,7 @@ shinyServer(function(input, output, session) {
           ## *** Download SVG file ***
           output$downloadsvg1 <- renderUI({
             req(figure_1)
-            downloadButton("Visualization_1.svg", "Download svg-file")
+            downloadButton("Visualization_1.svg", "Download SVG file")
           })
           
           output$Visualization_1.svg <- downloadHandler(
@@ -451,7 +451,7 @@ shinyServer(function(input, output, session) {
           ## *** Download PDF file ***
           output$downloadpdf2 <- renderUI({
             req(figure_2)
-            downloadButton("Visualization_2.pdf", "Download pdf-file")
+            downloadButton("Visualization_2.pdf", "Download PDF file")
           })
           
           output$Visualization_2.pdf <- downloadHandler(
@@ -467,7 +467,7 @@ shinyServer(function(input, output, session) {
           ## *** Download SVG file ***
           output$downloadsvg2 <- renderUI({
             req(figure_2)
-            downloadButton("Visualization_2.svg", "Download svg-file")
+            downloadButton("Visualization_2.svg", "Download SVG file")
           })
           
           output$Visualization_2.svg <- downloadHandler(

@@ -11,7 +11,7 @@ output:
 
 The detailed format of input data for different types of plots are described in the following sections.  
 
-## **1. Single genome plot**
+## **1. Single-genome plot**
 
 ### **1.1 Genome data**
 
@@ -434,7 +434,7 @@ Acceptable input data format can be
 1	937418	1249890	p36.31	  gneg
 ```
 
-## **2. Two genomes plot**
+## **2. Two-genome plot**
 
 ### **2.1 Data of genome along the horizontal axis**
 

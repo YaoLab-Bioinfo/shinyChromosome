@@ -2,9 +2,9 @@
 
 `shinyChromosome` is a graphical user interface for interactive creation of non-circular whole genome diagrams developed using the R **Shiny** package.  
 
-To create single genome plot by aligning genome data along all chromosomes of a single genome, go to the `Single genome plot` menu.  
+To create single-genome plot by aligning genome data along all chromosomes of a single genome, go to the `Single-genome plot` menu.  
 
-To cretae two genomes plot for comparison of data across two genomes, go to the `Two genomes plot` menu.  
+To cretae two-genome plot for comparison of data across two genomes, go to the `Two-genome plot` menu.  
 
 For the detail format of input data, check the `Input data format` submenu of the `Help` menu.  
 

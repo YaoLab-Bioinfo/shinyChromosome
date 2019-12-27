@@ -8,7 +8,7 @@ shinyUI(
     windowTitle = "interactive creation of non-circular whole genome diagram",
     
     tabPanel(
-      "Single genome plot", tags$head(
+      "Single-genome plot", tags$head(
         tags$style("
         input[type='file'] {width:5em;}
         .toggleButton {width:100%;}
@@ -388,7 +388,7 @@ shinyUI(
     ),
     
     tabPanel(
-      "Two genomes plot", tags$head(
+      "Two-genome plot", tags$head(
         tags$style("
           input[type='file'] {width:5em;}
           .toggleButton {width:100%}
