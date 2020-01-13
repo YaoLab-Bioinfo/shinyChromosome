@@ -1,6 +1,6 @@
 <h1><center> Usage and installation of shinyChromosome </center></h1>
 
-This is the repository for the Shiny application presented in "shinyChromosome: an R/Shiny application for interactive creation of non-circular plots of whole genomes" (Yu et al. 2018).
+This is the repository for the Shiny application presented in "<a href="https://doi.org/10.1016/j.gpb.2019.07.003" target="_blank">shinyChromosome: An R/Shiny Application for Interactive Creation of Non-circular Plots of Whole Genomes</a>" (Yu et al. ***Genomics Proteomics Bioinformatics***. 2020).
 
 *****
 

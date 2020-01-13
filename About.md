@@ -8,6 +8,9 @@ To cretae two-genome plot for comparison of data across two genomes, go to the `
 
 For the detail format of input data, check the `Input data format` submenu of the `Help` menu.  
 
+## Citation
+Yu Y<sup>+</sup>, Yao W<sup>+</sup><sup>✉</sup>, Wang Y, Huang F. <a href="https://doi.org/10.1016/j.gpb.2019.07.003" target="_blank">shinyChromosome: An R/Shiny Application for Interactive Creation of Non-circular Plots of Whole Genomes</a>. **Genomics, Proteomics & Bioinformatics**, 2020 (<sup>+</sup> co-first author)  
+
 ## Software references  
 1. R Development Core Team. <i><a href="http://www.r-project.org/" target="_blank">R</a>:  A Language and Environment for Statistical Computing.</i> R Foundation for Statistical Computing, Vienna. R version 3.5.0 (2018)  
 2. RStudio and Inc. <i><a href="http://www.rstudio.com/shiny/" target="_blank">shiny</a>: Web Application Framework for R.</i> R package version 1.0.5 (2017)   
