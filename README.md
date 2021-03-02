@@ -7,7 +7,7 @@ This is the repository for the Shiny application presented in "<a href="https://
 
 #	Use shinyChromosome online
 
-shinyChromosome is deployed at http://venyao.xyz/shinyChromosome/, http://shinychromosome.ncpgr.cn/ and https://yimingyu.shinyapps.io/shinychromosome/ for online use.  
+shinyChromosome is deployed at https://venyao.xyz/shinyChromosome/, http://shinychromosome.ncpgr.cn/ and https://yimingyu.shinyapps.io/shinychromosome/ for online use.  
 shinyChromosome is idle until you activate it by accessing the URLs.  
 So, it may take some time when you access this URL for the first time.   
 Once it was activated, shinyChromosome could be used smoothly and easily.
