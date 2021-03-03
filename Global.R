@@ -1,6 +1,9 @@
 
 options(shiny.maxRequestSize=30*1024^2)
 
+library(BiocManager)
+options(repos = BiocManager::repositories())
+
 library(ggplot2)
 library(plyr)
 library(ggthemes)

@@ -1,0 +1,12 @@
+name: shinyChromosome
+title: shinyChromosome
+username:
+account: venyao
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3726109
+bundleId: 4293488
+url: https://venyao.shinyapps.io/shinyChromosome/
+when: 1614745225.49397
+asMultiple: FALSE
+asStatic: FALSE
