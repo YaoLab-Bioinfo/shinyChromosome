@@ -2,7 +2,7 @@
 sig_data6 <- conditionalPanel(condition = "input.data6",
                               radioButtons("sel_upload_data6", NULL, c("Disable data input" = "1", "Upload input data" = "2"), "1"),
                               conditionalPanel(condition = "input.sel_upload_data6 == '2'",
-                                               selectInput("layer_index6", h5("Track index:",
+                                               selectInput("layer_index6", tags$div(HTML('<i class="fa fa-play" aria-hidden="true"></i> <font size="3" color="red"><b>Track index:</b></font>'),
                                                                               bsButton("bsb163", label="", icon=icon("question"), style="info", size="small")),
                                                            choices = c("track1", "track2", "track3", "track4", "track5", "track6", "track7", "track8", "track9", "track10"), selected="track1"),
                                                
@@ -11,7 +11,7 @@ sig_data6 <- conditionalPanel(condition = "input.data6",
                                                          trigger = "focus"
                                                ),
                                                
-                                               selectInput("plot_type6", "Plot type:", 
+                                               selectInput("plot_type6", tags$div(HTML('<i class="fa fa-play" aria-hidden="true"></i> <font size="3" color="red"><b>Plot type:</b></font>')), 
                                                            choices = c("point", "line", "bar", "rect_gradual", "rect_discrete", "heatmap_gradual", "heatmap_discrete", 
                                                                        "text", "segment", "vertical_line", "horizontal_line", "ideogram"), selected = "point"),
                                                

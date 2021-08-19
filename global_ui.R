@@ -1,6 +1,6 @@
 
 library(markdown)
-library(shinythemes)
+# library(shinythemes)
 library(shinyBS)
 
 ADVANCED_OPTIONS_PANEL_1 <- function(options_list){

@@ -1,0 +1,87 @@
+#myFooter {
+    background-color: #0073B7;
+    color: #4dff06;
+    font-size: 18px;
+    padding-top: 15px;
+    margin-top: 10px;
+    z-index: 10;
+    clear: both;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+#myFooter .footer-copyright {
+    background-color: #3c3d41;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+
+#myFooter .row {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#myFooter .navbar-brand {
+    margin-top: 45px;
+    height: 65px;
+}
+
+#myFooter .footer-copyright p {
+    margin: 10px;
+    color: #ccc;
+}
+
+#myFooter ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+}
+
+#myFooter h4 {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#myFooter h2 a{
+    font-size: 50px;
+    text-align: center;
+    color: #fff;
+}
+
+#myFooter a {
+    color: #d2d1d1;
+    text-decoration: none;
+}
+
+#myFooter a:hover,
+#myFooter a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+#myFooter .btn {
+    color: white;
+    background-color: #AC3E31;
+    border-radius: 20px;
+    border: none;
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    line-height: 25px;
+}
+
+@media screen and (max-width: 767px) {
+    #myFooter {
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px){
+.col-sm-7 {
+    width: 15%;
+}
+}
