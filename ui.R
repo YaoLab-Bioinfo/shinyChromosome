@@ -537,15 +537,15 @@ shinyUI(
                                                            
                                                            conditionalPanel(condition="input.tc_sel_gral_col=='2'",
                                                                             fluidRow(			                                        
-                                                                              column(6, jscolorInput("tc_2cols_low", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
-                                                                              column(6, jscolorInput("tc_2cols_high", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+                                                                              column(6, colourInput("tc_2cols_low", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                              column(6, colourInput("tc_2cols_high", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00", returnName = TRUE, allowTransparent = TRUE))),
                                                                             br()
                                                            ),																											  
                                                            conditionalPanel(condition="input.tc_sel_gral_col=='3'",
                                                                             fluidRow(			                                        
-                                                                              column(4, jscolorInput("tc_3cols_low", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
-                                                                              column(4, jscolorInput("tc_3cols_mid", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")), 
-                                                                              column(4, jscolorInput("tc_3cols_high", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+                                                                              column(4, colourInput("tc_3cols_low", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                              column(4, colourInput("tc_3cols_mid", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                              column(4, colourInput("tc_3cols_high", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00", returnName = TRUE, allowTransparent = TRUE))),
                                                                             br()
                                                            )	
                                           ),
@@ -559,7 +559,7 @@ shinyUI(
                                                                      'The color to be used to plot the data, which can be random assigned by the application or be specified by the users. By default, random assigned color would be used. To customize one color for data, users should choose a color from the color palette. To customize color for data with multiple groups, the column indicating different groups should be named as "color" in the input data. Users should provide a character string assigning colors to each group. For example, "a:red;b:green;c:blue", in which "a b c" represent different data groups. Color for data groups without assigned color would be set as "NA". Hex color codes as "#FF0000" are also supported. See example data for more details.',
                                                                      trigger = "focus"),
                                                            conditionalPanel(condition = "input.tc_col_type=='2'",
-                                                                            fluidRow(column(12, jscolorInput("tc_color_cus", label = NULL, value = "#FF0000"))),
+                                                                            fluidRow(column(12, colourInput("tc_color_cus", label = NULL, value = "#FF0000", returnName = TRUE, allowTransparent = TRUE))),
                                                                             br()
                                                            ),
                                                            conditionalPanel(condition="input.tc_col_type=='3'",
@@ -689,8 +689,8 @@ shinyUI(
                          bsPopover("bsb370", "Create a set of vertical lines across the X-axis to separate different chromosomes.", trigger = "focus"),
                          
                          conditionalPanel(condition = "input.tc_vertical=='1'",
-                                          fluidRow(column(12, jscolorInput("tc_vertical_col", label = h5('Vertical line color:',
-                                                                                                         bsButton("bsb371", label="", icon=icon("question"), style="info", size="small")), value = "#000000"))),
+                                          fluidRow(column(12, colourInput("tc_vertical_col", label = h5('Vertical line color:',
+                                                                                                         bsButton("bsb371", label="", icon=icon("question"), style="info", size="small")), value = "#000000", returnName = TRUE, allowTransparent = TRUE))),
                                           bsPopover("bsb371", "Color of the vertical lines.", trigger = "focus"),
                                           br(),
                                           sliderInput("tc_vertical_size",
@@ -710,9 +710,9 @@ shinyUI(
                          bsPopover("bsb374", "Create a set of horizontal lines across the Y-axis to separate different chromosomes.", trigger = "focus"),
                          
                          conditionalPanel(condition = "input.tc_horizontal=='1'",
-                                          fluidRow(column(12, jscolorInput("tc_horizontal_col", label = h5('Horizontal line color:',
+                                          fluidRow(column(12, colourInput("tc_horizontal_col", label = h5('Horizontal line color:',
                                                                                                            bsButton("bsb375", label="", icon=icon("question"), style="info", size="small")
-                                          ), value = "#000000"))),
+                                          ), value = "#000000", returnName = TRUE, allowTransparent = TRUE))),
                                           bsPopover("bsb375", "Color of the horizontal lines.",trigger = "focus"),
                                           br(),
                                           
@@ -735,7 +735,7 @@ shinyUI(
                                           ), c("Yes" = "1", "No" = "2"), selected = "2"),
                                           bsPopover("bsb378", "Add borders to the rect grids, which can be used to separate cells from each other.", trigger = "focus"),
                                           conditionalPanel(condition = "input.tc_add_border=='1'",
-                                                           fluidRow(column(12, jscolorInput("tc_border_col", label = h5('Borders color:'), value = "#000000")))
+                                                           fluidRow(column(12, colourInput("tc_border_col", label = h5('Borders color:'), value = "#000000", returnName = TRUE, allowTransparent = TRUE)))
                                           )
                          )
                        )

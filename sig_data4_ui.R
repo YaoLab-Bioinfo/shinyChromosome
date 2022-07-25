@@ -43,7 +43,7 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                                                 trigger = "focus"
                                                                                                       ),
                                                                                                       conditionalPanel(condition = "input.col_type4=='2'",
-                                                                                                                       fluidRow(column(12, jscolorInput("color_cus4", label = NULL, value = "#FF0000"))),
+                                                                                                                       fluidRow(column(12, colourInput("color_cus4", label = NULL, value = "#FF0000", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                                        br()
                                                                                                       ),
                                                                                                       conditionalPanel(condition = "input.col_type4=='3'",
@@ -59,7 +59,7 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                                                 trigger = "focus"
                                                                                                       ),
                                                                                                       conditionalPanel(condition = "input.rect_col4=='2'",
-                                                                                                                       fluidRow(column(12, jscolorInput("rect_col_dis4", label = NULL, value = "#FF0000"))),
+                                                                                                                       fluidRow(column(12, colourInput("rect_col_dis4", label = NULL, value = "#FF0000", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                                        br()
                                                                                                       ),
                                                                                                       conditionalPanel(condition = "input.rect_col4=='3'",
@@ -79,15 +79,15 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                                       ),
                                                                                                       conditionalPanel(condition="input.rect_grad_col4=='2'",
                                                                                                                        fluidRow(			                                                         
-                                                                                                                         column(6, jscolorInput("rect_2cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
-                                                                                                                         column(6, jscolorInput("rect_2cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))), 
+                                                                                                                         column(6, colourInput("rect_2cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                                                                         column(6, colourInput("rect_2cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00", returnName = TRUE, allowTransparent = TRUE))), 
                                                                                                                        br()
                                                                                                       ),
                                                                                                       conditionalPanel(condition="input.rect_grad_col4=='3'",
                                                                                                                        fluidRow(			                                                         
-                                                                                                                         column(4, jscolorInput("rect_3cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
-                                                                                                                         column(4, jscolorInput("rect_3cols_mid4", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")), 
-                                                                                                                         column(4, jscolorInput("rect_3cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))), 
+                                                                                                                         column(4, colourInput("rect_3cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                                                                         column(4, colourInput("rect_3cols_mid4", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                                                                         column(4, colourInput("rect_3cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00", returnName = TRUE, allowTransparent = TRUE))), 
                                                                                                                        br()
                                                                                                       )		
                                                                                      ),
@@ -104,15 +104,15 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                                       ),
                                                                                                       conditionalPanel(condition="input.sel_heatmap_col4=='2'",
                                                                                                                        fluidRow(			                                        
-                                                                                                                         column(6, jscolorInput("hmap_2cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
-                                                                                                                         column(6, jscolorInput("hmap_2cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+                                                                                                                         column(6, colourInput("hmap_2cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                                                                         column(6, colourInput("hmap_2cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                                        br()
                                                                                                       ),																											  
                                                                                                       conditionalPanel(condition="input.sel_heatmap_col4=='3'",
                                                                                                                        fluidRow(			                                        
-                                                                                                                         column(4, jscolorInput("hmap_3cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB")), 
-                                                                                                                         column(4, jscolorInput("hmap_3cols_mid4", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF")), 
-                                                                                                                         column(4, jscolorInput("hmap_3cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00"))),
+                                                                                                                         column(4, colourInput("hmap_3cols_low4", label = HTML('<p><font size="2.0"><strong>Low Color</strong></font></p>'), value = "#0016DB", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                                                                         column(4, colourInput("hmap_3cols_mid4", label = HTML('<p><font size="2.0"><strong>Middle Color</strong></font></p>'), value = "#FFFFFF", returnName = TRUE, allowTransparent = TRUE)), 
+                                                                                                                         column(4, colourInput("hmap_3cols_high4", label = HTML('<p><font size="2.0"><strong>High Color</strong></font></p>'), value = "#FFFF00", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                                        br()
                                                                                                       )			
                                                                                      ),
@@ -130,9 +130,9 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                      ),
                                                                                      
                                                                                      conditionalPanel(condition = "input.plot_type4=='vertical_line' | input.plot_type4=='horizontal_line'",
-                                                                                                      fluidRow(column(12, jscolorInput("line_color4", label = h5('Line color:',
+                                                                                                      fluidRow(column(12, colourInput("line_color4", label = h5('Line color:',
                                                                                                                                                                  bsButton("bsb107", label="", icon=icon("question"), style="info", size="small")
-                                                                                                      ), value = "#FF0000"))),
+                                                                                                      ), value = "#FF0000", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                       bsPopover("bsb107", 'The color to be used to plot the data.', trigger = "focus"),
                                                                                                       br()
                                                                                      ),
@@ -150,7 +150,7 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                                                                  'Fill the area with color, which can be identical with lines color or be specified by the users. If "Specific" was chosen, all data will be filled by a specified color as "blue".',
                                                                                                                                  trigger = "focus"),
                                                                                                                        conditionalPanel(condition = "input.sel_area_type4=='2'",
-                                                                                                                                        fluidRow(column(12, jscolorInput("border_area4", label = NULL, value = "#0000FF"))),
+                                                                                                                                        fluidRow(column(12, colourInput("border_area4", label = NULL, value = "#0000FF", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                                                         br()
                                                                                                                        )
                                                                                                       )
@@ -158,7 +158,7 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                      
                                                                                      conditionalPanel(condition = "input.plot_type4=='point' | input.plot_type4=='line' | input.plot_type4=='bar' | input.plot_type4=='rect_gradual' | input.plot_type4=='rect_discrete' | input.plot_type4=='heatmap_gradual' | input.plot_type4=='heatmap_discrete' | input.plot_type4=='vertical_line' | input.plot_type4=='horizontal_line' | input.plot_type4=='text' | input.plot_type4 == 'segment'",
                                                                                                       conditionalPanel(condition="input.plot_type4=='text'",
-                                                                                                                       fluidRow(column(12, jscolorInput("text_col4", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000"))),
+                                                                                                                       fluidRow(column(12, colourInput("text_col4", label = HTML('<p><font size="3.0"><strong>Font color:</strong></font></p>'), value = "#000000", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                                        br()
                                                                                                       ),
                                                                                                       selectInput("col_lgd4", h5("Color legend:",
@@ -318,7 +318,7 @@ sig_data4 <- conditionalPanel(condition = "input.data4",
                                                                                      ), c("Yes" = "1", "No" = "2"), selected = "2"),
                                                                                      bsPopover("bsb129", "Add borders to the grids, which can be used to separate cells from each other.", trigger = "focus"),
                                                                                      conditionalPanel(condition = "input.add_border4=='1'",
-                                                                                                      fluidRow(column(12, jscolorInput("border_col4", label = h5('Borders color:'), value = "#000000"))),
+                                                                                                      fluidRow(column(12, colourInput("border_col4", label = h5('Borders color:'), value = "#000000", returnName = TRUE, allowTransparent = TRUE))),
                                                                                                       br()
                                                                                      )
                                                                     ),
