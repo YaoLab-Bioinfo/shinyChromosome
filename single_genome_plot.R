@@ -125,7 +125,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
     data.chr$start <- 0
     names(data.chr) <- c("chr", "size", "start")
     data.chr <- data.chr[, c(1, 3, 2)]
-    val_range_chr <- melt(data = data.chr, id.vars = "chr")
+    val_range_chr <- reshape2::melt(data = data.chr, id.vars = "chr")
     val_range_chr$variable <- NULL
     chr.cum.len <- chr_cumsum(data.chr, 1)
     
@@ -191,7 +191,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       val_range_chr <- val_range_chr[c(which(val_range_chr$pos == min(val_range_chr$pos)),
                                        which(val_range_chr$pos == max(val_range_chr$pos))), ]
     }
-    val_range_chr <- melt(data = val_range_chr, id.vars = c("chr", "pos"))
+    val_range_chr <- reshape2::melt(data = val_range_chr, id.vars = c("chr", "pos"))
     val_range_chr$variable <- NULL
     
     selcols <- c("blue", "red", "green", "cyan", "purple", "pink", "orange", "yellow",
@@ -236,7 +236,7 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         raw_names <- colnames(data.track.single)[-c(1:3)]
         names(raw_names) <- paste("v", 1:(ncol(data.track.single) - 3), sep = "")
         colnames(data.track.single) <- c(c("chr", "xmin", "xmax"), paste("v", 1:(ncol(data.track.single) - 3), sep = ""))
-        data.track.single <- melt(data.track.single, id = c("chr", "xmin", "xmax"))
+        data.track.single <- reshape2::melt(data.track.single, id = c("chr", "xmin", "xmax"))
         data.track.single$variable <- as.character(data.track.single$variable)
         data.track.single$raw_names <- raw_names[data.track.single$variable]
         data.track.single$variable <- as.numeric(gsub("v", "", data.track.single$variable))
@@ -704,7 +704,8 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         if (fill_area[i] == 2) {
           if (add_col_lgd == "legend") {
             if (lgd_pos == 1) {
-              lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue, color = color), size = line_size[i], linetype = linetypep)
+              # lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue, color = color), size = line_size[i], linetype = linetypep)
+              lg1 <- ggplot() + geom_line(data = data.track.single.lgd, aes(pos, yvalue, color = color), linewidth = line_size[i], linetype = linetypep)
               lg1 <- lg1 + scale_color_identity(name = col_lgd_name[i], guide = add_col_lgd, breaks = breakscol, labels = labelscol)
               lg1 <- lg1 + theme(legend.title = element_text(size = lgd_title_size, face = lgd_title_font_face),
                                  legend.text = element_text(size = lgd_text_size, face = lgd_text_font_face), legend.key = element_rect(fill = NA))
