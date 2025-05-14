@@ -2,853 +2,1251 @@
 <html>
     <head>
         <meta charset="UTF-8">		
-		<style>
+		<style type="text/css">
 			.border-img {
-				border-radius:0.01em;
+				border-radius:0.1em;
 				max-width: 100%;
 				display: block;
 				margin-left: 0.01em;
 				margin-right: 0.01em;
+				margin-top: 1em;
 			}
 			figcaption {
 				text-align:center;
-				margin-bottom:0.01em;
+				margin-top: 1em;
+				margin-bottom: 0.01em;
 			}
-			.myRow {
-				display:table-row;
+			h5 {
+			  font-weight: bolder;
 			}
-			.myCol {
-				background-color:transparent;
-				display:table-cell;
-				width:auto;
+			.gallery {
+			  border-width: none;
 			}
-			.myTable {
-				border-spacing:0.01em;
+			.gallery tr td {
+				 border: 1px; 
+				 border-style: solid;
+				 border-color: #00000f;
+				 
+			}
+			.gallery tr th {
+			  border-width: none;
+			}
+			
+			.title, {
+			  border-width: none;
+			  border-style: none;
+			}
+			figure {
+				margin-left: 5%;
+				margin-right: 5%;
+				vertical-align: text-bottom;
 			}
 
 		</style>
     </head>  
     <body>
-		<div class="myTable">
-			
-			<div class="myRow">
-				
-				<div class="well myCol">
+		<table class="gallery">
+  
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/1.pdf')">				
-							<img src="figuresmall/1.jpg" alt="Example 1" class="border-img">
-						</div>		
-						<figcaption>
-							<h5>Example 1</h5>
-							<a href="data/example_1.zip" download="example_1.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>	
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+					  <figcaption>
+								<h5>Example 1</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 2</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 3</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 4</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 5</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			</tr>
+			<tr>
+				<td>
+						<figure>
+							<div onclick="window.open('figures/1.pdf')">
+								<img src="figuresmall/1.jpg" alt="Example 1" class="border-img">
+							</div>
+							<figcaption>
+								<a href="data/example_1.zip" download="example_1.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 1</span>
+							</figcaption>
+						</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/2.pdf')">
 							<img src="figuresmall/2.jpg" alt="Example 2" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 2</h5>
-							<a href="data/example_2.zip" download="example_2.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_2.zip" download="example_2.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 2</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/3.pdf')">
 							<img src="figuresmall/3.jpg" alt="Example 3" class="border-img">
 						</div>						
 						<figcaption>
-							<h5>Example 3</h5>
-							<a href="data/example_3.zip" download="example_3.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_3.zip" download="example_3.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 3</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/4.pdf')">
 							<img src="figuresmall/4.jpg" alt="Example 4" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 4</h5>
-							<a href="data/example_4.zip" download="example_4.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-
-				<div class="well myCol">
+							<a href="data/example_4.zip" download="example_4.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 4</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-	                    <div onclick="window.open('figures/5.pdf')">				
+	          <div onclick="window.open('figures/5.pdf')">				
 							<img src="figuresmall/5.jpg" alt="Example 5" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 5</h5>
-							<a href="data/example_5.zip" download="example_5.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>				
-			</div>
-					
-			<div class="myRow">				
-				
-				<div class="well myCol">
+							<a href="data/example_5.zip" download="example_5.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 5</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 6</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 7</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 8</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 9</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 10</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			</tr>
+			<tr>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/6.pdf')">
 							<img src="figuresmall/6.jpg" alt="Example 6" class="border-img">
 						</div>
-						
-					 </figure>
 						<figcaption>
-							<h5>Example 6</h5>
-							<a href="data/example_6.zip" download="example_6.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>	
-				</div>						
-				<div class="well myCol">
+							<a href="data/example_6.zip" download="example_6.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 6</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/7.pdf')">
 							<img src="figuresmall/7.jpg" alt="Example 7" class="border-img">
 						</div>						
 						<figcaption>
-							<h5>Example 7</h5>
-							<a href="data/example_7.zip" download="example_7.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_7.zip" download="example_7.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 7</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/8.pdf')">
 							<img src="figuresmall/8.jpg" alt="Example 8" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 8</h5>
-							<a href="data/example_8.zip" download="example_8.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-
-				<div class="well myCol">
+							<a href="data/example_8.zip" download="example_8.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 8</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-	                    <div onclick="window.open('figures/9.pdf')">				
+	          <div onclick="window.open('figures/9.pdf')">				
 							<img src="figuresmall/9.jpg" alt="Example 9" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 9</h5>
-							<a href="data/example_9.zip" download="example_9.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_9.zip" download="example_9.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 9</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/10.pdf')">
 							<img src="figuresmall/10.jpg" alt="Example 10" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 10</h5>
-							<a href="data/example_10.zip" download="example_10.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-			</div>					
-
-			<div class="myRow">				
-				
-				<div class="well myCol">
+							<a href="data/example_10.zip" download="example_10.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 10</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 11</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 12</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 13</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 14</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 15</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/11.pdf')">
 							<img src="figuresmall/11.jpg" alt="Example 11" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 11</h5>
-							<a href="data/example_11.zip" download="example_11.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_11.zip" download="example_11.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 11</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/12.pdf')">
 							<img src="figuresmall/12.jpg" alt="Example 12" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 12</h5>
-							<a href="data/example_12.zip" download="example_12.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-
-				<div class="well myCol">
+							<a href="data/example_12.zip" download="example_12.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 12</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-	                    <div onclick="window.open('figures/13.pdf')">				
+						<div onclick="window.open('figures/13.pdf')">
 							<img src="figuresmall/13.jpg" alt="Example 13" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 13</h5>
-							<a href="data/example_13.zip" download="example_13.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_13.zip" download="example_13.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 13</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/14.pdf')">
+	          <div onclick="window.open('figures/14.pdf')">				
 							<img src="figuresmall/14.jpg" alt="Example 14" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 14</h5>
-							<a href="data/example_14.zip" download="example_14.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_14.zip" download="example_14.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 14</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/15.pdf')">
 							<img src="figuresmall/15.jpg" alt="Example 15" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 15</h5>
-							<a href="data/example_15.zip" download="example_15.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>
-
-			<div class="myRow">				
-
-				<div class="well myCol">
+							<a href="data/example_15.zip" download="example_15.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 15</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 16</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 17</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 18</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 19</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 20</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/16.pdf')">
 							<img src="figuresmall/16.jpg" alt="Example 16" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 16</h5>
-							<a href="data/example_16.zip" download="example_16.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_16.zip" download="example_16.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 16</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-	                    <div onclick="window.open('figures/17.pdf')">				
-							<img src="figuresmall/17.jpg" alt="Example 1" class="border-img">
-						</div>
+						<div onclick="window.open('figures/17.pdf')">
+							<img src="figuresmall/17.jpg" alt="Example 17" class="border-img">
+						</div>						
 						<figcaption>
-							<h5>Example 17</h5>
-							<a href="data/example_17.zip" download="example_17.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_17.zip" download="example_17.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 17</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/18.pdf')">
 							<img src="figuresmall/18.jpg" alt="Example 18" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 18</h5>
-							<a href="data/example_18.zip" download="example_18.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_18.zip" download="example_18.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 18</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/19.pdf')">
+	          <div onclick="window.open('figures/19.pdf')">				
 							<img src="figuresmall/19.jpg" alt="Example 19" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 19</h5>
-							<a href="data/example_19.zip" download="example_19.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_19.zip" download="example_19.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 19</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/20.pdf')">
 							<img src="figuresmall/20.jpg" alt="Example 20" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 20</h5>
-							<a href="data/example_20.zip" download="example_20.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-			</div>
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_20.zip" download="example_20.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 20</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/21.pdf')">				
+					  <figcaption>
+								<h5>Example 21</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 22</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 23</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 24</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 25</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/21.pdf')">
 							<img src="figuresmall/21.jpg" alt="Example 21" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 21</h5>
-							<a href="data/example_21.zip" download="example_21.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_21.zip" download="example_21.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 21</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/22.pdf')">
 							<img src="figuresmall/22.jpg" alt="Example 22" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 22</h5>
-							<a href="data/example_22.zip" download="example_22.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_22.zip" download="example_22.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 22</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/23.pdf')">
 							<img src="figuresmall/23.jpg" alt="Example 23" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 23</h5>
-							<a href="data/example_23.zip" download="example_23.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_23.zip" download="example_23.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 23</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/24.pdf')">
+	          <div onclick="window.open('figures/24.pdf')">				
 							<img src="figuresmall/24.jpg" alt="Example 24" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 24</h5>
-							<a href="data/example_24.zip" download="example_24.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_24.zip" download="example_24.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 24</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/25.pdf')">
 							<img src="figuresmall/25.jpg" alt="Example 25" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 25</h5>
-							<a href="data/example_25.zip" download="example_25.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>	
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_25.zip" download="example_25.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 25</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/26.pdf')">				
+					  <figcaption>
+								<h5>Example 26</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 27</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 28</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 29</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 30</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/26.pdf')">
 							<img src="figuresmall/26.jpg" alt="Example 26" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 26</h5>
-							<a href="data/example_26.zip" download="example_26.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_26.zip" download="example_26.zip"><img src="download.png" height="8%" width="8%" /></a><span style="font-size: 16px;"> Input files for example 26</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/27.pdf')">
 							<img src="figuresmall/27.jpg" alt="Example 27" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 27</h5>
-							<a href="data/example_27.zip" download="example_27.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_27.zip" download="example_27.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 27</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/28.pdf')">
 							<img src="figuresmall/28.jpg" alt="Example 28" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 28</h5>
-							<a href="data/example_28.zip" download="example_28.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_28.zip" download="example_28.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 28</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/29.pdf')">
-							<img src="figuresmall/29.jpg" alt="Example 24" class="border-img">
-						</div>						
+	          <div onclick="window.open('figures/29.pdf')">				
+							<img src="figuresmall/29.jpg" alt="Example 29" class="border-img">
+						</div>
 						<figcaption>
-							<h5>Example 29</h5>
-							<a href="data/example_29.zip" download="example_29.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_29.zip" download="example_29.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 29</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/30.pdf')">
 							<img src="figuresmall/30.jpg" alt="Example 30" class="border-img">
-						</div>						
-						<figcaption>
-							<h5>Example 30</h5>
-							<a href="data/example_30.zip" download="example_30.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>	
-
-			<div class="myRow">
-				
-				<div class="well myCol">
-					<figure>
-	                    <div onclick="window.open('figures/31.pdf')">				
-							<img src="figuresmall/31.jpg" alt="Example 31" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 31</h5>
-							<a href="data/example_31.zip" download="example_31.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_30.zip" download="example_30.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 30</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 31</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 32</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 33</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 34</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 35</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				 <td>
+						<figure>
+							<div onclick="window.open('figures/31.pdf')">
+								<img src="figuresmall/31.jpg" alt="Example 31" class="border-img">
+							</div>		
+							<figcaption>
+								<a href="data/example_31.zip" download="example_31.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 31</span>
+							</figcaption>
+						</figure>
+					</div>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/32.pdf')">
 							<img src="figuresmall/32.jpg" alt="Example 32" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 32</h5>
-							<a href="data/example_32.zip" download="example_32.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_32.zip" download="example_32.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 32</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/33.pdf')">
 							<img src="figuresmall/33.jpg" alt="Example 33" class="border-img">
 						</div>						
 						<figcaption>
-							<h5>Example 33</h5>
-							<a href="data/example_33.zip" download="example_33.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_33.zip" download="example_33.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 33</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/34.pdf')">
 							<img src="figuresmall/34.jpg" alt="Example 34" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 34</h5>
-							<a href="data/example_34.zip" download="example_34.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_34.zip" download="example_34.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 34</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/35.pdf')">
+	          <div onclick="window.open('figures/35.pdf')">				
 							<img src="figuresmall/35.jpg" alt="Example 35" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 35</h5>
-							<a href="data/example_35.zip" download="example_35.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>	
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_35.zip" download="example_35.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 35</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/36.pdf')">				
+					  <figcaption>
+								<h5>Example 36</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 37</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 38</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 39</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 40</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/36.pdf')">
 							<img src="figuresmall/36.jpg" alt="Example 36" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 36</h5>
-							<a href="data/example_36.zip" download="example_36.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_36.zip" download="example_36.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 36</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/37.pdf')">
 							<img src="figuresmall/37.jpg" alt="Example 37" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 37</h5>
-							<a href="data/example_37.zip" download="example_37.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_37.zip" download="example_37.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 37</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/38.pdf')">
 							<img src="figuresmall/38.jpg" alt="Example 38" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 38</h5>
-							<a href="data/example_38.zip" download="example_38.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_38.zip" download="example_38.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 38</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/39.pdf')">
+	          <div onclick="window.open('figures/39.pdf')">				
 							<img src="figuresmall/39.jpg" alt="Example 39" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 39</h5>
-							<a href="data/example_39.zip" download="example_39.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_39.zip" download="example_39.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 39</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/40.pdf')">
 							<img src="figuresmall/40.jpg" alt="Example 40" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 40</h5>
-							<a href="data/example_40.zip" download="example_40.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>	
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_40.zip" download="example_40.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 40</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/41.pdf')">				
+					  <figcaption>
+								<h5>Example 41</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 42</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 43</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 44</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 45</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/41.pdf')">
 							<img src="figuresmall/41.jpg" alt="Example 41" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 41</h5>
-							<a href="data/example_41.zip" download="example_41.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_41.zip" download="example_41.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 41</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/42.pdf')">
 							<img src="figuresmall/42.jpg" alt="Example 42" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 42</h5>
-							<a href="data/example_42.zip" download="example_42.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_42.zip" download="example_42.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 42</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/43.pdf')">
 							<img src="figuresmall/43.jpg" alt="Example 43" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 43</h5>
-							<a href="data/example_43.zip" download="example_43.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_43.zip" download="example_43.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 43</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/44.pdf')">
+	          <div onclick="window.open('figures/44.pdf')">				
 							<img src="figuresmall/44.jpg" alt="Example 44" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 44</h5>
-							<a href="data/example_44.zip" download="example_44.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_44.zip" download="example_44.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 44</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/45.pdf')">
 							<img src="figuresmall/45.jpg" alt="Example 45" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 45</h5>
-							<a href="data/example_45.zip" download="example_45.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>	
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_45.zip" download="example_45.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 45</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/46.pdf')">				
+					  <figcaption>
+								<h5>Example 46</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 47</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 48</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 49</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 50</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/46.pdf')">
 							<img src="figuresmall/46.jpg" alt="Example 46" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 46</h5>
-							<a href="data/example_46.zip" download="example_46.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_46.zip" download="example_46.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 46</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/47.pdf')">
 							<img src="figuresmall/47.jpg" alt="Example 47" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 47</h5>
-							<a href="data/example_47.zip" download="example_47.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_47.zip" download="example_47.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 47</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/48.pdf')">
 							<img src="figuresmall/48.jpg" alt="Example 48" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 48</h5>
-							<a href="data/example_48.zip" download="example_48.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_48.zip" download="example_48.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 48</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/49.pdf')">
+	          <div onclick="window.open('figures/49.pdf')">				
 							<img src="figuresmall/49.jpg" alt="Example 49" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 49</h5>
-							<a href="data/example_49.zip" download="example_49.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_49.zip" download="example_49.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 49</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/50.pdf')">
 							<img src="figuresmall/50.jpg" alt="Example 50" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 50</h5>
-							<a href="data/example_50.zip" download="example_50.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_50.zip" download="example_50.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 50</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/51.pdf')">				
+					  <figcaption>
+								<h5>Example 51</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 52</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 53</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 54</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 55</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/51.pdf')">
 							<img src="figuresmall/51.jpg" alt="Example 51" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 51</h5>
-							<a href="data/example_51.zip" download="example_51.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_51.zip" download="example_51.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 51</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/52.pdf')">
 							<img src="figuresmall/52.jpg" alt="Example 52" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 52</h5>
-							<a href="data/example_52.zip" download="example_52.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_52.zip" download="example_52.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 52</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/53.pdf')">
 							<img src="figuresmall/53.jpg" alt="Example 53" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 53</h5>
-							<a href="data/example_53.zip" download="example_53.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_53.zip" download="example_53.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 53</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/54.pdf')">
+	          <div onclick="window.open('figures/54.pdf')">				
 							<img src="figuresmall/54.jpg" alt="Example 54" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 54</h5>
-							<a href="data/example_54.zip" download="example_54.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_54.zip" download="example_54.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 54</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/55.pdf')">
 							<img src="figuresmall/55.jpg" alt="Example 55" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 55</h5>
-							<a href="data/example_55.zip" download="example_55.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_55.zip" download="example_55.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 55</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/56.pdf')">				
+					  <figcaption>
+								<h5>Example 56</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 57</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 58</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 59</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 60</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/56.pdf')">
 							<img src="figuresmall/56.jpg" alt="Example 56" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 56</h5>
-							<a href="data/example_56.zip" download="example_56.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_56.zip" download="example_56.zip"><img src="download.png" height="8%" width="8%" /></a><span style="font-size: 16px;"> Input files for example 56</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/57.pdf')">
 							<img src="figuresmall/57.jpg" alt="Example 57" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 57</h5>
-							<a href="data/example_57.zip" download="example_57.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_57.zip" download="example_57.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 57</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/58.pdf')">
 							<img src="figuresmall/58.jpg" alt="Example 58" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 58</h5>
-							<a href="data/example_58.zip" download="example_58.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_58.zip" download="example_58.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 58</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/59.pdf')">
+	          <div onclick="window.open('figures/59.pdf')">				
 							<img src="figuresmall/59.jpg" alt="Example 59" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 59</h5>
-							<a href="data/example_59.zip" download="example_59.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_59.zip" download="example_59.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 59</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/60.pdf')">
 							<img src="figuresmall/60.jpg" alt="Example 60" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 60</h5>
-							<a href="data/example_60.zip" download="example_60.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>
-
-			<div class="myRow">
-				
-				<div class="well myCol">
+							<a href="data/example_60.zip" download="example_60.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 60</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<th>
 					<figure>
-	                    <div onclick="window.open('figures/61.pdf')">				
+					  <figcaption>
+								<h5>Example 61</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+				<th>
+					<figure>
+					  <figcaption>
+								<h5>Example 62</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 63</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 64</h5>
+							</figcaption>
+			    </figure>
+			  </th>				
+			  <th>
+					<figure>
+					  <figcaption>
+								<h5>Example 65</h5>
+							</figcaption>
+			    </figure>
+			  </th>
+			 </tr>
+			<tr>
+				<td>
+					<figure>
+						<div onclick="window.open('figures/61.pdf')">
 							<img src="figuresmall/61.jpg" alt="Example 61" class="border-img">
 						</div>
 						<figcaption>
-							<h5>Example 61</h5>
-							<a href="data/example_61.zip" download="example_61.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>											
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_61.zip" download="example_61.zip"><img src="download.png" height="8%" width="8%" /></a><span style="font-size: 16px;"> Input files for example 61</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/62.pdf')">
 							<img src="figuresmall/62.jpg" alt="Example 62" class="border-img">
-						</div>
+						</div>						
 						<figcaption>
-							<h5>Example 62</h5>
-							<a href="data/example_62.zip" download="example_62.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>
-				
-				<div class="well myCol">
+							<a href="data/example_62.zip" download="example_62.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 62</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/63.pdf')">
 							<img src="figuresmall/63.jpg" alt="Example 63" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 63</h5>
-							<a href="data/example_63.zip" download="example_63.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>	
-
-				<div class="well myCol">
+							<a href="data/example_63.zip" download="example_63.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 63</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
-						<div onclick="window.open('figures/64.pdf')">
+	          <div onclick="window.open('figures/64.pdf')">				
 							<img src="figuresmall/64.jpg" alt="Example 64" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 64</h5>
-							<a href="data/example_64.zip" download="example_64.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>				
-
-				<div class="well myCol">
+							<a href="data/example_64.zip" download="example_64.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 64</span>
+						</figcaption>
+					</figure>
+				</td>
+				<td>
 					<figure>
 						<div onclick="window.open('figures/65.pdf')">
 							<img src="figuresmall/65.jpg" alt="Example 65" class="border-img">
-						</div>						
+						</div>
 						<figcaption>
-							<h5>Example 65</h5>
-							<a href="data/example_65.zip" download="example_65.zip"><img src="download.png" height="8%" width="8%" /></a>
-						</figcaption>						
-					 </figure>
-				</div>					
-			</div>				
-		</div>
+							<a href="data/example_65.zip" download="example_65.zip"><img src="download.png" height="8%" width="8%" /></a><span> Input files for example 65</span>
+						</figcaption>
+					</figure>
+				</td>
+			</tr>
+			
+						
+			
+			
+
+			
+		</table>
     </body>
 </html>	
