@@ -1,0 +1,396 @@
+<!doctype html>
+<html>
+    <body>
+        <div class="global-div">
+            <div class = "content-left">
+                <div id="div4">
+                  <h2>
+<p><span><span><strong>4. Creation of non-circular single-genome plots using shinyChromosome</strong></span></span></p>
+                  </h2>
+<p class="p_help_English"><span>To create a non-circular single-genome plot, you need to use the  ;Single-genome plot  menu of the shinyChromosome application. A dataset to define the genome used in the single-genome plot and the other 1-10 datasets to be displayed along all the chromosomes of the genome are the compulsory input data to make a single-genome plot. In the following section, we demonstrate all the essential steps to create a non-circular single-genome plot using shinyChromosome with example datasets.</span></p>
+
+
+<div id="div4.1">
+<h3>
+<p><span><span><strong>4.1 Essential steps to create a non-circular single-genome plot</strong></span></span></p>
+</h3>
+
+<div id="div4.1.1">
+<h4>
+<p><span><strong>Step 1. Prepare and upload the input file of the genome data</strong></span></p>
+</h4>
+<p class="p_help_English"><span>The genome data is compulsory and defines the frame of a non-circular plot (An example dataset is available at </span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>). The genome data is basically a text file with </span><span><span>2 columns</span></span><span> (</span><span><strong>Figure 11</strong></span><span>). The 1st column is the chromosome ID. The 2nd column is the chromosome length. The detailed format of the genome data is illustrated in the  Input data format  menu (Under the  Help  menu) of the shinyChromosome application. The content of the  Input data format  menu is also available in GitHub (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/In_Data_Format.md"><span>https://github.com/venyao/shinyChromosome/blob/master/In_Data_Format.md</span></a></u></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_47dd50cb.png" alt="" width="168" height="227" name="图片 42" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 11. </strong></span><span>The format of input file for genome data.</span></p>
+
+<p class="p_help_English"><span>Here, we have prepared this file and stored this file on the disk (For example  E:/  on Windows). Next, we need to upload this file to the shinyChromosome application using the  Browse&hellip;  widget below the  Upload genome data  indicator in the left panel of the  Single-genome plot  menu of the shinyChromosome application (</span><span><strong>Figure 12</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_141c45b2.png" alt="" width="546" height="478" name="图片 45" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 12. </strong></span><span>Essential steps to create a single-genome plot using shinyChromosome. The file  genome_data.txt  is uploaded to the genome data widget. The file  point.txt  is uploaded to the  Data1  track while the file  bar.txt  is uploaded to the  Data2  track.</span></p>
+</div>
+
+<div id="div4.1.2">
+<h4>
+<p><span><strong>Step 2. Upload other input datasets to be displayed along all chromosomes of the input genome</strong></span></p>
+</h4>
+<p class="p_help_English"><span>1-10 datasets could be then uploaded to be displayed along all chromosomes of the genome data uploaded in </span><span><strong>Step 1</strong></span><span>. The ten  DataX  (Data1 to Data10) checkbox on the left panel of the  Single-genome plot  menu are provided for this purpose (</span><span><strong>Figure 12</strong></span><span>). Here, we use two input datasets (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt</span></a></u></span><span> and </span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</span></a></u></span><span>) to demonstrate this process. The detailed format of input files to create different types of plots are illustrated in the  Input data format  submenu of the shinyChromosome application (</span><span><strong>Figure 6</strong></span><span>). Here, we have prepared the two files and stored them on the disk (For example  E:/  on Windows). To upload the file  point.txt  to the Data1 track, check the  Data1  checkbox, choose the  Upload input data  radio button and then use the  Browse&hellip;  widget to upload the  point.txt  from the disk (</span><span><strong>Figure 12</strong></span><span>). To upload the file  bar.txt  to the Data2 track, check the  Data2  checkbox, choose the  Upload input data  radio button and then use the  Browse&hellip;  widget to upload the  bar.txt  from the disk.</span></p>
+</div>
+
+<div id="div4.1.3">
+<h4>
+<p><span><strong>Step 3. Set track index and plot type for each input dataset</strong></span></p>
+</h4>
+<p class="p_help_English"><span>By default, the track index for each input dataset is  track1  and the plot type for each input dataset is  point . We need to set the track index as  track2  and the plot type as  bar  for the input file  bar.txt  as we want to use this file to create a bar plot (</span><span><strong>Figure 12</strong></span><span>).</span></p>
+</div>
+
+<div id="div4.1.4">
+<h4>
+<p><span><strong>Step 4. Click the  Go!  button to make the plot</strong></span></p>
+</h4>
+<p class="p_help_English"><span>After all the input datasets has been successfully uploaded to the shinyChromosome application and the track index and plot type have been set properly, we need to click the  Go!  button at the bottom of the left panel of the  Single-genome plot  menu to tell shinyChromosome to make the plot (</span><span><strong>Figure 12</strong></span><span>). The plot shown in the main panel of </span><span><strong>Figure 12</strong></span><span> is the plot generated using the input datasets uploaded in Step 1 and Step 2. </span><span><span><strong>By default, random color or predefined colors would be used by shinyChromosome when generating the plot.</strong></span></span></p>
+</div>
+</div>
+
+
+<div id="div4.2">
+<h3>
+<p><span><span><strong>4.2 Turn off an input dataset used to make a single-genome plot</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>For each  DataX  checkbox on the left panel of the  Single-genome plot  menu, we provide two radio button options:  Disable data input  and  Upload input data . By default, the  Disable data input  radio button is checked. The  Upload input data  is used to upload an input dataset while the  Disable data input  is used to turn off an input dataset already uploaded.</span></p>
+<p class="p_help_English"><span>In section 4.1, we uploaded the input files  point.txt  and  bar.txt  to  Data1  and  Data2  respectively. The  point.txt  file was used to create the scatter plot in </span><span><strong>Figure 12</strong></span><span> while the  bar.txt  was used to create the bar plot in </span><span><strong>Figure 12</strong></span><span>. If we want to remove the scatter plot from </span><span><strong>Figure 12</strong></span><span> and only keep the bar plot, we can check the  Disable data input  radio button under the  Data1  checkbox and then click the  Go!  button on the bottom of the left panel to tell shinyChromosome to update the plot. This process is demonstrated in </span><span><strong>Figure 13</strong></span><span>. In this way, the  point.txt  file would be not be used by shinyChromosome and only the bar plot would be created as is shown in </span><span><strong>Figure 13</strong></span><span>. </span><span><span><strong>Remember to click the  Go!  button to update the plot whenever you modify any option or input file through the diverse widgets provided in the left panel.</strong></span></span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_e76b165c.png" alt="" width="520" height="467" name="图片 46" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 13. </strong></span><span>The procedure to turn off an input dataset used to make a single-genome plot.</span></p>
+</div>
+
+
+<div id="div4.3">
+<h3>
+<p><span><span><strong>4.3 Replace an input dataset used to make a single-genome plot</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>A single-genome plot is usually composed of several basic type of plots distributed in different tracks. Each plot is created using an uploaded input dataset. Sometimes, we may want to replace one or more input files so that we can update some components of the single-genome plot without creating the whole plot all over again. For example, we want to replace the  bar.txt  uploaded to  Data2  using a new input file  rect_discrete.txt  to create discrete rectangles. To achieve this purpose, we can use the  Browse&hellip;  widget under the  Upload input data  radio button in  Data2  to upload the  rect_discrete.txt  to  Data2 . Then  bar.txt  will be replaced by  rect_discrete.txt  in  Data2 . At the same time, we need to set the plot type as  rect_discrete  for  Data2 . Finally, we need to click the  Go!  button on the bottom of the left panel to tell shinyChromosome to update the corresponding plot. This process is demonstrated in </span><span><strong>Figure 14</strong></span><span>.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_27e4676d.png" alt="" width="534" height="544" name="图片 49" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 14. </strong></span><span>The procedure to replace an input dataset used to make a single-genome plot.</span></p>
+</div>
+
+
+<div id="div4.4">
+<h3>
+<p><span><span><strong>4.4 Download the created single-genome plot in PDF or SVG format</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>After a single-genome plot was generated, the user can use the widgets  Download PDF file  and  Download SVG file  on top of the generated plot in the main panel of the  Single-genome plot  menu to download the generated plot in PDF or SVG format (</span><span><strong>Figure 15</strong></span><span>). By default, the two downloaded files are named as  Visualization_1.pdf  and  Visualization_1.svg  respectively.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_8f8ee2c3.png" alt="" width="554" height="434" name="图片 50" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 15</strong></span><span>. The downloaded PDF file  Visualization_1.pdf  is opened in Adobe Acrobat and the downloaded SVG file  Visualization_1.svg  is opened in Google Chrome browser.</span></p>
+</div>
+
+
+<div id="div4.5">
+<h3>
+<p><span><span><strong>4.5 Download the R scripts and user-uploaded input datasets to reproduce the single-genome plot</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>Some users may have noticed that a download widget named  Download the R scripts and data files to reproduce the plot  is provided on top of the generated plot in the main panel of the  Single-genome plot  menu when a single-genome plot has been created (</span><span><strong>Figure 16</strong></span><span>). By clicking this button, all the user-uploaded input datasets and two R scripts would be downloaded as a zip file. By default, the downloaded zip file is named as  scripts_data_1.zip . The downloaded R scripts and user-uploaded input datasets can be used outside the shinyChromosome application to reproduce the plot generated using the graphical interface of shinyChromosome. The downloaded R scripts should be used in the R environment. The downloaded R scripts can be used with other scripts of the users in an analysis pipeline. The downloaded R scripts can also be cycled to generate hundreds of similar plots using different input datasets and the same set of parameters.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_962bd65b.png" alt="" width="554" height="444" name="图片 53" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 16</strong></span><span>. The widget to download the R scripts and user-uploaded input files to reproduce the plot.</span></p>
+
+<p class="p_help_English"><span>To use the  scripts_data_1.zip  file, unzip this file to a directory, for example  E:/ . Then open the R environment using RStudio. The R script  Script_1.R  is the main R script that would be used in RStudio to reproduce the plot. The path of the  Script_1.R  script in the disk is usually not the same as the default working directory of RStudio. We need to set them as the same directory. Here, we set the working directory of RStudio as  E:/  by editing the  Script_1.R  script in RStudio as the R scripts and user-uploaded input datasets were unzip to the directory  E:/  (</span><span><strong>Figure 17</strong></span><span>). Finally, run all the code in the edited  Script_1.R  script and a PDF file named  Visualization_1.pdf  would be generated in the directory  E:/ . The content of the  Visualization_1.pdf  is the same as the plot generated using the graphical interface of shinyChromosome in </span><span><strong>Figure 16</strong></span><span>.</span></p>
+
+<p style="text-align: center;"><img src="./helpfigures/E4_html_aeda5169.png" alt="" width="554" height="414" name="图片 6" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 17</strong></span><span>. Open and edit the  Script_1.R  script as indicated in red box. Then run all the code of the edited  Script_1.R  script in RStudio to reproduce the single-genome plot.</span></p>
+</div>
+
+
+<div id="div4.6">
+<h3>
+<p><span><span><strong>4.6 Create different types of single-genome plot using shinyChromosome</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>A total of 12 different types of plot can be created using shinyChromosome, including point, line, bar, rect_gradual, rect_discrete, heatmap_gradual, heatmap_discrete, text, segment, vertical_line, horizontal_line and ideogram. To create a single-genome plot, at least two input data files are needed, the genome data file which defines the genome used in the plot and other datasets to be displayed along all chromosomes of the genome. The format of genome data is illustrated in section 4.1. The detailed format of input files to make different types of single-genome plot is demonstrated in the  Input data format  menu (under the  Help  menu) of the shinyChromosome application. In this section, we will show the key parameters to make different types of single-genome plot using the graphical interface of shinyChromosome with example input datasets. The example genome data files used in this section is the same as the file used in section 4.1 (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>).</span></p>
+
+
+<div id="div4.6.1">
+<h4>
+<p><span><strong>4.6.1 Plot point</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To make point plot using shinyChromosome, we need two input files, the genome data file and the input file defining the genomic position and the value of each point. The simplest dataset to plot point should contain </span><span><span>3 columns</span></span><span> including the chromosome IDs, genomic positions and numeric values. Each genomic position would be represented as a point along the defined genome. Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  point.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot point using shinyChromosome (</span><span><strong>Figure 18</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_3cfd9a59.png" alt="" width="554" height="451" name="图片 56" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 18. </strong></span><span>The procedure to plot point using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.2">
+<h4>
+<p><span><strong>4.6.2 Plot line</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To make line plot using shinyChromosome, we need two input files, the genome data file and the input file defining the position and the value of each point to be connected in a line. The simplest dataset to plot line should contain </span><span><span>3 columns</span></span><span> including the chromosome IDs, genomic positions and numeric values. Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  line.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/line.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/line.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot line using shinyChromosome (</span><span><strong>Figure 19</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_8319991.png" alt="" width="554" height="448" name="图片 55" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 19. </strong></span><span>The procedure to plot line using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.3">
+<h4>
+<p><span><strong>4.6.3 Plot bar</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To make bar plot using shinyChromosome, we need two input files, the genome data file and the input file defining the position and the value of each genomic region to be displayed as a bar. The simplest dataset to plot bar should contain </span><span><span>4 columns</span></span><span> including the chromosome IDs, start coordinates of genomic regions, end coordinates of genomic regions and the heights of different bars. Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  bar.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot bar using shinyChromosome (</span><span><strong>Figure 20</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_da04ff2c.png" alt="" width="554" height="454" name="图片 57" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 20. </strong></span><span>The procedure to plot bar using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.4">
+<h4>
+<p><span><strong>4.6.4 Plot rect_gradual</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To make gradual rectangle plot using shinyChromosome, we need two input files, the genome data file and the input file defining the position and the value of each genomic region to be displayed as a rectangle. The simplest dataset to plot gradual rectangle should contain </span><span><span>4 columns</span></span><span> including the chromosome IDs, start coordinates of genomic regions, end coordinates of genomic regions and the value of each rectangle. The 4th column should be a numeric vector representing continuous variables. Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  rect_gradual.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_gradual.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_gradual.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot rect_gradual using shinyChromosome (</span><span><strong>Figure 21</strong></span><span>). Please be noted that the  Image type  is set as  Separated chromosomes  to split the 12 chromosomes.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_73134710.png" alt="" width="554" height="453" name="图片 12" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 21. </strong></span><span>The procedure to plot rect_gradual using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.5">
+<h4>
+<p><span><strong>4.6.5 Plot rect_discrete</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To make discrete rectangle plot using shinyChromosome, we need two input files, the genome data file and the input file defining the position and the value of each genomic region to be displayed as a rectangle. The simplest dataset to plot discrete rectangle should contain </span><span><span>4 columns</span></span><span> including the chromosome IDs, start coordinates of genomic regions, end coordinates of genomic regions and the value of each rectangle. The 4th column should be a character vector representing discrete variables. Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  rect_discrete.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_discrete.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_discrete.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot rect_discrete using shinyChromosome (</span><span><strong>Figure 22</strong></span><span>). Please be noted that the  Image type  is set as  Separated chromosomes  to split the 12 chromosomes of the rice genome.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_a9859cca.png" alt="" width="554" height="457" name="图片 26" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 22. </strong></span><span>The procedure to plot rect_discrete using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.6">
+<h4>
+<p><span><strong>4.6.6 Plot heatmap_gradual</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To make gradual heatmap using shinyChromosome, we need two input files, the genome data file and the input file defining the position and the values of each genomic region to be displayed as a cell of a heatmap. The simplest dataset to plot gradual heatmap should contain </span><span><span>at least</span></span><span><span>4 columns.</span></span></p>
+<ul>
+<li>
+<p class="p_help_English"><span>The 1-3 columns of data for heatmap_gradual plot are the chromosome IDs, start coordinates of genomic regions and end coordinates of genomic regions.</span></p>
+</li>
+<li>
+<p class="p_help_English"><span>Apart from the first three columns, other columns should be </span><span><span>numeric vectors</span></span><span> representing continuous variables.</span></p>
+</li>
+</ul>
+<p class="p_help_English"><span>Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  heatmap_gradual.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_gradual.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_gradual.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot heatmap_gradual using shinyChromosome (</span><span><strong>Figure 23</strong></span><span>). Please be noted that the  Image type  is set as  Separated chromosomes  to split the 12 chromosomes of the rice genome.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_b435006b.png" alt="" width="554" height="439" name="图片 3" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 23. </strong></span><span>The procedure to plot heatmap_gradual using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.7">
+<h4>
+<p><span><strong>4.6.7 Plot heatmap_discrete</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To make discrete heatmap using shinyChromosome, we need two input files, the genome data file and the input file defining the position and the values of each genomic region to be displayed as a cell of a heatmap. The simplest dataset to plot discrete heatmap should contain </span><span><span>at least</span></span><span><span>4 columns.</span></span></p>
+<ul>
+<li>
+<p class="p_help_English"><span>The 1-3 columns of data for heatmap_gradual plot are the chromosome IDs, start coordinates of genomic regions and end coordinates of genomic regions.</span></p>
+</li>
+<li>
+<p class="p_help_English"><span>Apart from the first three columns, other columns should be </span><span><span>character vectors</span></span><span> representing different categories.</span></p>
+</li>
+</ul>
+<p class="p_help_English"><span>Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  heatmap_discrete.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_discrete.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_discrete.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot heatmap_discrete using shinyChromosome (</span><span><strong>Figure 24</strong></span><span>). Please be noted that the  Image type  is set as  Separated chromosomes  to split the 12 chromosomes of the rice genome.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_1d8738ee.png" alt="" width="554" height="414" name="图片 32" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 24. </strong></span><span>The procedure to plot heatmap_discrete using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.8">
+<h4>
+<p><span><strong>4.6.8 Plot text</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To plot text using shinyChromosome, we need two input files, the genome data file and the input file defining the position of the text to be displayed along the genome. The simplest dataset to plot text should contain </span><span><span>4 columns</span></span><span>.</span></p>
+<ul>
+<li>
+<p class="p_help_English"><span>The 1-3 columns of data for text plot are the chromosome IDs, X-axis coordinates and the Y-axis coordinates of texts.</span></p>
+</li>
+<li>
+<p class="p_help_English"><span>The last column should be a </span><span><span>character vector</span></span><span> representing texts.</span></p>
+</li>
+</ul>
+<p class="p_help_English"><span>Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  text.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/text.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/text.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot text using shinyChromosome (</span><span><strong>Figure 25</strong></span><span>). Please be noted that some of the advanced options has been modified as is shown in </span><span><strong>Figure 25</strong></span><span>. Please be noted that the  Image type  is set as  Separated chromosomes  to split the 12 chromosomes of the rice genome.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_19f1a65e.png" alt="" width="554" height="454" name="图片 33" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 25. </strong></span><span>The procedure to plot text using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.9">
+<h4>
+<p><span><strong>4.6.9 Plot segment</strong></span></p>
+</h4>
+<p class="p_help_English"><span>To plot segment using shinyChromosome, we need two input files, the genome data file and the input file defining the start and end positions of the segment to be displayed along the genome. The simplest dataset to plot segment should contain </span><span><span>5 columns</span></span><span>.</span></p>
+<ul>
+<li>
+<p class="p_help_English"><span>The 1st column contains the chromosome IDs of each segment.</span></p>
+</li>
+<li>
+<p class="p_help_English"><span>Columns 2-3 and columns 4-5 represent the positions of the two ends of segment respectively.</span></p>
+</li>
+</ul>
+<p class="p_help_English"><span>Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  segment.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/segment.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/segment.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot segment using shinyChromosome (</span><span><strong>Figure 26</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_c2923e3e.png" alt="" width="554" height="436" name="图片 36" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 26. </strong></span><span>The procedure to plot segment using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.10">
+<h4>
+<p><span><strong>4.6.10 Plot vertical_line</strong></span></p>
+</h4>
+<p class="p_help_English"><span>Vertical lines are usually mixed with other types of plot. The input data to create vertical lines should include </span><span><span>two columns</span></span><span>. The first column is the chromosome IDs and the second column is the X-axis coordinate of each vertical line.</span></p>
+<p class="p_help_English"><span>Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>),  vertical_line.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/vertical_line.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/vertical_line.txt</span></a></u></span><span>) and  bar.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot vertical line using shinyChromosome (</span><span><strong>Figure 27</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_5f5f62cd.png" alt="" width="554" height="442" name="图片 4" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 27. </strong></span><span>The procedure to plot vertical_line using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.11">
+<h4>
+<p><span><strong>4.6.11 Plot horizontal_line</strong></span></p>
+</h4>
+<p class="p_help_English"><span>Horizontal lines are usually mixed with other types of plot. The input data to create horizontal lines should include </span><span><span>one column</span></span><span> representing the Y-axis coordinate of each horizontal line.</span></p>
+<p class="p_help_English"><span>Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>),  horizontal_line.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/horizontal_line.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/horizontal_line.txt</span></a></u></span><span>) and  bar.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot horizontal line using shinyChromosome (</span><span><strong>Figure 28</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_e2663ac5.png" alt="" width="554" height="463" name="图片 38" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 28. </strong></span><span>The procedure to plot horizontal_line using shinyChromosome.</span></p>
+</div>
+
+<div id="div4.6.12">
+<h4>
+<p><span><strong>4.6.12 Plot ideogram</strong></span></p>
+</h4>
+<p class="p_help_English"><span>Ideogram is a schematic representation of chromosomes. The input data to create ideogram should contain 5</span><span><span> columns</span></span><span>. Please check </span><span><u><a href="https://www.nature.com/scitable/topicpage/chromosome-mapping-idiograms-302"><span>https://www.nature.com/scitable/topicpage/chromosome-mapping-idiograms-302</span></a></u></span><span> and </span><span><u><a href="http://genome.ucsc.edu/cgi-bin/hgTables?db=hg38&amp;hgta_group=map&amp;hgta_track=cytoBand&amp;hgta_table=cytoBand&amp;hgta_doSchema=describe+table+schema"><span>http://genome.ucsc.edu/cgi-bin/hgTables?db=hg38&amp;hgta_group=map&amp;hgta_track=cytoBand&amp;hgta_table=cytoBand&amp;hgta_doSchema=describe+table+schema</span></a></u></span><span> for more information. To plot ideogram using shinyChromosome, we need two input files, the genome data file and the input file to create ideogram.</span></p>
+<p class="p_help_English"><span>Here, we use the example files  genome_data.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</span></a></u></span><span>) and  ideogram.txt  (</span><span><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/ideogram.txt"><span>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/ideogram.txt</span></a></u></span><span>) provided in the source code of shinyChromosome to demonstrate the procedure to plot ideogram using shinyChromosome (</span><span><strong>Figure 29</strong></span><span>). Please be noted that the  Image type  is set as  Separated chromosomes  to split the 12 chromosomes of the rice genome.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_843014ba.png" alt="" width="554" height="423" name="图片 43" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 29. </strong></span><span>The procedure to plot ideogram using shinyChromosome.</span></p>
+</div>
+</div>
+
+
+<div id="div4.7">
+<h3>
+<p><span><span><strong>4.7 Integration of multiple input datasets to create advanced single-genome plot using shinyChromosome</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>In section 4.6, we demonstrated the procedure to create different types of single-genome plot using shinyChromosome. To make things simple, we create a single type of plot in each example at a time in section 4.6. Actually, shinyChromosome accepts as many as 10 input datasets to create a single-genome plot. Each input dataset can be used to create any of the 12 different types of plot. Here, we use the example dataset  Example 1  provided in the  Gallery  menu of shinyChromosome to demonstrate the procedure to create advanced single-genome plot using shinyChromosome (</span><span><strong>Figure 30</strong></span><span>).</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_e7887bc7.png" alt="" width="554" height="528" name="图片 47" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 30. </strong></span><span>The procedure to create advanced single-genome plot with multiple input datasets using shinyChromosome.</span></p>
+
+<p class="p_help_English"><span>A total of 6 input datasets are distributed in 5 tracks of the generated plot. The uploading of the 6 input datasets and the setting of the track index and plot type for each dataset are shown in </span><span><strong>Figure 30</strong></span><span>. Except for the procedure demonstrated in </span><span><strong>Figure 30</strong></span><span>, other options were tunned to create the plot, including the display of figure legends, setting of figure theme and the size of each track. Setting of these options are shown in </span><span><strong>Figure 31</strong></span><span>.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_cadce309.png" alt="" width="554" height="540" name="图片 48" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 31.</strong></span><span> Settings of various options to decorate the plot created in Figure 30 using shinyChromosome.</span></p>
+</div>
+
+
+<div id="div4.8">
+<h3>
+<p><span><span><strong>4.8 Plotting options to decorate a single-genome plot</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>Various widgets are provided in the left panel of the  Single-genome plot  menu under each  DataX  checkbox to decorate the appearance of the generated single-genome plot. The following section will demonstrate the setting of some of these options.</span></p>
+
+
+<div id="div4.8.1">
+<h4>
+<p><span><strong>4.8.1 Concatenated chromosomes v.s. Separated chromosomes</strong></span></p>
+</h4>
+<p class="p_help_English"><span>All the chromosomes in a single-genome plot can either be concatenated in sequential order or can be separated in different panels by setting the  Image type  widget at the top of the left panel of the  Single-genome plot  menu. The input datasets are the same for  Example 10  and  Example 12  displayed in the  Gallery  menu of the shinyChromosome application. All the chromosomes are concatenated in sequential order in the plot shown in  Example 10  while all the chromosomes are separated in different panels in the plot shown in  Example 12 . The procedure and the setting of options to create the plot in  Example 10  and  Example 12  are demonstrated in </span><span><strong>Figure 32</strong></span><span> and </span><span><strong>Figure 33</strong></span><span>, respectively.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_a396841.png" alt="" width="554" height="522" name="图片 51" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 32. </strong></span><span>A single-genome plot with concatenated chromosomes created using the input dataset of  Example 10  in the  Gallery  menu.</span></p>
+
+
+<p style="text-align: center;"><img src="./helpfigures/E4_html_edb00299.png" alt="" width="554" height="482" name="图片 52" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 33.</strong></span><span> A single-genome plot with separated chromosomes created using the input dataset of  Example 12  in the  Gallery  menu.</span></p>
+</div>
+
+<div id="div4.8.2">
+<h4>
+<p><span><strong>4.8.2 Horizontally aligned chromosomes v.s. vertically aligned chromosomes</strong></span></p>
+</h4>
+<p class="p_help_English"><span>All the chromosomes in a single-genome plot can either be aligned along the horizontal axis or be aligned along the vertical axis by setting the  Chromosome orientation  widget at the top of the left panel of the  Single-genome plot  menu. The input datasets are the same for  Example 10  and  Example 12  displayed in the  Gallery  menu of the shinyChromosome application. All the chromosomes are aligned along the horizontal axis in the plot shown in  Example 10  while all the chromosomes are aligned along the vertical axis in the plot shown in  Example 12 . The procedure and the setting of options to create the plot in  Example 10  and  Example 12  are demonstrated in </span><span><strong>Figure 32</strong></span><span> and </span><span><strong>Figure 33</strong></span><span>, respectively.</span></p>
+</div>
+
+<div id="div4.8.3">
+<h4>
+<p><span><strong>4.8.3 Set point color, point size and point symbol</strong></span></p>
+</h4>
+<p class="p_help_English"><span>For a point plot, we can modify the point color, point size and point symbol using the widgets provided in the left panel of the  Single-genome plot  menu. Here, we use the input datasets of  Example 17  displayed in the  Gallery  menu to demonstrate these widgets.</span></p>
+<p class="p_help_English"><span>By default, random color and predefined size and symbol would be assigned to the points as is shown in </span><span><strong>Figure 34</strong></span><span>. If we want to change the point color, point size or point symbol, we can edit the default values of these widgets under the  Color ,  Symbol  and  Size  checkbox, as is shown in </span><span><strong>Figure 35</strong></span><span>.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_faea7b68.png" alt="" width="554" height="422" name="图片 58" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 34.</strong></span><span> Default settings of point color, point shape and point size in shinyChromosome.</span></p>
+
+<p style="text-align: center;"><img src="./helpfigures/E4_html_d7277991.png" alt="" width="554" height="411" name="图片 59" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 35.</strong></span><span> Settings of point color, point shape and point size using different widgets in shinyChromosome.</span></p>
+
+<p class="p_help_English"><span>Actually, the input dataset of  Example 17  contains a  color  column, a  shape  column and a  size  column to assign the color, symbol and the size of the points. To set the point color, point size and point symbol using the  color  column, the  shape  column and the  size  column inside the input dataset, we need to set the values of widgets under the  Color ,  Symbol  and  Size  checkbox, as is shown in </span><span><strong>Figure 36</strong></span><span>.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E4_html_15b85c0c.png" alt="" width="554" height="415" name="图片 60" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 36.</strong></span><span> Settings of point color, point shape and point size using the  color ,  symbol  and  size  columns of input dataset in shinyChromosome.</span></p>
+</div>
+
+<div id="div4.8.4">
+<h4>
+<p><span><strong>4.8.4 Set rect color for multiple datasets</strong></span></p>
+</h4>
+<p class="p_help_English"><span>For a rect_discrete plot, we can set the color of rectangles belonging to different groups using the widgets provided in the left panel of the  Single-genome plot  menu. Here, we use the input datasets of  Example 37  displayed in the  Gallery  menu to demonstrate these widgets. Three input datasets are uploaded to make rect_discrete plot. The fourth column of each dataset is a  color  column to define the group of each genomic region, which will be assigned different colors. By default, random colors would be assigned as is shown in </span><span><strong>Figure 37</strong></span><span>. If we want to set the colors of different data group, we can use the  color  widget of each dataset. The procedure is shown in </span><span><strong>Figure 38</strong></span><span>, including the settings of various options.</span></p>
+
+<p style="text-align: center;"><img src="./helpfigures/E4_html_4a242a5b.png" alt="" width="554" height="566" name="图片 9" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 37.</strong></span><span> Default settings of rect colors in shinyChromosome.</span></p>
+
+
+<p style="text-align: center;"><img src="./helpfigures/E4_html_f5a77a95.png" alt="" width="554" height="418" name="图片 13" border="0" /></p>
+<p class="pic_text"><span><strong>Figure 38.</strong></span><span> Settings of rect colors using the  color  column of input dataset in shinyChromosome.</span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div class = "content-right">
+                <h2 class="head_zh">目录</h2>
+                <p style="line-height: 25px;">
+                    <a href="#divc4"><span class="content"> 4. Creation of non-circular single-genome plots using shinyChromosome</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.1"><span class="content"> 4.1 Essential steps to create a non-circular single-genome plot</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.1"><span class="content"> Step 1. Prepare and upload the input file of the genome data</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.2"><span class="content"> Step 2. Upload other input datasets to be displayed along all chromosomes of the input genome</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.3"><span class="content"> Step 3. Set track index and plot type for each input dataset</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.4"><span class="content"> Step 4. Click the “Go!” button to make the plot</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.2"><span class="content"> 4.2 Turn off an input dataset used to make a single-genome plot</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.3"><span class="content"> 4.3 Replace an input dataset used to make a single-genome plot</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.4"><span class="content"> 4.4 Download the created single-genome plot in PDF or SVG format</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.5"><span class="content"> 4.5 Download the R scripts and user-uploaded input datasets to reproduce the single-genome plot</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.6"><span class="content"> 4.6 Create different types of single-genome plot using shinyChromosome</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.1"><span class="content"> 4.6.1 Plot point</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.2"><span class="content"> 4.6.2 Plot line</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.3"><span class="content"> 4.6.3 Plot bar</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.4"><span class="content"> 4.6.4 Plot rect_gradual</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.5"><span class="content"> 4.6.5 Plot rect_discrete</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.6"><span class="content"> 4.6.6 Plot heatmap_gradual</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.7"><span class="content"> 4.6.7 Plot heatmap_discrete</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.8"><span class="content"> 4.6.8 Plot text</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.9"><span class="content"> 4.6.9 Plot segment</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.10"><span class="content"> 4.6.10 Plot vertical_line</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.11"><span class="content"> 4.6.11 Plot horizontal_line</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.12"><span class="content"> 4.6.12 Plot ideogram</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.7"><span class="content"> 4.7 Integration of multiple input datasets to create advanced single-genome plot using shinyChromosome</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.8"><span class="content"> 4.8 Plotting options to decorate a single-genome plot</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.2"><span class="content"> 4.8.1 Concatenated chromosomes v.s. Separated chromosomes</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.2"><span class="content"> 4.8.2 Horizontally aligned chromosomes v.s. vertically aligned chromosomes </span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.3"><span class="content"> 4.8.3 Set point color, point size and point symbol</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.4"><span class="content"> 4.8.4 Set rect color for multiple datasets</span></a>
+                    
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

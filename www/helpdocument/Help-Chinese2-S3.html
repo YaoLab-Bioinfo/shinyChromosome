@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+    <body>
+        <div class="global-div">
+            <div class = "content-left">
+                <div id="divc3">
+                  <h2>3.在个人电脑上安装shinyChromosome</h2>
+<p class="p_help_Chinese">
+	用户可以选择在个人电脑(Windows、Mac或Linux)上安装和运行shinyChromosome，而无需将数据上传到在线服务器。shinyChromosome是跨平台的应用，即shinyChromosome可以安装在任何具有可用R环境的平台上。shinyChromosome的安装包括三个步骤。
+</p>
+
+
+<div id="divc3.1">
+  <h3><p><hr/>3.1在线使用 shinyChromosome</p></h3>
+<p class="p_help_Chinese">
+	shinyChromosome 部署在 &nbsp;<a href="https://venyao.xyz/shinyChromosome/">https://venyao.xyz/shinyChromosome/</a>,&nbsp;<br/>
+	<a href="https://venyao.shinyapps.io/shinyChromosome/">https://venyao.shinyapps.io/shinyChromosome/</a>&nbsp;<br/>
+	和&nbsp;<a href="https://yimingyu.shinyapps.io/shinychromosome/">https://yimingyu.shinyapps.io/shinychromosome/</a>&nbsp;
+	上以供在线使用。<br/>
+	 shinyChromosome 处于空闲状态，直到您通过访问 URL 激活它。
+	<br/>
+	 因此，首次访问此 URL 可能需要一些时间。
+	<br/>
+	 一旦它被激活，shinyChromosome 就可以顺利、轻松地使用。
+</p>
+</div>
+<hr/>
+
+
+<div id="divc3.2">
+  <h3><p>3.2直接从 R 和 GitHub 启动 shinyChromosome</p></h3>
+<p class="p_help_Chinese">用户可以选择运行安装在本地计算机（Windows、Mac 或 Linux）上的 shinyChromosome，以获得更理想的体验。</p>
+
+<div id="divc3.2.1">
+  <h4><p>步骤 1：安装 R 和 RStudio</p></h4>
+<p class="p_help_Chinese">
+	在运行该应用程序之前，您需要安装 R 和 RStudio（使用&nbsp;R 3.5.0&nbsp;和 RStudio 1.1.419 测试）。
+	<br />
+	 请检查 CRAN （<a href="https://cran.r-project.org/">https://cran.r-project.org/</a>） 以了解 R 的安装。
+	<br />
+	 请检查 &nbsp;<a href="https://www.rstudio.com/">https://www.rstudio.com/</a>&nbsp;以了解 RStudio 的安装。
+</p>
+</div>
+
+<div id="divc3.2.2">
+  <h4><p>步骤 2：安装 R Shiny 包和 shinyChromosome 需要的其他包</p></h4>
+<p class="p_help_Chinese">使用 RStudio 启动 R 会话并运行以下行：</p>
+<pre><code># try an http CRAN mirror if https CRAN mirror doesn't work
+install.packages("shiny")
+install.packages("rlang")
+install.packages("zip")
+install.packages("ggplot2")
+install.packages("plyr")
+install.packages("ggthemes")
+install.packages("RLumShiny")
+install.packages("RColorBrewer")
+install.packages("gridExtra")
+install.packages("reshape2")
+install.packages("data.table")
+install.packages("shinythemes")
+install.packages("shinyBS")
+install.packages("markdown")
+# install shinysky
+install.packages("devtools")
+devtools::install_github("venyao/ShinySky", force=TRUE)
+</code></pre>
+</div>
+
+<div id="divc3.2.3">
+<h4><p>步骤 3：启动应用程序</p></h4>
+<p class="p_help_Chinese">使用 RStudio 启动 R 会话并运行以下行：</p>
+	<pre><code>shiny::runGitHub("shinyChromosome", "venyao")
+</code></pre>
+<p class="p_help_Chinese">此命令会将 shinyChromosome 的代码从 GitHub 下载到您计算机的临时目录，然后在网络浏览器中启动 shinyChromosome 应用程序。关闭网络浏览器后，下载的 shinyChromosome 代码将从您的计算机中删除。下次在 RStudio 中运行此命令时，它会再次将 shinyChromosome 的源代码从 GitHub 下载到临时目录。这个过程令人沮丧，因为从 GitHub 下载 shinyChromosome 的代码需要一些时间。</p>
+<p class="p_help_Chinese">建议用户从 GitHub 下载 shinyChromosome 的源代码到你电脑的固定目录下，比如 Windows 上的 E：\apps。按照下图所示的过程，名为&ldquo;shinyChromosome-master.zip&rdquo;的 zip 文件将下载到计算机的磁盘上。将此文件移动到 'E：\apps' 并解压缩此文件。然后在 'E：\apps' 中生成一个名为 'shinyChromosome-master' 的目录。脚本 'server.R' 和 'ui.R' 可以在 'E：\apps\shinyChromosome-master' 中找到。</p>
+
+<p style="text-align: center;">
+<img src="./helpfigures/download zip.png" width="80%">
+
+<p class="p_help_Chinese">然后，您可以通过在 RStudio 中运行这些行来启动 shinyChromosome 应用程序。</p>
+<pre><code>library(shiny)
+runApp("E:/apps/shinyChromosome-master", launch.browser = TRUE)
+</code></pre>
+</div>
+</div>
+<hr/>
+
+<div id="divc3.3">
+  <h3><p>3.3 在本地或 Web Linux 服务器上部署 shinyChromosome</p></h3>
+
+<h4><p>第 1 步：安装 R</p></h4>
+<p class="p_help_Chinese">请检查 CRAN （https://cran.r-project.org/） 以安装 R。</p>
+
+<h4><p>第 2 步：安装 R Shiny 包和 shinyChromosome 需要的其他包</p></h4>
+<p class="p_help_Chinese">启动 R 会话并在 R 中运行以下行：</p>
+<pre><code># try an http CRAN mirror if https CRAN mirror doesn't work
+install.packages("shiny")
+install.packages("rlang")
+install.packages("zip")
+install.packages("ggplot2")
+install.packages("plyr")
+install.packages("ggthemes")
+install.packages("RLumShiny")
+install.packages("RColorBrewer")
+install.packages("gridExtra")
+install.packages("reshape2")
+install.packages("data.table")
+install.packages("shinythemes")
+install.packages("shinyBS")
+install.packages("markdown")
+# install shinysky
+install.packages("devtools")
+devtools::install_github("venyao/ShinySky", force=TRUE)
+</code></pre>
+<p class="p_help_Chinese">有关更多信息，请查看以下页面：<br/><a href="https://cran.r-project.org/web/packages/shiny/index.html">https://cran.r-project.org/web/packages/shiny/index.html</a><br/><a href="https://github.com/rstudio/shiny">https://github.com/rstudio/shiny</a><br/><a href="https://shiny.rstudio.com/">https://shiny.rstudio.com/</a></p>
+
+<h4><p>第 3 步：安装 Shiny-Server</p></h4>
+<p class="p_help_Chinese">请查看以下页面以安装 shiny-server。<br/><a href="https://www.rstudio.com/products/shiny/download-server/">https://www.rstudio.com/products/shiny/download-server/</a><br/><a href="https://github.com/rstudio/shiny-server/wiki/Building-Shiny-Server-from-Source">https://github.com/rstudio/shiny-server/wiki/Building-Shiny-Server-from-Source</a></p>
+
+<h4><p>第 4 步：上传 shinyChromosome 的文件</p></h4>
+<p class="p_help_Chinese">将包含 shinyChromosome 代码和数据的目录放到 /srv/shiny-server 中。</p>
+
+<h4><p>第 5 步：配置 shiny 服务器 （/etc/shiny-server/shiny-server.conf）</p></h4>
+<pre><code># Define the user to spawn R Shiny processes
+run_as shiny;
+# Define a top-level server which will listen on a port
+server {
+ # Use port 3838
+ listen 3838;
+ # Define the location available at the base URL
+ location /shinychromosome {
+ # Directory containing the code and data of shinyChromosome
+ app_dir /srv/shiny-server/shinyChromosome;
+ # Directory to store the log files
+ log_dir /var/log/shiny-server;
+ }
+}
+</code></pre>
+
+<h4><p>第 6 步：更改 shinyChromosome 目录的所有者</p></h4>
+<pre><code>$ chown -R shiny /srv/shiny-server/shinyChromosome
+</code></pre>
+
+<h4><p>第 7 步：启动 Shiny-Server</p></h4>
+<pre><code>$ start shiny-server
+</code></pre>
+
+<p class="p_help_Chinese">
+	现在，shinyChromosome 应用程序可在 &nbsp;<a href="http://ipaddressoftheserver:3838/shinyChromosome/">http://IPAddressOfTheServer:3838/shinyChromosome/</a> 使用。</p>
+</div>
+</div>
+</div>
+
+<div class = "content-right">
+                <h2 class="head_zh">目录</h2>
+                <p style="line-height: 23px;">
+                    <a href="#divc3"><span class="content">3. 在个人电脑上安装shinyChromosome</span></a>
+                    <br>
+                    &emsp;<a href="#divc3.1"><span class="content"> 3.1 在线使用 shinyChromosome</span></a>
+                    <br>
+                    &emsp;<a href="#divc3.2"><span class="content"> 3.2 直接从 R 和 GitHub 启动 shinyChromosome</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc3.2.1"><span class="content"> 步骤1：安装R和RStudio</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc3.2.2"><span class="content"> 步骤2：安装 R Shiny 包和 shinyChromosome 需要的其他包</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc3.2.3"><span class="content"> 步骤3：启动应用程序</span></a>
+                    <br>
+                    &emsp;<a href="#divc3.3"><span class="content"> 3.3 在本地或 Web Linux 服务器上部署 shinyChromosome</span></a>
+                    
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
+

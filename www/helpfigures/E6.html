@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+    <body>
+        <div class="global-div">
+            <div class = "content-left">
+                <div id="div6">
+<h2>
+<p><strong>6. Decorate the appearances of non-circular whole genome plot created by shinyChromosome</strong></p>
+</h2>
+<p class="p_help_English">Many widgets are provided in the left panel of the &ldquo;Single-genome plot&rdquo; and &ldquo;Two-genome plot&rdquo; menus to decorate the appearances of the plot generated using shinyChromosome, including figure size, figure theme, font size, axis title, axis label and legend, etc.</p>
+
+
+<div id="div6.1">
+<h3>
+<p><strong>6.1 Figure size</strong></p>
+</h3>
+<p class="p_help_English">Users can adjust the height and width of a single-genome plot using the &ldquo;Adjust plot size&rdquo; widget under the &ldquo;Show advanced options&rdquo; widget on the bottom of the left panel of the &ldquo;Single-genome plot&rdquo; menu. The figure size in both the browser and the downloaded PDF/SVG files would be affected. Here, we use the example datasets demonstrated in section 4.6.1 to show this function. The default height and width of a single-genome plot are 550 and 750, which is modified as 250 and 800 in <strong>Figure 44</strong>. Finally, we need to click the &ldquo;Go!&rdquo; button to tell shinyChromosome to update the plot.</p>
+<p style="text-align: center;"><img src="./helpfigures/E6_html_17c89591.png"/></p>
+<p class="pic_text"><strong>Figure 44. </strong>The procedure to modify the height and width of a single-genome plot using shinyChromosome.</p>
+</div>
+
+
+<div id="div6.2">
+<h3>
+<p><strong>6.2 Figure theme</strong></p>
+</h3>
+<p class="p_help_English">shinyChromosome use the ggplot2 graphics system as the engine to create single-genome plot and two-genome plot. The ggplot2 package provides lots of options to tune the appearances of the plot created using ggplot2. A set of options with predefined values is called a figure theme in ggplot2. This allows changing the overall appearance of a plot generated using ggplot2 with a single command. The ggthemes package is an R package with tens of different themes used to tune the appearance of a plot created using ggplot2. All the themes provided by ggthemes is available at <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/"><u>https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/</u></a>. The ggthemes package is used in shinyChromosome to decorate the appearance of the single-genome plot and two-genome plot generated using shinyChromosome. Here, we use the example datasets demonstrated in section 4.6.1 to show this function. The default figure theme of a single-genome plot is &ldquo;theme1&rdquo; in shinyChromosome, which is modified as &ldquo;theme18&rdquo; in <strong>Figure 45</strong>. Finally, we need to click the &ldquo;Go!&rdquo; button to tell shinyChromosome to update the plot.</p>
+<p style="text-align: center;"><img src="./helpfigures/E6_html_c9b988f6.png"/></p>
+<p class="pic_text"><strong>Figure 45. </strong>The procedure to modify the theme of a single-genome plot using shinyChromosome.</p>
+</div>
+
+
+<div id="div6.3">
+<h3>
+<p><strong>6.3 Font size</strong></p>
+</h3>
+<p class="p_help_English">The &ldquo;Font size&rdquo; widget on the bottom of the left panel of the &ldquo;Single-genome plot&rdquo; and &ldquo;Two-genome plot&rdquo; menus can be used to tune the font size of the plot created using shinyChromosome, including the font size of axis titles and axis tick labels. Here, we use the example datasets demonstrated in section 4.6.1 to show this function. The default font size is 16, which is modified as 30 in <strong>Figure 46</strong>. Finally, we need to click the &ldquo;Go!&rdquo; button to tell shinyChromosome to update the plot.</p>
+<p style="text-align: center;"><img src="./helpfigures/E6_html_6b4c7ab9.png"/></p>
+<p class="pic_text"><strong>Figure 46. </strong>The procedure to modify the font size of a single-genome plot using shinyChromosome.</p>
+</div>
+
+
+<div id="div6.4">
+<h3>
+<p><strong>6.4 Axis title</strong></p>
+</h3>
+<p class="p_help_English">The &ldquo;Axis title&rdquo; widget on the bottom of the left panel of the &ldquo;Single-genome plot&rdquo; and &ldquo;Two-genome plot&rdquo; menus can be used to tune the axis titles of the plot created using shinyChromosome, including the X-axis title, Y-axis title and the font face of axis titles. Here, we use the example datasets demonstrated in section 4.6.1 to show this function. The default axis titles are modified in <strong>Figure 47</strong>. Finally, we need to click the &ldquo;Go!&rdquo; button to tell shinyChromosome to update the plot.</p>
+<p style="text-align: center;"><img src="./helpfigures/E6_html_561d1926.png"/></p>
+<p class="pic_text"><strong>Figure 47. </strong>The procedure to modify the axis titles of a single-genome plot using shinyChromosome.</p>
+</div>
+
+
+<div id="div6.5">
+<h3>
+<p><strong>6.5 Legend</strong></p>
+</h3>
+<p class="p_help_English">One or more legends can be added to annotate point color, point size, point shape, bar color, heatmap color, etc. By default, no legend would be added to the plot created using shinyChromosome. To add a legend, the users are needed to set the &ldquo;Advanced options&rdquo; under the &ldquo;DataX&rdquo; checkbox. For example, to add a color legend, we need to set the value of the &ldquo;Color legend&rdquo; widget as &ldquo;Show&rdquo; in the &ldquo;Advanced options&rdquo; of the corresponding &ldquo;DataX&rdquo; checkbox (<strong>Figure 48</strong>).</p>
+<p class="p_help_English">Legends can be placed at the right or the bottom of a non-circular whole genome plot. A total of 7 widgets are provided at the bottom of the left panel of the &ldquo;Single-genome plot&rdquo; menu to tune the appearances of the added legends in the generated plot. The meaning of these widgets is shown as follows.</p>
+<p class="p_help_English"><strong>Legend position: </strong>The position to place the legend.</p>
+<p class="p_help_English"><strong>Legend region size: </strong>Percent of legend size relative to the main plotting region. Applicable values are numbers in [0-1].</p>
+<p class="p_help_English"><strong>Intra-spacing: </strong>Intra-spacing between different legends.</p>
+<p class="p_help_English"><strong>Title font size: </strong>The font size of legend title.</p>
+<p class="p_help_English"><strong>Title font face: </strong>The font face of legend title.</p>
+<p class="p_help_English"><strong>Label font size: </strong>The font size of legend tick label.</p>
+<p class="p_help_English"><strong>Label font face: </strong>The font face of legend tick label.</p>
+<p class="p_help_English">Here, we use the input datasets of &ldquo;Example 17&rdquo; displayed in the &ldquo;Gallery&rdquo; menu to demonstrate these widgets (<strong>Figure 48</strong>).</p>
+<p style="text-align: center;"><img src="./helpfigures/E6_html_9a619064.png"/></p>
+<p class="pic_text"><strong>Figure 48. </strong>The procedure to add legend to the bottom of a single-genome plot using shinyChromosome.</p>
+</div>
+
+
+<div id="div6.6">
+<h3>
+<p><strong>6.6 Height and width of different tracks</strong></p>
+</h3>
+<p class="p_help_English">For a single-genome plot, we can modify the height and margin size of each track to tune the size of each track in the generated plot. Here, we use the input datasets in section 4.1 to demonstrate the setting of these options (<strong>Figure 49</strong>).</p>
+<p style="text-align: center;"><img src="./helpfigures/E6_html_eb3708d.png"/></p>
+<p class="pic_text"><strong>Figure 49. </strong>The procedure to modify the height and margin size of each track of a single-genome plot using shinyChromosome.</p>
+</div>
+</div>
+</div>
+
+<div class = "content-right">
+                <h2 class="head">Contents</h2>
+                <p style="line-height: 23px;">
+                    <a href="#div6"><span class="content"> 6. Decorate the appearances of non-circular whole genome plot created by shinyChromosome</span></a>
+                    <br>
+                    &emsp;<a href="#div6.1"><span class="content"> 6.1 Figure size</span></a>
+                    <br>
+                    &emsp;<a href="#div6.2"><span class="content"> 6.2 Figure theme</span></a>
+                    <br>
+                    &emsp;<a href="#div6.3"><span class="content"> 6.3 Font size</span></a>
+                    <br>
+                    &emsp;<a href="#div6.4"><span class="content"> 6.4 Axis title</span></a>
+                    <br>
+                    &emsp;<a href="#div6.5"><span class="content"> 6.5 Legend</span></a>
+                    <br>
+                    &emsp;<a href="#div6.6"><span class="content"> 6.6 Height and width of different tracks</span></a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

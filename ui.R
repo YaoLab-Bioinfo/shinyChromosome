@@ -845,16 +845,116 @@ shinyUI(
       
       tabPanel("Gallery", icon = icon("image", class = NULL, lib = "font-awesome"), includeHTML("www/gallery.html")),
       
+      tabPanel("About", icon = icon("info-circle", class = NULL, lib = "font-awesome"),
+               includeMarkdown("www/About.md")),
+      
       navbarMenu("Help",
                  icon = icon("book", class = NULL, lib = "font-awesome"),
                  tabPanel("Usage and installation", includeMarkdown("README.md")),
                  tabPanel("Input data format", includeMarkdown("In_Data_Format.md")),
-                 tabPanel("User manual", uiOutput("pdfview")),
-                 tabPanel("User manual in Chinese", uiOutput("pdfview1"))
+                 
+                 tabPanel("User manual", 
+                          fluidRow(
+                            column(
+                              width = 8,
+                              conditionalPanel(
+                                condition = "input.helplan == 1",
+                                HTML('<font style="font-size: 25px;font-family: Arial, Helvetica, sans-serif;font-weight: bolder;"><h2><i class="fa-solid fa-play"></i> Section</font>')
+                              ),
+                              conditionalPanel(
+                                condition = "input.helplan == 2",
+                                HTML('<font style="font-size: 25px;font-family: Arial, Helvetica, sans-serif;font-weight: bolder;"><h2><i class="fa-solid fa-play"></i> 章节</font>')
+                              ),
+                              
+                              tags$style(
+                                type='text/css',
+                                "#helpsection div .radio {font-size: 23px;font-weight:100;margin-bottom: -10px;margin-top: 2px; }"
+                              ),
+                              radioButtons(
+                                inputId = "helpsection",
+                                label = NULL,
+                                choices = c(
+                                  "Introduction" = 1, 
+                                  "Use shinyChromosome online or on local computer" = 2,  
+                                  "Creation of non-circular single-genome plot" = 3, 
+                                  "Creation of Non-circular two-genome plot" = 4,
+                                  "Plot options to decorate non-circular whole genome plots" = 5
+                                ),
+                                selected = 1,
+                                width = "100%"
+                              )
+                            ),
+                            column(
+                              width = 4,
+                              conditionalPanel(
+                                condition = "input.helplan == 1",
+                                HTML('<font style="font-size: 25px;font-family: Arial, Helvetica, sans-serif;font-weight: bolder;"><h2><i class="fa-solid fa-play"></i> Language</font>')
+                              ),
+                              conditionalPanel(
+                                condition = "input.helplan == 2",
+                                HTML('<font style="font-size: 25px;font-family: Arial, Helvetica, sans-serif;font-weight: bolder;"><h2><i class="fa-solid fa-play"></i> 语言</font>')
+                              ),
+                              pickerInput(
+                                inputId = "helplan",
+                                label = NULL,
+                                choices = c("English" = 1, "简体中文" = 2),
+                                selected = 1
+                              )
+                            )
+                          ),
+                          
+                        #  tags$div(
+                            conditionalPanel(
+                              condition = "input.helplan == '1'",
+                              conditionalPanel(
+                                condition = "input.helpsection == 1",
+                                shiny::includeHTML("www/helpdocument/help-English1-S12.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 2",
+                                shiny::includeHTML("www/helpdocument/help-English2-S3.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 3",
+                                shiny::includeHTML("www/helpdocument/help-English3-S4.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 4",
+                                shiny::includeHTML("www/helpdocument/help-English4-S5.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 5",
+                                shiny::includeHTML("www/helpdocument/help-English5-S6.html")
+                              )
+                            ),
+                        
+                            conditionalPanel(
+                              condition = "input.helplan == '2'",
+                              conditionalPanel(
+                                condition = "input.helpsection == 1",
+                                shiny::includeHTML("www/helpdocument/Help-Chinese1-S12.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 2",
+                                shiny::includeHTML("www/helpdocument/Help-Chinese2-S3.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 3",
+                                shiny::includeHTML("www/helpdocument/Help-Chinese3-S4.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 4",
+                                shiny::includeHTML("www/helpdocument/Help-Chinese4-S5.html")
+                              ),
+                              conditionalPanel(
+                                condition = "input.helpsection == 5",
+                                shiny::includeHTML("www/helpdocument/Help-Chinese5-S6.html")
+                              )
+                            )
+                       #   )
+                 )
       ),
       
-      tabPanel("About", icon = icon("info-circle", class = NULL, lib = "font-awesome"),
-               includeMarkdown("About.md")),
       
       footer = footerTagList
     )

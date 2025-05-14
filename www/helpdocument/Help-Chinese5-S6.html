@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+    <body>
+        <div class="global-div">
+            <div class = "content-left">
+                <div id="divc6">
+<h2>6. 修改由shinyChromosome绘制的非圆形全基因组图形的外观</h2>
+<p class="p_help_Chinese">在&ldquo;Single-genome plot&rdquo;和&ldquo;Two-genome plot&rdquo;菜单的左侧面板中提供了许多小控件来修改使用shinyChromosome绘制的图的外观，包括图的大小、图的主题、字体大小、坐标轴标题、坐标轴标签和图例等。</p>
+
+
+<div id="divc6.1">
+<h3>6.1 图形大小</h3>
+<p class="p_help_Chinese">用户可以使用&ldquo;Single-genome plot&rdquo;菜单左侧面板底部的&ldquo;Show advanced options&rdquo;小控件下的&ldquo;Adjust plot size&rdquo;小部件调整单个基因组图形的高度和宽度。浏览器中和下载的PDF/SVG格式文件中的图形大小都会受到影响。在这里，我们使用第4.6.1节中演示的示例数据集来展示这此功能。单个基因组图的默认高度和宽度分别为550和750，在图44中修改为250和800。最后，我们需要点击&ldquo;Go！&rdquo;按钮来让shinyChromosome更新所绘制的图形。</p>
+<p style="text-align: center;"><img src="./helpfigures/C6_html_17c89591.png" alt="" width="554" height="430" name="图片 11" border="0" /></p>
+<p class="pic_text">图44. 利用shinyChromosome修改单个基因组图形的高度和宽度的过程。</p>
+                </div>
+
+                <div id="divc6.2">
+<h3>6.2 图的主题</h3>
+<p class="p_help_Chinese">shinyChromosome使用ggplot2作图系统作为引擎绘制单基因组图型和双基因组图形。ggplot2包提供了许多选项来调整使用ggplot2绘制的图形的外观。具有预定义值的一组选项在 ggplot2 中称为图形主题。可以通过单个命令更改使用ggplot2所生成绘图的总体外观。ggthemes是一个R包，它包含数十个不同的主题，用于调整使用ggplot2所绘制的图形外观。ggthemes安装包提供的所有主题都可以在 <a href="https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/"><u>https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/</u></a> 上找到。ggthemes包被用于修饰shinyChromosome绘制的单基因组图形和双基因组图形的外观。在这里，我们使用4.6.1节中演示的示例数据集来展示此功能。单基因组图形的默认图形主题是shinyChromosome中的&ldquo;theme1&rdquo;，在图45中被修改为&ldquo;theme18&rdquo;。最后，我们需要单击&ldquo;Go！&rdquo;按钮让shinyChromosome更新所绘制的图形。</p>
+<p style="text-align: center;"><img src="./helpfigures/C6_html_c9b988f6.png" alt="" width="554" height="404" name="图片 15" border="0" /></p>
+<p class="pic_text">图45. 使用shinyChromosome修改单基因组图形的主题的过程。</p>
+                </div>
+
+                <div id="divc6.3">
+<h3>
+<p class="p_help_Chinese">6.3 字体大小</p>
+</h3>
+<p class="p_help_Chinese">&ldquo;Single-genome plot&rdquo; 和&ldquo;Two-genome plot&rdquo;菜单左侧面板底部的&ldquo;Font size&rdquo;小控件可用于调整使用shinyChromosome绘制的图形中的字体大小，包括坐标轴标题的字体大小和坐标轴刻度标签大小。在这里，我们使用4.6.1节中演示的示例数据集来展示此功能。默认字体大小为16，在图46中被修改为30。最后，我们需要单击&ldquo;Go！&rdquo;按钮让shinyChromosome更新所绘制的图形。</p>
+<p style="text-align: center;"><img src="./helpfigures/C6_html_6b4c7ab9.png" alt="" width="554" height="459" name="图片 16" border="0" /></p>
+<p class="pic_text">图46. 使用shinyChromosome修改单基因组图形的字体大小的过程。</p>
+                </div>
+
+                <div id="divc6.4">
+<h3>
+<p class="p_help_Chinese">6.4 坐标轴标题</p>
+</h3>
+<p class="p_help_Chinese">&ldquo;Single-genome plot&rdquo;和&ldquo;Two-genome plot&rdquo;菜单左侧面板底部的&ldquo;Axis title&rdquo;小控件可用于调整使用shinyChromosome绘制的图的坐标轴标题，包括X轴标题、Y轴标题和坐标轴标题的字体。在这里，我们使用第4.6.1节中演示的示例数据集来展示此功能。默认的坐标轴标题在图47中进行了修改。最后，我们需要点击&ldquo;Go！&rdquo;按钮让shinyChromosome更新所绘制的图形。</p>
+<p style="text-align: center;"><img src="./helpfigures/C6_html_561d1926.png" alt="" width="554" height="438" name="图片 17" border="0" /></p>
+<p class="pic_text">图47. 利用shinyChromosome来修改单基因组图形的坐标轴标题的过程。</p>
+                </div>
+
+                <div id="divc6.5">
+<h3>
+<p class="p_help_Chinese">6.5 图例</p>
+</h3>
+<p class="p_help_Chinese">可以添加一个或多个图例来注释点的颜色、点的大小、点的形状、柱状图的颜色、热图的颜色等。默认情况下，不会将图例添加到使用shinyChromosome绘制的图形中。要添加图例，需要用户在&ldquo;DataX&rdquo;复选框下设置&ldquo;Advanced options&rdquo;。例如，要添加颜色图例，我们需要在相应的&ldquo;DataX&rdquo;复选框的&ldquo;Advanced options&rdquo;中将&ldquo;Color legend&rdquo;小控件的值设置为&ldquo;Show&rdquo;(图48)。</p>
+<p class="p_help_Chinese">图例可以放在非圆形全基因组图形的右侧或底部。在&ldquo;Single-genome plot&rdquo;菜单的左侧面板底部总共提供了7个小控件，用于调整生成的图中所添加的图例的外观。这些小控件的含义如下所示。</p>
+<p class="p_help_Chinese">Legend position：放置图例的位置。</p>
+<p class="p_help_Chinese">Legend region size：图例大小相对于主画图区域的百分比。适用值为[0-1]中的数字。</p>
+<p class="p_help_Chinese">Intra-spacing：不同图例之间的内部间距。</p>
+<p class="p_help_Chinese">Title font size：图例标题的字体大小。</p>
+<p class="p_help_Chinese">Title font face：图例标题的字体。</p>
+<p class="p_help_Chinese">Label font size：图例刻度标签的字体大小。</p>
+<p class="p_help_Chinese">Label font face：图例刻度标签的字体。</p>
+<p class="p_help_Chinese">在这里，我们使用&ldquo;Gallery&rdquo;菜单中显示的&ldquo;Example 17&rdquo;的输入数据集来展示这些小控件(图48)。</p>
+<p style="text-align: center;"><img src="./helpfigures/C6_html_9a619064.png" alt="" width="554" height="432" name="图片 24" border="0" /></p>
+<p class="pic_text">图48. 使用shinyChromosome将图例添加到单个基因组图形底部的过程。</p>
+                </div>
+
+                <div id="divc6.6">
+<h3>
+<p class="p_help_Chinese">6.6 不同轨道的高度和宽度</p>
+</h3>
+<p class="p_help_Chinese">对于单基因组图形，我们可以修改每个轨道的高度和边距大小，以调整生成的图中每个轨道的大小。在这里，我们使用第4.1节中的输入数据集来展示这些选项的设置(图49)。</p>
+<p style="text-align: center;"><img src="./helpfigures/C6_html_eb3708d.png" alt="" width="554" height="454" name="图片 27" border="0" /></p>
+<p class="pic_text">图49. 使用shinyChromosome修改单基因组图形的每个轨道的高度和边距大小的过程。</p>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class = "content-right">
+                <h2 class="head_zh">目录</h2>
+                <p style="line-height: 23px;">
+                    <a href="#divc3"><span class="content">6. 修改由shinyChromosome绘制的非圆形全基因组图形的外观</span></a>
+                    <br>
+                    &emsp;<a href="#divc6.1"><span class="content">6.1 图形大小</span></a>
+                    <br>
+                    &emsp;<a href="#divc6.2"><span class="content">6.2 图的主题</span></a>
+                    <br>
+                    &emsp;<a href="#divc6.3"><span class="content">6.3 字体大小</span></a>
+                    <br>
+                    &emsp;<a href="#divc6.4"><span class="content">6.4 坐标轴标题</span></a>
+                    <br>
+                    &emsp;<a href="#divc6.5"><span class="content">6.5 图例</span></a>
+                    <br>
+                    &emsp;<a href="#divc6.6"><span class="content">6.6 不同轨道的高度和宽度</span></a>
+                </p>
+            </div>
+          </div>
+                
+</body>
+</html>

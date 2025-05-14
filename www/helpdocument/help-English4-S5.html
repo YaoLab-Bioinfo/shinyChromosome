@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+    <body>
+        <div class="global-div">
+            <div class = "content-left">
+                <div id="div5">
+                    <h2><strong>5. Creation of Non-circular two-genome plot using shinyChromosome</strong></h2>
+<p class="p_help_English"><span>To create a non-circular two-genome plot, you need to use the &ldquo;Two-genome plot&rdquo; menu of the shinyChromosome application. </span><span><span><strong>Three datasets are required to create a two-genome plot.</strong></span></span><span><span>The first dataset</span></span><span> defines the genome aligned along the horizontal axis. </span><span><span>The second dataset</span></span><span> defines the genome aligned along the vertical axis. </span><span><span>The third dataset</span></span><span> is the main dataset used to create the two-genome plot. In the following section, we demonstrate all the essential steps to create a non-circular two-genome plot using shinyChromosome with example datasets.</span></p>
+
+
+<div id="div5.1">
+<h3><strong>5.1 Essential steps to create a non-circular two-genome plot</strong></h3>
+
+<div id="div5.1.1">
+<h4><strong>Step 1. Prepare and upload the input file of the genome data aligned along the horizontal axis</strong></h4>
+<p class="p_help_English"><span>The format of the genome data is the same as the genome data illustrated in section 4.1. An example dataset is available at </span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt</u></span></span></a><span>. This example dataset is used to create the plot in </span><span><strong>Figure 39</strong></span><span>. This input file should be uploaded using the &ldquo;Upload genome1 data&rdquo; widget in the left panel of the &ldquo;Two-genome plot&rdquo; menu.</span></p>
+</div>
+
+<div id="div5.1.2">
+<h4><strong>Step 2. Prepare and upload the input file of the genome data aligned along the vertical axis</strong></h4>
+<p class="p_help_English"><span>The format of the genome data is the same as the genome data illustrated in section 4.1. An example dataset is available at </span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt</u></span></span></a><span>. This example dataset is used to create the plot in </span><span><strong>Figure 39</strong></span><span>. The input files used in Step 1 and Step 2 can either be the same file or different files. This input file should be uploaded using the &ldquo;Upload genome2 data&rdquo; widget in the left panel of the &ldquo;Two-genome plot&rdquo; menu.</span></p>
+</div>
+
+<div id="div5.1.3">
+<h4><strong>Step 3. Prepare and upload the main dataset</strong></h4>
+<p class="p_help_English"><span>The detailed file format of the main dataset used to create a &ldquo;Two-genome plot&rdquo; is described in the &ldquo;Input data format&rdquo; menu of the shinyChromosome application. Here, we use the example dataset &ldquo;point_gradual.txt&rdquo; (</span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_gradual.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_gradual.txt</u></span></span></a><span>) to create the plot in </span><span><strong>Figure 39. </strong></span></p>
+</div>
+
+<div id="div5.1.4">
+<h4><strong>Step 4. Set the plot type for the main dataset</strong></h4>
+<p class="p_help_English"><span>Here, the plot type is set as &ldquo;point_gradual&rdquo; (</span><span><strong>Figure 39</strong></span><span>).</span></p>
+</div>
+
+<div id="div5.1.5">
+<h4><strong>Step 5. Click the &ldquo;Go!&rdquo; button to make the plot</strong></h4>
+<p class="p_help_English"><span>After all the input datasets has been successfully uploaded to the shinyChromosome application, we need to click the &ldquo;Go!&rdquo; button at the bottom of the left panel of the &ldquo;Two-genome plot&rdquo; menu to tell shinyChromosome to make the plot (</span><span><strong>Figure 39</strong></span><span>). The plot shown in the main panel of </span><span><strong>Figure 39</strong></span><span> is the plot generated using the input datasets uploaded in Step 1, Step 2 and Step 3. </span><span><span><strong>By default, random color or predefined colors would be used by shinyChromosome when generating the plot. </strong></span></span><span><span><strong>Remember to click the &ldquo;Go!&rdquo; button to update the plot whenever you modify any option or input file through the diverse widgets provided in the left panel.</strong></span></span></p>
+<p style="text-align: center;"><img src="./helpfigures/E5_html_dbbb90e9.png"/></p>
+<p class="pic_text"><span><strong>Figure 39. </strong></span><span>Essential steps to create a two-genome plot using shinyChromosome.</span></p>
+</div>
+</div>
+
+
+<div id="div5.2">
+<h3>
+<p><span><span><strong>5.2 Create different types of two-genome plot using shinyChromosome</strong></span></span></p>
+</h3>
+<p class="p_help_English"><span>A total of 5 different types of plot can be created using shinyChromosome, including point_gradual, point_discrete, segment, rect_gradual and rect_discrete. To create a two-genome plot, at least three input data files are needed. The detailed format of input files to make a two-genome plot is demonstrated in the &ldquo;Input data format&rdquo; menu (under the &ldquo;Help&rdquo; menu) of the shinyChromosome application. In this section, we will show the key parameters to make different types of two-genome plot using the graphical interface of shinyChromosome with example input datasets. The two example genome data files used in this section is the same as the file used in section 5.1 (</span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt</u></span></span></a><span>, </span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt</u></span></span></a><span>).</span></p>
+
+
+<div id="div5.2.1">
+<h4><strong>
+5.2.1 Plot point_gradual
+</strong></h4>
+<p class="p_help_English"><span>The input dataset should contain 5 columns.</span></p>
+<p class="p_help_English"><span>1st column: chromosome ID of genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>2nd column: chromosome position in genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>3rd column: chromosome ID of genome along the vertical axis.</span></p>
+<p class="p_help_English"><span>4th column: chromosome position in genome along the vertical axis.</span></p>
+<p class="p_help_English"><span>5th column: a numeric vector defining the value of each point.</span></p>
+<p class="p_help_English"><span>The procedure to plot point_gradual using shinyChromosome is demonstrated in </span><span><strong>Figure 39</strong></span><span>.</span></p>
+</div>
+
+<div id="div5.2.2">
+<h4><strong>
+5.2.2 Plot point_discrete
+</strong></h4>
+<p class="p_help_English"><span>The input dataset should contain 5 columns.</span></p>
+<p class="p_help_English"><span>1st column: chromosome ID of genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>2nd column: chromosome position in genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>3rd column: chromosome ID of genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>4th column: chromosome position in genome along the vertical axis.</span></p>
+<p class="p_help_English"><span>5th column: a character vector defining the category of each point.</span></p>
+<p class="p_help_English"><span>Here, we use the example dataset &ldquo;point_discrete.txt&rdquo; (</span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_discrete.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_discrete.txt</u></span></span></a><span>) provided in the source code of the shinyChromosome application. The procedure to plot point_discrete using shinyChromosome is demonstrated in </span><span><strong>Figure 40</strong></span><span>.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E5_html_cc5472bc.png"/></p>
+<p class="pic_text"><span><strong>Figure 40. </strong></span><span>The procedure to plot point_discrete using shinyChromosome.</span></p>
+</div>
+
+<div id="div5.2.3">
+<h4><strong>
+5.2.3 Plot segment
+</strong></h4>
+<p class="p_help_English"><span>The dataset should contain &gt;=6 columns. In the simplest situation, the dataset should contain 6 columns with fixed order.</span></p>
+<p class="p_help_English"><span>1st column: chromosome ID of genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>2nd column: X-axis start coordinate of segments.</span></p>
+<p class="p_help_English"><span>3rd column: X-axis end coordinate of segments.</span></p>
+<p class="p_help_English"><span>4th column: chromosome ID of genome along the vertical axis.</span></p>
+<p class="p_help_English"><span>5th column: Y-axis start coordinate of segments.</span></p>
+<p class="p_help_English"><span>6th column: Y-axis end coordinate of segments.</span></p>
+<p class="p_help_English"><span>Here, we use the example dataset &ldquo;segment.txt&rdquo; (</span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/segment.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/segment.txt</u></span></span></a><span>) provided in the source code of the shinyChromosome application. The procedure to plot segment using shinyChromosome is demonstrated in </span><span><strong>Figure 41</strong></span><span>.</span></p>
+<p style="text-align: center;"><img src="./helpfigures/E5_html_c8f69543.png"/></p>
+<p class="pic_text"><span><strong>Figure 41. </strong></span><span>The procedure to plot segment using shinyChromosome.</span></p>
+</div>
+
+<div id="div5.2.4">
+<h4><strong>5.2.4 Plot rect_gradual</strong></h4>
+<p class="p_help_English"><span>The dataset should contain 7 columns with fixed order.</span></p>
+<p class="p_help_English"><span>1st column: chromosome ID of genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>2nd column: X-axis start coordinate of rects.</span></p>
+<p class="p_help_English"><span>3rd column: X-axis end coordinate of rects.</span></p>
+<p class="p_help_English"><span>4th column: chromosome ID of genome along the vertical axis.</span></p>
+<p class="p_help_English"><span>5th column: Y-axis start coordinate of rects.</span></p>
+<p class="p_help_English"><span>6th column: Y-axis end coordinate of rects.</span></p>
+<p class="p_help_English"><span>7th column: a numeric vector defining the value of each rectangle.</span></p>
+<p class="p_help_English"><span>Here, we use the example dataset &ldquo;rect_gradual.txt&rdquo; (</span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_gradual.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_gradual.txt</u></span></span></a><span>) provided in the source code of the shinyChromosome application. The procedure to plot rect_gradual using shinyChromosome is demonstrated in </span><span><strong>Figure 42</strong></span><span>.</span></p>
+
+<p style="text-align: center;"><img src="./helpfigures/E5_html_b8e8804e.png"/></p>
+<p class="pic_text"><span><strong>Figure 42. </strong></span><span>The procedure to plot rect_gradual using shinyChromosome.</span></p>
+</div>
+
+<div id="div5.2.5">
+<h4><strong>5.2.5 Plot rect_discrete</strong></h4>
+<p class="p_help_English"><span>The dataset should contain 7 columns with fixed order.</span></p>
+<p class="p_help_English"><span>1st column: chromosome ID of genome along the horizontal axis.</span></p>
+<p class="p_help_English"><span>2nd column: X-axis start coordinate of rects.</span></p>
+<p class="p_help_English"><span>3rd column: X-axis end coordinate of rects.</span></p>
+<p class="p_help_English"><span>4th column: chromosome ID of genome along the vertical axis.</span></p>
+<p class="p_help_English"><span>5th column: Y-axis start coordinate of rects.</span></p>
+<p class="p_help_English"><span>6th column: Y-axis end coordinate of rects.</span></p>
+<p class="p_help_English"><span>7th column: a character vector defining the category of each rectangle.</span></p>
+<p class="p_help_English"><span>Here, we use the example dataset &ldquo;rect_discrete.txt&rdquo; (</span><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_discrete.txt"><span><span><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_discrete.txt</u></span></span></a><span>) provided in the source code of the shinyChromosome application. The procedure to plot rect_discrete using shinyChromosome is demonstrated in </span><span><strong>Figure 43</strong></span><span>.</span></p>
+
+<p style="text-align: center;"><img src="./helpfigures/E5_html_40f107d7.png"/></p>
+<p class="pic_text"><span><strong>Figure 43. </strong></span><span>The procedure to plot rect_discrete using shinyChromosome.</span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div class = "content-right">
+                <h2 class="head_zh">Contents</h2>
+                <p style="line-height: 23px;">
+                    <a href="#div5"><span class="content">5. Creation of Non-circular two-genome plot using shinyChromosome</span></a>
+                    <br>
+                    &emsp;<a href="#div5.1"><span class="content">5.1 Essential steps to create a non-circular two-genome plot</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.1.1"><span class="content">Step 1. Prepare and upload the input file of the genome data aligned along the horizontal axis</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.1.2"><span class="content">Step 2. Prepare and upload the input file of the genome data aligned along the vertical axis</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.1.3"><span class="content">Step 3. Prepare and upload the main dataset</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.1.4"><span class="content">Step 4. Set the plot type for the main dataset</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.1.5"><span class="content">Step 5. Click the “Go!” button to make the plot</span></a>
+                    <br>
+                    &emsp;<a href="#div5.2"><span class="content">5.2 Create different types of two-genome plot using shinyChromosome</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.2.1"><span class="content">5.2.1 Plot point_gradual</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.2.2"><span class="content">5.2.2 Plot point_discrete</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.2.3"><span class="content">5.2.3 Plot segment</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.2.4"><span class="content">5.2.4 Plot rect_gradual</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div5.2.5"><span class="content">5.2.5 Plot rect_discrete</span></a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

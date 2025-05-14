@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+  
+                
+    <body>
+      <div class="global-div">
+        <div class = "content-left">
+          
+<div id="divc4">
+<h2>4. 利用 shinyChromosome 绘制非圆形的单基因组图形</h2>
+<p class="p_help_Chinese">用户可以使用shinyChromosome 应用程序的“Single-genome plot”菜单，来创建非圆形的单基因组图形。制作单个基因组图时，必须输入定义基因组中每条染色体长度的文件，以及1-10个沿基因组排布的输入数据。在本节中，我们将演示使用shinyChromosome 中的示例数据集，创建非圆形单基因组图的所有基本步骤。</p>
+
+
+<div id="divc4.1">
+<h3>4.1 创建非圆形单基因组图形的基本步骤</h3>
+
+<div id="divc4.1.1">
+<h4>步骤 1. 准备并上传定义基因组长度的输入文件</h4>
+<p class="p_help_Chinese">基因组数据是必须输入的文件，它定义了非圆形图的框架（示例数据集可在 <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> 中获得）。基因组数据是一个包含两列的文本文件 （ 图 11 ）。第一列是染色体编号，第二列是染色体长度。基因组数据的详细格式在shinyChromosome应用程序的 “Input data format” 菜单（在 “Help” 菜单下）中有说明。“Input data format” 菜单中的内容也可以在 GitHub 上找到 （ <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/In_Data_Format.md"> https://github.com/venyao/shinyChromosome/blob/master/In_Data_Format.md </a> </u> ）。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_47dd50cb.png" alt="" width="168" height="227" name="图片 42" border="0" /></p>
+<p class="pic_text">图 11. 定义基因组长度的输入文件的格式。</p>
+<p class="p_help_Chinese">现在，我们已经准备好了这个文件并将它存储在磁盘上（例如Windows上的“E：/”）。接下来，我们需要通过shinyChromosome应用程序中“Single-genome plot”菜单的左侧面板上“Upload genome data”标志下的“Browse...”小部件，将此文件上传到shinyChromosome应用程序中 （ 图 12 ）。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_141c45b2.png" alt="" width="546" height="478" name="图片 45" border="0" /></p>
+<p class="pic_text">图 12.利用shinyChromosome创建单个基因组图形的基本步骤。文件“genome_data.txt”被上传到基因组 data小部件中。文件“point.txt”上传到“Data1”轨道，而文件“bar.txt”上传到“Data2”轨道。</p>
+</div>
+
+<div id="divc4.1.2">
+<h4>步骤 2.上传沿着所有染色体排布的其它数据集</h4>
+<p class="p_help_Chinese">用户可以上传1-10个数据集，沿着 步骤 1 中上传的基因组的所有染色体排布。“Single-genome plot”菜单左侧面板上的十个“DataX”（Data1到Data10）复选框就是为了这个目的而提供的（ 图 12）。在这里，我们使用两个输入数据集（ <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt </a> </u> 和 <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt </a> </u> ） 来演示这个过程。用来创建不同类型图形的输入文件的详细格式在shinyChromosome应用程序的“Input data format”子菜单中有说明（ 图 6 ）。首先，我们准备了两个文件并将它们存储在磁盘上（例如，windows上的“E：/”）。要将文件“point.txt”上传到Data1对应的轨道，请选中“Data1”复选框，选择“Upload input data”单选按钮，然后点击“Browse...”小部件从磁盘上传入“point.txt”（ 图 12 ）。要将文件“bar.txt”上传到Data2对应的轨道，请选中“Data2”复选框，选择“Upload input data”单选按钮，然后点击“Browse...”小部件从磁盘上传入“bar.txt”。</p>
+</div>
+
+<div id="divc4.1.3">
+<h4>步骤 3.为每个输入数据集设置轨道位置和绘图类型</h4>
+<p class="p_help_Chinese">默认情况下，每个输入数据集的轨道位置为“track1”，每个输入数据集的绘图类型为“point”。因为我们希望使用文件“bar.txt”创建条形图，所以我们需要将文件“bar.txt”对应的轨道位置设置为“track2”，并将输入文件“bar.txt”的绘图类型设置为“bar”（ 图 12 ）。</p>
+</div>
+
+<div id="divc4.1.4">
+<h4>步骤 4.点击“ Go！” 按钮绘制图形</h4>
+<p class="p_help_Chinese">所有输入数据集成功上传到shinyChromosome应用程序并正确设置轨道位置和绘图类型后，我们需要单击“Single-genome plot” 菜单左面板底部的“Go！”按钮，告诉shinyChromosome去绘制图形（ 图 12 ）。图 12 主面板中显示的图是使用步骤1和步骤2中上传的输入数据集生成的图。默认情况下，在绘制图形时， shinyChromosome 将使用随机颜色或者预定义的颜色。</p>
+</div>
+</div>
+
+
+<div id="divc4.2">
+<h3>4.2 关闭用于绘制单个基因组图的输入数据集</h3>
+<p class="p_help_Chinese">对于“Single-genome plot”菜单左侧面板上的每个“DataX”复选框，我们提供两个单选按钮选项：“Disable data input”和“Upload input data”。默认情况下， “Disable data input”单选按钮是被选中的。“Upload input data”用于上传输入数据集，而“Disable data input”用于关闭已上传的输入数据集。</p>
+<p class="p_help_Chinese">在第4.1节中，我们分别将输入文件“point.txt”和“bar.txt”上传到“Data1”和“Data2”。“point.txt”文件用于创建 图 12 中的散点图，而“bar.txt”用于创建 图 12 中的条形图。如果我们想从 图 12 中删除散点图并且只保留条形图，我们可以选中“Data1”复选框下的“Disable data input”单选按钮，然后单击左面板底部的“Go！”按钮，告诉shinyChromosome更新绘图结果。这个过程如 图 13 所示。这样，shinyChromosome就不会使用“point.txt”文件，只会创建条形图， 图 13 所示。当您通过左面板中提供的各种小部件修改任何选项或输入文件时，记得点击“ 走！ 按钮来更新绘图结果。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_e76b165c.png" alt="" width="520" height="467" name="图片 46" border="0" /></p>
+<p class="pic_text">图 13.关闭用于绘制单个基因组图的某个输入数据集的过程</p>
+</div>
+
+
+<div id="divc4.3">
+<h3>4.3 替换用于绘制单个基因组图的输入数据集</h3>
+<p class="p_help_Chinese">单个基因组图形通常由分布在不同轨道上的几种基本类型的图形组成。每个图形都是使用用户上传的输入数据集创建的。有时，我们可能需要替换其中一个或多个输入文件，这样我们就可以更新单个基因组图形的某些组成部分，而无需重新创建整个图形。例如，我们想用一个新的输入文件“rect_discrete.txt”来替换上传到“Data2”的“bar.txt”来创建离散型矩形图。为了达到这个目的，我们可以使用“Data2”中“Upload input data”单选按钮下的“Browse...”小部件将“rect_discrete.txt”上传到“Data2”。这样，“Data2”中的“bar.txt”将替换为“rect_discrete.txt”。同时，我们需要将“Data2”的绘图类型设置为“rect_discrete”。最后，我们需要点击左面板底部的“Go！”按钮，告诉shinyChromosome更新相应的绘图结果。这个过程如 图 14 所示。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_27e4676d.png" alt="" width="534" height="544" name="图片 49" border="0" /></p>
+<p class="pic_text">图 14. 替换用于绘制单个基因组图形的某个输入数据集的过程。</p>
+</div>
+
+
+<div id="divc4.4">
+<h3> 4.4 以 PDF 或 SVG 格式下载创建的单个基因组图形</h3>
+<p class="p_help_Chinese">生成单个基因组图形后，用户可以使用“Single-genome plot”菜单主面板上方的小部件“Download PDF-file”和“Download SVG-file”下载PDF或SVG格式的绘图结果( 图 15 )。默认情况下，下载的两个文件分别命名为“Visualization_1.pdf”和“Visualization_1.svg”。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_8f8ee2c3.png" alt="" width="554" height="434" name="图片 50" border="0" /></p>
+<p class="pic_text">图 15 . 下载的PDF文件“Visualization_1.pdf”可以在Adobe Acrobat中打开，下载的SVG文件“Visualization_1.svg”可以在Google Chrome浏览器中打开。</p>
+</div>
+
+
+<div id="divc4.5">
+<h3> 4.5 下载 R 脚本和用户上传的输入数据集，以重建单个基因组图形</h3>
+<p class="p_help_Chinese"> 一些用户可能已经注意到，当创建单个基因组图形时，在“Single-genome plot”菜单的主面板中生成的图形顶部提供了一个名为“Download the R scripts and data files to reproduce the plot”的下载小部件 ( 图 16 )。单击此按钮，将会以zip文件形式下载所有用户上传的输入数据集和两个R脚本。默认情况下，下载的zip文件被命名为“scripts_data_1.zip”。下载的R脚本和用户上传的输入数据集可以在shinyChromosome应用程序之外使用，以重建使用shinyChromosome图形界面生成的图形。下载的R脚本应该在R环境中使用。下载的R脚本可以与用户分析流程中的其他脚本一起使用。下载的R脚本可以被循环使用来生成很多类型的图形，只需要修改输入数据文件即可。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_962bd65b.png" alt="" width="554" height="444" name="图片 53" border="0" /></p>
+<p class="pic_text">图 16 . 下载R脚本和用户上传的输入文件来重建绘图结果的小部件。</p>
+<p class="p_help_Chinese">要使用“scripts_data_1.zip”文件, 请将该文件解压缩到计算机中的一个目录，例如“E:/”。然后使用RStudio打开R环境。R脚本 “Script_1.R”是在RStudio中用来绘制图形的主要R脚本。磁盘中 “Script_1.R” 脚本的路径通常与RStudio默认的工作目录不同。我们需要将它们设置为相同的目录。在本示例中，因为R脚本和用户上传的输入数据集被解压缩到目录“E:/”中，所以我们通过编辑RStudio中的“Script_1.R”脚本将RStudio的工作目录也设置为“E:/” ( 图 17 )。最后，运行编辑后的“Script_1.R”脚本中的所有代码，在目录“E:/”中将生成一个名为“Visualization_1.pdf”的PDF文件。生成的“Visualization_1.pdf”文件的内容与 图 16 中使用shinyChromosome的图形界面生成的图形是一样的。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_aeda5169.png" alt="" width="554" height="414" name="图片 6" border="0" /></p>
+<p class="pic_text">图 17 . 打开并编辑脚本，如红色框中所示。然后在RStudio中运行修改后的“Script_1.R”脚本中的所有代码，以重建单个基因组图形。</p>
+</div>
+
+
+<div id="divc4.6">
+<h3> 4.6 利用 shinyChromosome 绘制不同类型的单基因组图形</h3>
+<p class="p_help_Chinese">使用shinyChromosome可以创建12种不同类型的图形，包括point, line, bar, rect_gradual, rect_discrete, heatmap_gradual, heatmap_discrete, text, segment, vertical_line, horizontal_line 和 ideogram。要创建单个基因组图形，至少需要两个输入数据文件，一个是定义基因组长度的基因组数据文件，另一个是沿基因组显示的染色体数据集。定义基因组长度的文件的格式见第4.1节。在shinyChromosome应用程序的“Input data format”菜单（在“Help”菜单下）中展示了用于绘制不同类型单基因组图形的输入文件的详细格式。在这一节中，我们将展示使用shinyChromosome图形界面和示例输入数据集绘制不同类型单基因组图形的关键参数。本节中使用的定义基因组长度的输入文件与第4.1节中使用的文件是一样的 ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> )。</p>
+
+<div id="divc4.6.1">
+<h4> 4.6.1 绘制点图</h4>
+<p class="p_help_Chinese">利用shinyChromosome绘制点图需要两个输入文件：基因组数据文件和定义每个点的基因组位置和数值的输入文件。绘制点的最基本数据集应该包含3列：染色体ID、基因组位置和数值。每个基因组的位置用一个点来表示。在这里，我们使用shinyChromosome源代码中提供的示例文件 “genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “point.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt </a> </u> ) 来演示使用shinyChromosome绘制点图的过程( 图 18 )。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_3cfd9a59.png" alt="" width="554" height="451" name="图片 56" border="0" /></p>
+<p class="pic_text">图 18. 使用shinyChromosome绘制点图的过程。</p>
+</div>
+
+<div id="divc4.6.2">
+<h4> 4.6.2 绘制线形图</h4>
+<p class="p_help_Chinese">利用shinyChromosome绘制线性图需要两个输入文件：基因组数据文件和定义每个点的基因组位置和值的输入文件，所有的点连接起来就成了一条线。绘制直线最基本的数据集应包含3列：染色体ID、基因组位置和数值。在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “line.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/line.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/line.txt </a> </u> ) 来演示使用shinyChromosome绘制线形图的过程( 图 19 )。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_8319991.png" alt="" width="554" height="448" name="图片 55" border="0" /></p>
+<p class="pic_text">图 19. 使用shinyChromosome绘制线形图的过程。</p>
+</div>
+<div id="divc4.6.3">
+<h4> 4.6.3 绘制柱状图</h4>
+<p class="p_help_Chinese">利用shinyChromosome绘制柱状图需要两个输入文件：基因组数据文件和定义每个基因组区间的位置和值的输入文件。绘制柱状图最基本的数据集应该包含4列：染色体ID、基因组区间的起始坐标、基因组区间的结束坐标和不同柱子的高度。在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “bar.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt </a> </u> ) 来演示使用shinyChromosome绘制柱状图的过程 ( 图 20 )。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_da04ff2c.png" alt="" width="554" height="454" name="图片 57" border="0" /></p>
+<p class="pic_text">图 20. 使用shinyChromosome绘制柱状图的过程。</p>
+</div>
+
+<div id="divc4.6.4">
+<h4> 4.6.4 绘制渐变型矩形图</h4>
+<p class="p_help_Chinese">利用shinyChromosome绘制渐变型矩形图需要两个输入文件：基因组数据文件和定义每个基因组区间的位置和值的输入文件。绘制渐变型矩形图最基本的数据集应该包含4列：染色体ID、基因组区间的起始坐标、基因组区间的结束坐标和每个矩形的值。第4列应该是表示连续变量的数值向量。在这里，我们使用shinyChromosome源代码中提供的示例文件 “genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “rect_gradual.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_gradual.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_gradual.txt </a> </u> ) 来演示使用shinyChromosome绘制渐变型矩形图的过程 ( 图 21 )。请注意，要将“Image type”设置为“Separated chromosomes”来分割12条染色体。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_73134710.png" alt="" width="554" height="453" name="图片 12" border="0" /></p>
+<p class="pic_text">图 21. 使用shinyChromosome绘制渐变型矩形图的过程。</p>
+</div>
+
+<div id="divc4.6.5">
+<h4> 4.6.5 绘制离散型矩形图</h4>
+<p class="p_help_Chinese">利用shinyChromosome绘制离散型矩形图需要两个输入文件：基因组数据文件和定义每个基因组区间的位置和值的输入文件。绘制离散型矩形图最基本的数据集应该包含4列：染色体ID、基因组区间的起始坐标、基因组区间的结束坐标和每个矩形的值。第四列应该是表示离散变量的字符向量。在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “rect_discrete.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_discrete.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_discrete.txt </a> </u> ) 来演示使用shinyChromosome绘制离散型矩形图的过程 ( 图 22 )。请注意，要将“Image type”设置为“Separated chromosomes”来分割水稻基因组的12条染色体。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_a9859cca.png" alt="" width="554" height="457" name="图片 26" border="0" /></p>
+<p class="pic_text">图 22. 使用shinyChromosome绘制离散型矩形图的过程。</p>
+</div>
+
+<div id="divc4.6.6">
+<h4> 4.6.6 绘制渐变型热图</h4>
+<p class="p_help_Chinese">利用shinychromosome制作渐变型热图，我们需要两个输入文件，基因组数据文件和定义每个基因组区域的位置和值的输入文件，每个基因组区域作为热图的一个单元显示。绘制渐变型热图最基本的数据集应至少包含4列。</p>
+<ul>
+<li>
+<p class="p_help_Chinese">渐变型热图的1-3列数据是染色体ID、基因组区域的起始坐标和基因组区域的结束坐标。</p>
+</li>
+<li>
+<p class="p_help_Chinese">除前三列外，其他列应为表示连续变量的数值向量。</p>
+</li>
+</ul>
+<p class="p_help_Chinese">在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “heatmap_gradual.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_gradual.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_gradual.txt </a> </u> ) 来演示使用shinyChromosome绘制渐变型热图的过程( 图 23 )。请注意，要将“Image type”设置为“Separated chromosomes”来分割水稻基因组的12条染色体。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_b435006b.png" alt="" width="554" height="439" name="图片 3" border="0" /></p>
+<p class="pic_text">图 23. 使用shinyChromosome绘制渐变型热图的过程。</p>
+</div>
+
+<div id="divc4.6.7">
+<h4> 4.6.7 绘制离散型热图</h4>
+<p class="p_help_Chinese">利用shinyChromosome制作离散型热图，我们需要两个输入文件：基因组数据文件和定义每个基因组区域的位置和值的输入文件，每个基因组区域作为热图的一个单元来显示。绘制离散热图的最基本数据集应至少包含4列。</p>
+<ul>
+<li>
+<p class="p_help_Chinese">离散型热图的1-3列数据是染色体ID、基因组区域的起始坐标和基因组区域的结束坐标。</p>
+</li>
+<li>
+<p class="p_help_Chinese">除前三列外，其他列应为表示不同类别的字符向量。</p>
+</li>
+</ul>
+<p class="p_help_Chinese">在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “heatmap_discrete.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_discrete.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_discrete.txt </a> </u> ) 来演示使用shinyChromosome绘制离散型热图的过程 ( 图 24 )。请注意，要将“Image type”设置为“Separated chromosomes”来分割水稻基因组的12条染色体。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_1d8738ee.png" alt="" width="554" height="414" name="图片 32" border="0" /></p>
+<p class="pic_text">图 24. 使用shinyChromosome绘制离散型热图的过程。</p>
+</div>
+
+<div id="divc4.6.8">
+<h4> 4.6.8 绘制 text</h4>
+<p class="p_help_Chinese">要使用shinyChromosome绘制文本，我们需要两个输入文件，基因组数据文件和定义要沿基因组显示的文本位置的输入文件。绘制文本最基本的数据集应包含4列。</p>
+<ul>
+<li>
+<p class="p_help_Chinese">第1-3列数据是染色体ID、X轴坐标和Y轴坐标。</p>
+</li>
+<li>
+<p class="p_help_Chinese">最后一列应该是表示文本的字符向量。</p>
+</li>
+</ul>
+<p class="p_help_Chinese"><a name="_Hlk4590158"></a> 在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “text.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/text.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/text.txt </a> </u> ) 来演示使用shinyChromosome绘制文本图的过程( 图 25 )。请注意，一些高级选项已经修改，如 图 25 所示。并且，要将“Image type”设置为“Separated chromosomes”来分割水稻基因组的12条染色体。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_19f1a65e.png" alt="" width="554" height="454" name="图片 33" border="0" /></p>
+<p class="pic_text">图 25. 使用shinyChromosome绘制文本图的过程。</p>
+</div>
+
+<div id="divc4.6.9">
+<h4> 4.6.9 绘制线段图</h4>
+<p class="p_help_Chinese">使用shinychromosome绘制线段图，我们需要两个输入文件，即基因组数据文件和定义沿基因组显示的线段的开始和结束位置的输入文件。绘制线段图最基本的数据集应包含5列。</p>
+<ul>
+<li>
+<p class="p_help_Chinese">第1列包含每个片段的染色体ID。</p>
+</li>
+<li>
+<p class="p_help_Chinese">第2-3列和第4-5列分别代表片段两端的位置。</p>
+</li>
+</ul>
+<p class="p_help_Chinese">在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “segment.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/segment.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/segment.txt </a> </u> ) 来演示使用shinyChromosome绘制线段图的过程( 图 26 )。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_c2923e3e.png" alt="" width="554" height="436" name="图片 36" border="0" /></p>
+<p class="pic_text">图 26. 使用shinyChromosome绘制线段图的过程。</p>
+</div>
+
+<div id="divc4.6.10">
+<h4> 4.6.10 绘制垂直线图</h4>
+<p class="p_help_Chinese">垂直线图通常与其他类型的图形混合使用。创建垂直线图的输入数据应包含两列。第一列是染色体ID，第二列是每条垂直线的X轴坐标。</p>
+<p class="p_help_Chinese">在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ), “vertical_line.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/vertical_line.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/vertical_line.txt </a> </u> ) 和 “bar.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt </a> </u> ) 来演示使用shinyChromosome绘制垂直线图的过程( 图 27 )。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_5f5f62cd.png" alt="" width="554" height="442" name="图片 4" border="0" /></p>
+<p class="pic_text">图 27. 使用shinyChromosome绘制垂直线图的过程。</p>
+</div>
+
+<div id="divc4.6.11">
+<h4> 4.6.11 绘制水平线图</h4>
+<p class="p_help_Chinese">水平线图通常与其他类型的图形混合使用。创建水平线图的输入数据应包括一列，表示每条水平线的Y轴坐标。</p>
+<p class="p_help_Chinese">在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ), “horizontal_line.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/horizontal_line.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/horizontal_line.txt </a> </u> ) 和 “bar.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt </a> </u> ) 来演示使用shinyChromosome绘制水平线图的过程( 图 28 )。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_e2663ac5.png" alt="" width="554" height="463" name="图片 38" border="0" /></p>
+<p class="pic_text">图 28. 使用shinyChromosome绘制水平线图的过程。</p>
+</div>
+
+<div id="divc4.6.12">
+<h4> 4.6.12 绘制 ideogram</h4>
+<p class="p_help_Chinese">Ideogram是染色体的图解表示。创建ideogram的输入数据应包含5列。请查看 <u> <a href="https://www.nature.com/scitable/topicpage/chromosome-mapping-idiograms-302"> https://www.nature.com/scitable/topicpage/chromosome-mapping-idiograms-302 </a> </u> 和 <u> <a href="http://genome.ucsc.edu/cgi-bin/hgTables?db=hg38&amp;hgta_group=map&amp;hgta_track=cytoBand&amp;hgta_table=cytoBand&amp;hgta_doSchema=describe+table+schema"> http://genome.ucsc.edu/cgi-bin/hgTables?db=hg38&amp;hgta_group=map&amp;hgta_track=cytoBand&amp;hgta_table=cytoBand&amp;hgta_doSchema=describe+table+schema </a> </u> 获取更多信息。使用shinyChromosome绘制ideogram，需要两个输入文件：基因组数据文件和用来创建ideogram的输入文件。</p>
+<p class="p_help_Chinese">在这里，我们使用shinyChromosome源代码中提供的示例文件“genome_data.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt </a> </u> ) 和 “ideogram.txt” ( <u> <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/ideogram.txt"> https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/ideogram.txt </a> </u> ) 来演示使用shinyChromosome绘制ideogram的过程 ( 图 29 )。 请注意，要将“Image type”设置为“Separated chromosomes”来分割水稻基因组的12条染色体。 
+<p style="text-align: center;"><img src="./helpfigures/E4_html_843014ba.png" alt="" width="554" height="423" name="图片 43" border="0" /></p></p>
+<p class="pic_text">图 29. 使用shinyChromosome绘制ideogram的过程。</p>
+</div>
+</div>
+
+
+<div id="divc4.7">
+<h3> 4.7 利用 shinyChromosome 整合多个输入数据集创建高级单基因组图型</h3>
+<p class="p_help_Chinese">在第4.6节中，我们演示了使用shinyChromosome创建不同类型单基因组图形的过程。为了简单起见，我们在第4.6节的每个示例中只创建一种类型的绘图。实际上，shinyChromosome可以接受多达10个输入数据集来创建复杂的单基因组图形。每个输入数据集可用于创建12种不同类型的绘图中的任意一种。现在，我们使用shinyChromosome的“Gallery”菜单中提供的示例数据集“Example 1”演示使用shinyChromosome创建高级单基因组图形的过程( 图 30 )。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_e7887bc7.png" alt="" width="554" height="528" name="图片 47" border="0" /></p>
+<p class="pic_text">图 30. 使用shinyChromosome创建具有多个输入数据集的高级单基因组图形的过程。</p>
+<p class="p_help_Chinese">一共有6个输入数据集分布在最终生成的图的5个轨道中。 图 30 显示了6个输入数据集的上传过程以及每个数据集的轨道和绘图类型的设置。除了在 图 30 中演示的过程之外，其他很多选项也被调整用来创建最终的图形，包括图形图例的显示、图形主题的设置和每个轨道的大小。这些选项的设置如 图 31 所示。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_cadce309.png" alt="" width="554" height="540" name="图片 48" border="0" /></p>
+<p class="pic_text">图 31. 使用shinyChromosome装饰图30中创建的图形的各种选项的设置。</p>
+</div>
+
+
+<div id="divc4.8">
+<h3> 4.8 修饰单个基因组图形的绘图选项</h3>
+<p class="p_help_Chinese">在“Single-genome plot”菜单的左侧面板中的每个“DataX”复选框下，提供了各种小部件来装饰生成的单基因组图的外观。下面将演示其中一些选项的设置。</p>
+
+<div id="divc4.8.1">
+<h4> 4.8.1 相连的染色体 v.s. 分离的染色体</h4>
+<p class="p_help_Chinese">单个基因组图形中的所有染色体可以按顺序连接在一起，也可以通过在“Single-genome plot”菜单的左面板顶部“Image type”小部件设置为分离在不同的面板中。对于shinyChromosome应用程序的“Gallery”菜单中显示的“Example 10”和“Example 12”，输入数据集是相同的。在“Example 10”所示的图中，所有染色体按顺序连接，而在“Example 12”所示的图中，所有染色体分离在不同的面板中。 图 32 和 图 33 分别演示了创建“Example 10”和“Example 12”中所示图形的过程和选项设置。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_a396841.png" alt="" width="554" height="522" name="图片 51" border="0" /></p>
+<p class="pic_text">图 32. 使用“Gallery”菜单中“Example 10”的输入数据集创建的所有染色体连在一起的单基因组图形。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_edb00299.png" alt="" width="554" height="482" name="图片 52" border="0" /></p>
+<p class="pic_text">图 33. 使用“Gallery”菜单中“Example 12”的输入数据集创建的所有染色体不相连的单基因组图形。</p>
+</div>
+
+<div id="divc4.8.2">
+<h4> 4.8.2 水平排列的染色体 v.s. 垂直排列的染色体</h4>
+<p class="p_help_Chinese">通过设置“Single-genome plot”菜单左侧面板顶部的“Chromosome orientation”小部件，可以设置使得单个基因组图中的所有染色体沿水平轴对齐，也可以使其沿垂直轴对齐。对于shinyChromosome应用程序的“Gallery”菜单中显示的“Example 10”和“Example 12”，输入数据集是相同的。在“Example 10”所示的图中，所有染色体沿水平轴对齐，而在“Example 12”所示的图中，所有染色体沿垂直轴对齐。 图 32 和 图 33 分别演示了创建“Example 10”和“Example 12”中所示图形的过程和选项设置。</p>
+</div>
+
+<div id="divc4.8.3">
+<h4> 4.8.3 设置点的颜色、大小和形状</h4>
+<p class="p_help_Chinese"><a name="_Toc19650423"></a> 对于点图，我们可以使用“Single-genome plot”菜单左侧面板中提供的小部件修改点的颜色、点的大小和点的形状。在这里，我们使用“Gallery”菜单中显示的“Example 17”的输入数据集来演示这些小部件。</p>
+<p class="p_help_Chinese">默认情况下，点的颜色是系统随机设置的、点的大小和形状是系统预定义的，如 图 34 所示。如果要更改点的颜色、点的大小或点的形状，可以在“Color”、“Symbol” 和 “Size”复选框下编辑这些小部件的默认值，如 图 35 所示。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_faea7b68.png" alt="" width="554" height="422" name="图片 58" border="0" /></p>
+<p class="pic_text">图 34. shinyChromosome中点的颜色、点的形状和点的大小的默认设置。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_d7277991.png" alt="" width="554" height="411" name="图片 59" border="0" /></p>
+<p class="pic_text">图 35. 在shinyChromosome中使用不同控件设置点的颜色、点的形状和点的大小。</p>
+<p class="p_help_Chinese">实际上，“Example 17”的输入数据集包含一个“color”列、“shape”列和“size”列，用于指定点的颜色、形状和大小。要使用输入数据集中的“color”、“shape”和“size”设置点的颜色、形状和大小，需要在“Color”、“Symbol”和“Size”复选框下设置小部件的值，如 图 36 所示。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_15b85c0c.png" alt="" width="554" height="415" name="图片 60" border="0" /></p>
+<p class="pic_text">图 36. 使用shinyChromosome中输入数据集的“color”、 “symbol”和“size”列设置点的颜色、形状和大小。</p>
+</div>
+
+<div id="divc4.8.4">
+<h4> 4.8.4 为多个数据集设置矩形图的颜色</h4>
+<p class="p_help_Chinese">对于离散型矩形图，我们可以使用“Single-genome plot”菜单左侧面板中提供的小部件设置属于不同组的矩形的颜色。在这里，我们使用“Gallery”菜单中展示的“Example 37”的输入数据集来演示这些小部件。一共上传了三个输入数据集，生成了“Example 37”中的离散型矩形图。每个数据集的第四列是一个“color”列，用于定义每个基因组区域的组别，不同的组将设置为不同的颜色。默认情况下，颜色的分配是随机的，如 图 37 所示。如果要设置不同数据组的颜色，可以使用每个数据集对应的“color”小部件。该过程如 图 38 所示，包括各种选项的设置。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_4a242a5b.png" alt="" width="554" height="566" name="图片 9" border="0" /></p>
+<p class="pic_text">图 37. shinyChromosome中矩形颜色的默认设置。</p>
+<p style="text-align: center;"><img src="./helpfigures/C4_html_f5a77a95.png" alt="" width="554" height="418" name="图片 13" border="0" /></p>
+<p class="pic_text">图 38. 使用shinyChromosome中输入数据集的“color”列设置矩形颜色。</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class = "content-right">
+                <h2 class="head_zh">目录</h2>
+                <p style="line-height: 25px;">
+                    <a href="#divc4"><span class="content"> 4. 利用shinyChromosome绘制非圆形的单基因组图形</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.1"><span class="content"> 4.1 创建非圆形单基因组图形的基本步骤</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.1"><span class="content"> 步骤 1. 准备并上传定义基因组长度的输入文件</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.2"><span class="content"> 步骤 2. 上传沿着所有染色体排布的其它数据集</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.3"><span class="content"> 步骤 3. 为每个输入数据集设置轨道位置和绘图类型</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.1.4"><span class="content"> 步骤 4. 点击“Go!”按钮绘制图形</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.2"><span class="content"> 4.2关闭用于绘制单个基因组图的输入数据集</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.3"><span class="content"> 4.3 替换用于绘制单个基因组图的输入数据集</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.4"><span class="content"> 4.4 以PDF或SVG格式下载创建的单个基因组图形</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.5"><span class="content"> 4.5 下载R脚本和用户上传的输入数据集，以重建单个基因组图形</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.6"><span class="content"> 4.6 利用shinyChromosome绘制不同类型的单基因组图形</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.1"><span class="content"> 4.6.1 绘制点图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.2"><span class="content"> 4.6.2 绘制线形图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.3"><span class="content"> 4.6.3 绘制柱状图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.4"><span class="content"> 4.6.4 绘制渐变型矩形图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.5"><span class="content"> 4.6.5 绘制离散型矩形图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.6"><span class="content"> 4.6.6 绘制渐变型热图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.7"><span class="content"> 4.6.7 绘制离散型热图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.8"><span class="content"> 4.6.8 绘制text</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.9"><span class="content"> 4.6.9 绘制线段图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.10"><span class="content"> 4.6.10 绘制垂直线图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.11"><span class="content"> 4.6.11 绘制水平线图</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.6.12"><span class="content"> 4.6.12 绘制ideogram</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.7"><span class="content"> 4.7 利用shinyChromosome整合多个输入数据集创建高级单基因组图型</span></a>
+                    <br>
+                    &emsp;<a href="#divc4.8"><span class="content"> 4.8 修饰单个基因组图形的绘图选项</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.2"><span class="content"> 4.8.1 相连的染色体v.s.分离的染色体</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.2"><span class="content"> 4.8.2 水平排列的染色体v.s.垂直排列的染色体 </span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.3"><span class="content"> 4.8.3 设置点的颜色、大小和形状</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc4.8.4"><span class="content"> 4.8.4为多个数据集设置矩形图的颜色</span></a>
+                    
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

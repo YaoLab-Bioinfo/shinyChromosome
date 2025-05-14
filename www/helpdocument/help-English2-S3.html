@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+    <body>
+        <div class="global-div">
+            <div class = "content-left">
+                <div id="div3">
+                  <h2>3. Installation of shinyChromosome on personal computers</h2>
+                  <p class="p_help_English">User can choose to install and run shinyChromosome on personal computers (Windows, Mac or Linux) without uploading data to online servers. Installation of shinyChromosome is platform independent, i.e., shinyChromosome can be installed on any platform with the R environment available. Installation of shinyChromosome includes 3 steps.</p>
+
+<div id="div3.1">
+<h3>3.1 Use shinyChromosome online</h3>
+<p class="p_help_English">shinyChromosome is deployed at&nbsp;<a href="https://venyao.xyz/shinyChromosome/">https://venyao.xyz/shinyChromosome/</a>,&nbsp;<a href="https://venyao.shinyapps.io/shinyChromosome/">https://venyao.shinyapps.io/shinyChromosome/</a>&nbsp;and&nbsp;<a href="https://yimingyu.shinyapps.io/shinychromosome/">https://yimingyu.shinyapps.io/shinychromosome/</a>&nbsp;for online use.<br/>shinyChromosome is idle until you activate it by accessing the URLs.<br/>So, it may take some time when you access this URL for the first time.<br/>Once it was activated, shinyChromosome could be used smoothly and easily.</p>
+</div>
+<hr/>
+
+<div id="div3.2">
+<h2>3.2 Launch shinyChromosome directly from R and GitHub</h2>
+<p class="p_help_English">User can choose to run shinyChromosome installed on local computers (Windows, Mac or Linux) for a more preferable experience.</p>
+
+
+<div id="div3.2.1">
+<h3>
+<p><strong>Step 1: Install R and RStudio</strong></p>
+</h3>
+<p class="p_help_English">Before running the app you will need to have R and RStudio installed (tested with&nbsp;R 3.5.0&nbsp;and RStudio 1.1.419).<br/>
+Please check CRAN (<a href="https://cran.r-project.org/">https://cran.r-project.org/</a>) for the installation of R.
+<br/>Please check&nbsp;<a href="https://www.rstudio.com/">https://www.rstudio.com/</a>&nbsp;for the installation of RStudio.</p>
+</div>
+
+<div id="div3.2.2">
+<h3>
+<p><strong>Step 2: Install the R Shiny package and other packages required by shinyChromosome</strong></p>
+</h3>
+<p class="p_help_English">Start an R session using RStudio and run these lines:</p>
+<pre><code># try an http CRAN mirror if https CRAN mirror doesn't work
+install.packages("shiny")
+install.packages("rlang")
+install.packages("zip")
+install.packages("ggplot2")
+install.packages("plyr")
+install.packages("ggthemes")
+install.packages("RLumShiny")
+install.packages("RColorBrewer")
+install.packages("gridExtra")
+install.packages("reshape2")
+install.packages("data.table")
+install.packages("shinythemes")
+install.packages("shinyBS")
+install.packages("markdown")
+# install shinysky
+install.packages("devtools")
+devtools::install_github("venyao/ShinySky", force=TRUE)
+</code></pre>
+</div>
+
+<div id="div3.2.3">
+<h3>
+<p><strong>Step 3: Start the app</strong></p>
+</h3>
+<p class="p_help_English">Start an R session using RStudio and run these lines:</p>
+<pre><code>shiny::runGitHub("shinyChromosome", "venyao")
+</code></pre>
+<p class="p_help_English">This command will download the code of shinyChromosome from GitHub to a temporary directory of your computer and then launch the shinyChromosome app in the web browser. Once the web browser was closed, the downloaded code of shinyChromosome would be deleted from your computer. Next time when you run this command in RStudio, it will download the source code of shinyChromosome from GitHub to a temporary directory again. This process is frustrating since it takes some time to download the code of shinyChromosome from GitHub.</p>
+
+<p style="text-align: center;">
+<img src="./helpfigures/download zip.png" width="80%">
+
+<p class="p_help_English">Then you can start the shinyChromosome app by running these lines in RStudio.</p>
+<pre><code>library(shiny)
+runApp("E:/apps/shinyChromosome-master", launch.browser = TRUE)
+</code></pre>
+</div>
+</div>
+<hr/>
+
+<div id="div3.3">
+<h2>3.3 Deploy shinyChromosome on local or web Linux server</h2>
+
+<p><strong>Step 1: Install R</strong></p>
+<p class="p_help_English">Please check CRAN (<a href="https://cran.r-project.org/">https://cran.r-project.org/</a>) for the installation of R.</p>
+<p><strong>Step 2: Install the R Shiny package and other packages required by shinyChromosome</strong></p>
+<p class="p_help_English">Start an R session and run these lines in R:</p>
+<pre><code># try an http CRAN mirror if https CRAN mirror doesn't work
+install.packages("shiny")
+install.packages("rlang")
+install.packages("zip")
+install.packages("ggplot2")
+install.packages("plyr")
+install.packages("ggthemes")
+install.packages("RLumShiny")
+install.packages("RColorBrewer")
+install.packages("gridExtra")
+install.packages("reshape2")
+install.packages("data.table")
+install.packages("shinythemes")
+install.packages("shinyBS")
+install.packages("markdown")
+# install shinysky
+install.packages("devtools")
+devtools::install_github("venyao/ShinySky", force=TRUE)
+</code></pre>
+<p class="p_help_English">For more information, please check the following pages:<br/><a href="https://cran.r-project.org/web/packages/shiny/index.html">https://cran.r-project.org/web/packages/shiny/index.html</a><br/><a href="https://github.com/rstudio/shiny">https://github.com/rstudio/shiny</a><br/><a href="https://shiny.rstudio.com/">https://shiny.rstudio.com/</a></p>
+
+<p><strong>Step 3: Install Shiny-Server</strong></p>
+<p class="p_help_English">Please check the following pages for the installation of shiny-server.<br/><a href="https://www.rstudio.com/products/shiny/download-server/">https://www.rstudio.com/products/shiny/download-server/</a><br/><a href="https://github.com/rstudio/shiny-server/wiki/Building-Shiny-Server-from-Source">https://github.com/rstudio/shiny-server/wiki/Building-Shiny-Server-from-Source</a></p>
+
+<p><strong>Step 4: Upload files of shinyChromosome</strong></p>
+<p class="p_help_English">Put the directory containing the code and data of shinyChromosome to /srv/shiny-server.</p>
+
+<p><strong>Step 5: Configure shiny server (/etc/shiny-server/shiny-server.conf)</strong></p>
+<pre><code># Define the user to spawn R Shiny processes
+run_as shiny;
+# Define a top-level server which will listen on a port
+server {
+ # Use port 3838
+ listen 3838;
+ # Define the location available at the base URL
+ location /shinychromosome {
+ # Directory containing the code and data of shinyChromosome
+ app_dir /srv/shiny-server/shinyChromosome;
+ # Directory to store the log files
+ log_dir /var/log/shiny-server;
+ }
+}
+</code></pre>
+
+<p><strong>Step 6: Change the owner of the shinyChromosome directory</strong></p>
+<pre><code>$ chown -R shiny /srv/shiny-server/shinyChromosome
+</code></pre>
+
+<p><strong>Step 7: Start Shiny-Server</strong></p>
+<pre><code>$ start shiny-server
+</code></pre>
+<p class="p_help_English">Now, the shinyChromosome app is available at&nbsp;<a href="http://ipaddressoftheserver:3838/shinyChromosome/">http://IPAddressOfTheServer:3838/shinyChromosome/</a>.</p>
+</div>
+</div>
+</div>
+
+ <div class = "content-right">
+                <h2 class="head_zh">Contents</h2>
+                <p style="line-height: 23px;">
+                    <a href="#div3"><span class="content">3. Installation of shinyChromosome on personal computers</span></a>
+                    <br>
+                    &emsp;<a href="#div3.1"><span class="content"> 3.1 Use shinyChromosome online</span></a>
+                    <br>
+                    &emsp;<a href="#div3.2"><span class="content"> 3.2 Launch shinyChromosome directly from R and GitHub</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div3.2.1"><span class="content"> Step 1: Install R and RStudio</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div3.2.2"><span class="content"> Step 2: Install the R Shiny package and other packages required by shinyChromosome</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#div3.2.3"><span class="content"> Step 3: Start the app</span></a>
+                    <br>
+                    &emsp;<a href="#div3.3"><span class="content"> 3.3 Deploy shinyChromosome on local or web Linux server</span></a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

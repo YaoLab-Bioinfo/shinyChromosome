@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+    <body>
+        <div class="global-div">
+            <div class = "content-left">
+                <div id="divc5">
+                    <h2>5. 利用shinyChromosome来绘制非圆形双基因组图形</h2>
+                     <p class="p_help_Chinese">为了绘制非圆形双基因组图形，您需要使用shinyChromosome应用程序的&ldquo;Two-genome plot&rdquo;菜单。<strong>创建双基因组图形需要三个数据集。</strong>第一个数据集定义了沿水平轴排列的基因组的长度。第二个数据集定义了沿垂直轴排列的基因组的长度。第三个数据集是用于创建双基因组图的主数据集。在下一节中，我们将演示使用shinyChromosome和示例数据集绘制非圆双基因组图形的所有基本步骤。</p>
+
+                 <div id="divc5.1">
+                        <h3>
+                      5.1 绘制非圆双基因组图谱的基本步骤
+                        </h3>
+                   <div id="divc5.1.1">
+                         <h4> 
+                        步骤 1. 准备并上传沿水平轴排列的基因组数据文件
+                         </h4>
+                          <p class="p_help_Chinese">基因组数据文件的格式与第4.1节所示的基因组数据格式是一样的。示例数据位于<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt</u></a>. 这个示例数据集被用于绘制<strong>图</strong><strong>39</strong>中所示的图形。这个输入文件应该选择&ldquo;Two-genome plot&rdquo;菜单左侧面板中的&ldquo;Upload genome1 data&rdquo;控件来进行上传。</p>
+                        </div>
+                   <div id="divc5.1.2">
+                          <h4>
+                        步骤 2. 准备并上传沿垂直轴排列的基因组数据文件
+                          </h4>
+                              <p class="p_help_Chinese">基因组数据文件的格式与第4.1节所示的基因组数据格式是一样的。示例数据组位于<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt</u></a>. 这个示例数据集被用于绘制<strong>图</strong><strong>39</strong>中所示的图形。步骤1和步骤2中使用的输入文件可以是相同的文件，也可以是不同的文件。此输入文件应该选择&ldquo;Two-genome plot&rdquo;菜单左侧面板中的&ldquo;Upload genome2 data&rdquo;控件来进行上传。</p>
+                        </div>
+                   <div id="divc5.1.3">
+                            <h4>
+                        步骤 3. 准备并上传主数据集
+                            </h4>
+                             <p class="p_help_Chinese">用于创建&ldquo;Two-genome plot&rdquo;的主数据集的详细文件格式在shinyChromosome应用程序的&ldquo;Input data format&rdquo;菜单中有详细描述。在这里，我们使用示例数据集 &ldquo;point_gradual.txt&rdquo; (<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_gradual.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_gradual.txt</u></a>) 来绘制<strong>图</strong><strong>39</strong>中所示的图形。</p>
+                             </div>
+                   <div id="divc5.1.4">
+                            <h4>
+                        步骤 4. 设置主数据集的绘图类型
+                            </h4>
+                             <p class="p_help_Chinese">绘图类型应被设置成&ldquo;point_gradual&rdquo; (<strong>图</strong><strong>39</strong>)。</p>
+                        </div>
+                   <div id="divc5.1.5">
+                            <h4>
+                        步骤 5. 点击&ldquo;Go!&rdquo;按钮来进行绘制
+                            </h4>
+                             <p class="p_help_Chinese">在所有输入数据集成功上传到shinyChromosome应用程序之后，我们需要单击&ldquo;Two-genome plot&rdquo;菜单左侧底部的&ldquo;Go!&rdquo;按钮来让shinyChromosome绘制图形(<strong>图</strong><strong>39</strong>)。<strong>图</strong><strong>39</strong>中的主面板中显示的图是使用步骤1、步骤2和步骤3中上传的数据集而生成的图。<strong>默认情况下，在绘制图形时，</strong><strong>shinyChromosome</strong><strong>使用的是随机颜色或是系统预定义的颜色。</strong><strong>当您通过左面板中提供的各种小控件修改任何选项或输入文件时，记得点击&ldquo;</strong><strong>Go!&rdquo;</strong><strong>按钮来更新绘图结果。</strong></p>
+                             <p style="text-align: center;"><img src="./helpfigures/C5_html_dbbb90e9.png"/></p>
+                             <p class="pic_text">图39.使用shinyChromosome绘制双基因组图的基本步骤。</p>
+                  </div>
+                </div>
+                
+                <div id="divc5.2">
+                        <h3>
+                        5.2 利用shinyChromosome绘制不同类型的双基因组图谱
+                        </h3>
+                         <p class="p_help_Chinese">使用shinyChromosome总共可以创建5种不同类型的图形，包括渐变类型的点、离散类型的点、线段、渐变类型的矩形和离散类型的矩形。要创建双基因组图，至少需要三个输入数据文件。在shinyChromosome应用程序的&ldquo;Input data format&rdquo;菜单（在&ldquo;Help&rdquo;菜单下）中演示了用于绘制双基因组图的输入文件的详细格式。在这一节中，我们将演示使用shinyChromosome的图形界面和示例输入数据集绘制不同类型的双基因组图的关键参数。本节中使用的两个示例基因组数据文件与5.1节中使用的文件相同。 (<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome1_data.txt</u></a>, <a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/genome2_data.txt</u></a>).</p>
+
+                   <div id="divc5.2.1">
+                            <h4>
+                          5.2.1渐变类型的点
+                            </h4>
+                         
+                            <p class="p_help_Chinese">输入数据集应包含5列。</p>
+                            <p class="p_help_Chinese">第1列：沿水平轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第2列：沿水平轴排布的基因组中的位置。</p>
+                            <p class="p_help_Chinese">第3列：沿垂直轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第4列：沿垂直轴排布的基因组中的位置。</p>
+                            <p class="p_help_Chinese">第5列：定义每个点的值的数值向量。</p>
+                            <p class="p_help_Chinese">使用shinyChromosome绘制渐变类型的点的过程如<strong>图</strong><strong>39</strong>所示。</p>
+                            </div>
+                            
+                    <div id="divc5.2.2">
+                            <h4>
+                          5.2.2 离散类型的点
+                            </h4>
+                            <p class="p_help_Chinese">输入数据集应包含5列。</p>
+                            <p class="p_help_Chinese">第1列：沿水平轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第2列：沿水平轴排布的基因组中的位置。</p>
+                            <p class="p_help_Chinese">第3列：沿垂直轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第4列：沿垂直轴排布的基因组中的位置。</p>
+                            <p class="p_help_Chinese">第5列：定义每个点的类别的字符向量。</p>
+                            <p class="p_help_Chinese">这里，我们使用shinyChromosome应用程序源代码中提供的示例数据集 &ldquo;point_discrete.txt&rdquo; (<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_discrete.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/point_discrete.txt</u></a>) 来展示shinyChromosome绘制离散类型的点的过程，如<strong>图</strong><strong>40</strong>所示。</p>
+                            <p style="text-align: center;"><img src="./helpfigures/C5_html_cc5472bc.png"/></p>
+                            <p class="pic_text">图40.用shinyChromosome绘制离散类型的点的过程。</p>
+                            </div>
+                            
+                    <div id="divc5.2.3">
+                            <h4>
+                          5.2.3 线段
+                            </h4>
+                            <p class="p_help_Chinese">数据集应包含&gt;=6列。在最简单的情况下，数据集应该包含6列，列的顺序是固定的。</p>
+                            <p class="p_help_Chinese">第1列：沿水平轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第2列：线段的X轴起始坐标。</p>
+                            <p class="p_help_Chinese">第3列：线段的X轴结束坐标。</p>
+                            <p class="p_help_Chinese">第4列：沿垂直轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第5列：线段的Y轴起始坐标。</p>
+                            <p class="p_help_Chinese">第6列：线段的Y轴结束坐标。</p>
+                            <p class="p_help_Chinese">这里，我们使用shinyChromosome应用程序源代码中提供的示例数据集&ldquo;segment.txt&rdquo; (<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/segment.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/segment.txt</u></a>) 来展示shinyChromosome绘制线段的过程，如<strong>图</strong><strong>41</strong>所示。</p>
+                            <p style="text-align: center;"><img src="./helpfigures/C5_html_c8f69543.png"/></p>
+                            <p class="pic_text">图41. 用shinyChromosome绘制线段的过程。</p>
+                            </div>
+                            
+                    <div id="divc5.2.4">
+                            <h4>
+                          5.2.4 渐变类型的矩形
+                            </h4>
+                            <p class="p_help_Chinese">数据集应包含顺序固定的七列。</p>
+                            <p class="p_help_Chinese">第1列：沿水平轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第2列：矩形的X轴起始坐标。</p>
+                            <p class="p_help_Chinese">第3列：矩形的X轴结束坐标。</p>
+                            <p class="p_help_Chinese">第4列：沿垂直轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第5列：矩形的Y轴起始坐标。</p>
+                            <p class="p_help_Chinese">第6列：矩形的Y轴结束坐标。</p>
+                            <p class="p_help_Chinese">第7列：定义每个矩形值的数值向量。</p>
+                            <p class="p_help_Chinese">这里，我们使用shinyChromosome应用程序源代码中提供的示例数据集&ldquo;rect_gradual.txt&rdquo; (<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_gradual.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_gradual.txt</u></a>) 来展示shinyChromosome绘制渐变类型的矩形的过程，如<strong>图</strong><strong>42</strong>所示。</p>
+                            <p style="text-align: center;"><img src="./helpfigures/C5_html_b8e8804e.png"/></p>
+                            <p class="pic_text">图42. 用shinyChromosome绘制渐变类型的矩形的过程。</p>
+                            </div>
+                            
+                    <div id="divc5.2.5">
+                            <h4>
+                            5.2.5 离散类型的矩形
+                            </h4>
+                            <p class="p_help_Chinese">数据集应包含顺序固定的七列。</p>
+                            <p class="p_help_Chinese">第1列：沿水平轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第2列：矩形的X轴起始坐标。</p>
+                            <p class="p_help_Chinese">第3列：矩形的X轴结束坐标。</p>
+                            <p class="p_help_Chinese">第4列：沿垂直轴排布的基因组的染色体ID。</p>
+                            <p class="p_help_Chinese">第5列：矩形的Y轴起始坐标。</p>
+                            <p class="p_help_Chinese">第6列：矩形的Y轴结束坐标。</p>
+                            <p class="p_help_Chinese">第7列：定义每个矩形组别的字符向量。</p>
+                            <p class="p_help_Chinese">这里，我们使用shinyChromosome应用程序源代码中提供的示例数据集&ldquo;rect_discrete.txt&rdquo; (<a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_discrete.txt"><u>https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/two_genome/rect_discrete.txt</u></a>) 来展示shinychromosome绘制离散类型的矩形的过程，如<strong>图</strong><strong>43</strong>所示。</p>
+                            <p style="text-align: center;"><img src="./helpfigures/C5_html_40f107d7.png"/></p>
+                            <p class="pic_text">图43. 用shinyChromosome绘制离散类型的矩形的过程。</p>
+                    
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "content-right">
+                <h2 class="head_zh">目录</h2>
+                <p style="line-height: 23px;">
+                    <a href="#divc5"><span class="content">5. 利用shinyChromosome来绘制非圆形双基因组图形</span></a>
+                    <br>
+                    &emsp;<a href="#divc5.1"><span class="content">5.1 绘制非圆双基因组图谱的基本步骤</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.1.1"><span class="content">步骤 1. 准备并上传沿水平轴排列的基因组数据文件</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.1.2"><span class="content">步骤 2. 准备并上传沿垂直轴排列的基因组数据文件</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.1.3"><span class="content">步骤 3. 准备并上传主数据集</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.1.4"><span class="content">步骤 4. 设置主数据集的绘图类型</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.1.5"><span class="content">步骤 5. 点击“Go!”按钮来进行绘制</span></a>
+                    <br>
+                    &emsp;<a href="#divc5.2"><span class="content">5.2 利用shinyChromosome绘制不同类型的双基因组图谱</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.2.1"><span class="content">5.2.1渐变类型的点</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.2.2"><span class="content">5.2.2 离散类型的点</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.2.3"><span class="content">5.2.3 线段</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.2.4"><span class="content">5.2.4 渐变类型的矩形</span></a>
+                    <br>
+                    &emsp;&emsp;<a href="#divc5.2.5"><span class="content">5.2.5 离散类型的矩形</span></a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

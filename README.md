@@ -147,5 +147,3 @@ $ start shiny-server
 ```
 
 Now, the shinyChromosome app is available at http://IPAddressOfTheServer:3838/shinyChromosome/.  
-
-

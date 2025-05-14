@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+        <meta charset = "UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+        
+            .global-div {
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+            }
+            .p_help_Chinese{
+                text-indent: 0em;
+                font-size: 18px;
+                line-height: 150%;
+                font-weight: normal;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .content{
+                font-size: 16px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+            .head_zh{
+                font-size: 25px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bolder;
+                margin-bottom: 5px;
+                margin-top: 0px;
+            }
+            .content-left {
+                float: left;
+                width: 68%;
+                
+            }
+            .content-right{
+                position: fixed;
+                left: 73%;
+                height: 50%;
+                width: 27%;
+                overflow: auto;
+                background-color: #EEF1F0;
+                margin-top: -1%;
+                display: block;
+                padding: 1%;
+            }
+            .pic_text{
+                font-size: 18px;
+                text-align: center;
+                margin-top: -10px;
+                margin-bottom: 25px;
+                color: #0000ff;
+            }
+            
+            
+            </style>
+        <title>shinyChromosome 帮助</title>
+
+    </head>
+    
+   <body>
+        <div class="global-div">
+            <div class = "content-left">
+<br/>
+<hr/>
+<br/>
+<br/>
+<p class="p_help_Chinese"><strong>shinyChromosome</strong>是一个可交互式创建全基因组非圆形图的R/Shiny应用程序。</p>
+<div class="rTable">
+<div class="rTableBody">
+<div class="rTableRow">
+<div class="rTableCell">
+<p class="p_help_Chinese"><strong>源代码：</strong></p>
+</div>
+<div class="rTableCell">
+<p class="p_help_Chinese"><a href="https://github.com/venyao/shinyChromosome"><u>https://github.com/venyao/shinyChromosome</u></a></p>
+</div>
+</div>
+<div class="rTableRow">
+<div class="rTableCell">
+<p class="p_help_Chinese"><strong>在线使用：</strong></p>
+</div>
+<div class="rTableCell">
+<p class="p_help_Chinese"><a href="http://venyao.xyz/shinyChromosome/"><u>http://venyao.xyz/shinyChromosome/</u></a></p>
+</div>
+</div>
+<div class="rTableRow">
+<div class="rTableCell">
+<p class="p_help_Chinese"><a href="http://shinychromosome.ncpgr.cn/"><u>http://shinychromosome.ncpgr.cn/</u></a></p>
+</div>
+</div>
+<div class="rTableRow">
+<div class="rTableCell">
+<p class="p_help_Chinese"><a href="https://yimingyu.shinyapps.io/shinychromosome/"><u>https://yimingyu.shinyapps.io/shinychromosome/</u></a></p>
+</div>
+</div>
+<div class="rTableRow">
+<div class="rTableCell">
+<p class="p_help_Chinese"><strong>联系方式：</strong></p>
+</div>
+<div class="rTableCell">
+<p class="p_help_Chinese"><a href="mailto:yimingyym@qq.com"><u>yimingyym@qq.com</u></a> 或 <a href="mailto:yaowen@henau.edu.cn"><u>yaowen@henau.edu.cn</u></a></p>
+</div>
+</div>
+</div>
+</div>
+<p><br /></p>
+
+
+<div id="divc1">
+<h2><strong>1. </strong><strong>在线使用</strong><strong>shinyChromosome</strong></h2>
+<p class="p_help_Chinese">在线使用shinyChromosome的网址是 <a href="http://venyao.xyz/shinyChromosome/"><u>http://venyao.xyz/shinyChromosome/</u></a>， <a href="http://shinychromosome.ncpgr.cn/"><u>http://shinychromosome.ncpgr.cn/</u></a> 或者 <a href="https://yimingyu.shinyapps.io/shinychromosome/"><u>https://yimingyu.shinyapps.io/shinychromosome/</u></a>。用户可以根据访问速度选择访问这三个网址中的任意一个来使用shinyChromosome。在通过访问网址激活shinyChromosome之前，它是停顿的。因此，第一次访问可能需要一些时间。一旦激活，shinyChromosome就可以被流畅、方便地使用。</p>
+</div>
+<div id="divc2">
+<h2><strong>2. shinyChromosome</strong><strong>的界面</strong></h2>
+<p class="p_help_Chinese">shinyChromosome应用程序包含5个主菜单：“Single-genome plot”，“Two-genome plot”，“Gallery”，“Help”和“关于”（<strong>图</strong><strong>1</strong>）。“About”菜单列出了shinyChromosome应用程序的相关信息，包括基本介绍和shinyChromosome使用到的R包列表。</p>
+
+<p style="text-align: center;"><img src="./helpfigures/C123_html_8cca7563.png" alt="" width="100%" height="100%" name="图片 41" border="0" /></p>
+<p class="pic_text"><strong>图</strong><strong>1.</strong> shinyChromosome应用程序的“About”菜单。</p>
+<p class="p_help_Chinese">“Single-genome plot”菜单允许用户通过上传输入数据，创建沿着单个基因组的所有染色体排布的非圆形图（<strong>图</strong><strong>2</strong>）。在“Single-genome plot”菜单的左侧是选项面板，其中包含许多小部件来接受用户输入。当上传了合适的数据并正确设置了绘图选项后，可以在主面板的绘图区域中创建并显示基于输入数据构建的图形。主面板绘图区域上方的三个“Download”按钮供用户下载PDF或SVG格式的结果图，以及R脚本和用户上传的输入数据集，以重建该图。</p>
+<p style="text-align: center;"><img src="./helpfigures/C123_html_466d019a.png" alt="" width="528" height="309" name="图片 44" border="0" /></p>
+<p class="pic_text"><strong>图</strong><strong>2.</strong> shinyChromosome应用程序的“Single-genome plot”菜单。</p>
+<p class="p_help_Chinese">“Two-genome plot”菜单允许用户上传输入数据创建基于两个基因组排布的图形，以便在两个基因组之间比较数据（<strong>图</strong><strong>3</strong>）。“Two-genome plot”菜单的左侧面板包含许多小部件，可以接受用户输入。当用户上传了合适的数据并正确设置了绘图选项后，就可以在主绘图区域创建并显示图形。在主绘图区域的顶部提供了三个“Download”按钮，供用户下载结果图，并提供了R脚本供用户在R命令行中重建图形。</p>
+<p style="text-align: center;"><img src="./helpfigures/C123_html_a69dfdef.png" alt="" width="512" height="328" name="图片 7" border="0" /></p>
+<p class="pic_text"><strong>图</strong><strong>3.</strong> shinyChromosome应用程序的“Two-genome plot”菜单。</p>
+<p class="p_help_Chinese">在shinyChromosome应用程序的“Gallery”菜单中列出了65个使用shinyChromosome创建的示例图形(<strong>图</strong><strong>4</strong>)。同时提供了用于生成每个示例图的数据集以供下载，其中包含所有输入文件，每个输入文件的被合理命名，指示了数据集中每个文件对应的轨道和绘图类型。</p>
+<p style="text-align: center;"><img src="./helpfigures/C123_html_632cbba.png" alt="" width="505" height="292" name="图片 1" border="0" /></p>
+<p class="pic_text"><strong>图</strong><strong>4.</strong> shinyChromosome应用程序的“Gallery”菜单。</p>
+<p class="p_help_Chinese">shinyChromosome的“Usage and installation”子菜单展示了使用shinyChromosome的不同方式(<strong>图</strong><strong>5</strong>)。</p>
+<p style="text-align: center;"><img src="./helpfigures/C123_html_e1762e4e.png" alt="" width="554" height="310" name="图片 2" border="0" /></p>
+<p class="pic_text"><strong>图</strong><strong>5.</strong> shinyChromosome应用程序的“Usage and installation”子菜单。</p>
+<p class="p_help_Chinese">“Input data format”子菜单提供了使用shinyChromosome创建不同类型图形的输入数据的详细格式 (<strong>图</strong><strong>6</strong>)。</p>
+<p style="text-align: center;"><img src="./helpfigures/C123_html_152365.png" alt="" width="524" height="328" name="图片 18" border="0" /></p>
+<p class="pic_text"><strong>图</strong><strong>6.</strong> shinyChromosome应用程序的“Input data format”子菜单。</p>
+<p class="p_help_Chinese">shinyChromosome的“User manual”子菜单提供了本用户手册（英文版）的PDF格式文件(<strong>图</strong><strong>7</strong>)。</p>
+<p style="text-align: center;"><img src="./helpfigures/C123_html_fd8e9963.png" alt="" width="554" height="285" name="图片 40" border="0" /></p>
+<p class="pic_text"><strong>图</strong><strong>7.</strong> shinyChromosome应用程序的“User manual”子菜单。</p>
+</div>
+
+
+</div>
+
+<div class = "content-right">
+                <h2 class="head_zh">目录</h2>
+                <p style="line-height: 23px;">
+                    <a href="#divc1"><span class="content">1. 在线使用shinyChromosome</span></a>
+                    <br>
+                    <a href="#divc2"><span class="content">2. shinyChromosome的界面</span></a>
+                </p>
+                
+            </div>
+
+</div>
+</body>
+</html>

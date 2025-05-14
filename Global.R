@@ -16,6 +16,7 @@ library(grid)
 library(shinysky)
 library(zip)
 library(colourpicker)
+library(shinyWidgets)
 
 source("single_genome_plot.R")
 source("two_genomes_plot.R")

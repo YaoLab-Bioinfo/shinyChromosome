@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	
+	<style type="text/css">
+		@page { size: 8.27in 11.69in; margin-left: 1.25in; margin-right: 1.25in; margin-top: 1in; margin-bottom: 1in }
+		p { line-height: 115%; text-align: justify; orphans: 0; widows: 0; margin-bottom: 0.1in; direction: ltr; background: transparent }
+		a:link { color: #0000ff; text-decoration: underline }
+		a:visited { color: #800080; text-decoration: underline }
+	</style>
+</head>
+<body lang="en-US" link="#0000ff" vlink="#800080" dir="ltr"><p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="OLE_LINK1"></a><a name="_Toc19737059"></a>
+<font size="4" style="font-size: 14pt"><b>4.
+</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>利用</b></font></span></font><font size="4" style="font-size: 14pt"><b>shinyChromosome</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>绘制非圆形的单基因组图形</b></font></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">用户可以使用</span></font>shinyChromosome
+<font face="黑体"><span lang="zh-CN">应用程序的“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单，来创建非圆形的单基因组图形。制作单个基因组图时，必须输入定义基因组中每条染色体长度的文件，以及</span></font>1-10<font face="黑体"><span lang="zh-CN">个沿基因组排布的输入数据。在本节中，我们将演示使用</span></font>shinyChromosome
+<font face="黑体"><span lang="zh-CN">中的示例数据集，创建非圆形单基因组图的所有基本步骤。</span></font></p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737060"></a>
+<font size="4" style="font-size: 14pt"><b>4.1 </b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>创建非圆形单基因组图形的基本步骤</b></font></span></font></p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737061"></a>
+<font face="黑体"><span lang="zh-CN"><b>步骤 </b></span></font><b>1.
+</b><font face="黑体"><span lang="zh-CN"><b>准备并上传定义基因组长度的输入文件</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">基因组数据是必须输入的文件，它定义了非圆形图的框架（示例数据集可在</span></font><font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt"><font face="Calibri, serif">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</font></a></u></font><font face="黑体"><span lang="zh-CN">中获得</span></font>)<font face="黑体"><span lang="zh-CN">。
+基因组数据是一个包含<font color="#ff0000">两列</font>的文本文件
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>11</b>)<font face="黑体"><span lang="zh-CN">。
+第一列是染色体编号，第二列是染色体长度。基因组数据的详细格式在</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序的
+“</span></font>Input data format” <font face="黑体"><span lang="zh-CN">菜单（在
+“</span></font>Help” <font face="黑体"><span lang="zh-CN">菜单下）中有说明。“</span></font>Input
+data format” <font face="黑体"><span lang="zh-CN">菜单中的内容也可以在</span></font>GitHub<font face="黑体"><span lang="zh-CN">中找到
+</span></font>(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/In_Data_Format.md">https://github.com/venyao/shinyChromosome/blob/master/In_Data_Format.md</a></u></font>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_47dd50cb.png" name="图片 42" align="bottom" width="168" height="227" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>11.
+</b><font face="黑体"><span lang="zh-CN">定义基因组长度的输入文件的格式。</span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">现在，我们已经准备好了这个文件并将它存储在磁盘上（例如</span></font>Windows<font face="黑体"><span lang="zh-CN">上的“</span></font>E:/”<font face="黑体"><span lang="zh-CN">）。接下来，我们需要通过</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序中“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单的左侧面板上“</span></font>Upload
+genome data”<font face="黑体"><span lang="zh-CN">标志下的“</span></font>Browse…”
+<font face="黑体"><span lang="zh-CN">小部件，将此文件上传到</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序中
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>12</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_141c45b2.png" name="图片 45" align="bottom" width="546" height="478" border="0"/>
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>12.
+</b><font face="黑体"><span lang="zh-CN">利用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">创建单个基因组图形的基本步骤。文件“</span></font>genome_data.txt”<font face="黑体"><span lang="zh-CN">被上传到</span></font>genome
+data<font face="黑体"><span lang="zh-CN">小部件中。文件“</span></font>point.txt”<font face="黑体"><span lang="zh-CN">上传到“</span></font>Data1”<font face="黑体"><span lang="zh-CN">轨道，而文件“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">上传到“</span></font>Data2”<font face="黑体"><span lang="zh-CN">轨道。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737062"></a>
+<font face="黑体"><span lang="zh-CN"><b>步骤 </b></span></font><b>2.
+</b><font face="黑体"><span lang="zh-CN"><b>上传沿着所有染色体排布的其它数据集</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">用户可以上传</span></font>1-10<font face="黑体"><span lang="zh-CN">个数据集，沿着<b>步骤</b></span></font><b>1</b><font face="黑体"><span lang="zh-CN">中上传的基因组的所有染色体排布。“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单左侧面板上的十个“</span></font>DataX”<font face="黑体"><span lang="zh-CN">（</span></font>Data1<font face="黑体"><span lang="zh-CN">到</span></font>Data10<font face="黑体"><span lang="zh-CN">）复选框就是为了这个目的而提供的</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font>12)<font face="黑体"><span lang="zh-CN">。在这里，我们使用两个输入数据集</span></font>(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt</a></u></font>
+<font face="黑体"><span lang="zh-CN">和
+</span></font><font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示这个过程。用来创建不同类型图形的输入文件的详细格式在</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序的“</span></font>Input
+data
+format”<font face="黑体"><span lang="zh-CN">子菜单中有说明</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>6</b>)<font face="黑体"><span lang="zh-CN">。首先，我们准备了两个文件并将它们存储在磁盘上（例如，</span></font>windows<font face="黑体"><span lang="zh-CN">上的“</span></font>E:/”<font face="黑体"><span lang="zh-CN">）。要将文件“</span></font>point.txt”<font face="黑体"><span lang="zh-CN">上传到</span></font>Data1<font face="黑体"><span lang="zh-CN">对应的轨道，请选中“</span></font>Data1”<font face="黑体"><span lang="zh-CN">复选框，选择“</span></font>Upload
+input data”<font face="黑体"><span lang="zh-CN">单选按钮，然后点击“</span></font>Browse…”<font face="黑体"><span lang="zh-CN">小部件从磁盘上传入“</span></font>point.txt”
+(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>12</b>)<font face="黑体"><span lang="zh-CN">。要将文件“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">上传到</span></font>Data2<font face="黑体"><span lang="zh-CN">对应的轨道，请选中“</span></font>Data2”<font face="黑体"><span lang="zh-CN">复选框，选择“</span></font>Upload
+input data”<font face="黑体"><span lang="zh-CN">单选按钮，然后点击“</span></font>Browse…”<font face="黑体"><span lang="zh-CN">小部件从磁盘上传入“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737063"></a>
+<font face="黑体"><span lang="zh-CN"><b>步骤 </b></span></font><b>3.
+</b><font face="黑体"><span lang="zh-CN"><b>为每个输入数据集设置轨道位置和绘图类型</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">默认情况下，每个输入数据集的轨道位置为“</span></font>track1”<font face="黑体"><span lang="zh-CN">，每个输入数据集的绘图类型为“</span></font>point”<font face="黑体"><span lang="zh-CN">。因为我们希望使用文件“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">创建条形图，所以我们需要将文件“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">对应的轨道位置设置为“</span></font>track2”<font face="黑体"><span lang="zh-CN">，并将输入文件“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">的绘图类型设置为“</span></font>bar”(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>12</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737064"></a>
+<font face="黑体"><span lang="zh-CN"><b>步骤 </b></span></font><b>4.
+</b><font face="黑体"><span lang="zh-CN"><b>点击“</b></span></font><b>Go!”</b><font face="黑体"><span lang="zh-CN"><b>按钮绘制图形</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">所有输入数据集成功上传到</span></font>shinyChromosome
+<font face="黑体"><span lang="zh-CN">应用程序并正确设置轨道位置和绘图类型后，我们需要单击“</span></font>Single-genome
+plot”
+<font face="黑体"><span lang="zh-CN">菜单左面板底部的“</span></font>Go!”<font face="黑体"><span lang="zh-CN">按钮，告诉</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">去绘制图形</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>12</b>)<font face="黑体"><span lang="zh-CN">。<b>图</b></span></font><b>12</b><font face="黑体"><span lang="zh-CN">主面板中显示的图是使用步骤</span></font>1<font face="黑体"><span lang="zh-CN">和步骤</span></font>2<font face="黑体"><span lang="zh-CN">中上传的输入数据集生成的图。<font color="#ff0000"><b>默认情况下，在绘制图形时，</font></b></font></span></font><font color="#ff0000"><b>shinyChromosome</b><font face="黑体"><span lang="zh-CN"><b>将使用随机颜色或者预定义的颜色。</b></span></font></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737065"></a>
+<font size="4" style="font-size: 14pt"><b>4.2</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>关闭用于绘制单个基因组图的输入数据集
+</b></font></span></font>
+</p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in"><a name="_Toc19650399"></a>
+<font face="黑体"><span lang="zh-CN">对于“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单左侧面板上的每个“</span></font>DataX”<font face="黑体"><span lang="zh-CN">复选框，我们提供两个单选按钮选项：“</span></font>Disable
+data input”<font face="黑体"><span lang="zh-CN">和“</span></font>Upload
+input data”<font face="黑体"><span lang="zh-CN">。 默认情况下，
+“</span></font>Disable data input”<font face="黑体"><span lang="zh-CN">单选按钮是被选中的。“</span></font>Upload
+input data”<font face="黑体"><span lang="zh-CN">用于上传输入数据集，而“</span></font>Disable
+data input”<font face="黑体"><span lang="zh-CN">用于关闭已上传的输入数据集。</span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在第</span></font>4.1<font face="黑体"><span lang="zh-CN">节中，我们分别将输入文件“</span></font>point.txt”<font face="黑体"><span lang="zh-CN">和“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">上传到“</span></font>Data1”<font face="黑体"><span lang="zh-CN">和“</span></font>Data2”<font face="黑体"><span lang="zh-CN">。
+“</span></font>point.txt”<font face="黑体"><span lang="zh-CN">文件用于创建<b>图</b></span></font><b>12</b><font face="黑体"><span lang="zh-CN">中的散点图，而“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">用于创建<b>图</b></span></font><b>12</b><font face="黑体"><span lang="zh-CN">中的条形图。如果我们想从<b>图</b></span></font><b>12</b><font face="黑体"><span lang="zh-CN">中删除散点图并且只保留条形图，我们可以选中“</span></font>Data1”<font face="黑体"><span lang="zh-CN">复选框下的“</span></font>Disable
+data
+input”<font face="黑体"><span lang="zh-CN">单选按钮，然后单击左面板底部的“</span></font>Go!”<font face="黑体"><span lang="zh-CN">按钮，告诉</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">更新绘图结果。这个过程如<b>图</b></span></font><b>13</b><font face="黑体"><span lang="zh-CN">所示。这样，</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">就不会使用“</span></font>point.txt”<font face="黑体"><span lang="zh-CN">文件，只会创建条形图，<b>图</b></span></font><b>13</b><font face="黑体"><span lang="zh-CN">所示。<font color="#ff0000"><b>当您通过左面板中提供的各种小部件修改任何选项或输入文件时，记得点击“</font></b></font></span></font><font color="#ff0000"><b>Go!”</b><font face="黑体"><span lang="zh-CN"><b>按钮来更新绘图结果。</b></span></font></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_e76b165c.png" name="图片 46" align="bottom" width="520" height="467" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>13.
+</b><font face="黑体"><span lang="zh-CN">关闭用于绘制单个基因组图的某个输入数据集的过程</span></font></p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737066"></a>
+<font size="4" style="font-size: 14pt"><b>4.3 </b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>替换用于绘制单个基因组图的输入数据集</b></font></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in"><a name="_Toc19650401"></a>
+<font face="黑体"><span lang="zh-CN">单个基因组图形通常由分布在不同轨道上的几种基本类型的图形组成。每个图形都是使用用户上传的输入数据集创建的。有时，我们可能需要替换其中一个或多个输入文件，这样我们就可以更新单个基因组图形的某些组成部分，而无需重新创建整个图形。例如，我们想用一个新的输入文件“</span></font>rect_discrete.txt”<font face="黑体"><span lang="zh-CN">来替换上传到“</span></font>Data2”<font face="黑体"><span lang="zh-CN">的“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">来创建离散型矩形图。为了达到这个目的，我们可以使用“</span></font>Data2”<font face="黑体"><span lang="zh-CN">中“</span></font>Upload
+input
+data”<font face="黑体"><span lang="zh-CN">单选按钮下的“</span></font>Browse…”<font face="黑体"><span lang="zh-CN">小部件将“</span></font>rect_discrete.txt”<font face="黑体"><span lang="zh-CN">上传到“</span></font>Data2”<font face="黑体"><span lang="zh-CN">。这样，“</span></font>Data2”<font face="黑体"><span lang="zh-CN">中的“</span></font>bar.txt”<font face="黑体"><span lang="zh-CN">将替换为“</span></font>rect_discrete.txt”<font face="黑体"><span lang="zh-CN">。同时，我们需要将“</span></font>Data2”<font face="黑体"><span lang="zh-CN">的绘图类型设置为“</span></font>rect_discrete”<font face="黑体"><span lang="zh-CN">。最后，我们需要点击左面板底部的“</span></font>Go!”<font face="黑体"><span lang="zh-CN">按钮，告诉</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">更新相应的绘图结果。这个过程如<b>图</b></span></font><b>14</b><font face="黑体"><span lang="zh-CN">所示。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_27e4676d.png" name="图片 49" align="bottom" width="534" height="544" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>14.
+</b><font face="黑体"><span lang="zh-CN">替换用于绘制单个基因组图形的某个输入数据集的过程。</span></font></p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737067"></a>
+<font size="4" style="font-size: 14pt"><b>4.4 </b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>以</b></font></span></font><font size="4" style="font-size: 14pt"><b>PDF</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>或</b></font></span></font><font size="4" style="font-size: 14pt"><b>SVG</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>格式下载创建的单个基因组图形</b></font></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">生成单个基因组图形后，用户可以使用“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单主面板上方的小部件“</span></font>Download
+PDF-file”<font face="黑体"><span lang="zh-CN">和“</span></font>Download
+SVG-file”<font face="黑体"><span lang="zh-CN">下载</span></font>PDF<font face="黑体"><span lang="zh-CN">或</span></font>SVG<font face="黑体"><span lang="zh-CN">格式的绘图结果</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>15</b>)<font face="黑体"><span lang="zh-CN">。默认情况下，下载的两个文件分别命名为“</span></font>Visualization_1.pdf”<font face="黑体"><span lang="zh-CN">和“</span></font>Visualization_1.svg”<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_8f8ee2c3.png" name="图片 50" align="bottom" width="554" height="434" border="0"/>
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>15</b>.
+<font face="黑体"><span lang="zh-CN">下载的</span></font>PDF<font face="黑体"><span lang="zh-CN">文件“</span></font>Visualization_1.pdf”<font face="黑体"><span lang="zh-CN">可以在</span></font>Adobe
+Acrobat<font face="黑体"><span lang="zh-CN">中打开，下载的</span></font>SVG<font face="黑体"><span lang="zh-CN">文件“</span></font>Visualization_1.svg”<font face="黑体"><span lang="zh-CN">可以在</span></font>Google
+Chrome<font face="黑体"><span lang="zh-CN">浏览器中打开。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737068"></a>
+<font size="4" style="font-size: 14pt"><b>4.5
+</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>下载</b></font></span></font><font size="4" style="font-size: 14pt"><b>R</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>脚本和用户上传的输入数据集，以重建单个基因组图形</b></font></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in"><a name="_Toc19650404"></a>
+<font face="黑体"><span lang="zh-CN">一些用户可能已经注意到，当创建单个基因组图形时，在“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单的主面板中生成的图形顶部提供了一个名为“</span></font>Download
+the R scripts and data files to reproduce the plot”<font face="黑体"><span lang="zh-CN">的下载小部件
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>16</b>)<font face="黑体"><span lang="zh-CN">。单击此按钮，将会以</span></font>zip<font face="黑体"><span lang="zh-CN">文件形式下载所有用户上传的输入数据集和两个</span></font>R<font face="黑体"><span lang="zh-CN">脚本。默认情况下，下载的</span></font>zip<font face="黑体"><span lang="zh-CN">文件被命名为“</span></font>scripts_data_1.zip”<font face="黑体"><span lang="zh-CN">。下载的</span></font>R<font face="黑体"><span lang="zh-CN">脚本和用户上传的输入数据集可以在</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序之外使用，以重建使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">图形界面生成的图形。下载的</span></font>R<font face="黑体"><span lang="zh-CN">脚本应该在</span></font>R<font face="黑体"><span lang="zh-CN">环境中使用。下载的</span></font>R<font face="黑体"><span lang="zh-CN">脚本可以与用户分析流程中的其他脚本一起使用。下载的</span></font>R<font face="黑体"><span lang="zh-CN">脚本可以被循环使用来生成很多类型的图形，只需要修改输入数据文件即可。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_962bd65b.png" name="图片 53" align="bottom" width="554" height="444" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>16</b>.
+<font face="黑体"><span lang="zh-CN">下载</span></font>R<font face="黑体"><span lang="zh-CN">脚本和用户上传的输入文件来重建绘图结果的小部件。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">要使用“</span></font>scripts_data_1.zip”<font face="黑体"><span lang="zh-CN">文件</span></font>,
+<font face="黑体"><span lang="zh-CN">请将该文件解压缩到计算机中的一个目录，例如“</span></font>E:/”<font face="黑体"><span lang="zh-CN">。然后使用</span></font>RStudio<font face="黑体"><span lang="zh-CN">打开</span></font>R<font face="黑体"><span lang="zh-CN">环境。</span></font>R<font face="黑体"><span lang="zh-CN">脚本
+“</span></font>Script_1.R”<font face="黑体"><span lang="zh-CN">是在</span></font>RStudio<font face="黑体"><span lang="zh-CN">中用来绘制图形的主要</span></font>R<font face="黑体"><span lang="zh-CN">脚本。磁盘中
+“</span></font>Script_1.R”
+<font face="黑体"><span lang="zh-CN">脚本的路径通常与</span></font>RStudio<font face="黑体"><span lang="zh-CN">默认的工作目录不同。我们需要将它们设置为相同的目录。在本示例中，因为</span></font>R<font face="黑体"><span lang="zh-CN">脚本和用户上传的输入数据集被解压缩到目录“</span></font>E:/”<font face="黑体"><span lang="zh-CN">中，所以我们通过编辑</span></font>RStudio<font face="黑体"><span lang="zh-CN">中的“</span></font>Script_1.R”<font face="黑体"><span lang="zh-CN">脚本将</span></font>RStudio<font face="黑体"><span lang="zh-CN">的工作目录也设置为“</span></font>E:/”
+(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>17</b>)<font face="黑体"><span lang="zh-CN">。最后，运行编辑后的“</span></font>Script_1.R”<font face="黑体"><span lang="zh-CN">脚本中的所有代码，在目录“</span></font>E:/”<font face="黑体"><span lang="zh-CN">中将生成一个名为“</span></font>Visualization_1.pdf”<font face="黑体"><span lang="zh-CN">的</span></font>PDF<font face="黑体"><span lang="zh-CN">文件。生成的“</span></font>Visualization_1.pdf”<font face="黑体"><span lang="zh-CN">文件的内容与<b>图</b></span></font><b>16</b><font face="黑体"><span lang="zh-CN">中使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">的图形界面生成的图形是一样的。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_aeda5169.png" name="图片 6" align="bottom" width="554" height="414" border="0"/>
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>17</b>.
+<font face="黑体"><span lang="zh-CN">打开并编辑脚本，如红色框中所示。然后在</span></font>RStudio<font face="黑体"><span lang="zh-CN">中运行修改后的“</span></font>Script_1.R”<font face="黑体"><span lang="zh-CN">脚本中的所有代码，以重建单个基因组图形。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737069"></a>
+<font size="4" style="font-size: 14pt"><b>4.6
+</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>利用</b></font></span></font><font size="4" style="font-size: 14pt"><b>shinyChromosome</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>绘制不同类型的单基因组图形</b></font></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">可以创建</span></font>12<font face="黑体"><span lang="zh-CN">种不同类型的图形，包括</span></font>point,
+line, bar, rect_gradual, rect_discrete, heatmap_gradual,
+heatmap_discrete, text, segment, vertical_line, horizontal_line <font face="黑体"><span lang="zh-CN">和
+</span></font>ideogram<font face="黑体"><span lang="zh-CN">。要创建单个基因组图形，至少需要两个输入数据文件，一个是定义基因组长度的基因组数据文件，另一个是沿基因组显示的染色体数据集。定义基因组长度的文件的格式见第</span></font>4.1<font face="黑体"><span lang="zh-CN">节。在</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序的“</span></font>Input
+data
+format”<font face="黑体"><span lang="zh-CN">菜单（在“</span></font>Help”<font face="黑体"><span lang="zh-CN">菜单下）中展示了用于绘制不同类型单基因组图形的输入文件的详细格式。在这一节中，我们将展示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">图形界面和示例输入数据集绘制不同类型单基因组图形的关键参数。本节中使用的定义基因组长度的输入文件与第</span></font>4.1<font face="黑体"><span lang="zh-CN">节中使用的文件是一样的
+</span></font>(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737070"></a>
+<b>4.6.1 </b><font face="黑体"><span lang="zh-CN"><b>绘制点图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">利用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制点图需要两个输入文件：基因组数据文件和定义每个点的基因组位置和数值的输入文件。绘制点的最基本数据集应该包含</span></font><font color="#ff0000">3<font face="黑体"><span lang="zh-CN">列</font>：染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、基因组位置和数值。每个基因组的位置用一个点来表示。在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件
+“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>point.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/point.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制点图的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>18</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_3cfd9a59.png" name="图片 56" align="bottom" width="554" height="451" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>18.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制点图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737071"></a>
+<b>4.6.2 </b><font face="黑体"><span lang="zh-CN"><b>绘制线形图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">利用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制线性图需要两个输入文件：基因组数据文件和定义每个点的基因组位置和值的输入文件，所有的点连接起来就成了一条线。绘制直线最基本的数据集应包含</span></font><font color="#ff0000">3<font face="黑体"><span lang="zh-CN">列</font>：染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、基因组位置和数值。在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>line.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/line.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/line.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制线形图的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>19</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_8319991.png" name="图片 55" align="bottom" width="554" height="448" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>19.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制线形图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737072"></a>
+<b>4.6.3 </b><font face="黑体"><span lang="zh-CN"><b>绘制柱状图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">利用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制柱状图需要两个输入文件：基因组数据文件和定义每个基因组区间的位置和值的输入文件。绘制柱状图最基本的数据集应该包含</span></font><font color="#ff0000">4<font face="黑体"><span lang="zh-CN">列</font>：染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、基因组区间的起始坐标、基因组区间的结束坐标和不同柱子的高度。在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>bar.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制柱状图的过程
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>20</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_da04ff2c.png" name="图片 57" align="bottom" width="554" height="454" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>20.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制柱状图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737073"></a>
+<b>4.6.4 </b><font face="黑体"><span lang="zh-CN"><b>绘制渐变型矩形图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">利用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制渐变型矩形图需要两个输入文件：基因组数据文件和定义每个基因组区间的位置和值的输入文件。绘制渐变型矩形图最基本的数据集应该包含</span></font><font color="#ff0000">4<font face="黑体"><span lang="zh-CN">列</font>：染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、基因组区间的起始坐标、基因组区间的结束坐标和每个矩形的值。第</span></font>4<font face="黑体"><span lang="zh-CN">列应该是表示连续变量的数值向量。在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件
+“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>rect_gradual.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_gradual.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_gradual.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制渐变型矩形图的过程
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>21</b>)<font face="黑体"><span lang="zh-CN">。请注意，要将“</span></font>Image
+type”<font face="黑体"><span lang="zh-CN">设置为“</span></font>Separated
+chromosomes”<font face="黑体"><span lang="zh-CN">来分割</span></font>12<font face="黑体"><span lang="zh-CN">条染色体。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_73134710.png" name="图片 12" align="bottom" width="554" height="453" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>21.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制渐变型矩形图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737074"></a>
+<b>4.6.5 </b><font face="黑体"><span lang="zh-CN"><b>绘制离散型矩形图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">利用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制离散型矩形图需要两个输入文件：基因组数据文件和定义每个基因组区间的位置和值的输入文件。绘制离散型矩形图最基本的数据集应该包含</span></font><font color="#ff0000">4<font face="黑体"><span lang="zh-CN">列</font>：染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、基因组区间的起始坐标、基因组区间的结束坐标和每个矩形的值。第四列应该是表示离散变量的字符向量。在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>rect_discrete.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_discrete.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/rect_discrete.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制离散型矩形图的过程
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>22</b>)<font face="黑体"><span lang="zh-CN">。请注意，要将“</span></font>Image
+type”<font face="黑体"><span lang="zh-CN">设置为“</span></font>Separated
+chromosomes”<font face="黑体"><span lang="zh-CN">来分割水稻基因组的</span></font>12<font face="黑体"><span lang="zh-CN">条染色体。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_a9859cca.png" name="图片 26" align="bottom" width="554" height="457" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>22.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制离散型矩形图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737075"></a>
+<b>4.6.6 </b><font face="黑体"><span lang="zh-CN"><b>绘制渐变型热图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">利用</span></font>shinychromosome<font face="黑体"><span lang="zh-CN">制作渐变型热图，我们需要两个输入文件，基因组数据文件和定义每个基因组区域的位置和值的输入文件，每个基因组区域作为热图的一个单元显示。绘制渐变型热图最基本的数据集应至少包含</span></font><font color="#ff0000">4<font face="黑体"><span lang="zh-CN">列</font>。</span></font></p>
+<ul>
+	<li><p style="line-height: 125%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">渐变型热图的</span></font>1-3<font face="黑体"><span lang="zh-CN">列数据是染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、基因组区域的起始坐标和基因组区域的结束坐标。</span></font></p></li>
+	<li><p style="line-height: 125%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">除前三列外，其他列应为表示连续变量的<font color="#ff0000">数值向量</font>。</span></font></p></li>
+</ul>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>heatmap_gradual.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_gradual.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_gradual.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制渐变型热图的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>23</b>)<font face="黑体"><span lang="zh-CN">。请注意，要将“</span></font>Image
+type”<font face="黑体"><span lang="zh-CN">设置为“</span></font>Separated
+chromosomes”<font face="黑体"><span lang="zh-CN">来分割水稻基因组的</span></font>12<font face="黑体"><span lang="zh-CN">条染色体。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_b435006b.png" name="图片 3" align="bottom" width="554" height="439" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>23.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制渐变型热图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737076"></a>
+<b>4.6.7 </b><font face="黑体"><span lang="zh-CN"><b>绘制离散型热图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">利用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">制作离散型热图，我们需要两个输入文件：基因组数据文件和定义每个基因组区域的位置和值的输入文件，每个基因组区域作为热图的一个单元来显示。绘制离散热图的最基本数据集应至少包含</span></font><font color="#ff0000">4<font face="黑体"><span lang="zh-CN">列</font>。</span></font></p>
+<ul>
+	<li><p style="line-height: 125%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">离散型热图的</span></font>1-3<font face="黑体"><span lang="zh-CN">列数据是染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、基因组区域的起始坐标和基因组区域的结束坐标。</span></font></p></li>
+	<li><p style="line-height: 125%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">除前三列外，其他列应为表示不同类别的<font color="#ff0000">字符向量</font>。</span></font></p></li>
+</ul>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>heatmap_discrete.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_discrete.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/heatmap_discrete.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制离散型热图的过程
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>24</b>)<font face="黑体"><span lang="zh-CN">。请注意，要将“</span></font>Image
+type”<font face="黑体"><span lang="zh-CN">设置为“</span></font>Separated
+chromosomes”<font face="黑体"><span lang="zh-CN">来分割水稻基因组的</span></font>12<font face="黑体"><span lang="zh-CN">条染色体。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_1d8738ee.png" name="图片 32" align="bottom" width="554" height="414" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>24.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制离散型热图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737077"></a>
+<b>4.6.8 </b><font face="黑体"><span lang="zh-CN"><b>绘制</b></span></font><b>text</b></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">要使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制文本，我们需要两个输入文件，基因组数据文件和定义要沿基因组显示的文本位置的输入文件。绘制文本最基本的数据集应包含</span></font><font color="#ff0000">4<font face="黑体"><span lang="zh-CN">列</font>。</span></font></p>
+<ul>
+	<li><p style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">第</span></font>1-3<font face="黑体"><span lang="zh-CN">列数据是染色体</span></font>ID<font face="黑体"><span lang="zh-CN">、</span></font>X<font face="黑体"><span lang="zh-CN">轴坐标和</span></font>Y<font face="黑体"><span lang="zh-CN">轴坐标。</span></font></p></li>
+	<li><p style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">最后一列应该是表示文本的<font color="#ff0000">字符向量</font>。</span></font></p></li>
+</ul>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in"><a name="_Hlk4590158"></a>
+<font face="黑体"><span lang="zh-CN">在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>text.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/text.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/text.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制文本图的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>25</b>)<font face="黑体"><span lang="zh-CN">。请注意，一些高级选项已经修改，如<b>图</b></span></font><b>25</b><font face="黑体"><span lang="zh-CN">所示。并且，要将“</span></font>Image
+type”<font face="黑体"><span lang="zh-CN">设置为“</span></font>Separated
+chromosomes”<font face="黑体"><span lang="zh-CN">来分割水稻基因组的</span></font>12<font face="黑体"><span lang="zh-CN">条染色体。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_19f1a65e.png" name="图片 33" align="bottom" width="554" height="454" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>25.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制文本图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737078"></a>
+<b>4.6.9 </b><font face="黑体"><span lang="zh-CN"><b>绘制线段图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">使用</span></font>shinychromosome<font face="黑体"><span lang="zh-CN">绘制线段图，我们需要两个输入文件，即基因组数据文件和定义沿基因组显示的线段的开始和结束位置的输入文件。绘制线段图最基本的数据集应包含</span></font><font color="#ff0000">5<font face="黑体"><span lang="zh-CN">列</font>。
+</span></font>
+</p>
+<ul>
+	<li><p style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">第</span></font>1<font face="黑体"><span lang="zh-CN">列包含每个片段的染色体</span></font>ID<font face="黑体"><span lang="zh-CN">。</span></font></p></li>
+	<li><p style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN">第</span></font>2-3<font face="黑体"><span lang="zh-CN">列和第</span></font>4-5<font face="黑体"><span lang="zh-CN">列分别代表片段两端的位置。</span></font></p></li>
+</ul>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>segment.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/segment.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/segment.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制线段图的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>26</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_c2923e3e.png" name="图片 36" align="bottom" width="554" height="436" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>26.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制线段图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737079"></a>
+<b>4.6.10 </b><font face="黑体"><span lang="zh-CN"><b>绘制垂直线图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">垂直线图通常与其他类型的图形混合使用。创建垂直线图的输入数据应包含<font color="#ff0000">两列</font>。第一列是染色体</span></font>ID<font face="黑体"><span lang="zh-CN">，第二列是每条垂直线的</span></font>X<font face="黑体"><span lang="zh-CN">轴坐标。</span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>),
+“vertical_line.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/vertical_line.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/vertical_line.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>bar.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制垂直线图的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>27</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_5f5f62cd.png" name="图片 4" align="bottom" width="554" height="442" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>27.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制垂直线图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737080"></a>
+<b>4.6.11 </b><font face="黑体"><span lang="zh-CN"><b>绘制水平线图</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">水平线图通常与其他类型的图形混合使用。创建水平线图的输入数据应包括<font color="#ff0000">一列</font>，表示每条水平线的</span></font>Y<font face="黑体"><span lang="zh-CN">轴坐标。</span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>),
+“horizontal_line.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/horizontal_line.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/horizontal_line.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>bar.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/bar.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制水平线图的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>28</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_e2663ac5.png" name="图片 38" align="bottom" width="554" height="463" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>28.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制水平线图的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737081"></a>
+<b>4.6.12 </b><font face="黑体"><span lang="zh-CN"><b>绘制</b></span></font><b>ideogram</b></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+Ideogram<font face="黑体"><span lang="zh-CN">是染色体的图解表示。创建</span></font>ideogram<font face="黑体"><span lang="zh-CN">的输入数据应包含</span></font><font color="#ff0000">5<font face="黑体"><span lang="zh-CN">列</font>。请查看</span></font><font color="#0000ff"><u><a href="https://www.nature.com/scitable/topicpage/chromosome-mapping-idiograms-302">https://www.nature.com/scitable/topicpage/chromosome-mapping-idiograms-302</a></u></font>
+<font face="黑体"><span lang="zh-CN">和
+</span></font><font color="#0000ff"><u><a href="http://genome.ucsc.edu/cgi-bin/hgTables?db=hg38&amp;hgta_group=map&amp;hgta_track=cytoBand&amp;hgta_table=cytoBand&amp;hgta_doSchema=describe+table+schema">http://genome.ucsc.edu/cgi-bin/hgTables?db=hg38&amp;hgta_group=map&amp;hgta_track=cytoBand&amp;hgta_table=cytoBand&amp;hgta_doSchema=describe+table+schema</a></u></font>
+<font face="黑体"><span lang="zh-CN">获取更多信息。使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制</span></font>ideogram<font face="黑体"><span lang="zh-CN">，需要两个输入文件：基因组数据文件和用来创建</span></font>ideogram<font face="黑体"><span lang="zh-CN">的输入文件。</span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在这里，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">源代码中提供的示例文件“</span></font>genome_data.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/genome_data.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">和 “</span></font>ideogram.txt”
+(<font color="#0000ff"><u><a href="https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/ideogram.txt">https://github.com/venyao/shinyChromosome/blob/master/www/data/download_example_data/single_genome/ideogram.txt</a></u></font>)
+<font face="黑体"><span lang="zh-CN">来演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制</span></font>ideogram<font face="黑体"><span lang="zh-CN">的过程
+</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>29</b>)<font face="黑体"><span lang="zh-CN">。
+请注意，要将“</span></font>Image type”<font face="黑体"><span lang="zh-CN">设置为“</span></font>Separated
+chromosomes”<font face="黑体"><span lang="zh-CN">来分割水稻基因组的</span></font>12<font face="黑体"><span lang="zh-CN">条染色体。<img src="01b427df544f33991e277866bfc6750d_html_843014ba.png" name="图片 43" align="bottom" width="554" height="423" border="0"/>
+</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>29.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">绘制</span></font>ideogram<font face="黑体"><span lang="zh-CN">的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737082"></a>
+<font size="4" style="font-size: 14pt"><b>4.7
+</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>利用</b></font></span></font><font size="4" style="font-size: 14pt"><b>shinyChromosome</b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>整合多个输入数据集创建高级单基因组图型</b></font></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在第</span></font>4.6<font face="黑体"><span lang="zh-CN">节中，我们演示了使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">创建不同类型单基因组图形的过程。为了简单起见，我们在第</span></font>4.6<font face="黑体"><span lang="zh-CN">节的每个示例中只创建一种类型的绘图。实际上，</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">可以接受多达</span></font>10<font face="黑体"><span lang="zh-CN">个输入数据集来创建复杂的单基因组图形。每个输入数据集可用于创建</span></font>12<font face="黑体"><span lang="zh-CN">种不同类型的绘图中的任意一种。现在，我们使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">的“</span></font>Gallery”<font face="黑体"><span lang="zh-CN">菜单中提供的示例数据集“</span></font>Example
+1”<font face="黑体"><span lang="zh-CN">演示使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">创建高级单基因组图形的过程</span></font>(<font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>30</b>)<font face="黑体"><span lang="zh-CN">。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_e7887bc7.png" name="图片 47" align="bottom" width="554" height="528" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>30.
+</b><font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">创建具有多个输入数据集的高级单基因组图形的过程。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">一共有</span></font>6<font face="黑体"><span lang="zh-CN">个输入数据集分布在最终生成的图的</span></font>5<font face="黑体"><span lang="zh-CN">个轨道中。<b>图</b></span></font><b>30</b><font face="黑体"><span lang="zh-CN">显示了</span></font>6<font face="黑体"><span lang="zh-CN">个输入数据集的上传过程以及每个数据集的轨道和绘图类型的设置。除了在<b>图</b></span></font><b>30</b><font face="黑体"><span lang="zh-CN">中演示的过程之外，其他很多选项也被调整用来创建最终的图形，包括图形图例的显示、图形主题的设置和每个轨道的大小。这些选项的设置如<b>图</b></span></font><b>31</b><font face="黑体"><span lang="zh-CN">所示。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_cadce309.png" name="图片 48" align="bottom" width="554" height="540" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>31.</b>
+<font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">装饰图</span></font>30<font face="黑体"><span lang="zh-CN">中创建的图形的各种选项的设置。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-top: 0.11in; margin-bottom: 0.11in"><a name="_Toc19737083"></a>
+<font size="4" style="font-size: 14pt"><b>4.8 </b></font><font face="黑体"><span lang="zh-CN"><font size="4" style="font-size: 14pt"><b>修饰单个基因组图形的绘图选项</b></font></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">在“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单的左侧面板中的每个“</span></font>DataX”<font face="黑体"><span lang="zh-CN">复选框下，提供了各种小部件来装饰生成的单基因组图的外观。下面将演示其中一些选项的设置。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737084"></a><a name="_Hlk4863350"></a>
+<b>4.8.1 </b><font face="黑体"><span lang="zh-CN"><b>相连的染色体</b></span></font><b>v.s.</b><font face="黑体"><span lang="zh-CN"><b>分离的染色体</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">单个基因组图形中的所有染色体可以按顺序连接在一起，也可以通过在“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单的左面板顶部“</span></font>Image
+type”<font face="黑体"><span lang="zh-CN">小部件设置为分离在不同的面板中。对于</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序的“</span></font>Gallery”<font face="黑体"><span lang="zh-CN">菜单中显示的“</span></font>Example
+10”<font face="黑体"><span lang="zh-CN">和“</span></font>Example
+12”<font face="黑体"><span lang="zh-CN">，输入数据集是相同的。在“</span></font>Example
+10”<font face="黑体"><span lang="zh-CN">所示的图中，所有染色体按顺序连接，而在“</span></font>Example
+12”<font face="黑体"><span lang="zh-CN">所示的图中，所有染色体分离在不同的面板中。<b>图</b></span></font><b>32</b><font face="黑体"><span lang="zh-CN">和<b>图</b></span></font><b>33</b><font face="黑体"><span lang="zh-CN">分别演示了创建“</span></font>Example
+10”<font face="黑体"><span lang="zh-CN">和“</span></font>Example
+12”<font face="黑体"><span lang="zh-CN">中所示图形的过程和选项设置。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_a396841.png" name="图片 51" align="bottom" width="554" height="522" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>32.
+</b><font face="黑体"><span lang="zh-CN">使用“</span></font>Gallery”<font face="黑体"><span lang="zh-CN">菜单中“</span></font>Example
+10”<font face="黑体"><span lang="zh-CN">的输入数据集创建的所有染色体连在一起的单基因组图形。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_edb00299.png" name="图片 52" align="bottom" width="554" height="482" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>33.
+</b><font face="黑体"><span lang="zh-CN">使用“</span></font>Gallery”<font face="黑体"><span lang="zh-CN">菜单中“</span></font>Example
+12”<font face="黑体"><span lang="zh-CN">的输入数据集创建的所有染色体不相连的单基因组图形。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737085"></a>
+<b>4.8.2 </b><font face="黑体"><span lang="zh-CN"><b>水平排列的染色体</b></span></font><b>v.s.</b><font face="黑体"><span lang="zh-CN"><b>垂直排列的染色体</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">通过设置“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单左侧面板顶部的“</span></font>Chromosome
+orientation”<font face="黑体"><span lang="zh-CN">小部件，可以设置使得单个基因组图中的所有染色体沿水平轴对齐，也可以使其沿垂直轴对齐。对于</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">应用程序的“</span></font>Gallery”<font face="黑体"><span lang="zh-CN">菜单中显示的“</span></font>Example
+10”<font face="黑体"><span lang="zh-CN">和“</span></font>Example
+12”<font face="黑体"><span lang="zh-CN">，输入数据集是相同的。在“</span></font>Example
+10”<font face="黑体"><span lang="zh-CN">所示的图中，所有染色体沿水平轴对齐，而在“</span></font>Example
+12”<font face="黑体"><span lang="zh-CN">所示的图中，所有染色体沿垂直轴对齐。<b>图</b></span></font><b>32</b><font face="黑体"><span lang="zh-CN">和<b>图</b></span></font><b>33</b><font face="黑体"><span lang="zh-CN">分别演示了创建“</span></font>Example
+10”<font face="黑体"><span lang="zh-CN">和“</span></font>Example
+12”<font face="黑体"><span lang="zh-CN">中所示图形的过程和选项设置。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737086"></a>
+<b>4.8.3 </b><font face="黑体"><span lang="zh-CN"><b>设置点的颜色、大小和形状</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in"><a name="_Toc19650423"></a>
+<font face="黑体"><span lang="zh-CN">对于点图，我们可以使用“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单左侧面板中提供的小部件修改点的颜色、点的大小和点的形状。在这里，我们使用“</span></font>Gallery”<font face="黑体"><span lang="zh-CN">菜单中显示的“</span></font>Example
+17”<font face="黑体"><span lang="zh-CN">的输入数据集来演示这些小部件。</span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">默认情况下，点的颜色是系统随机设置的、点的大小和形状是系统预定义的，如<b>图</b></span></font><b>34</b><font face="黑体"><span lang="zh-CN">所示。如果要更改点的颜色、点的大小或点的形状，可以在“</span></font>Color”<font face="黑体"><span lang="zh-CN">、“</span></font>Symbol”
+<font face="黑体"><span lang="zh-CN">和
+“</span></font>Size”<font face="黑体"><span lang="zh-CN">复选框下编辑这些小部件的默认值，如<b>图</b></span></font><b>35</b><font face="黑体"><span lang="zh-CN">所示。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_faea7b68.png" name="图片 58" align="bottom" width="554" height="422" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>34.</b>
+shinyChromosome<font face="黑体"><span lang="zh-CN">中点的颜色、点的形状和点的大小的默认设置。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_d7277991.png" name="图片 59" align="bottom" width="554" height="411" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>35.</b>
+<font face="黑体"><span lang="zh-CN">在</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">中使用不同控件设置点的颜色、点的形状和点的大小。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">实际上，“</span></font>Example
+17”<font face="黑体"><span lang="zh-CN">的输入数据集包含一个“</span></font>color”<font face="黑体"><span lang="zh-CN">列、“</span></font>shape”<font face="黑体"><span lang="zh-CN">列和“</span></font>size”<font face="黑体"><span lang="zh-CN">列，用于指定点的颜色、形状和大小。要使用输入数据集中的“</span></font>color”<font face="黑体"><span lang="zh-CN">、“</span></font>shape”<font face="黑体"><span lang="zh-CN">和“</span></font>size”<font face="黑体"><span lang="zh-CN">设置点的颜色、形状和大小，需要在“</span></font>Color”<font face="黑体"><span lang="zh-CN">、“</span></font>Symbol”<font face="黑体"><span lang="zh-CN">和“</span></font>Size”<font face="黑体"><span lang="zh-CN">复选框下设置小部件的值，如<b>图</b></span></font><b>36</b><font face="黑体"><span lang="zh-CN">所示。
+</span></font>
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_15b85c0c.png" name="图片 60" align="bottom" width="554" height="415" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>36.</b>
+<font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">中输入数据集的“</span></font>color”<font face="黑体"><span lang="zh-CN">、
+“</span></font>symbol”<font face="黑体"><span lang="zh-CN">和“</span></font>size”<font face="黑体"><span lang="zh-CN">列设置点的颜色、形状和大小。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><a name="_Toc19737087"></a>
+<b>4.8.4</b><font face="黑体"><span lang="zh-CN"><b>为多个数据集设置矩形图的颜色</b></span></font></p>
+<p style="line-height: 150%; text-indent: 0.33in; margin-bottom: 0in">
+<font face="黑体"><span lang="zh-CN">对于离散型矩形图，我们可以使用“</span></font>Single-genome
+plot”<font face="黑体"><span lang="zh-CN">菜单左侧面板中提供的小部件设置属于不同组的矩形的颜色。在这里，我们使用“</span></font>Gallery”<font face="黑体"><span lang="zh-CN">菜单中展示的“</span></font>Example
+37”<font face="黑体"><span lang="zh-CN">的输入数据集来演示这些小部件。一共上传了三个输入数据集，生成了“</span></font>Example
+37”<font face="黑体"><span lang="zh-CN">中的离散型矩形图。每个数据集的第四列是一个“</span></font>color”<font face="黑体"><span lang="zh-CN">列，用于定义每个基因组区域的组别，不同的组将设置为不同的颜色。默认情况下，颜色的分配是随机的，如<b>图</b></span></font><b>37</b><font face="黑体"><span lang="zh-CN">所示。如果要设置不同数据组的颜色，可以使用每个数据集对应的“</span></font>color”<font face="黑体"><span lang="zh-CN">小部件。该过程如<b>图</b></span></font><b>38</b><font face="黑体"><span lang="zh-CN">所示，包括各种选项的设置。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_4a242a5b.png" name="图片 9" align="bottom" width="554" height="566" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>37.
+</b>shinyChromosome<font face="黑体"><span lang="zh-CN">中矩形颜色的默认设置。</span></font></p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 150%; margin-bottom: 0in"><img src="01b427df544f33991e277866bfc6750d_html_f5a77a95.png" name="图片 13" align="bottom" width="554" height="418" border="0"/>
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><font face="黑体"><span lang="zh-CN"><b>图</b></span></font><b>38.</b>
+<font face="黑体"><span lang="zh-CN">使用</span></font>shinyChromosome<font face="黑体"><span lang="zh-CN">中输入数据集的“</span></font>color”<font face="黑体"><span lang="zh-CN">列设置矩形颜色。</span></font></p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+<p align="center" style="line-height: 150%; margin-bottom: 0in"><br/>
+
+</p>
+
+</body>
+</html>
