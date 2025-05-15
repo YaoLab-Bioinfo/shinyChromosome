@@ -1177,7 +1177,12 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
         p1 <- p1 + geom_rect(data = data.chr.ideo, aes(xmin = start, xmax = size), ymin = unique(data.track.single$ystart),
                              ymax = unique(data.track.single$yend), color = "black", fill = NA)
         p1 <- p1 + scale_fill_identity() + scale_color_identity()
-        p1 <- p1 + scale_y_continuous(breaks = NULL)
+        
+        if (theme_sty == "theme20"){
+          p1 <- p1 + scale_y_continuous(breaks = NULL, expand = expansion(mult = c(0, 0.01)))
+        } else {
+          p1 <- p1 + scale_y_continuous(breaks = NULL)
+        }
       }
       
       if (plot_type[i] %in% c("point", "line", "bar")) {
@@ -1193,7 +1198,8 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       list(
         theme_bw(), theme_classic(), theme_minimal(), theme_few(), theme_grey(), theme_tufte(),
         theme_calc(), theme_void(), theme_base(), theme_linedraw(), theme_economist(), theme_excel(),
-        theme_fivethirtyeight(), theme_gdocs(), theme_hc(), theme_pander(), theme_solarized(), theme_wsj()
+        theme_fivethirtyeight(), theme_gdocs(), theme_hc(), theme_pander(), theme_solarized(), theme_wsj(),
+        theme_prism(),theme_my()
       )
     p1 <- p1 + alltheme_sty[[as.numeric(gsub("theme", "", theme_sty))]]
     
@@ -1204,12 +1210,27 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       x_text$chr <- factor(x_text$chr, levels = names(chr.cum.len), ordered = T)
       x_text$pos <- x_text$pos + chr.cum.len[x_text$chr]
       x_text$chr <- as.character(x_text$chr)
-      p1 <- p1 + scale_x_continuous(breaks = x_text$pos, labels = x_text$chr)
+      
+      if (theme_sty == "theme20") {
+        p1 <- p1 + scale_x_continuous(breaks = x_text$pos, labels = x_text$chr, expand = expansion(mult = c(0.04, 0.04)))
+      } else {
+        p1 <- p1 + scale_x_continuous(breaks = x_text$pos, labels = x_text$chr)
+      }
     } else if (xlabel == 2) {
       if (plot_direct == 1) {
-        p1 <- p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+        if (theme_sty == "theme20") {
+          p1 <- p1 + scale_x_continuous(expand = expansion(mult = c(0.04, 0.04)))
+          p1 <- p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+        } else {
+          p1 <- p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+        }
       } else{
-        p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+        if (theme_sty == "theme20") {
+          p1 <- p1 + scale_x_continuous(expand = expansion(mult = c(0.04, 0.04)))
+          p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+        } else {
+          p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+        }
       }
     }
     
@@ -1235,16 +1256,33 @@ single_genome_plot <- function(input, output, data.chr, data.track, track_indx, 
       yaxis_labels <- yaxis_labels[, -2]
       names(yaxis_breaks) <- c("layer", "min_val", "max_val")
       names(yaxis_labels) <- c("layer", "min_val", "max_val")
-      p1 <- p1 + scale_y_continuous(breaks = c(yaxis_breaks$min_val, yaxis_breaks$max_val),
-                                    labels = c(yaxis_labels$min_val, yaxis_labels$max_val))
+      
+      if (theme_sty == "theme20"){
+        p1 <- p1 + scale_y_continuous(breaks = c(yaxis_breaks$min_val, yaxis_breaks$max_val),
+                                      labels = c(yaxis_labels$min_val, yaxis_labels$max_val), expand = expansion(mult = c(0, 0.01)))
+      } else {
+        p1 <- p1 + scale_y_continuous(breaks = c(yaxis_breaks$min_val, yaxis_breaks$max_val),
+                                      labels = c(yaxis_labels$min_val, yaxis_labels$max_val))
+      }
+      
       if (chr_plotype == 2 & plot_direct == 2) {
         p1 <- p1 + theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
       }
-    } else{
+    } else {
       if (plot_direct == 1) {
-        p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
-      } else{
-        p1 <- p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+        if (theme_sty == "theme20"){
+          p1 <- p1 + scale_y_continuous(expand = expansion(mult = c(0, 0.01)))
+          p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+        } else {
+          p1 <- p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+        }
+      } else {
+        if (theme_sty == "theme20"){
+          p1 <- p1 + scale_y_continuous(expand = expansion(mult = c(0, 0.01)))
+          p1 <- p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+        } else {
+          p1 <- p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+        }
       }
     }
     

@@ -33,7 +33,8 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
       list(
         theme_bw(), theme_classic(), theme_minimal(), theme_few(), theme_grey(), theme_tufte(),
         theme_calc(), theme_void(), theme_base(), theme_linedraw(), theme_economist(), theme_excel(),
-        theme_fivethirtyeight(), theme_gdocs(), theme_hc(), theme_pander(), theme_solarized(), theme_wsj()
+        theme_fivethirtyeight(), theme_gdocs(), theme_hc(), theme_pander(), theme_solarized(), theme_wsj(),
+        theme_prism(),theme_my()
       )
     tc_p1 <- tc_p1 + tc_alltheme_sty[[as.numeric(gsub("theme", "", theme_sty))]]
     
@@ -372,14 +373,32 @@ two_genomes_plot <- function(input, output, data.chr1, data.chr2, data.2geno.plo
     
     ## *** The axis label ***
     if (xlabel == 1) {
-      tc_p1 <- tc_p1 + scale_x_continuous(breaks = data.chr1$pos, labels = data.chr1$chr)
-    } else{
-      tc_p1 <- tc_p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+      if (theme_sty == "theme20") {
+        tc_p1 <- tc_p1 + scale_x_continuous(breaks = data.chr1$pos, labels = data.chr1$chr, expand = expansion(mult = c(0.001, 0.01)))
+      } else {
+        tc_p1 <- tc_p1 + scale_x_continuous(breaks = data.chr1$pos, labels = data.chr1$chr)
+      }
+    } else {
+      if (theme_sty == "theme20") {
+        tc_p1 <- tc_p1 + scale_x_continuous(expand = expansion(mult = c(0.001, 0.01)))
+        tc_p1 <- tc_p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+      } else {
+        tc_p1 <- tc_p1 + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+      }
     }
+    
     if (ylabel == 1) {
-      tc_p1 <- tc_p1 + scale_y_continuous(breaks = data.chr2$pos, labels = data.chr2$chr)
-    } else{
-      tc_p1 <- tc_p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+      if (theme_sty == "theme20"){
+        tc_p1 <- tc_p1 + scale_y_continuous(breaks = data.chr2$pos, labels = data.chr2$chr, expand = expansion(mult = c(0.001, 0.01)))
+      } else {
+        tc_p1 <- tc_p1 + scale_y_continuous(breaks = data.chr2$pos, labels = data.chr2$chr)
+      }
+    } else {
+      if (theme_sty == "theme20") {
+        tc_p1 <- tc_p1 + scale_y_continuous(expand = expansion(mult = c(0.001, 0.01)))
+        tc_p1 <- tc_p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+      } else {
+        tc_p1 <- tc_p1 + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())}
     }
     
     ## *** The x and y axis title ***

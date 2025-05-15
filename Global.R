@@ -17,6 +17,9 @@ library(shinysky)
 library(zip)
 library(colourpicker)
 library(shinyWidgets)
+library(shinyBS)
+library(ggprism)
+library(shinyjqui)
 
 source("single_genome_plot.R")
 source("two_genomes_plot.R")
@@ -127,4 +130,15 @@ col_lgd_mdy_labels <- function(dat, col_lgd_labels, breakscol, labelscol) {
   dat$raw_color <- factor(dat$raw_color, levels = unique(labels_1), ordered = T)
   return(dat)
 }
+
+theme_my <- function(base_size = 14, base_family = "sans") {
+  theme_prism(
+    base_size = base_size, 
+    base_family = base_family) + 
+    theme(
+      panel.border = element_blank(),
+      plot.margin = margin(0, 10, 0, 10)
+    ) 
+}
+
 
