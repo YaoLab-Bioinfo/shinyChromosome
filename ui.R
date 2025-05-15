@@ -850,7 +850,7 @@ shinyUI(
       
       navbarMenu("Help",
                  icon = icon("book", class = NULL, lib = "font-awesome"),
-                 tabPanel("Usage and installation", includeMarkdown("README.md")),
+                 # tabPanel("Usage and installation", includeMarkdown("README.md")),
                  tabPanel("Input data format", includeMarkdown("In_Data_Format.md")),
                  
                  tabPanel("User manual", 
@@ -875,7 +875,7 @@ shinyUI(
                                 label = NULL,
                                 choices = c(
                                   "Introduction" = 1, 
-                                  "Use shinyChromosome online or on local computer" = 2,  
+                                  "Usage and installation of shinyChromosome" = 2,  
                                   "Creation of non-circular single-genome plot" = 3, 
                                   "Creation of Non-circular two-genome plot" = 4,
                                   "Plot options to decorate non-circular whole genome plots" = 5
