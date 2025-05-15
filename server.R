@@ -667,13 +667,37 @@ shinyServer(function(input, output, session) {
     }, contentType = 'text/csv')
   
   ## *** User Manual ***
-  output$pdfview <- renderUI({
-    tags$iframe(style = "height:900px; width:100%; scrolling=yes", src = "shinyChromosome_User_Manual.pdf")
+  ## *** language selection ***
+  observeEvent(input$helplan,{
+    if(input$helplan == 1){
+      updateRadioButtons(
+        session = session, 
+        inputId = "helpsection",
+        choices = c(
+          "Introduction" = 1,
+          "Usage and installation of shinyChromosome" = 2, 
+          "Creation of non-circular single-genome plot" = 3,
+          "Creation of Non-circular two-genome plot" = 4,
+          "Plot options to decorate non-circular whole genome plots" = 5
+        ),
+        selected = input$helpsection
+      )
+    }else{
+      updateRadioButtons(
+        session = session, 
+        inputId = "helpsection",
+        choices = c(
+          "简介" = 1,
+          "ShinyChromosome的使用和安装" = 2, 
+          "非圆形单基因组图的绘制" = 3,
+          "非圆形双基因组图的绘制" = 4,
+          "修饰非圆形全基因组图的绘图选项" = 5
+        ),
+        selected = input$helpsection
+      )
+    }
   })
   
-  output$pdfview1 <- renderUI({
-    tags$iframe(style = "height:900px; width:100%; scrolling=yes", src = "shinyChromosome_User_Manual_Chinese.pdf")
-  })
   
   ## *** View example data ***
   output$Table1 <- renderDataTable({

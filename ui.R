@@ -219,7 +219,7 @@ shinyUI(
                                                                                      "theme4", "theme5", "theme6", "theme7",
                                                                                      "theme8","theme9","theme10","theme11",
                                                                                      "theme12", "theme13", "theme14", "theme15",
-                                                                                     "theme16","theme17","theme18"), selected="theme1")
+                                                                                     "theme16","theme17","theme18","theme19","theme20"), selected="theme1")
                          ),
                          
                          checkboxInput("selfontsize", "Font size", FALSE),
@@ -755,7 +755,7 @@ shinyUI(
                                                                                     "theme4", "theme5", "theme6", "theme7",
                                                                                     "theme8","theme9","theme10","theme11",
                                                                                     "theme12", "theme13", "theme14", "theme15",
-                                                                                    "theme16","theme17","theme18"), selected="theme1")
+                                                                                    "theme16","theme17","theme18","theme19","theme20"), selected="theme1")
                      ),
                      
                      checkboxInput("tc_sel_font_size", "Font size", FALSE),
